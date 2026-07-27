@@ -1,0 +1,77 @@
+# MOCK-TUA control plane on desk-host.
+# Consumes live Headroom :8787 and live SM Comfy :8188 on the host.
+# Video workers: push to gpu-host (see docker-compose.gpu-host.yml).
+#
+#   cd /Users/redacted/mock-tua
+#   docker compose up -d --build
+#   curl -s http://127.0.0.1:8799/healthz | python3 -m json.tool
+
+services:
+  mock-tua-api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    image: mock-tua-api:local
+    container_name: mock-tua-api
+    restart: unless-stopped
+    ports:
+      - "${MOCK_TUA_PORT:-8799}:8799"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      MOCK_TUA_HOST: "0.0.0.0"
+      MOCK_TUA_PORT: "8799"
+      MOCK_TUA_CONFIG: /config
+      HEADROOM_BASE: ${HEADROOM_BASE:-http://host.docker.internal:8787/v1}
+      COMFY_desk-host_URL: ${COMFY_desk-host_URL:-http://host.docker.internal:8188}
+      COMFY_gpu-host_URL: ${COMFY_gpu-host_URL:-http://REDACTED-LAN-IP:8188}
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-manager-auto}
+      WORK_ROOT: ${WORK_ROOT:-/work}
+      WORK_FALLBACK: /work
+      MOCK_TUA_QQQ: ${MOCK_TUA_QQQ:-QQQ0}
+      MOCK_TUA_DRY_RUN: ${MOCK_TUA_DRY_RUN:-1}
+      MOCK_TUA_LIVE_STILL: ${MOCK_TUA_LIVE_STILL:-0}
+      MOCK_TUA_HF_LIVE: ${MOCK_TUA_HF_LIVE:-0}
+    volumes:
+      - ./config:/config:ro
+      - ./fixtures:/fixtures:ro
+      - ./schemas:/schemas:ro
+      - ./work:/work
+      # Prefer NFS story-anim when mounted on host
+      - ${STORY_ANIM_HOST:-/Volumes/ai-data/work/story-anim}:/story-anim
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8799/healthz')",
+        ]
+      interval: 20s
+      timeout: 5s
+      retries: 8
+      start_period: 15s
+
+  # Optional estimate-only cloud stub (profile mock-cloud)
+  mock-cloud:
+    profiles: ["mock-cloud"]
+    image: python:3.12-slim
+    container_name: mock-tua-cloud-stub
+    command:
+      - python
+      - -c
+      - |
+        from http.server import BaseHTTPRequestHandler, HTTPServer
+        import json
+        class H(BaseHTTPRequestHandler):
+            def do_GET(self):
+                body=json.dumps({"ok":True,"service":"mock-cloud-stub","mode":"estimate-only"}).encode()
+                self.send_response(200); self.send_header('Content-Type','application/json'); self.end_headers(); self.wfile.write(body)
+            def log_message(self,*a): pass
+        HTTPServer(('0.0.0.0',8899), H).serve_forever()
+    ports:
+      - "8899:8899"

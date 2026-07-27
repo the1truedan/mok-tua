@@ -1,0 +1,22 @@
+{
+  "default_mode": "QQQ0",
+  "modes": {
+    "QQQ0": {
+      "label": "Local only",
+      "cloud": false,
+      "backends": ["local_desk-host", "local_gpu-host", "local_tower_cpu"]
+    },
+    "QQQ3": {
+      "label": "Free/public overflow",
+      "cloud": true,
+      "backends": ["hf_zerogpu_free", "hf_zerogpu_pro"],
+      "requires": ["data_class_public"]
+    },
+    "QQQ1": {
+      "label": "Paid cloud",
+      "cloud": true,
+      "backends": ["runpod_rtx4090", "vast_cheap", "hf_zerogpu_pro"],
+      "requires": ["explicit_confirm", "data_class_not_phi"]
+    }
+  }
+}

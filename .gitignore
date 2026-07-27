@@ -1,0 +1,8 @@
+.env
+work/runs/
+__pycache__/
+*.pyc
+.venv/
+api/.venv/
+*.egg-info/
+*.bak-*

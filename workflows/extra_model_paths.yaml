@@ -1,0 +1,117 @@
+# Paths inside the container. Host pool is mounted at /models-pool.
+# Dual-case dirs until pool hygiene finishes.
+
+ai_data:
+  base_path: /models-pool/
+  is_default: true
+  checkpoints: |
+    checkpoints
+    StableDiffusion
+  configs: |
+    configs
+  loras: |
+    loras
+    Lora
+    LyCORIS
+  vae: |
+    vae
+    VAE
+  vae_approx: |
+    approxvae
+    ApproxVAE
+    vae_approx
+  text_encoders: |
+    text_encoders
+    TextEncoders
+    textencoders
+    clip
+  clip_vision: |
+    clip_vision
+    ClipVision
+  embeddings: |
+    embeddings
+    Embeddings
+  diffusers: |
+    diffusers
+    Diffusers
+  diffusion_models: |
+    diffusion_models
+    DiffusionModels
+    unet
+    wan
+    flux
+    ltx_video
+    ltx2
+    hyvideo
+  controlnet: |
+    controlnet
+    ControlNet
+    t2iadapter
+    T2IAdapter
+  gligen: |
+    gligen
+    GLIGEN
+  upscale_models: |
+    upscale_models
+    esrgan
+    ESRGAN
+    realesrgan
+    RealESRGAN
+    SwinIR
+    BSRGAN
+  latent_upscale_models: |
+    latent_upscale_models
+  hypernetworks: |
+    hypernetworks
+    Hypernetwork
+  photomaker: |
+    photomaker
+  style_models: |
+    style_models
+    StyleModels
+  model_patches: |
+    model_patches
+    ModelPatches
+  audio_encoders: |
+    audio_encoders
+    AudioEncoders
+  animatediff_models: |
+    animatediff
+    motion_models
+  animatediff_motion_lora: |
+    animatediff_motion_lora
+  ipadapter: |
+    ipadapter
+    IpAdapter
+    IpAdapters15
+    IpAdaptersXl
+  ultralytics: |
+    ultralytics
+    Ultralytics
+  sams: |
+    sams
+    Sams
+  insightface: |
+    insightface
+  facerestore_models: |
+    facerestore_models
+    face_restore
+    GFPGAN
+    Codeformer
+  reactor: |
+    reactor
+    roop
+  depth: |
+    depth
+    depthanything
+  onnx: |
+    onnx
+  wildcards: |
+    wildcards
+  prompt_expansion: |
+    PromptExpansion
+  background_removal: |
+    BackgroundRemoval
+  svd: |
+    svd
+    SVD
