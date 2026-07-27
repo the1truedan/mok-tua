@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "updated": "2026-07-24",
+  "description": "MOCK-TUA hybrid: live M4RV Headroom + SM Comfy; video \u2192 MRGPU; cloud overflow estimated only by default.",
+  "model_pool": {
+    "M4RV": "/Volumes/ai-data/models",
+    "MRGPU": "/mnt/ai-data/models",
+    "TOWER": "/mnt/ai-data/models"
+  },
+  "endpoints": {
+    "m4rv": {
+      "host": "m4rv",
+      "label": "Mac SM ComfyUI (live)",
+      "base_url": "http://127.0.0.1:8188",
+      "role": "image",
+      "mode": "live"
+    },
+    "mrgpu": {
+      "host": "mrgpu",
+      "label": "MRGPU ComfyUI (container or host runtime)",
+      "base_url": "http://192.168.1.5:8188",
+      "role": "video",
+      "mode": "remote"
+    },
+    "headroom": {
+      "host": "m4rv",
+      "label": "Live Headroom / LiteLLM path",
+      "base_url": "http://localhost:8787/v1",
+      "role": "llm",
+      "mode": "live"
+    },
+    "mock_cloud": {
+      "host": "stub",
+      "label": "Cloud overflow estimate stub (live path: manager-openrouter-free on Headroom/MRGPU LiteLLM)",
+      "base_url": "http://127.0.0.1:8899",
+      "role": "cloud",
+      "mode": "stub",
+      "live_model": "manager-openrouter-free",
+      "note": "NEW LAW: MRGPU may use cloud compute for mock-tua overflow; never PHI auto-cloud"
+    },
+    "mrgpu_litellm": {
+      "host": "mrgpu",
+      "label": "MRGPU LiteLLM worker+cloud",
+      "base_url": "http://192.168.1.5:4000/v1",
+      "role": "llm_worker_cloud",
+      "mode": "live"
+    }
+  },
+  "routing": {
+    "script_to_shots": "headroom",
+    "image-gen": "m4rv",
+    "character-sheet": "m4rv",
+    "storyboard-panel": "m4rv",
+    "video-gen": "mrgpu",
+    "i2v": "mrgpu",
+    "talking-avatar": "mrgpu",
+    "cloud-overflow": "mock_cloud"
+  },
+  "outputs": {
+    "work_root_M4RV": "/Volumes/ai-data/work/story-anim",
+    "work_root_MRGPU": "/mnt/ai-data/work/story-anim",
+    "local_fallback": "./work"
+  },
+  "still_defaults": {
+    "checkpoint": "DreamShaper_8_pruned.safetensors",
+    "width": 768,
+    "height": 768,
+    "steps": 20,
+    "cfg": 7.0
+  },
+  "mvp_chain": [
+    "script_to_shots",
+    "character_sheet",
+    "storyboard_panels",
+    "i2v_or_wan_animate",
+    "resume_segment",
+    "stitch"
+  ],
+  "llm": {
+    "model": "manager-auto",
+    "max_tokens": 2048,
+    "temperature": 0.4
+  }
+}

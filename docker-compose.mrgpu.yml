@@ -1,0 +1,53 @@
+# MRGPU CUDA Comfy worker for MOCK-TUA video stages.
+# Aligns with ~/grokcode/deploy/comfyui — run ON MRGPU after nvidia-container-toolkit.
+#
+#   # on MRGPU:
+#   rsync -az /Users/dtm/mock-tua/ dtm@mrgpu:~/mock-tua/
+#   # or use grokcode deploy/comfyui
+#   docker compose -f docker-compose.mrgpu.yml up -d
+#
+# BLOCKER if nvidia-ctk missing: use scripts/comfy_mrgpu_host_runtime.sh from grokcode.
+
+services:
+  comfyui-mrgpu:
+    image: ${COMFY_IMAGE:-yanwk/comfyui-boot:cu124-slim}
+    container_name: mock-tua-comfy-mrgpu
+    restart: unless-stopped
+    ports:
+      - "${COMFY_PORT:-8188}:8188"
+    environment:
+      CLI_ARGS: ${COMFY_CLI_ARGS:---listen 0.0.0.0 --port 8188 --disable-auto-launch}
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+    gpus: all
+    volumes:
+      - ${AI_DATA_MODELS:-/mnt/ai-data/models}:/models-pool
+      - ./workflows/extra_model_paths.yaml:/models-pool-extra/extra_model_paths.yaml:ro
+      - ${COMFY_OUTPUT:-/mnt/ai-data/work/story-anim/mrgpu}:/output-pool
+      - ${COMFY_INPUT:-/mnt/ai-data/work/story-anim/input}:/input-pool
+      - comfyui-root:/root
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        set -e
+        if [ ! -f /root/ComfyUI/main.py ]; then
+          bash /runner-scripts/download.sh || true
+        fi
+        if [ ! -f /root/ComfyUI/main.py ]; then
+          cd /root && git clone --depth=1 https://github.com/comfyanonymous/ComfyUI.git
+        fi
+        cp -f /models-pool-extra/extra_model_paths.yaml /root/ComfyUI/extra_model_paths.yaml
+        rm -rf /root/ComfyUI/output /root/ComfyUI/input
+        ln -sfn /output-pool /root/ComfyUI/output
+        ln -sfn /input-pool /root/ComfyUI/input
+        cd /root/ComfyUI
+        exec python3 main.py --listen 0.0.0.0 --port 8188 --disable-auto-launch
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8188/system_stats"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 420s
+
+volumes:
+  comfyui-root:

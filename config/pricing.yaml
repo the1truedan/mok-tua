@@ -1,0 +1,75 @@
+# Pre-flight cost / time / SLA estimates for MOCK-TUA.
+# Numbers are planning defaults; refresh from provider pages as needed.
+
+providers:
+  local_m4rv:
+    type: local
+    cost_usd: 0.0
+    est_still_sec: 25
+    est_video_sec_per_s: 8
+    sla: best-effort
+    notes: "Live SM ComfyUI on M4RV (MPS); image/storyboard preferred"
+
+  local_mrgpu:
+    type: local
+    cost_usd: 0.0
+    est_still_sec: 12
+    est_video_sec_per_s: 4
+    sla: best-effort
+    notes: "CUDA Comfy on MRGPU; video / Wan / I2V preferred"
+
+  local_tower_cpu:
+    type: local
+    cost_usd: 0.0
+    est_still_sec: 120
+    est_video_sec_per_s: 40
+    sla: best-effort
+    notes: "No-GPU control / light CPU only (ML350 / R710 class)"
+
+  hf_zerogpu_free:
+    type: free_or_paid
+    free_tier: true
+    cost_usd: 0.0
+    est_video_sec_per_s: 15
+    clip_sec_typical: [4, 12]
+    daily_quota_min: 5
+    sla: free-tier-queue
+    notes: "HF Spaces ZeroGPU free; short clips only"
+
+  hf_zerogpu_pro:
+    type: free_or_paid
+    free_tier: false
+    cost_usd: 0.0
+    est_video_sec_per_s: 12
+    clip_sec_typical: [4, 12]
+    daily_quota_min: 40
+    overage_usd_per_10min: 1.0
+    sla: priority-queue
+    notes: "HF Pro ~$9/mo; 40 min/day ZeroGPU; overage $1/10min"
+
+  runpod_rtx4090:
+    type: paid
+    on_demand_per_hour: 0.39
+    spot_per_hour: 0.22
+    min_bill_seconds: 1
+    est_video_sec_per_s: 3
+    sla: on-demand
+    notes: "Planning stub; confirm live prices"
+
+  vast_cheap:
+    type: paid
+    on_demand_per_hour: 0.25
+    est_video_sec_per_s: 4
+    sla: spot-variable
+    notes: "Planning stub"
+
+defaults:
+  prefer:
+    - local_m4rv
+    - local_mrgpu
+    - hf_zerogpu_pro
+    - hf_zerogpu_free
+    - runpod_rtx4090
+  refuse_if_data_class:
+    - phi
+    - phi-adjacent
