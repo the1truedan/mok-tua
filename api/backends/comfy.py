@@ -129,7 +129,7 @@ def submit_still(
     checkpoint: str = "DreamShaper_8_pruned.safetensors",
     seed: int | None = None,
     dry_run: bool = True,
-    host_key: str = "m4rv",
+    host_key: str = "mac",
     width: int = 768,
     height: int = 768,
     steps: int = 20,

@@ -4,7 +4,7 @@
     "QQQ0": {
       "label": "Local only",
       "cloud": false,
-      "backends": ["local_m4rv", "local_mrgpu", "local_tower_cpu"]
+      "backends": ["local_mac", "local_gpu", "local_storage_cpu"]
     },
     "QQQ3": {
       "label": "Free/public overflow",

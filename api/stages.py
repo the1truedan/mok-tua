@@ -49,7 +49,7 @@ def work_root() -> Path:
     if env and Path(env).is_dir():
         return Path(env)
     orch = load_json("orchestration.json")
-    preferred = (orch.get("outputs") or {}).get("work_root_M4RV")
+    preferred = (orch.get("outputs") or {}).get("work_root_MAC")
     if preferred and Path(preferred).is_dir():
         return Path(preferred)
     fallback = os.environ.get("WORK_FALLBACK", str(ROOT / "work"))
@@ -61,8 +61,8 @@ def work_root() -> Path:
 def endpoint_url(key: str) -> str:
     orch = load_json("orchestration.json")
     env_map = {
-        "m4rv": os.environ.get("COMFY_M4RV_URL"),
-        "mrgpu": os.environ.get("COMFY_MRGPU_URL"),
+        "mac": os.environ.get("COMFY_MAC_URL"),
+        "gpu": os.environ.get("COMFY_GPU_URL"),
         "headroom": os.environ.get("HEADROOM_BASE"),
     }
     if env_map.get(key):
@@ -149,8 +149,8 @@ def estimate_story(story: dict[str, Any], *, qqq: str | None = None) -> dict[str
 def _run_dir(run_id: str) -> Path:
     d = work_root() / "runs" / run_id
     d.mkdir(parents=True, exist_ok=True)
-    (d / "m4rv").mkdir(exist_ok=True)
-    (d / "mrgpu").mkdir(exist_ok=True)
+    (d / "mac").mkdir(exist_ok=True)
+    (d / "gpu").mkdir(exist_ok=True)
     (d / "frames").mkdir(exist_ok=True)
     return d
 
@@ -189,8 +189,8 @@ def create_run_from_markdown(
     stages.append({"stage": "estimate", "result": est})
     (rdir / "estimate.json").write_text(dumps(est), encoding="utf-8")
 
-    m4rv_url = endpoint_url("m4rv")
-    mrgpu_url = endpoint_url("mrgpu")
+    mac_url = endpoint_url("mac")
+    gpu_url = endpoint_url("gpu")
     checkpoint = str(still_defs.get("checkpoint") or "DreamShaper_8_pruned.safetensors")
 
     shot_results: list[dict[str, Any]] = []
@@ -204,14 +204,14 @@ def create_run_from_markdown(
             elif not isinstance(seed, int):
                 seed = None
 
-            # S1/S2 stills on M4RV
+            # S1/S2 stills on MAC
             still = comfy.submit_still(
-                m4rv_url,
+                mac_url,
                 prompt,
                 checkpoint=checkpoint,
                 seed=seed,
                 dry_run=dry_run or not live_still,
-                host_key="m4rv",
+                host_key="mac",
                 width=int(still_defs.get("width") or 768),
                 height=int(still_defs.get("height") or 768),
                 steps=int(still_defs.get("steps") or 20),
@@ -220,19 +220,19 @@ def create_run_from_markdown(
             )
             stages.append({"stage": "storyboard_panel", "shot_id": shot.get("id"), "result": still})
 
-            # S3 video route (dry by default — push metadata for MRGPU)
+            # S3 video route (dry by default — push metadata for GPU)
             video_payload = {
                 "shot_id": shot.get("id"),
-                "host_key": "mrgpu",
-                "base_url": mrgpu_url,
+                "host_key": "gpu",
+                "base_url": gpu_url,
                 "prompt": prompt,
                 "duration_s": duration_seconds(fields.get("duration") or 5),
                 "status": "dry_run" if dry_run else "planned",
                 "ok": True,
-                "note": "Video graphs require MRGPU Comfy + Wan/I2V workflow pin; v1 records plan + probe",
+                "note": "Video graphs require GPU Comfy + Wan/I2V workflow pin; v1 records plan + probe",
             }
             if not dry_run:
-                probe = comfy.probe(mrgpu_url)
+                probe = comfy.probe(gpu_url)
                 video_payload["probe"] = probe
                 video_payload["ok"] = bool(probe.get("ok"))
                 video_payload["status"] = "reachable" if probe.get("ok") else "unreachable"
@@ -244,7 +244,7 @@ def create_run_from_markdown(
                 "last_good_frame": fields.get("last_good_frame"),
                 "last_good_path": None,
                 "seed": still.get("seed"),
-                "backend": "mrgpu",
+                "backend": "gpu",
                 "status": fields.get("status") or "pending",
             }
             shot_results.append(
@@ -276,7 +276,7 @@ def create_run_from_markdown(
         "run_dir": str(rdir),
         "stages": stages,
         "shots": shot_results,
-        "endpoints": {"m4rv": m4rv_url, "mrgpu": mrgpu_url, "headroom": endpoint_url("headroom")},
+        "endpoints": {"mac": mac_url, "gpu": gpu_url, "headroom": endpoint_url("headroom")},
     }
     (rdir / "run.json").write_text(dumps(state), encoding="utf-8")
     _append_audit(run_id, {"event": "run_created", "shot_count": state["shot_count"]})
@@ -298,7 +298,7 @@ def resume_shot(run_id: str, shot_id: str, *, last_good_frame: int | None = None
             resume["last_good_frame"] = last_good_frame
             resume["last_good_path"] = str(rdir / "frames" / f"{last_good_frame:04d}.png")
         resume["status"] = "resume_planned"
-        resume["backend"] = "mrgpu"
+        resume["backend"] = "gpu"
         resume["note"] = "Re-queue I2V with start frame = last_good_frame (VideoHelperSuite skip_first_frames)"
         updated = True
         break
@@ -353,14 +353,14 @@ def list_runs(limit: int = 20) -> list[dict[str, Any]]:
 
 
 def health() -> dict[str, Any]:
-    m4rv = comfy.probe(endpoint_url("m4rv"))
-    mrgpu = comfy.probe(endpoint_url("mrgpu"))
+    mac = comfy.probe(endpoint_url("mac"))
+    gpu = comfy.probe(endpoint_url("gpu"))
     return {
         "ok": True,
         "service": "mock-tua-api",
         "work_root": str(work_root()),
-        "comfy_m4rv": m4rv,
-        "comfy_mrgpu": mrgpu,
+        "comfy_mac": mac,
+        "comfy_gpu": gpu,
         "headroom": endpoint_url("headroom"),
         "qqq": os.environ.get("MOCK_TUA_QQQ", "QQQ0"),
         "dry_run": os.environ.get("MOCK_TUA_DRY_RUN", "1") not in ("0", "false"),

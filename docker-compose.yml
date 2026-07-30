@@ -1,8 +1,8 @@
-# MOCK-TUA control plane on M4RV.
+# MOCK-TUA control plane on MAC.
 # Consumes live Headroom :8787 and live SM Comfy :8188 on the host.
-# Video workers: push to MRGPU (see docker-compose.mrgpu.yml).
+# Video workers: push to GPU (see docker-compose.gpu.yml).
 #
-#   cd /Users/dtm/mock-tua
+#   cd ~/mock-tua
 #   docker compose up -d --build
 #   curl -s http://127.0.0.1:8799/healthz | python3 -m json.tool
 
@@ -24,8 +24,8 @@ services:
       MOCK_TUA_PORT: "8799"
       MOCK_TUA_CONFIG: /config
       HEADROOM_BASE: ${HEADROOM_BASE:-http://host.docker.internal:8787/v1}
-      COMFY_M4RV_URL: ${COMFY_M4RV_URL:-http://host.docker.internal:8188}
-      COMFY_MRGPU_URL: ${COMFY_MRGPU_URL:-http://192.168.1.5:8188}
+      COMFY_MAC_URL: ${COMFY_MAC_URL:-http://host.docker.internal:8188}
+      COMFY_GPU_URL: ${COMFY_GPU_URL:-http://<gpu-host-ip>:8188}
       LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:-}
       LLM_MODEL: ${LLM_MODEL:-manager-auto}
       WORK_ROOT: ${WORK_ROOT:-/work}

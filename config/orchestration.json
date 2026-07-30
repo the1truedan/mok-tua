@@ -1,29 +1,29 @@
 {
   "version": 1,
   "updated": "2026-07-24",
-  "description": "MOCK-TUA hybrid: live M4RV Headroom + SM Comfy; video \u2192 MRGPU; cloud overflow estimated only by default.",
+  "description": "MOCK-TUA hybrid: live MAC Headroom + SM Comfy; video \u2192 GPU; cloud overflow estimated only by default.",
   "model_pool": {
-    "M4RV": "/Volumes/ai-data/models",
-    "MRGPU": "/mnt/ai-data/models",
-    "TOWER": "/mnt/ai-data/models"
+    "MAC": "/Volumes/ai-data/models",
+    "GPU": "/mnt/ai-data/models",
+    "STORAGE": "/mnt/ai-data/models"
   },
   "endpoints": {
-    "m4rv": {
-      "host": "m4rv",
+    "mac": {
+      "host": "mac",
       "label": "Mac SM ComfyUI (live)",
       "base_url": "http://127.0.0.1:8188",
       "role": "image",
       "mode": "live"
     },
-    "mrgpu": {
-      "host": "mrgpu",
-      "label": "MRGPU ComfyUI (container or host runtime)",
-      "base_url": "http://192.168.1.5:8188",
+    "gpu": {
+      "host": "gpu",
+      "label": "GPU ComfyUI (container or host runtime)",
+      "base_url": "http://<gpu-host-ip>:8188",
       "role": "video",
       "mode": "remote"
     },
     "headroom": {
-      "host": "m4rv",
+      "host": "mac",
       "label": "Live Headroom / LiteLLM path",
       "base_url": "http://localhost:8787/v1",
       "role": "llm",
@@ -31,34 +31,34 @@
     },
     "mock_cloud": {
       "host": "stub",
-      "label": "Cloud overflow estimate stub (live path: manager-openrouter-free on Headroom/MRGPU LiteLLM)",
+      "label": "Cloud overflow estimate stub (live path: manager-openrouter-free on Headroom/GPU LiteLLM)",
       "base_url": "http://127.0.0.1:8899",
       "role": "cloud",
       "mode": "stub",
       "live_model": "manager-openrouter-free",
-      "note": "NEW LAW: MRGPU may use cloud compute for mock-tua overflow; never PHI auto-cloud"
+      "note": "NEW LAW: GPU may use cloud compute for mock-tua overflow; never PHI auto-cloud"
     },
-    "mrgpu_litellm": {
-      "host": "mrgpu",
-      "label": "MRGPU LiteLLM worker+cloud",
-      "base_url": "http://192.168.1.5:4000/v1",
+    "gpu_litellm": {
+      "host": "gpu",
+      "label": "GPU LiteLLM worker+cloud",
+      "base_url": "http://<gpu-host-ip>:4000/v1",
       "role": "llm_worker_cloud",
       "mode": "live"
     }
   },
   "routing": {
     "script_to_shots": "headroom",
-    "image-gen": "m4rv",
-    "character-sheet": "m4rv",
-    "storyboard-panel": "m4rv",
-    "video-gen": "mrgpu",
-    "i2v": "mrgpu",
-    "talking-avatar": "mrgpu",
+    "image-gen": "mac",
+    "character-sheet": "mac",
+    "storyboard-panel": "mac",
+    "video-gen": "gpu",
+    "i2v": "gpu",
+    "talking-avatar": "gpu",
     "cloud-overflow": "mock_cloud"
   },
   "outputs": {
-    "work_root_M4RV": "/Volumes/ai-data/work/story-anim",
-    "work_root_MRGPU": "/mnt/ai-data/work/story-anim",
+    "work_root_MAC": "/Volumes/ai-data/work/story-anim",
+    "work_root_GPU": "/mnt/ai-data/work/story-anim",
     "local_fallback": "./work"
   },
   "still_defaults": {
