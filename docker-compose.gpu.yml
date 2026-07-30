@@ -1,17 +1,17 @@
-# gpu-host CUDA Comfy worker for MOCK-TUA video stages.
-# Aligns with ~/grokcode/deploy/comfyui — run ON gpu-host after nvidia-container-toolkit.
+# GPU CUDA Comfy worker for MOCK-TUA video stages.
+# Aligns with ~/grokcode/deploy/comfyui — run ON GPU after nvidia-container-toolkit.
 #
-#   # on gpu-host:
-#   rsync -az /Users/redacted/mock-tua/ redacted@gpu-host:~/mock-tua/
+#   # on GPU:
+#   rsync -az ~/mock-tua/ user@gpu:~/mock-tua/
 #   # or use grokcode deploy/comfyui
-#   docker compose -f docker-compose.gpu-host.yml up -d
+#   docker compose -f docker-compose.gpu.yml up -d
 #
-# BLOCKER if nvidia-ctk missing: use scripts/comfy_gpu-host_host_runtime.sh from grokcode.
+# BLOCKER if nvidia-ctk missing: use scripts/comfy_gpu_host_runtime.sh from grokcode.
 
 services:
-  comfyui-gpu-host:
+  comfyui-gpu:
     image: ${COMFY_IMAGE:-yanwk/comfyui-boot:cu124-slim}
-    container_name: mock-tua-comfy-gpu-host
+    container_name: mock-tua-comfy-gpu
     restart: unless-stopped
     ports:
       - "${COMFY_PORT:-8188}:8188"
@@ -23,7 +23,7 @@ services:
     volumes:
       - ${AI_DATA_MODELS:-/mnt/ai-data/models}:/models-pool
       - ./workflows/extra_model_paths.yaml:/models-pool-extra/extra_model_paths.yaml:ro
-      - ${COMFY_OUTPUT:-/mnt/ai-data/work/story-anim/gpu-host}:/output-pool
+      - ${COMFY_OUTPUT:-/mnt/ai-data/work/story-anim/gpu}:/output-pool
       - ${COMFY_INPUT:-/mnt/ai-data/work/story-anim/input}:/input-pool
       - comfyui-root:/root
     entrypoint: ["/bin/bash", "-c"]

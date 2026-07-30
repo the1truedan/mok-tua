@@ -15,7 +15,7 @@ from story_parse import parse_story_markdown
 app = FastAPI(
     title="MOCK-TUA",
     version="0.1.0",
-    description="Shot-driven storyboard + tiered staged rendering orchestrator (desk-host hybrid).",
+    description="Shot-driven storyboard + tiered staged rendering orchestrator (MAC hybrid).",
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -112,7 +112,7 @@ def resume(run_id: str, shot_id: str, req: ResumeRequest) -> dict[str, Any]:
 @app.get("/v1/probe/comfy")
 def probe_comfy() -> dict[str, Any]:
     h = stages.health()
-    return {"desk-host": h.get("comfy_desk-host"), "gpu-host": h.get("comfy_gpu-host")}
+    return {"mac": h.get("comfy_mac"), "gpu": h.get("comfy_gpu")}
 
 
 def main() -> None:

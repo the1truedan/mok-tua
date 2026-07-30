@@ -1,29 +1,29 @@
 {
   "version": 1,
   "updated": "2026-07-24",
-  "description": "MOCK-TUA hybrid: live desk-host Headroom + SM Comfy; video \u2192 gpu-host; cloud overflow estimated only by default.",
+  "description": "MOCK-TUA hybrid: live MAC Headroom + SM Comfy; video \u2192 GPU; cloud overflow estimated only by default.",
   "model_pool": {
-    "desk-host": "/Volumes/ai-data/models",
-    "gpu-host": "/mnt/ai-data/models",
-    "TOWER": "/mnt/ai-data/models"
+    "MAC": "/Volumes/ai-data/models",
+    "GPU": "/mnt/ai-data/models",
+    "STORAGE": "/mnt/ai-data/models"
   },
   "endpoints": {
-    "desk-host": {
-      "host": "desk-host",
+    "mac": {
+      "host": "mac",
       "label": "Mac SM ComfyUI (live)",
       "base_url": "http://127.0.0.1:8188",
       "role": "image",
       "mode": "live"
     },
-    "gpu-host": {
-      "host": "gpu-host",
-      "label": "gpu-host ComfyUI (container or host runtime)",
-      "base_url": "http://REDACTED-LAN-IP:8188",
+    "gpu": {
+      "host": "gpu",
+      "label": "GPU ComfyUI (container or host runtime)",
+      "base_url": "http://<gpu-host-ip>:8188",
       "role": "video",
       "mode": "remote"
     },
     "headroom": {
-      "host": "desk-host",
+      "host": "mac",
       "label": "Live Headroom / LiteLLM path",
       "base_url": "http://localhost:8787/v1",
       "role": "llm",
@@ -31,34 +31,34 @@
     },
     "mock_cloud": {
       "host": "stub",
-      "label": "Cloud overflow estimate stub (live path: manager-openrouter-free on Headroom/gpu-host LiteLLM)",
+      "label": "Cloud overflow estimate stub (live path: manager-openrouter-free on Headroom/GPU LiteLLM)",
       "base_url": "http://127.0.0.1:8899",
       "role": "cloud",
       "mode": "stub",
       "live_model": "manager-openrouter-free",
-      "note": "NEW LAW: gpu-host may use cloud compute for mock-tua overflow; never PHI auto-cloud"
+      "note": "NEW LAW: GPU may use cloud compute for mock-tua overflow; never PHI auto-cloud"
     },
-    "gpu-host_litellm": {
-      "host": "gpu-host",
-      "label": "gpu-host LiteLLM worker+cloud",
-      "base_url": "http://REDACTED-LAN-IP:4000/v1",
+    "gpu_litellm": {
+      "host": "gpu",
+      "label": "GPU LiteLLM worker+cloud",
+      "base_url": "http://<gpu-host-ip>:4000/v1",
       "role": "llm_worker_cloud",
       "mode": "live"
     }
   },
   "routing": {
     "script_to_shots": "headroom",
-    "image-gen": "desk-host",
-    "character-sheet": "desk-host",
-    "storyboard-panel": "desk-host",
-    "video-gen": "gpu-host",
-    "i2v": "gpu-host",
-    "talking-avatar": "gpu-host",
+    "image-gen": "mac",
+    "character-sheet": "mac",
+    "storyboard-panel": "mac",
+    "video-gen": "gpu",
+    "i2v": "gpu",
+    "talking-avatar": "gpu",
     "cloud-overflow": "mock_cloud"
   },
   "outputs": {
-    "work_root_desk-host": "/Volumes/ai-data/work/story-anim",
-    "work_root_gpu-host": "/mnt/ai-data/work/story-anim",
+    "work_root_MAC": "/Volumes/ai-data/work/story-anim",
+    "work_root_GPU": "/mnt/ai-data/work/story-anim",
     "local_fallback": "./work"
   },
   "still_defaults": {

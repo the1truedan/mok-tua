@@ -2,23 +2,23 @@
 # Numbers are planning defaults; refresh from provider pages as needed.
 
 providers:
-  local_desk-host:
+  local_mac:
     type: local
     cost_usd: 0.0
     est_still_sec: 25
     est_video_sec_per_s: 8
     sla: best-effort
-    notes: "Live SM ComfyUI on desk-host (MPS); image/storyboard preferred"
+    notes: "Live SM ComfyUI on MAC (MPS); image/storyboard preferred"
 
-  local_gpu-host:
+  local_gpu:
     type: local
     cost_usd: 0.0
     est_still_sec: 12
     est_video_sec_per_s: 4
     sla: best-effort
-    notes: "CUDA Comfy on gpu-host; video / Wan / I2V preferred"
+    notes: "CUDA Comfy on GPU; video / Wan / I2V preferred"
 
-  local_tower_cpu:
+  local_storage_cpu:
     type: local
     cost_usd: 0.0
     est_still_sec: 120
@@ -65,8 +65,8 @@ providers:
 
 defaults:
   prefer:
-    - local_desk-host
-    - local_gpu-host
+    - local_mac
+    - local_gpu
     - hf_zerogpu_pro
     - hf_zerogpu_free
     - runpod_rtx4090

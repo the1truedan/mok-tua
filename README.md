@@ -2,13 +2,13 @@
 
 Portable **shot-driven** storyboard + tiered staged rendering orchestrator for M.A.N.A.G.E.R.
 
-Hybrid v1 (desk-host):
+Hybrid v1 (MAC):
 
 | Stage | Backend |
 |-------|---------|
 | S0 script expand | **Live Headroom** `:8787` |
 | S1/S2 stills / storyboard | **Live SM ComfyUI** `:8188` |
-| S3 video | **gpu-host** Comfy `:8188` (container or host runtime) |
+| S3 video | **GPU** Comfy `:8188` (container or host runtime) |
 | Cloud overflow | Pricing estimate stub (HF ZeroGPU / RunPod tables) |
 
 Control API: **`:8799`**.
@@ -16,33 +16,35 @@ Control API: **`:8799`**.
 ## Quick start (host, recommended)
 
 ```bash
-cd /Users/redacted/mock-tua
+cd ~/mock-tua
 chmod +x scripts/*.sh
 ./scripts/run_host.sh
 # other terminal:
 ./scripts/smoke_local.sh
-./scripts/smoke_gpu-host.sh
+./scripts/smoke_gpu.sh
 ```
 
 ## Docker (API only)
 
 ```bash
 cp .env.example .env
-# set LITELLM_MASTER_KEY from ~/ai-gateway/.env if you want live S0
+# set LITELLM_MASTER_KEY to your own LLM gateway/proxy key if you want live S0
 docker compose up -d --build
 ./scripts/smoke_local.sh
 ```
 
-Uses `host.docker.internal` for Headroom + desk-host Comfy.
+Uses `host.docker.internal` for Headroom + MAC Comfy.
 
-## gpu-host video worker
+## GPU video worker
 
 ```bash
-# preferred until nvidia-ctk: host runtime from grokcode
-ssh gpu-host 'bash ~/grokcode/scripts/comfy_gpu-host_host_runtime.sh smoke'
+# preferred until nvidia-ctk: a host-runtime launcher script for ComfyUI on
+# your GPU box (not included in this repo -- write your own equivalent to
+# start/stop ComfyUI outside Docker)
+ssh gpu 'bash path/to/your/comfy_gpu_host_runtime.sh smoke'
 
 # docker path (needs nvidia-container-toolkit):
-# docker compose -f docker-compose.gpu-host.yml up -d
+# docker compose -f docker-compose.gpu.yml up -d
 ```
 
 ## Story elements
@@ -54,17 +56,13 @@ curl -s http://127.0.0.1:8799/v1/runs -H 'content-type: application/json' \
   -d @<(python3 -c "import json,pathlib; print(json.dumps({'markdown': pathlib.Path('fixtures/sample_instructor_story.md').read_text(), 'dry_run': True}))")
 ```
 
-## Context / share ingest
-
-Full recon export: `context/mock-tua.md`.  
-**Agents:** fetch `grok.com/share` via `~/grokcode/scripts/batch_share_ingest.py` (never SPA scrape). See `CONTEXT.md`.
-
 ## Earmarks
 
-- Comfy config portability → Mac Studio / PCI CUDA-ROCm Mac (`workflows/extra_model_paths.yaml` + grokcode `deploy/comfyui`)
-- HF Pro ZeroGPU overflow (`config/pricing.yaml`, `MOCK_TUA_HF_LIVE=0` until wired)
-- Tok-tua S-tier agent deck (agtop/ctop) — separate track
-- Ansible portable node package — post-ACL unless needed sooner
+- Comfy config portability across CUDA/MPS/ROCm hosts
+  (`workflows/extra_model_paths.yaml`)
+- HF Pro ZeroGPU overflow (`config/pricing.yaml`, `MOCK_TUA_HF_LIVE=0` until
+  wired)
+- Ansible-based portable node packaging, not yet built
 
 ## API map
 
