@@ -80,3 +80,27 @@ curl -s http://127.0.0.1:8799/v1/runs -H 'content-type: application/json' \
 | GET | `/v1/runs/{id}` |
 | POST | `/v1/runs/{id}/shots/{shot}/resume` |
 | GET | `/v1/probe/comfy` |
+
+
+## How this came to be
+
+Storyboards and short motion clips kept coming up as a way to *explain*
+caregiver tools without a 40-page PDF. **mok-tua** is the small orchestrator
+that walks script → stills → optional video against a local ComfyUI + LLM
+gateway — the same fleet used for M.A.N.A.G.E.R. testing.
+
+It grew from hybrid Mac experiments and multi-model design chats, then a
+local git history, then a sanitized public tree after ACL Phase 1 so others
+can see the pattern without our private render paths.
+
+**Timeline anchors:** pivot **13 April 2026**; gateway/fleet work **June–July
+2026**; public release late **July 2026**.
+
+---
+
+<p align="left">
+  <a href="https://linktr.ee/the1truedan"><img src="https://img.shields.io/badge/Linktree-39E09B?style=for-the-badge&logo=linktree&logoColor=white" alt="Linktree"></a>
+  <a href="https://ko-fi.com/the1truedan"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
+</p>
+
+**© 2026 M.A.N.A.G.E.R. LLC** — *prepare for the care when we cannot be there*
