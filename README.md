@@ -1,22 +1,26 @@
-# MOCK-TUA
+# mok-tua (a.k.a. MOCK-TUA)
 
-Portable **shot-driven** storyboard + tiered staged rendering orchestrator for M.A.N.A.G.E.R.
+Turn a short script into storyboard stills and optional video clips by
+walking a fixed stage ladder — text expand → stills → video — against the
+tools you already run at home (local LLM gateway + ComfyUI).
 
-Hybrid v1 (MAC):
+Built for small creative pipelines, not a hosted “movie studio” product.
 
-| Stage | Backend |
-|-------|---------|
-| S0 script expand | **Live Headroom** `:8787` |
-| S1/S2 stills / storyboard | **Live SM ComfyUI** `:8188` |
-| S3 video | **GPU** Comfy `:8188` (container or host runtime) |
-| Cloud overflow | Pricing estimate stub (HF ZeroGPU / RunPod tables) |
+### Stages (hybrid Mac v1)
 
-Control API: **`:8799`**.
+| Stage | What happens | Where |
+|-------|----------------|------|
+| S0 | Expand / shape the script | Local Headroom gateway `:8787` |
+| S1/S2 | Still frames / storyboard | ComfyUI `:8188` |
+| S3 | Video (when you want motion) | GPU ComfyUI `:8188` |
+| Cloud | Overflow cost estimate only | Stub tables (HF ZeroGPU / RunPod) |
 
-## Quick start (host, recommended)
+Control API listens on **`:8799`**.
+
+## Quick start (on the host)
 
 ```bash
-cd ~/mock-tua
+cd ~/mok-tua   # or your clone path
 chmod +x scripts/*.sh
 ./scripts/run_host.sh
 # other terminal:
@@ -28,12 +32,12 @@ chmod +x scripts/*.sh
 
 ```bash
 cp .env.example .env
-# set LITELLM_MASTER_KEY to your own LLM gateway/proxy key if you want live S0
+# optional: set LITELLM_MASTER_KEY if S0 should hit your live gateway
 docker compose up -d --build
 ./scripts/smoke_local.sh
 ```
 
-Uses `host.docker.internal` for Headroom + MAC Comfy.
+From Docker on a Mac, Headroom and Comfy are reached via `host.docker.internal`.
 
 ## GPU video worker
 
