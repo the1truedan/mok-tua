@@ -1,0 +1,63 @@
+/* Commodore 64 canvas skin — VIC-II blue + light blue text
+   Native spirit: 40-col monospaced, line-oriented prompt.
+   (Full 320×200 pixel framebuffer is docs mock; this is the ops skin.) */
+
+Screen {
+    background: #40318d;
+    color: #a5a0ff;
+    layout: vertical;
+}
+
+#chrome {
+    dock: top;
+    height: auto;
+    background: #40318d;
+    color: #ffffff;
+    padding: 0 1;
+    text-style: bold;
+}
+
+#menu {
+    dock: top;
+    height: auto;
+    background: #40318d;
+    color: #d5df7c;
+    padding: 0 1;
+}
+
+#log {
+    height: 1fr;
+    background: #40318d;
+    color: #a5a0ff;
+    border: solid #6c5eb5;
+    padding: 0 1;
+    scrollbar-background: #40318d;
+    scrollbar-color: #7869c4;
+}
+
+#prompt-row {
+    dock: bottom;
+    height: auto;
+    background: #40318d;
+    padding: 0 1 1 1;
+}
+
+#ready {
+    color: #ffffff;
+    width: auto;
+}
+
+Input {
+    background: #40318d;
+    color: #ffffff;
+    border: none;
+    padding: 0 1;
+    width: 1fr;
+}
+
+Input:focus {
+    background: #40318d;
+    border: none;
+}
+
+/* status line colors via Rich markup in code */

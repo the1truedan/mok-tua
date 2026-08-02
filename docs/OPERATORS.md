@@ -3,7 +3,7 @@
 > **Looking for the plain-English overview?** Start at the root [README.md](../README.md).  
 > This page keeps the **technical** detail (ports, CLI, tiers, federation, API tables).
 
-**Version:** hybrid v0.3–0.4 · Control API **`:8799`**
+**Version:** hybrid v0.5 · Control API **`:8799`**
 
 ---
 
@@ -26,6 +26,8 @@ Control API: **`:8799`**. Director's Console peer: UI `:5173` · CPE `:9800` · 
 
 | Ver | Date | Changes |
 |-----|------|---------|
+| **0.5.0** | 2026-08-02 | Conductor **TUI** (`tui/`): `--skin c64\|modern`, CLI `tui` + `run_tui.sh`, bridge to existing CLI verbs; vendor GUI mok-ups retained — see `docs/INTERFACES.md`, root `CHANGELOG.md` |
+| **0.4.x** | 2026-08-02 | Human README, non-doxxing product art, vendor/mok-up showcase |
 | **0.3.0** | 2026-08-02 | T0–T4 **tier lock** (`config/tier_lock_T0-T4.json`) + loading profiles; live `pull --tier` with dirty/conflict safety; **MRGPU monitor** (RAM/CPU/GPU/temp via exporters+SSH); `smoke` T0–T4 scorecard; nested `discover` / `audit` / `stage-app` / `lock`; progress bars on pull/load; **ask_packet.v1** federation (Johnny BOM + CHAINS render receipts + trusted node award; PHI unbroadcastable) — `docs/ASK_PACKET_FEDERATION.md` |
 | **0.2.x** | 2026-08 | Providers/catalog, sides ingest, Qwen multi-angle lock, Grok Imagine / Nano Banana dry-run, `mok_tua_cli` launch/pull |
 | **0.1.0** | 2026-07-27 | Initial scaffold — story parse, stages, Comfy/Headroom, MRGPU compose |
@@ -53,6 +55,12 @@ Full map of **Director's Console**, **Wan2GP**, **FaceFusion**, **FreeMoCap**,
 - `config/tier_lock_T0-T4.json` — **version pins + loading profiles** (scale/repro)
 
 ```bash
+# conductor TUI (C64 default; same verbs as below)
+python3 scripts/mok_tua_cli.py tui                 # or ./scripts/run_tui.sh
+python3 scripts/mok_tua_cli.py tui --skin modern
+python3 scripts/mok_tua_cli.py tui --repl          # no Textual
+# optional full-screen: pip install -r tui/requirements.txt
+
 # status board
 python3 scripts/mok_tua_cli.py providers
 python3 scripts/mok_tua_cli.py doctor

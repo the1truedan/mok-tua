@@ -1,0 +1,60 @@
+/* Modern ops TUI — navy conductor chrome (matches mok-up frames) */
+
+Screen {
+    background: #0b1220;
+    color: #d7e0f2;
+    layout: vertical;
+}
+
+#chrome {
+    dock: top;
+    height: auto;
+    background: #121a2b;
+    color: #e8eefc;
+    padding: 0 1;
+    text-style: bold;
+    border-bottom: solid #2a3a5c;
+}
+
+#menu {
+    dock: top;
+    height: auto;
+    background: #0f1729;
+    color: #9fb4d9;
+    padding: 0 1;
+}
+
+#log {
+    height: 1fr;
+    background: #0b1220;
+    color: #c9d4ea;
+    border: solid #2a3a5c;
+    padding: 0 1;
+    scrollbar-background: #0b1220;
+    scrollbar-color: #3d5a8a;
+}
+
+#prompt-row {
+    dock: bottom;
+    height: auto;
+    background: #121a2b;
+    padding: 0 1 1 1;
+    border-top: solid #2a3a5c;
+}
+
+#ready {
+    color: #7ddea8;
+    width: auto;
+}
+
+Input {
+    background: #0b1220;
+    color: #e8eefc;
+    border: tall #2a3a5c;
+    padding: 0 1;
+    width: 1fr;
+}
+
+Input:focus {
+    border: tall #5b8def;
+}
