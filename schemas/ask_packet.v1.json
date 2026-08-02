@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mok-tua.local/schemas/ask_packet.v1.json",
+  "title": "ask_packet.v1",
+  "description": "Encapsulated compute ask: public manifest (Johnny BOM + tier_lock + pricing expectations) + sealed payload_ref + CHAINS custody seed. PHI must not be crowd-routable.",
+  "type": "object",
+  "required": ["id", "created", "ttl", "manifest", "payload_ref", "custody"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "ask_packet.v1" },
+    "id": { "type": "string", "minLength": 8 },
+    "created": { "type": "string", "format": "date-time" },
+    "ttl": {
+      "type": "string",
+      "description": "ISO-8601 duration or seconds as string, e.g. PT15M or 900s"
+    },
+    "manifest": {
+      "type": "object",
+      "required": ["lock_ref", "requires", "op", "resource", "expect", "data_class", "price", "qqq_floor"],
+      "additionalProperties": false,
+      "properties": {
+        "lock_ref": {
+          "type": "string",
+          "description": "Tier lock join key, e.g. T1_vid_gen@<blake3-12hex>",
+          "pattern": "^T[0-4]_[a-z0-9_]+@[0-9a-f]{8,64}$"
+        },
+        "requires": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["kind", "ref"],
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": ["unet", "lora", "workflow", "node_pack", "checkpoint", "vae", "text_encoder", "other"]
+              },
+              "ref": {
+                "type": "string",
+                "description": "Path digest, inventory id, or content CID — never raw weight bytes"
+              },
+              "role": { "type": "string" }
+            }
+          }
+        },
+        "op": {
+          "type": "string",
+          "enum": ["still", "i2v", "expand", "tts", "face", "stitch", "video"]
+        },
+        "resource": {
+          "type": "object",
+          "required": ["vram_min_gb", "arch_any"],
+          "additionalProperties": false,
+          "properties": {
+            "vram_min_gb": { "type": "number", "minimum": 0 },
+            "arch_any": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["cuda_sm89", "cuda_sm86", "cuda_sm80", "cuda_any", "mps_unified", "cpu", "mlx"]
+              },
+              "minItems": 1
+            },
+            "disk_gb": { "type": "number", "minimum": 0 }
+          }
+        },
+        "expect": {
+          "type": "object",
+          "required": ["wall_sec_p50", "wall_sec_deadline", "on_deadline"],
+          "additionalProperties": false,
+          "properties": {
+            "wall_sec_p50": { "type": "number", "minimum": 0 },
+            "wall_sec_deadline": { "type": "number", "minimum": 0 },
+            "on_deadline": {
+              "type": "string",
+              "enum": ["cancel", "spill_local", "spill_qqq1"]
+            }
+          }
+        },
+        "memory": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "peak_gb_est": { "type": "number", "minimum": 0 },
+            "residency": {
+              "type": "string",
+              "enum": ["latent", "kv", "weights", "mixed"]
+            }
+          }
+        },
+        "data_class": {
+          "type": "string",
+          "enum": ["public", "internal", "phi", "phi-adjacent"]
+        },
+        "price": {
+          "type": "object",
+          "required": ["max_usd", "unit"],
+          "additionalProperties": false,
+          "properties": {
+            "max_usd": { "type": "number", "minimum": 0 },
+            "unit": { "type": "string", "enum": ["shot", "sec", "run"] }
+          }
+        },
+        "qqq_floor": {
+          "type": "string",
+          "enum": ["QQQ0", "QQQ3", "QQQ1"]
+        },
+        "shot_id": { "type": "string" },
+        "run_id": { "type": "string" }
+      }
+    },
+    "payload_ref": {
+      "type": "object",
+      "required": ["cid", "enc", "bytes"],
+      "additionalProperties": false,
+      "description": "Sealed payload handle — not broadcast with prompts. Reveal only to awardee.",
+      "properties": {
+        "cid": { "type": "string" },
+        "enc": {
+          "type": "string",
+          "enum": ["none", "x25519", "age", "local_path"]
+        },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "path": {
+          "type": "string",
+          "description": "Local sealed path when enc=local_path (lab only)"
+        }
+      }
+    },
+    "custody": {
+      "type": "object",
+      "required": ["chain_id", "actor", "prev_hash", "content_hash"],
+      "additionalProperties": false,
+      "properties": {
+        "chain_id": {
+          "type": "string",
+          "const": "mok-tua-render",
+          "description": "Never reuse caregiving/PHI CHAINS instance"
+        },
+        "actor": { "type": "string" },
+        "prev_hash": { "type": "string" },
+        "content_hash": { "type": "string" },
+        "sig": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

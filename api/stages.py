@@ -12,7 +12,8 @@ from typing import Any
 
 import yaml
 
-from backends import cloud_stub, comfy, headroom
+from backends import cloud_stub, comfy, grok_imagine, headroom, nano_banana
+from prompt_build import build_panel_prompt, continuity_from_fields
 from story_parse import duration_seconds, parse_story_file, parse_story_markdown
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -49,7 +50,7 @@ def work_root() -> Path:
     if env and Path(env).is_dir():
         return Path(env)
     orch = load_json("orchestration.json")
-    preferred = (orch.get("outputs") or {}).get("work_root_MAC")
+    preferred = (orch.get("outputs") or {}).get("work_root_desk-host")
     if preferred and Path(preferred).is_dir():
         return Path(preferred)
     fallback = os.environ.get("WORK_FALLBACK", str(ROOT / "work"))
@@ -61,8 +62,8 @@ def work_root() -> Path:
 def endpoint_url(key: str) -> str:
     orch = load_json("orchestration.json")
     env_map = {
-        "mac": os.environ.get("COMFY_MAC_URL"),
-        "gpu": os.environ.get("COMFY_GPU_URL"),
+        "desk-host": os.environ.get("COMFY_desk-host_URL"),
+        "gpu-host": os.environ.get("COMFY_gpu-host_URL"),
         "headroom": os.environ.get("HEADROOM_BASE"),
     }
     if env_map.get(key):
@@ -149,10 +150,175 @@ def estimate_story(story: dict[str, Any], *, qqq: str | None = None) -> dict[str
 def _run_dir(run_id: str) -> Path:
     d = work_root() / "runs" / run_id
     d.mkdir(parents=True, exist_ok=True)
-    (d / "mac").mkdir(exist_ok=True)
-    (d / "gpu").mkdir(exist_ok=True)
+    (d / "desk-host").mkdir(exist_ok=True)
+    (d / "gpu-host").mkdir(exist_ok=True)
     (d / "frames").mkdir(exist_ok=True)
     return d
+
+
+def _qqq_mode(qqq: str | None = None) -> str:
+    return qqq or os.environ.get("MOCK_TUA_QQQ") or (load_json("qqq.json").get("default_mode") or "QQQ0")
+
+
+def _provider_allowed(provider: str, qqq: str, kind: str = "still") -> bool:
+    qqq_cfg = load_json("qqq.json")
+    mode = (qqq_cfg.get("modes") or {}).get(qqq) or {}
+    key = "still_providers" if kind == "still" else "video_providers"
+    allowed = mode.get(key) or mode.get("backends") or []
+    if not allowed:
+        return True
+    return provider in allowed
+
+
+def resolve_still_provider(
+    orch: dict[str, Any],
+    *,
+    requested: str | None,
+    qqq: str,
+) -> tuple[str, dict[str, Any]]:
+    defaults = orch.get("defaults") or {}
+    name = requested or os.environ.get("MOCK_TUA_STILL_PROVIDER") or defaults.get("still_provider") or "local_sd_minimal"
+    providers = orch.get("still_providers") or {}
+    if name not in providers:
+        name = "local_sd_minimal"
+    if not _provider_allowed(name, qqq, "still"):
+        # fall back to first allowed local
+        for cand in ("local_sd_minimal", "local_qwen_edit"):
+            if _provider_allowed(cand, qqq, "still") and cand in providers:
+                name = cand
+                break
+    return name, dict(providers.get(name) or {})
+
+
+def resolve_video_provider(
+    orch: dict[str, Any],
+    *,
+    requested: str | None,
+    qqq: str,
+) -> tuple[str, dict[str, Any]]:
+    defaults = orch.get("defaults") or {}
+    name = requested or os.environ.get("MOCK_TUA_VIDEO_PROVIDER") or defaults.get("video_provider") or "local_wan"
+    providers = orch.get("video_providers") or {}
+    if name not in providers:
+        name = "local_wan"
+    if not _provider_allowed(name, qqq, "video"):
+        for cand in ("local_wan", "local_animatediff"):
+            if _provider_allowed(cand, qqq, "video") and cand in providers:
+                name = cand
+                break
+    return name, dict(providers.get(name) or {})
+
+
+def _workflow_pin(orch: dict[str, Any], pin_name: str | None) -> dict[str, Any] | None:
+    if not pin_name:
+        return None
+    pins = orch.get("workflow_pins") or {}
+    pin = pins.get(pin_name)
+    return dict(pin) if isinstance(pin, dict) else None
+
+
+def submit_still_via_provider(
+    provider_name: str,
+    provider_cfg: dict[str, Any],
+    *,
+    orch: dict[str, Any],
+    prompt: str,
+    seed: int | None,
+    dry_run: bool,
+    live_still: bool,
+    still_defs: dict[str, Any],
+    shot_id: str | None,
+    quality: bool = False,
+) -> dict[str, Any]:
+    """Route still to local Comfy pin or cloud API backend."""
+    ptype = str(provider_cfg.get("type") or "local_comfy")
+    dry = dry_run or not live_still
+
+    if ptype == "api" and provider_cfg.get("backend") == "grok_imagine":
+        model = provider_cfg.get("model_quality" if quality else "model") or "grok-imagine-image"
+        result = grok_imagine.generate_image(prompt, model=str(model), dry_run=dry)
+        result["provider"] = provider_name
+        return result
+
+    if ptype == "api" and provider_cfg.get("backend") == "nano_banana":
+        result = nano_banana.generate_image(
+            prompt,
+            model=str(provider_cfg.get("model") or "nano-banana"),
+            dry_run=dry,
+        )
+        result["provider"] = provider_name
+        return result
+
+    # local Comfy (default)
+    host = str(provider_cfg.get("host") or "desk-host")
+    base_url = endpoint_url(host)
+    pin_name = provider_cfg.get("workflow_pin")
+    pin = _workflow_pin(orch, str(pin_name) if pin_name else None)
+    checkpoint = str(still_defs.get("checkpoint") or "DreamShaper_8_pruned.safetensors")
+    return comfy.submit_still(
+        base_url,
+        prompt,
+        checkpoint=checkpoint,
+        seed=seed,
+        dry_run=dry,
+        host_key=host,
+        width=int(still_defs.get("width") or 768),
+        height=int(still_defs.get("height") or 768),
+        steps=int(still_defs.get("steps") or 20),
+        cfg=float(still_defs.get("cfg") or 7.0),
+        filename_prefix=f"mock_tua_{shot_id or 'panel'}",
+        workflow_pin=pin,
+        provider=provider_name,
+    )
+
+
+def submit_video_via_provider(
+    provider_name: str,
+    provider_cfg: dict[str, Any],
+    *,
+    orch: dict[str, Any],
+    prompt: str,
+    duration_s: float,
+    dry_run: bool,
+    shot_id: str | None,
+) -> dict[str, Any]:
+    ptype = str(provider_cfg.get("type") or "local_comfy")
+
+    if ptype == "api" and provider_cfg.get("backend") == "grok_imagine":
+        result = grok_imagine.generate_video_plan(
+            prompt,
+            model=str(provider_cfg.get("model") or "grok-imagine-video"),
+            dry_run=dry_run,
+        )
+        result["provider"] = provider_name
+        result["shot_id"] = shot_id
+        result["duration_s"] = duration_s
+        return result
+
+    if ptype == "comfy_partner" or provider_name == "seedance_cloud":
+        return {
+            "ok": True,
+            "status": "earmark",
+            "provider": provider_name,
+            "shot_id": shot_id,
+            "duration_s": duration_s,
+            "prompt_preview": prompt[:200],
+            "note": "Seedance / Comfy partner overflow — wire Comfy Cloud client in Phase 4",
+            "workflow_ref": provider_cfg.get("workflow_ref"),
+        }
+
+    host = str(provider_cfg.get("host") or "gpu-host")
+    base_url = endpoint_url(host)
+    pin = _workflow_pin(orch, str(provider_cfg.get("workflow_pin") or ""))
+    return comfy.plan_video(
+        base_url,
+        prompt,
+        host_key=host,
+        duration_s=duration_s,
+        dry_run=dry_run,
+        workflow_pin=pin,
+        provider=provider_name,
+    )
 
 
 def create_run_from_markdown(
@@ -162,6 +328,10 @@ def create_run_from_markdown(
     qqq: str | None = None,
     live_still: bool | None = None,
     expand_script: str | None = None,
+    still_provider: str | None = None,
+    video_provider: str | None = None,
+    next_scene: bool | None = None,
+    quality_stills: bool = False,
 ) -> dict[str, Any]:
     if dry_run is None:
         dry_run = os.environ.get("MOCK_TUA_DRY_RUN", "1") not in ("0", "false", "False")
@@ -177,6 +347,9 @@ def create_run_from_markdown(
     stages: list[dict[str, Any]] = []
     orch = load_json("orchestration.json")
     still_defs = orch.get("still_defaults") or {}
+    mode = _qqq_mode(qqq)
+    still_name, still_cfg = resolve_still_provider(orch, requested=still_provider, qqq=mode)
+    video_name, video_cfg = resolve_video_provider(orch, requested=video_provider, qqq=mode)
 
     # S0 optional LLM expand
     if expand_script:
@@ -185,66 +358,86 @@ def create_run_from_markdown(
         (rdir / "s0_expand.json").write_text(dumps(s0), encoding="utf-8")
 
     # estimates
-    est = estimate_story(story, qqq=qqq)
+    est = estimate_story(story, qqq=mode)
     stages.append({"stage": "estimate", "result": est})
     (rdir / "estimate.json").write_text(dumps(est), encoding="utf-8")
 
-    mac_url = endpoint_url("mac")
-    gpu_url = endpoint_url("gpu")
-    checkpoint = str(still_defs.get("checkpoint") or "DreamShaper_8_pruned.safetensors")
+    desk-host_url = endpoint_url("desk-host")
+    gpu-host_url = endpoint_url("gpu-host")
+    style_lock = None
+    meta = story.get("meta") or {}
+    if isinstance(meta, dict):
+        style_lock = meta.get("style_lock")
 
     shot_results: list[dict[str, Any]] = []
     for scene in story.get("scenes") or []:
         for shot in scene.get("shots") or []:
             fields = shot.get("fields") or {}
-            prompt = str(fields.get("prompt") or shot.get("title") or "storyboard panel")
+            base_prompt = str(fields.get("prompt") or shot.get("title") or "storyboard panel")
+            cont = continuity_from_fields(fields)
+            panel_prompt = build_panel_prompt(
+                base_prompt,
+                camera=fields.get("camera"),
+                continue_from=cont,
+                next_scene=next_scene,
+                style_lock=style_lock or fields.get("style_lock"),
+            )
             seed = fields.get("seed")
             if isinstance(seed, str) and seed.isdigit():
                 seed = int(seed)
             elif not isinstance(seed, int):
                 seed = None
 
-            # S1/S2 stills on MAC
-            still = comfy.submit_still(
-                mac_url,
-                prompt,
-                checkpoint=checkpoint,
+            # S1/S2 stills — local Comfy or cloud (Grok Imagine / Nano Banana)
+            still = submit_still_via_provider(
+                still_name,
+                still_cfg,
+                orch=orch,
+                prompt=panel_prompt,
                 seed=seed,
-                dry_run=dry_run or not live_still,
-                host_key="mac",
-                width=int(still_defs.get("width") or 768),
-                height=int(still_defs.get("height") or 768),
-                steps=int(still_defs.get("steps") or 20),
-                cfg=float(still_defs.get("cfg") or 7.0),
-                filename_prefix=f"mock_tua_{shot.get('id')}",
+                dry_run=dry_run,
+                live_still=live_still,
+                still_defs=still_defs,
+                shot_id=shot.get("id"),
+                quality=quality_stills,
             )
-            stages.append({"stage": "storyboard_panel", "shot_id": shot.get("id"), "result": still})
+            still["panel_prompt"] = panel_prompt
+            stages.append(
+                {
+                    "stage": "storyboard_panel",
+                    "shot_id": shot.get("id"),
+                    "provider": still_name,
+                    "result": still,
+                }
+            )
 
-            # S3 video route (dry by default — push metadata for GPU)
-            video_payload = {
-                "shot_id": shot.get("id"),
-                "host_key": "gpu",
-                "base_url": gpu_url,
-                "prompt": prompt,
-                "duration_s": duration_seconds(fields.get("duration") or 5),
-                "status": "dry_run" if dry_run else "planned",
-                "ok": True,
-                "note": "Video graphs require GPU Comfy + Wan/I2V workflow pin; v1 records plan + probe",
-            }
-            if not dry_run:
-                probe = comfy.probe(gpu_url)
-                video_payload["probe"] = probe
-                video_payload["ok"] = bool(probe.get("ok"))
-                video_payload["status"] = "reachable" if probe.get("ok") else "unreachable"
-            stages.append({"stage": "i2v_or_wan_animate", "shot_id": shot.get("id"), "result": video_payload})
+            # S3 video — Wan / AnimateDiff / cloud earmarks
+            duration_s = duration_seconds(fields.get("duration") or 5)
+            video_payload = submit_video_via_provider(
+                video_name,
+                video_cfg,
+                orch=orch,
+                prompt=panel_prompt,
+                duration_s=duration_s,
+                dry_run=dry_run,
+                shot_id=shot.get("id"),
+            )
+            stages.append(
+                {
+                    "stage": "i2v_or_wan_animate",
+                    "shot_id": shot.get("id"),
+                    "provider": video_name,
+                    "result": video_payload,
+                }
+            )
 
             resume = {
                 "shot_id": shot.get("id"),
-                "workflow_hash": comfy.seed_from_prompt(prompt),
+                "workflow_hash": comfy.seed_from_prompt(panel_prompt),
                 "last_good_frame": fields.get("last_good_frame"),
                 "last_good_path": None,
                 "seed": still.get("seed"),
-                "backend": "gpu",
+                "backend": video_name,
                 "status": fields.get("status") or "pending",
             }
             shot_results.append(
@@ -253,6 +446,7 @@ def create_run_from_markdown(
                     "still": still,
                     "video": video_payload,
                     "resume": resume,
+                    "panel_prompt": panel_prompt,
                 }
             )
 
@@ -270,16 +464,33 @@ def create_run_from_markdown(
         "created_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "dry_run": dry_run,
         "live_still": live_still and not dry_run,
-        "qqq": qqq or os.environ.get("MOCK_TUA_QQQ", "QQQ0"),
+        "qqq": mode,
+        "still_provider": still_name,
+        "video_provider": video_name,
         "title": story.get("title"),
         "shot_count": story.get("shot_count"),
         "run_dir": str(rdir),
         "stages": stages,
         "shots": shot_results,
-        "endpoints": {"mac": mac_url, "gpu": gpu_url, "headroom": endpoint_url("headroom")},
+        "endpoints": {"desk-host": desk-host_url, "gpu-host": gpu-host_url, "headroom": endpoint_url("headroom")},
+        "providers": {
+            "still": still_name,
+            "video": video_name,
+            "still_cfg_type": still_cfg.get("type"),
+            "video_cfg_type": video_cfg.get("type"),
+        },
     }
     (rdir / "run.json").write_text(dumps(state), encoding="utf-8")
-    _append_audit(run_id, {"event": "run_created", "shot_count": state["shot_count"]})
+    _append_audit(
+        run_id,
+        {
+            "event": "run_created",
+            "shot_count": state["shot_count"],
+            "still_provider": still_name,
+            "video_provider": video_name,
+            "qqq": mode,
+        },
+    )
     return state
 
 
@@ -298,7 +509,7 @@ def resume_shot(run_id: str, shot_id: str, *, last_good_frame: int | None = None
             resume["last_good_frame"] = last_good_frame
             resume["last_good_path"] = str(rdir / "frames" / f"{last_good_frame:04d}.png")
         resume["status"] = "resume_planned"
-        resume["backend"] = "gpu"
+        resume["backend"] = "gpu-host"
         resume["note"] = "Re-queue I2V with start frame = last_good_frame (VideoHelperSuite skip_first_frames)"
         updated = True
         break
@@ -353,17 +564,23 @@ def list_runs(limit: int = 20) -> list[dict[str, Any]]:
 
 
 def health() -> dict[str, Any]:
-    mac = comfy.probe(endpoint_url("mac"))
-    gpu = comfy.probe(endpoint_url("gpu"))
+    desk-host = comfy.probe(endpoint_url("desk-host"))
+    gpu-host = comfy.probe(endpoint_url("gpu-host"))
+    orch = load_json("orchestration.json")
     return {
         "ok": True,
         "service": "mock-tua-api",
         "work_root": str(work_root()),
-        "comfy_mac": mac,
-        "comfy_gpu": gpu,
+        "comfy_desk-host": desk-host,
+        "comfy_gpu-host": gpu-host,
         "headroom": endpoint_url("headroom"),
-        "qqq": os.environ.get("MOCK_TUA_QQQ", "QQQ0"),
+        "qqq": _qqq_mode(),
         "dry_run": os.environ.get("MOCK_TUA_DRY_RUN", "1") not in ("0", "false"),
+        "still_providers": list((orch.get("still_providers") or {}).keys()),
+        "video_providers": list((orch.get("video_providers") or {}).keys()),
+        "grok_imagine_key": grok_imagine.available(),
+        "nano_banana_key": nano_banana.available(),
+        "defaults": orch.get("defaults"),
     }
 
 

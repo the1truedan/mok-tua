@@ -1,0 +1,166 @@
+{
+  "_meta": {
+    "title": "mok-tua Qwen Edit multi-angle + next-scene",
+    "status": "api_ready",
+    "builder": "qwen_graph.build_qwen_edit_storyboard_graph",
+    "requires": [
+      "diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+      "text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+      "vae/qwen_image_vae.safetensors",
+      "loras/Qwen-Edit-2509-Multiple-angles.safetensors",
+      "loras/next-scene_lora-v2-3000.safetensors",
+      "loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors"
+    ],
+    "prompt_node": "30",
+    "seed_node": "50"
+  },
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+      "type": "qwen_image"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    }
+  },
+  "10": {
+    "class_type": "LoraLoaderModelOnly",
+    "inputs": {
+      "lora_name": "Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+      "strength_model": 1.0,
+      "model": [
+        "1",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "LoraLoaderModelOnly",
+    "inputs": {
+      "lora_name": "Qwen-Edit-2509-Multiple-angles.safetensors",
+      "strength_model": 1.0,
+      "model": [
+        "10",
+        0
+      ]
+    }
+  },
+  "12": {
+    "class_type": "LoraLoaderModelOnly",
+    "inputs": {
+      "lora_name": "next-scene_lora-v2-3000.safetensors",
+      "strength_model": 0.75,
+      "model": [
+        "11",
+        0
+      ]
+    }
+  },
+  "20": {
+    "class_type": "ModelSamplingAuraFlow",
+    "inputs": {
+      "shift": 3.0,
+      "model": [
+        "12",
+        0
+      ]
+    }
+  },
+  "30": {
+    "class_type": "TextEncodeQwenImageEditPlus",
+    "inputs": {
+      "prompt": "Next Scene: Medium close-up, eye-level. Instructor in dark studio.",
+      "clip": [
+        "2",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "31": {
+    "class_type": "TextEncodeQwenImageEditPlus",
+    "inputs": {
+      "prompt": "blurry, low quality, watermark, text, deformed",
+      "clip": [
+        "2",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "40": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 768,
+      "height": 768,
+      "batch_size": 1
+    }
+  },
+  "50": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 42,
+      "steps": 8,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1.0,
+      "model": [
+        "20",
+        0
+      ],
+      "positive": [
+        "30",
+        0
+      ],
+      "negative": [
+        "31",
+        0
+      ],
+      "latent_image": [
+        "40",
+        0
+      ]
+    }
+  },
+  "60": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "50",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "70": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "mok_tua_qwen",
+      "images": [
+        "60",
+        0
+      ]
+    }
+  }
+}

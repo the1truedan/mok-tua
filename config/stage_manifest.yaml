@@ -1,0 +1,99 @@
+# mok-tua model stage manifest — drops into ai-data models subfolders only.
+# CLI: python -m stage_cli models -f config/stage_manifest.yaml
+# API: POST /v1/stage/models
+
+version: 1
+pool_root_env: MOCK_TUA_MODELS_ROOT
+pool_root_default: /Volumes/ai-data/models
+allow_subdirs:
+  - checkpoints
+  - loras
+  - Lora
+  - diffusion_models
+  - text_encoders
+  - vae
+  - VAE
+  - controlnet
+  - ControlNet
+  - animatediff
+  - clip
+  - clip_vision
+  - unet
+  - embeddings
+
+items:
+  - id: qwen_edit_2509_fp8
+    role: storyboard_base_edit
+    source:
+      type: hf
+      repo: Comfy-Org/Qwen-Image-Edit_ComfyUI
+      file: split_files/diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors
+    dest_subdir: diffusion_models
+    dest_name: qwen_image_edit_2509_fp8_e4m3fn.safetensors
+    required_for: [local_qwen_edit]
+
+  - id: qwen_vae
+    role: storyboard_vae
+    source:
+      type: hf
+      repo: Comfy-Org/Qwen-Image_ComfyUI
+      file: split_files/vae/qwen_image_vae.safetensors
+    dest_subdir: vae
+    dest_name: qwen_image_vae.safetensors
+    required_for: [local_qwen_edit]
+    skip_if_exists: true
+
+  - id: qwen_vl_te
+    role: storyboard_text_encoder
+    source:
+      type: hf
+      repo: Comfy-Org/Qwen-Image_ComfyUI
+      file: split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors
+    dest_subdir: text_encoders
+    dest_name: qwen_2.5_vl_7b_fp8_scaled.safetensors
+    required_for: [local_qwen_edit]
+    skip_if_exists: true
+
+  - id: multi_angles
+    role: storyboard_camera
+    source:
+      type: local_or_hf
+      path: loras/Qwen-Edit-2509-Multiple-angles.safetensors
+      repo: dx8152/Qwen-Edit-2509-Multiple-angles
+      file: Qwen-Edit-2509-Multiple-angles.safetensors
+    dest_subdir: loras
+    dest_name: Qwen-Edit-2509-Multiple-angles.safetensors
+    required_for: [local_qwen_edit]
+    skip_if_exists: true
+
+  - id: next_scene_v2
+    role: storyboard_continuity
+    source:
+      type: local_or_hf
+      path: loras/next-scene_lora-v2-3000.safetensors
+      repo: lovis93/next-scene-qwen-image-lora-2509
+      file: next-scene_lora-v2-3000.safetensors
+    dest_subdir: loras
+    dest_name: next-scene_lora-v2-3000.safetensors
+    required_for: [local_qwen_edit]
+    skip_if_exists: true
+
+  - id: lightning_2509
+    role: storyboard_speed
+    source:
+      type: local_or_hf
+      path: loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors
+    dest_subdir: loras
+    dest_name: Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors
+    required_for: [local_qwen_edit]
+    skip_if_exists: true
+
+workflows:
+  - id: qwen_next_scene_angles
+    pin: qwen_next_scene_angles
+    path: workflows/qwen_next_scene_angles.api.json
+    status: managed
+  - id: animatediff_basic
+    pin: animatediff_basic
+    path: workflows/animatediff_basic.api.json
+    status: placeholder

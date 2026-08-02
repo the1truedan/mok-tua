@@ -4,18 +4,68 @@
     "QQQ0": {
       "label": "Local only",
       "cloud": false,
-      "backends": ["local_mac", "local_gpu", "local_storage_cpu"]
+      "backends": [
+        "local_desk-host",
+        "local_gpu-host",
+        "local_tower_cpu",
+        "local_sd_minimal",
+        "local_qwen_edit",
+        "local_wan",
+        "local_animatediff"
+      ],
+      "still_providers": ["local_sd_minimal", "local_qwen_edit"],
+      "video_providers": ["local_wan", "local_animatediff"]
     },
     "QQQ3": {
       "label": "Free/public overflow",
       "cloud": true,
-      "backends": ["hf_zerogpu_free", "hf_zerogpu_pro"],
-      "requires": ["data_class_public"]
+      "backends": [
+        "hf_zerogpu_free",
+        "hf_zerogpu_pro",
+        "local_desk-host",
+        "local_gpu-host",
+        "local_sd_minimal",
+        "local_qwen_edit",
+        "local_wan",
+        "grok_imagine",
+        "crowd_federated"
+      ],
+      "still_providers": ["local_qwen_edit", "local_sd_minimal", "grok_imagine", "crowd_federated"],
+      "video_providers": ["local_wan", "local_animatediff", "crowd_federated"],
+      "requires": ["data_class_public"],
+      "notes": "crowd_federated = trusted federation / public ask packets only; never PHI"
     },
     "QQQ1": {
       "label": "Paid cloud",
       "cloud": true,
-      "backends": ["runpod_rtx4090", "vast_cheap", "hf_zerogpu_pro"],
+      "backends": [
+        "runpod_rtx4090",
+        "vast_cheap",
+        "hf_zerogpu_pro",
+        "grok_imagine",
+        "grok_imagine_quality",
+        "grok_imagine_video",
+        "nano_banana",
+        "seedance_cloud",
+        "local_desk-host",
+        "local_gpu-host",
+        "local_sd_minimal",
+        "local_qwen_edit",
+        "local_wan",
+        "local_animatediff"
+      ],
+      "still_providers": [
+        "local_qwen_edit",
+        "local_sd_minimal",
+        "grok_imagine",
+        "nano_banana"
+      ],
+      "video_providers": [
+        "local_wan",
+        "local_animatediff",
+        "seedance_cloud",
+        "grok_imagine_video"
+      ],
       "requires": ["explicit_confirm", "data_class_not_phi"]
     }
   }

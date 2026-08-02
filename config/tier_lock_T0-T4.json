@@ -1,0 +1,383 @@
+{
+  "version": 1,
+  "locked_at": "2026-08-02T17:04:58Z",
+  "mok_tua_version": "0.3.0",
+  "host_profiles": {
+    "desk-host": {
+      "role": "stills",
+      "comfy": "http://127.0.0.1:8188"
+    },
+    "gpu-host": {
+      "role": "video",
+      "host": "REDACTED-LAN-IP",
+      "comfy_url": "http://REDACTED-LAN-IP:8188",
+      "gpu": "RTX 4060 Ti 16G"
+    }
+  },
+  "tiers": {
+    "T0_orchestrators": [
+      {
+        "id": "directors_console",
+        "name": "Director's Console",
+        "path": "/Volumes/ai-data/pinokio/api/directorsconsole.pinokio.git",
+        "path_ok": true,
+        "sha": "40702f0948ae",
+        "dirty": true,
+        "priority": 1,
+        "bleeding_edge": true,
+        "ports": {
+          "frontend": 5173,
+          "cpe_api": 9800,
+          "orchestrator": 9820
+        },
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "mok_tua",
+        "name": "mok-tua",
+        "path": "/Users/redacted/mok-tua",
+        "path_ok": true,
+        "sha": "2f2e9f15f6ac",
+        "dirty": true,
+        "priority": 0,
+        "bleeding_edge": false,
+        "ports": {
+          "api": 8799
+        },
+        "status": "live"
+      }
+    ],
+    "T1_vid_gen": [
+      {
+        "id": "sm_comfy",
+        "name": "ComfyUI (Stability Matrix)",
+        "path": "/Volumes/ai-data/stability-matrix/mac-Data/Packages/ComfyUI",
+        "path_ok": true,
+        "sha": "e0951a9c7e47",
+        "dirty": true,
+        "priority": 0,
+        "bleeding_edge": false,
+        "ports": {
+          "api": 8188
+        },
+        "status": "live"
+      },
+      {
+        "id": "pinokio_comfy",
+        "name": "ComfyUI (Pinokio)",
+        "path": "/Volumes/ai-data/pinokio/api/comfyui.pinokio.git",
+        "path_ok": true,
+        "sha": "05dcd21be737",
+        "dirty": true,
+        "priority": 2,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "wan2gp",
+        "name": "Wan2GP",
+        "path": "/Volumes/ai-data/pinokio/api/wan2gp.git",
+        "path_ok": true,
+        "sha": "30720c1ec05e",
+        "dirty": true,
+        "priority": 1,
+        "bleeding_edge": true,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "wan_pinokio",
+        "name": "Wan (pinokiofactory)",
+        "path": "/Volumes/ai-data/pinokio/api/wan.git",
+        "path_ok": true,
+        "sha": "89b986418a99",
+        "dirty": true,
+        "priority": 2,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "framepack_studio",
+        "name": "FramePack Studio",
+        "path": "/Volumes/ai-data/stability-matrix/mac-Data/Packages",
+        "path_ok": true,
+        "sha": null,
+        "dirty": false,
+        "priority": 2,
+        "bleeding_edge": true,
+        "ports": null,
+        "status": "installed_sm"
+      }
+    ],
+    "T2_audio_music": [
+      {
+        "id": "ace_step",
+        "name": "ACE-Step 1.5",
+        "path": "/Volumes/ai-data/pinokio/api/ace-step.pinokio.git",
+        "path_ok": true,
+        "sha": "c81078ede0d1",
+        "dirty": true,
+        "priority": 1,
+        "bleeding_edge": true,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "ace_step_ui",
+        "name": "ACE-Step UI",
+        "path": "/Volumes/ai-data/pinokio/api/ace-step-ui.pinokio.git",
+        "path_ok": true,
+        "sha": "68688b95bbe1",
+        "dirty": true,
+        "priority": 3,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "tts_story",
+        "name": "TTS-Story",
+        "path": "/Volumes/ai-data/pinokio/api/TTS-Story.git",
+        "path_ok": true,
+        "sha": "351d6e22f47a",
+        "dirty": true,
+        "priority": 1,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "qwen3_tts",
+        "name": "Qwen3-TTS",
+        "path": "/Volumes/ai-data/pinokio/api/Qwen3-TTS-Pinokio.git",
+        "path_ok": true,
+        "sha": "91fe02ae0aeb",
+        "dirty": true,
+        "priority": 2,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "chatterbox",
+        "name": "Chatterbox TTS",
+        "path": "/Volumes/ai-data/pinokio/api/chatterbox-tts-app.git",
+        "path_ok": true,
+        "sha": "56810fe7c8f4",
+        "dirty": true,
+        "priority": 2,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "alltalk",
+        "name": "AllTalk TTS",
+        "path": "/Volumes/ai-data/pinokio/api/alltalk-tts.git",
+        "path_ok": true,
+        "sha": "a4c577ebd33b",
+        "dirty": true,
+        "priority": 3,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "zonos",
+        "name": "Zonos",
+        "path": "/Volumes/ai-data/pinokio/api/zonos.git",
+        "path_ok": true,
+        "sha": "0be13e4e803f",
+        "dirty": true,
+        "priority": 2,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "whisper_webui",
+        "name": "Whisper WebUI",
+        "path": "/Volumes/ai-data/pinokio/api/whisper-webui.git",
+        "path_ok": true,
+        "sha": "434df0a495af",
+        "dirty": true,
+        "priority": 2,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "installed_pinokio"
+      }
+    ],
+    "T3_face_body": [
+      {
+        "id": "facefusion",
+        "name": "FaceFusion",
+        "path": "/Volumes/ai-data/pinokio/api/facefusion-pinokio.git",
+        "path_ok": true,
+        "sha": "8f4ef5e7841c",
+        "dirty": true,
+        "priority": 1,
+        "bleeding_edge": true,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "dreamtalk",
+        "name": "DreamTalk",
+        "path": "/Volumes/ai-data/pinokio/api/dreamtalk.git",
+        "path_ok": true,
+        "sha": "b43020cfcc22",
+        "dirty": true,
+        "priority": 1,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "freemocap",
+        "name": "FreeMoCap",
+        "path": "/Volumes/ai-data/pinokio/api/FreeMoCap.pinokio.git",
+        "path_ok": true,
+        "sha": "220a815e35c2",
+        "dirty": true,
+        "priority": 1,
+        "bleeding_edge": true,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "ai4animation",
+        "name": "AI4Animation",
+        "path": "/Volumes/ai-data/pinokio/api/ai4animationpy.pinokio.git",
+        "path_ok": true,
+        "sha": "f687bd5884cf",
+        "dirty": false,
+        "priority": 3,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "installed_pinokio"
+      },
+      {
+        "id": "liveportrait_models",
+        "name": "LivePortrait (models pool)",
+        "path": "/Volumes/ai-data/models/liveportrait",
+        "path_ok": true,
+        "sha": null,
+        "dirty": false,
+        "priority": 1,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "models_present"
+      },
+      {
+        "id": "insightface_models",
+        "name": "InsightFace (models pool)",
+        "path": "/Volumes/ai-data/models/insightface",
+        "path_ok": true,
+        "sha": null,
+        "dirty": false,
+        "priority": 1,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "models_present"
+      },
+      {
+        "id": "openpose_controlnet",
+        "name": "OpenPose ControlNet",
+        "path": "/Volumes/ai-data/models/controlnet",
+        "path_ok": true,
+        "sha": null,
+        "dirty": false,
+        "priority": 1,
+        "bleeding_edge": false,
+        "ports": null,
+        "status": "models_present"
+      }
+    ],
+    "T4_comfy_graphs": [
+      {
+        "glob": "workflow-wan22-animate-workfow-comfyui-*.json",
+        "status": "present",
+        "sample": "workflow-wan22-animate-workfow-comfyui-IhXSpaW4tGqX2xWwFV60-bbs_revenger-openart.ai.json"
+      },
+      {
+        "glob": "workflow-create-talking-avatar-using-wan-22-*.json",
+        "status": "present",
+        "sample": "workflow-create-talking-avatar-using-wan-22-sound-to-video-model-tKc1vwOSUx0tRGGwFw7U-cgpixel_ai_art-openart.ai.json"
+      },
+      {
+        "glob": "workflow-wananimate22infinitetalkv1-*.json",
+        "status": "present",
+        "sample": "workflow-wananimate22infinitetalkv1-hal2sDJl9b9ENawrRjUb-t8star-openart.ai.json"
+      },
+      {
+        "glob": "workflow-wananimate22mixv1-*.json",
+        "status": "present",
+        "sample": "workflow-wananimate22mixv1-Qjxch2dRMQS8O5xaSDSW-t8star-openart.ai.json"
+      },
+      {
+        "glob": "workflow-wananimate22uni3cmovev2-*.json",
+        "status": "present",
+        "sample": "workflow-wananimate22uni3cmovev2-40BXUOQBcXzB1qZQ8nwY-t8star-openart.ai.json"
+      },
+      {
+        "glob": "workflow-wan-all-in-one-alpha-*.json",
+        "status": "present",
+        "sample": "workflow-wan-all-in-one-alpha-10-JmIcYyHzd7235LTyQBRM-latent_dream-openart.ai.json"
+      },
+      {
+        "glob": "workflow-wan-21_t2v_video-x-video-_-motion-transfer-*.json",
+        "status": "present",
+        "sample": "workflow-wan-21_t2v_video-x-video-_-motion-transfer-f3UnSsMnvDSBHd3AXYYG-rubynian-openart.ai.json"
+      },
+      {
+        "glob": "workflow-transform-your-videos-using-wan-21-ditto-*.json",
+        "status": "present",
+        "sample": "workflow-transform-your-videos-using-wan-21-ditto-IEdgVxIfvo4urgrlhhIV-cgpixel_ai_art-openart.ai.json"
+      },
+      {
+        "glob": "workflow-qwen-image-edit-2509-*.json",
+        "status": "present",
+        "sample": "workflow-qwen-image-edit-2509-anime2realism_v1-zCu1SweVRtVw2IM1bkBG-civet_flawless_61-openart.ai.json"
+      }
+    ]
+  },
+  "loading": {
+    "demo": [
+      "mok_tua",
+      "sm_comfy",
+      "directors_console"
+    ],
+    "full_local": [
+      "mok_tua",
+      "sm_comfy",
+      "directors_console",
+      "wan2gp",
+      "ace_step",
+      "tts_story",
+      "facefusion"
+    ],
+    "video_gpu-host": [
+      "sm_comfy",
+      "wan2gp"
+    ],
+    "face": [
+      "facefusion",
+      "dreamtalk"
+    ],
+    "audio": [
+      "ace_step",
+      "tts_story"
+    ],
+    "body": [
+      "freemocap"
+    ]
+  },
+  "smoke_ref": "work/smoke/tier_smoke_2026-08-02.json",
+  "policy": {
+    "dirty_pinokio_wrapper": "prefer_nested_app_git",
+    "conflict": "skip_until_repair",
+    "qqq_smoke": "dry_run_only"
+  }
+}

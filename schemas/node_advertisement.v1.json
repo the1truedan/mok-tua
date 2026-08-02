@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mok-tua.local/schemas/node_advertisement.v1.json",
+  "title": "node_advertisement.v1",
+  "description": "Supply-side advertisement for trusted federation / future crowd. Join key = lock_hashes_resident (tier_lock slices).",
+  "type": "object",
+  "required": ["id", "endpoint", "lock_hashes_resident", "data_classes_accepted", "roles", "last_heartbeat"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "node_advertisement.v1" },
+    "id": { "type": "string" },
+    "pubkey": { "type": ["string", "null"] },
+    "endpoint": { "type": "string" },
+    "lock_hashes_resident": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "e.g. T1_vid_gen@abc123..."
+    },
+    "models_digest_set": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Johnny catalog refs / inventory ids, not weight blobs"
+    },
+    "vram_gb": { "type": "number", "minimum": 0 },
+    "arch": {
+      "type": "string",
+      "enum": ["cuda_sm89", "cuda_sm86", "cuda_sm80", "cuda_any", "mps_unified", "cpu", "mlx"]
+    },
+    "driver": { "type": "string" },
+    "bandwidth_mbps": { "type": "number", "minimum": 0 },
+    "uptime_score": { "type": "number", "minimum": 0, "maximum": 1 },
+    "price_hint_usd": { "type": "number", "minimum": 0 },
+    "data_classes_accepted": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["public", "internal"]
+      },
+      "description": "Never list phi — crowd/federated public tier only for strangers"
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["still", "i2v", "video", "expand", "tts", "face", "stitch", "llm"]
+      }
+    },
+    "last_heartbeat": { "type": "string" },
+    "trusted": {
+      "type": "boolean",
+      "description": "Lab nodes you operate (gpu-host/desk-host/tower) vs open crowd"
+    },
+    "notes": { "type": "string" }
+  }
+}

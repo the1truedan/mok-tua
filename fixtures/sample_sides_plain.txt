@@ -1,0 +1,19 @@
+INT. DARK STUDIO - NIGHT
+
+A calm technical instructor stands under soft blue rim light.
+He faces camera, hands loose at his sides.
+
+INSTRUCTOR
+Tonight we walk through the gateway — one door, many models.
+
+He steps closer. Medium shot.
+
+INSTRUCTOR (CONT'D)
+Headroom first. LiteLLM second. Local when it matters.
+
+CUT TO:
+
+EXT. SERVER RACK AISLE - NIGHT
+
+Wide establishing: rows of quiet machines, status LEDs breathing.
+A single workstation glows at the end of the aisle.

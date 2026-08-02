@@ -1,0 +1,103 @@
+{
+  "schema": "crowd_nodes.v1",
+  "updated": "2026-08-02T18:16:50Z",
+  "notes": "Trusted lab federation only. Re-seed: mok-tua nodes seed --force",
+  "nodes": [
+    {
+      "schema": "node_advertisement.v1",
+      "id": "desk-host",
+      "pubkey": null,
+      "endpoint": "http://127.0.0.1:8188",
+      "lock_hashes_resident": [
+        "T0_orchestrators@60c4f00b9e1325de",
+        "T1_vid_gen@4e103167334b165a"
+      ],
+      "models_digest_set": [
+        "qwen_edit_2509_fp8",
+        "multi_angles"
+      ],
+      "vram_gb": 36.0,
+      "arch": "mps_unified",
+      "driver": "mps",
+      "bandwidth_mbps": 10000,
+      "uptime_score": 0.95,
+      "price_hint_usd": 0.0,
+      "data_classes_accepted": [
+        "public",
+        "internal"
+      ],
+      "roles": [
+        "still",
+        "expand",
+        "llm"
+      ],
+      "last_heartbeat": "2026-08-02T18:16:50Z",
+      "trusted": true,
+      "notes": "desk-host SM Comfy \u2014 stills preferred"
+    },
+    {
+      "schema": "node_advertisement.v1",
+      "id": "gpu-host",
+      "pubkey": null,
+      "endpoint": "http://REDACTED-LAN-IP:8188",
+      "lock_hashes_resident": [
+        "T0_orchestrators@60c4f00b9e1325de",
+        "T1_vid_gen@4e103167334b165a",
+        "T2_audio_music@41d86ae44ece200c",
+        "T3_face_body@e97fbfbc7680d441"
+      ],
+      "models_digest_set": [
+        "wan22",
+        "qwen_edit_2509_fp8",
+        "animatediff"
+      ],
+      "vram_gb": 16.0,
+      "arch": "cuda_sm89",
+      "driver": "cuda",
+      "bandwidth_mbps": 1000,
+      "uptime_score": 0.9,
+      "price_hint_usd": 0.0,
+      "data_classes_accepted": [
+        "public",
+        "internal"
+      ],
+      "roles": [
+        "still",
+        "i2v",
+        "video",
+        "face",
+        "tts"
+      ],
+      "last_heartbeat": "2026-08-02T18:16:50Z",
+      "trusted": true,
+      "notes": "gpu-host Comfy \u2014 video / Wan preferred"
+    },
+    {
+      "schema": "node_advertisement.v1",
+      "id": "tower",
+      "pubkey": null,
+      "endpoint": "http://REDACTED-LAN-IP:8799",
+      "lock_hashes_resident": [
+        "T0_orchestrators@60c4f00b9e1325de"
+      ],
+      "models_digest_set": [],
+      "vram_gb": 0.0,
+      "arch": "cpu",
+      "driver": "none",
+      "bandwidth_mbps": 1000,
+      "uptime_score": 0.99,
+      "price_hint_usd": 0.0,
+      "data_classes_accepted": [
+        "public",
+        "internal"
+      ],
+      "roles": [
+        "stitch",
+        "expand"
+      ],
+      "last_heartbeat": "2026-08-02T18:16:50Z",
+      "trusted": true,
+      "notes": "Tower control / CPU \u2014 no GPU video"
+    }
+  ]
+}

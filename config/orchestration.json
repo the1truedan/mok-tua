@@ -1,29 +1,29 @@
 {
-  "version": 1,
-  "updated": "2026-07-24",
-  "description": "MOCK-TUA hybrid: live MAC Headroom + SM Comfy; video \u2192 GPU; cloud overflow estimated only by default.",
+  "version": 2,
+  "updated": "2026-08-02",
+  "description": "mok-tua hybrid: desk-host Headroom + SM Comfy stills; gpu-host video; cloud overflow via QQQ providers (Grok Imagine, Nano Banana, Seedance earmark).",
   "model_pool": {
-    "MAC": "/Volumes/ai-data/models",
-    "GPU": "/mnt/ai-data/models",
-    "STORAGE": "/mnt/ai-data/models"
+    "desk-host": "/Volumes/ai-data/models",
+    "gpu-host": "/mnt/ai-data/models",
+    "TOWER": "/mnt/ai-data/models"
   },
   "endpoints": {
-    "mac": {
-      "host": "mac",
+    "desk-host": {
+      "host": "desk-host",
       "label": "Mac SM ComfyUI (live)",
       "base_url": "http://127.0.0.1:8188",
       "role": "image",
       "mode": "live"
     },
-    "gpu": {
-      "host": "gpu",
-      "label": "GPU ComfyUI (container or host runtime)",
-      "base_url": "http://<gpu-host-ip>:8188",
+    "gpu-host": {
+      "host": "gpu-host",
+      "label": "gpu-host ComfyUI (container or host runtime)",
+      "base_url": "http://REDACTED-LAN-IP:8188",
       "role": "video",
       "mode": "remote"
     },
     "headroom": {
-      "host": "mac",
+      "host": "desk-host",
       "label": "Live Headroom / LiteLLM path",
       "base_url": "http://localhost:8787/v1",
       "role": "llm",
@@ -31,34 +31,117 @@
     },
     "mock_cloud": {
       "host": "stub",
-      "label": "Cloud overflow estimate stub (live path: manager-openrouter-free on Headroom/GPU LiteLLM)",
+      "label": "Cloud overflow (prefer real providers under still_providers/video_providers)",
       "base_url": "http://127.0.0.1:8899",
       "role": "cloud",
       "mode": "stub",
       "live_model": "manager-openrouter-free",
-      "note": "NEW LAW: GPU may use cloud compute for mock-tua overflow; never PHI auto-cloud"
+      "note": "NEW LAW: gpu-host may use cloud compute for mok-tua overflow; never PHI auto-cloud"
     },
-    "gpu_litellm": {
-      "host": "gpu",
-      "label": "GPU LiteLLM worker+cloud",
-      "base_url": "http://<gpu-host-ip>:4000/v1",
+    "gpu-host_litellm": {
+      "host": "gpu-host",
+      "label": "gpu-host LiteLLM worker+cloud",
+      "base_url": "http://REDACTED-LAN-IP:4000/v1",
       "role": "llm_worker_cloud",
       "mode": "live"
+    },
+    "xai": {
+      "host": "api.x.ai",
+      "label": "xAI Grok Imagine API",
+      "base_url": "https://api.x.ai/v1",
+      "role": "cloud_image_video",
+      "mode": "api",
+      "env_key": "XAI_API_KEY"
     }
   },
   "routing": {
     "script_to_shots": "headroom",
-    "image-gen": "mac",
-    "character-sheet": "mac",
-    "storyboard-panel": "mac",
-    "video-gen": "gpu",
-    "i2v": "gpu",
-    "talking-avatar": "gpu",
+    "image-gen": "desk-host",
+    "character-sheet": "desk-host",
+    "storyboard-panel": "desk-host",
+    "video-gen": "gpu-host",
+    "i2v": "gpu-host",
+    "talking-avatar": "gpu-host",
     "cloud-overflow": "mock_cloud"
   },
+  "defaults": {
+    "still_provider": "local_qwen_edit",
+    "video_provider": "local_wan",
+    "fallback_still_provider": "local_sd_minimal",
+    "inventory": "config/lora_inventory_storyboard_2026-08-02.json",
+    "stage_manifest": "config/stage_manifest.yaml",
+    "locked": "2026-08-02",
+    "note": "LOCKED: Qwen multi-angle+next-scene builder. UNet falls back to qwen_image_fp8 until edit-2509 finishes staging."
+  },
+  "still_providers": {
+    "local_sd_minimal": {
+      "type": "local_comfy",
+      "host": "desk-host",
+      "workflow_pin": "minimal_still",
+      "qqq": ["QQQ0", "QQQ1", "QQQ3"]
+    },
+    "local_qwen_edit": {
+      "type": "local_comfy",
+      "host": "desk-host",
+      "workflow_pin": "qwen_next_scene_angles",
+      "requires_models": [
+        "Qwen-Image-Edit-2509",
+        "Qwen-Edit-2509-Multiple-angles",
+        "next-scene_lora-v2-3000"
+      ],
+      "qqq": ["QQQ0", "QQQ1", "QQQ3"],
+      "status": "locked"
+    },
+    "grok_imagine": {
+      "type": "api",
+      "backend": "grok_imagine",
+      "model": "grok-imagine-image",
+      "model_quality": "grok-imagine-image-quality",
+      "qqq": ["QQQ1", "QQQ3"],
+      "env_key": "XAI_API_KEY"
+    },
+    "nano_banana": {
+      "type": "api",
+      "backend": "nano_banana",
+      "model": "nano-banana",
+      "qqq": ["QQQ1"],
+      "env_keys": ["GOOGLE_API_KEY", "GEMINI_API_KEY", "COMFY_API_KEY"],
+      "cli_earmark": "comfy generate nano-banana --prompt '...' --download out.png"
+    }
+  },
+  "video_providers": {
+    "local_wan": {
+      "type": "local_comfy",
+      "host": "gpu-host",
+      "workflow_pin": "wan22_animate",
+      "qqq": ["QQQ0", "QQQ1", "QQQ3"],
+      "status": "pin_pending"
+    },
+    "local_animatediff": {
+      "type": "local_comfy",
+      "host": "gpu-host",
+      "workflow_pin": "animatediff_basic",
+      "qqq": ["QQQ0", "QQQ1"],
+      "status": "pin_pending",
+      "note": "Zealousideal_Money99-era AD fallback / short loops; not primary narrative path"
+    },
+    "seedance_cloud": {
+      "type": "comfy_partner",
+      "workflow_ref": "comfy.org/f4e29143100c",
+      "qqq": ["QQQ1"],
+      "status": "earmark"
+    },
+    "grok_imagine_video": {
+      "type": "api",
+      "backend": "grok_imagine",
+      "model": "grok-imagine-video",
+      "qqq": ["QQQ1"],
+      "env_key": "XAI_API_KEY"
+    }
+  },
   "outputs": {
-    "work_root_MAC": "/Volumes/ai-data/work/story-anim",
-    "work_root_GPU": "/mnt/ai-data/work/story-anim",
+    "work_root_desk-host": "/Volumes/ai-data/work/story-anim",
+    "work_root_gpu-host": "/mnt/ai-data/work/story-anim",
     "local_fallback": "./work"
   },
   "still_defaults": {
@@ -76,6 +159,150 @@
     "resume_segment",
     "stitch"
   ],
+  "workflow_pins": {
+    "minimal_still": {
+      "type": "inline",
+      "builder": "build_minimal_still_graph",
+      "host": "desk-host",
+      "tags": ["sd", "still", "storyboard"]
+    },
+    "qwen_next_scene_angles": {
+      "path": "workflows/qwen_next_scene_angles.api.json",
+      "host": "desk-host",
+      "builder": "qwen_edit_storyboard",
+      "tags": ["qwen", "edit", "next-scene", "multi-angle", "storyboard"],
+      "status": "locked",
+      "sources": [
+        "https://huggingface.co/dx8152/Qwen-Edit-2509-Multiple-angles",
+        "https://huggingface.co/lovis93/next-scene-qwen-image-lora-2509",
+        "https://github.com/NickPittas/StoryboardUI2"
+      ],
+      "prompt_keys": ["prompt", "text"],
+      "note": "API builder qwen_graph.py + graph file; LoRAs on pool; edit unet staging via stage_manifest"
+    },
+    "character_sheet": {
+      "path": "/Volumes/ai-data/stability-matrix/mac-Data/Workflows/workflow-flux-consistent-character-sheet-oSEKBwDLvkt9rHMfdU1b-reverentelusarca-openart.ai.json",
+      "host": "desk-host",
+      "tags": ["flux", "character", "image"],
+      "status": "external"
+    },
+    "photo_to_video": {
+      "path": "/Volumes/ai-data/stability-matrix/mac-Data/Workflows/workflow-photo-to-video-make-your-images-move-LIxcxnDqGGS3WQQ6XCT7-neuralunk-openart.ai.json",
+      "host": "gpu-host",
+      "tags": ["i2v", "video"],
+      "status": "external"
+    },
+    "wan22_animate": {
+      "path": "/Volumes/ai-data/stability-matrix/mac-Data/Workflows/workflow-wan22-animate-workfow-comfyui-IhXSpaW4tGqX2xWwFV60-bbs_revenger-openart.ai.json",
+      "host": "gpu-host",
+      "tags": ["wan", "animate", "video"],
+      "status": "external"
+    },
+    "talking_avatar_wan22": {
+      "path": "/Volumes/ai-data/stability-matrix/mac-Data/Workflows/workflow-create-talking-avatar-using-wan-22-sound-to-video-model-tKc1vwOSUx0tRGGwFw7U-cgpixel_ai_art-openart.ai.json",
+      "host": "gpu-host",
+      "tags": ["wan", "avatar", "video", "audio"],
+      "status": "external"
+    },
+    "animatediff_basic": {
+      "path": "workflows/animatediff_basic.api.json",
+      "host": "gpu-host",
+      "tags": ["animatediff", "video", "fallback"],
+      "status": "placeholder",
+      "note": "Export AD Evolved API graph; models under models/animatediff/"
+    },
+    "ltx_fflf": {
+      "path": "/Volumes/ai-data/stability-matrix/mac-Data/Packages/ComfyUI/user/default/workflows/LTX-2.3-FFLF.json",
+      "host": "gpu-host",
+      "tags": ["ltx", "video"],
+      "status": "external"
+    }
+  },
+  "integration_earmarks": {
+    "director_stack_catalog": {
+      "status": "locked",
+      "path": "config/director_stack_catalog.json",
+      "md": "config/director_stack_catalog.md",
+      "use": "Pinokio+SM+GitHub director/vid/audio/face/body map"
+    },
+    "tier_lock_T0_T4": {
+      "status": "locked",
+      "path": "config/tier_lock_T0-T4.json",
+      "mok_tua_version": "0.3.0",
+      "use": "Version pins + loading profiles (demo/full_local/video_gpu-host); smoke_ref under work/smoke/"
+    },
+    "ask_packet_federation": {
+      "status": "lab",
+      "schemas": [
+        "schemas/ask_packet.v1.json",
+        "schemas/ask_receipt.v1.json",
+        "schemas/node_advertisement.v1.json"
+      ],
+      "docs": "docs/ASK_PACKET_FEDERATION.md",
+      "chain_id": "mok-tua-render",
+      "pricing": "crowd_federated",
+      "use": "Johnny BOM + tier_lock join + CHAINS receipts; trusted desk-host/gpu-host/tower only; PHI unbroadcastable"
+    },
+    "comfy_robust_roster": {
+      "status": "locked",
+      "path": "config/comfy_nodes_mok_tua_roster.json",
+      "docs": "docs/COMFY_ROBUST_NODES.md",
+      "install": "scripts/comfy_robust_install_gpu-host.sh",
+      "smoke": "scripts/smoke_comfy_robust.sh",
+      "updated": "2026-08-02",
+      "use": "A-E packs + F install order + G outside-Comfy; disable avoid-list on gpu-host"
+    },
+    "directors_console": {
+      "status": "live_spawned",
+      "path": "/Volumes/ai-data/pinokio/api/directorsconsole.pinokio.git",
+      "ports": {"ui": 5173, "cpe": 9800, "orchestrator": 9820},
+      "note": "mok-tua launch directors_console --live; frontend may warn on missing @tanstack/react-virtual"
+    },
+    "wan2gp": {
+      "status": "installed_pinokio",
+      "path": "/Volumes/ai-data/pinokio/api/wan2gp.git",
+      "upstream": "https://github.com/deepbeepmeep/Wan2GP"
+    },
+    "facefusion": {
+      "status": "installed_pinokio",
+      "path": "/Volumes/ai-data/pinokio/api/facefusion-pinokio.git"
+    },
+    "freemocap": {
+      "status": "installed_pinokio",
+      "path": "/Volumes/ai-data/pinokio/api/FreeMoCap.pinokio.git"
+    },
+    "framepack_studio": {
+      "status": "installed_sm",
+      "path": "/Volumes/ai-data/stability-matrix/mac-Data/Packages/FramePack Studio"
+    },
+    "ominicontrol": {
+      "status": "tier_b",
+      "url": "https://github.com/Yuanshi9815/OminiControl",
+      "use": "FLUX subject/object lock; weak on humans"
+    },
+    "storyboard_ui2": {
+      "status": "library_port",
+      "url": "https://github.com/NickPittas/StoryboardUI2",
+      "use": "camera_angles.json + template param map; do not embed PyQt6"
+    },
+    "seedance_storyboard": {
+      "status": "cloud_qqq1",
+      "urls": [
+        "https://comfy.org/workflows/f4e29143100c-f4e29143100c/",
+        "https://comfy.org/workflows/d124e24eca67-d124e24eca67/"
+      ]
+    },
+    "aby_one": {
+      "status": "competitive_only",
+      "url": "https://www.aby.one/",
+      "note": "No stable open API found"
+    },
+    "cli": {
+      "grok_imagine": "curl + XAI_API_KEY or xai_sdk / grok-image-cli",
+      "nano_banana": "comfy generate nano-banana --prompt ... --download out.png",
+      "stage": "scripts/mok_tua_cli.py stage|sides|run|batch"
+    }
+  },
   "llm": {
     "model": "manager-auto",
     "max_tokens": 2048,

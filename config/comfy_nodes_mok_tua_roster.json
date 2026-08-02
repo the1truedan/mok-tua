@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "updated": "2026-08-02",
+  "scope": "ROBUST mok-tua Comfy worker (gpu-host primary, desk-host stills)",
+  "host_law": "Install/update nodes on gpu-host as uid 1000 when possible; fix .git a+rwx for Manager .cnr-id on NFS",
+  "avoid": [
+    {
+      "id": "ComfyUI-RVC",
+      "reason": "fairseq/hydra unfixable on Python 3.12 — use tts_audio_suite"
+    },
+    {
+      "id": "ComfyUI-Moore-AnimateAnyone",
+      "reason": "diffusers PositionNet API mismatch"
+    },
+    {
+      "id": "ComfyUI-AniPortrait",
+      "reason": "import fail dual_transformer_2d / ffmpeg residual"
+    },
+    {
+      "id": "ComfyUI-BlenderAI-node",
+      "reason": "requires Blender bpy — use Blender addon → HTTP only"
+    },
+    {
+      "id": "ComfyUI-BlenderAI",
+      "reason": "requires Blender bpy"
+    },
+    {
+      "id": "ComfyUI-Assistant",
+      "reason": "permission denied main.zip"
+    }
+  ],
+  "outside_comfy_G": {
+    "music": "ACE-Step Pinokio API",
+    "multi_voice_vo": "TTS-Story / Qwen3-TTS Pinokio",
+    "face_platform": "FaceFusion Pinokio",
+    "mocap": "FreeMoCap → pose JSON → ControlNet",
+    "shot_ledger_qqq": "mok-tua",
+    "flux_object_lock": "OminiControl when FLUX stills (earmark)"
+  },
+  "required_have": [
+    "ComfyUI-Manager",
+    "ComfyUI-VideoHelperSuite",
+    "rgthree-comfy",
+    "was-node-suite-comfyui",
+    "ComfyUI_essentials",
+    "ComfyUI-FreeMemory",
+    "ComfyUI-Impact-Pack",
+    "ComfyUI-Impact-Subpack",
+    "comfyui_controlnet_aux",
+    "ComfyUI-Advanced-ControlNet",
+    "ComfyUI_IPAdapter_plus",
+    "comfyui_panels",
+    "ComfyUI-layerdiffuse",
+    "comfyui_segment_anything",
+    "ComfyUI_UltimateSDUpscale",
+    "ComfyUI_Wan",
+    "ComfyUI-AnimateDiff-Evolved",
+    "ComfyUI-Frame-Interpolation",
+    "ComfyUI-DepthAnythingV2",
+    "ComfyUI-MimicMotionWrapper",
+    "ComfyUI-ReActor",
+    "facerestore_cf",
+    "ComfyUI_InstantID",
+    "ComfyUI-LivePortraitKJ",
+    "ComfyUI-wav2lip",
+    "ComfyUI-AudioScheduler",
+    "tts_audio_suite",
+    "ComfyUI-QwenImageWanBridge"
+  ],
+  "install_now": [
+    {
+      "id": "ComfyUI-KJNodes",
+      "url": "https://github.com/kijai/ComfyUI-KJNodes.git",
+      "priority": "P0",
+      "role": "utilities for modern video/still graphs"
+    },
+    {
+      "id": "ComfyUI-Inspire-Pack",
+      "url": "https://github.com/ltdrdata/ComfyUI-Inspire-Pack.git",
+      "priority": "P1",
+      "role": "prompt/seed batch control for shot runs"
+    },
+    {
+      "id": "efficiency-nodes-comfyui",
+      "url": "https://github.com/jags111/efficiency-nodes-comfyui.git",
+      "priority": "P1",
+      "role": "XY/batch eval sweeps"
+    },
+    {
+      "id": "ComfyUI-GGUF",
+      "url": "https://github.com/city96/ComfyUI-GGUF.git",
+      "priority": "P0",
+      "role": "GGUF UNet loaders for VRAM-poor paths"
+    },
+    {
+      "id": "ComfyUI-Florence2",
+      "url": "https://github.com/kijai/ComfyUI-Florence2.git",
+      "priority": "P2",
+      "role": "auto-caption panels (prefer stills host if VRAM tight)"
+    }
+  ],
+  "deps_pin": {
+    "numpy": "1.26.4",
+    "note": "Re-pin after any opencv install"
+  },
+  "smoke_object_info_keys": [
+    "VHS_LoadVideo",
+    "VHS_VideoCombine",
+    "DWPreprocessor",
+    "OpenposePreprocessor",
+    "IPAdapterModelLoader",
+    "ReActorFaceSwap",
+    "LivePortraitProcess",
+    "Wav2Lip",
+    "ADE_AnimateDiffLoaderGen1",
+    "KSampler",
+    "INTConstant",
+    "ColorMatch"
+  ],
+  "dedupe": [
+    {
+      "keep": "ComfyUI-Custom-Scripts",
+      "disable": "comfyui-custom-scripts",
+      "reason": "duplicate pythongosssss scripts folders"
+    }
+  ]
+}

@@ -1,0 +1,330 @@
+{
+  "version": 1,
+  "updated": "2026-08-02",
+  "description": "Director / orchestrator map: Pinokio + Stability Matrix + GitHub → mok-tua stages. Bleed-edge vid/audio/face/body options already on ai-data or pull targets.",
+  "roots": {
+    "pinokio_api": "/Volumes/ai-data/pinokio/api",
+    "sm_mac_packages": "/Volumes/ai-data/stability-matrix/mac-Data/Packages",
+    "sm_mac_workflows": "/Volumes/ai-data/stability-matrix/mac-Data/Workflows",
+    "sm_linux_packages": "/Volumes/ai-data/stability-matrix/Data/Packages",
+    "models": "/Volumes/ai-data/models",
+    "github_mirrors": "/Volumes/ai-data/github"
+  },
+  "launchers": {
+    "pinokio_gui": "Pinokio desktop → Install/Start/Update on app folder",
+    "sm_gui": "Stability Matrix → Packages + Workflows + shared models pool",
+    "mok_tua_cli": "scripts/mok_tua_cli.py stage|sides|run|batch",
+    "mok_tua_api": "POST /v1/tools/call | /v1/runs | /v1/stage/*",
+    "comfy_api": "http://host:8188/prompt after SM or Pinokio Comfy launch",
+    "git_pull": "git -C <app> pull && pinokio Update / SM package update"
+  },
+  "tiers": {
+    "T0_orchestrators": "Multi-service directors that call render workers",
+    "T1_vid_gen": "Local video generation UIs / graphs",
+    "T2_audio_music": "TTS / music / voice",
+    "T3_face_body": "Face swap, talking head, mocap, pose",
+    "T4_comfy_graphs": "SM workflow pins for Comfy-first path"
+  },
+  "apps": [
+    {
+      "id": "directors_console",
+      "tier": "T0_orchestrators",
+      "name": "Director's Console",
+      "path": "pinokio/api/directorsconsole.pinokio.git",
+      "kind": "pinokio",
+      "roles": ["storyboard_ui", "cinema_prompt_api", "multi_node_orchestrator"],
+      "ports": {"frontend": 5173, "cpe_api": 9800, "orchestrator": 9820},
+      "mok_tua_hook": "Upstream peer: CPE for camera language → mok-tua shot fields; Orchestrator API can sit beside :8799 for multi-node",
+      "status": "installed_pinokio",
+      "priority": 1,
+      "bleeding_edge": true
+    },
+    {
+      "id": "mok_tua",
+      "tier": "T0_orchestrators",
+      "name": "mok-tua",
+      "path": "~/mok-tua",
+      "kind": "lab",
+      "roles": ["sides_ingest", "shot_pipeline", "provider_routing", "stage_models"],
+      "ports": {"api": 8799},
+      "status": "live",
+      "priority": 0
+    },
+    {
+      "id": "sm_comfy",
+      "tier": "T1_vid_gen",
+      "name": "ComfyUI (Stability Matrix)",
+      "path": "stability-matrix/mac-Data/Packages/ComfyUI",
+      "kind": "stability_matrix",
+      "roles": ["still", "i2v", "wan", "ltx", "qwen_edit", "controlnet"],
+      "ports": {"api": 8188},
+      "mok_tua_hook": "Primary still/video worker via ComfyClient",
+      "status": "live",
+      "priority": 0
+    },
+    {
+      "id": "pinokio_comfy",
+      "tier": "T1_vid_gen",
+      "name": "ComfyUI (Pinokio)",
+      "path": "pinokio/api/comfyui.pinokio.git",
+      "kind": "pinokio",
+      "roles": ["still", "video", "nodes_bleeding"],
+      "mok_tua_hook": "Alternate Comfy host; point COMFY_*_URL",
+      "status": "installed_pinokio",
+      "priority": 2
+    },
+    {
+      "id": "wan2gp",
+      "tier": "T1_vid_gen",
+      "name": "Wan2GP",
+      "path": "pinokio/api/wan2gp.git",
+      "upstream": "https://github.com/deepbeepmeep/Wan2GP",
+      "kind": "pinokio",
+      "roles": ["wan21", "wan22", "ltx", "hunyuan", "qwen_image", "flux", "gpu_poor_vid"],
+      "mok_tua_hook": "video_provider=local_wan2gp (Gradio/API) when Comfy Wan pin heavy",
+      "status": "installed_pinokio",
+      "priority": 1,
+      "bleeding_edge": true
+    },
+    {
+      "id": "wan_pinokio",
+      "tier": "T1_vid_gen",
+      "name": "Wan (pinokiofactory)",
+      "path": "pinokio/api/wan.git",
+      "kind": "pinokio",
+      "roles": ["wan_video"],
+      "status": "installed_pinokio",
+      "priority": 2
+    },
+    {
+      "id": "framepack_studio",
+      "tier": "T1_vid_gen",
+      "name": "FramePack Studio",
+      "path": "stability-matrix/mac-Data/Packages",
+      "path_glob": "FramePack*",
+      "kind": "stability_matrix",
+      "roles": ["framepack", "long_video", "keyframe"],
+      "mok_tua_hook": "Optional S3 long-form after storyboard keyframes",
+      "status": "installed_sm",
+      "priority": 2,
+      "bleeding_edge": true
+    },
+    {
+      "id": "ace_step",
+      "tier": "T2_audio_music",
+      "name": "ACE-Step 1.5",
+      "path": "pinokio/api/ace-step.pinokio.git",
+      "kind": "pinokio",
+      "roles": ["music_gen", "rest_api"],
+      "mok_tua_hook": "sound_gen stage → ace-step API after panels",
+      "status": "installed_pinokio",
+      "priority": 1,
+      "bleeding_edge": true
+    },
+    {
+      "id": "ace_step_ui",
+      "tier": "T2_audio_music",
+      "name": "ACE-Step UI",
+      "path": "pinokio/api/ace-step-ui.pinokio.git",
+      "kind": "pinokio",
+      "roles": ["music_ui"],
+      "status": "installed_pinokio",
+      "priority": 3
+    },
+    {
+      "id": "tts_story",
+      "tier": "T2_audio_music",
+      "name": "TTS-Story",
+      "path": "pinokio/api/TTS-Story.git",
+      "kind": "pinokio",
+      "roles": ["multi_voice_story", "kokoro", "chatterbox"],
+      "mok_tua_hook": "VO bed from sides text before lipsync",
+      "status": "installed_pinokio",
+      "priority": 1
+    },
+    {
+      "id": "qwen3_tts",
+      "tier": "T2_audio_music",
+      "name": "Qwen3-TTS",
+      "path": "pinokio/api/Qwen3-TTS-Pinokio.git",
+      "kind": "pinokio",
+      "roles": ["tts", "voice"],
+      "status": "installed_pinokio",
+      "priority": 2
+    },
+    {
+      "id": "chatterbox",
+      "tier": "T2_audio_music",
+      "name": "Chatterbox TTS",
+      "path": "pinokio/api/chatterbox-tts-app.git",
+      "kind": "pinokio",
+      "roles": ["tts"],
+      "status": "installed_pinokio",
+      "priority": 2
+    },
+    {
+      "id": "alltalk",
+      "tier": "T2_audio_music",
+      "name": "AllTalk TTS",
+      "path": "pinokio/api/alltalk-tts.git",
+      "kind": "pinokio",
+      "roles": ["tts"],
+      "status": "installed_pinokio",
+      "priority": 3
+    },
+    {
+      "id": "zonos",
+      "tier": "T2_audio_music",
+      "name": "Zonos",
+      "path": "pinokio/api/zonos.git",
+      "kind": "pinokio",
+      "roles": ["tts", "emotion"],
+      "status": "installed_pinokio",
+      "priority": 2
+    },
+    {
+      "id": "whisper_webui",
+      "tier": "T2_audio_music",
+      "name": "Whisper WebUI",
+      "path": "pinokio/api/whisper-webui.git",
+      "kind": "pinokio",
+      "roles": ["asr", "transcript"],
+      "mok_tua_hook": "Transcript → sides import",
+      "status": "installed_pinokio",
+      "priority": 2
+    },
+    {
+      "id": "facefusion",
+      "tier": "T3_face_body",
+      "name": "FaceFusion",
+      "path": "pinokio/api/facefusion-pinokio.git",
+      "upstream": "https://github.com/facefusion/facefusion",
+      "kind": "pinokio",
+      "roles": ["face_swap", "face_enhance", "lipsync_adjacent"],
+      "mok_tua_hook": "Post-process stills/clips for identity lock",
+      "status": "installed_pinokio",
+      "priority": 1,
+      "bleeding_edge": true
+    },
+    {
+      "id": "dreamtalk",
+      "tier": "T3_face_body",
+      "name": "DreamTalk",
+      "path": "pinokio/api/dreamtalk.git",
+      "upstream": "https://github.com/ali-vilab/dreamtalk",
+      "kind": "pinokio",
+      "roles": ["talking_head", "audio_driven_face"],
+      "mok_tua_hook": "talking-avatar path alternate to Wan InfiniteTalk",
+      "status": "installed_pinokio",
+      "priority": 1
+    },
+    {
+      "id": "freemocap",
+      "tier": "T3_face_body",
+      "name": "FreeMoCap",
+      "path": "pinokio/api/FreeMoCap.pinokio.git",
+      "upstream": "https://github.com/freemocap/freemocap",
+      "kind": "pinokio",
+      "roles": ["markerless_mocap", "skeleton", "body_track"],
+      "mok_tua_hook": "Export pose → ControlNet openpose / Wan motion control",
+      "status": "installed_pinokio",
+      "priority": 1,
+      "bleeding_edge": true
+    },
+    {
+      "id": "ai4animation",
+      "tier": "T3_face_body",
+      "name": "AI4Animation",
+      "path": "pinokio/api/ai4animationpy.pinokio.git",
+      "kind": "pinokio",
+      "roles": ["animation", "body_motion"],
+      "status": "installed_pinokio",
+      "priority": 3
+    },
+    {
+      "id": "liveportrait_models",
+      "tier": "T3_face_body",
+      "name": "LivePortrait (models pool)",
+      "path": "models/liveportrait",
+      "kind": "models",
+      "roles": ["face_reenact", "portrait_motion"],
+      "mok_tua_hook": "Comfy LivePortrait nodes or dedicated app",
+      "status": "models_present",
+      "priority": 1
+    },
+    {
+      "id": "insightface_models",
+      "tier": "T3_face_body",
+      "name": "InsightFace (models pool)",
+      "path": "models/insightface",
+      "kind": "models",
+      "roles": ["face_id", "face_embed"],
+      "status": "models_present",
+      "priority": 1
+    },
+    {
+      "id": "openpose_controlnet",
+      "tier": "T3_face_body",
+      "name": "OpenPose ControlNet",
+      "path": "models/controlnet",
+      "kind": "models",
+      "roles": ["skeleton", "pose_guided_still"],
+      "status": "models_present",
+      "priority": 1
+    }
+  ],
+  "sm_workflow_pins_bleed": [
+    "workflow-wan22-animate-workfow-comfyui-*.json",
+    "workflow-create-talking-avatar-using-wan-22-*.json",
+    "workflow-wananimate22infinitetalkv1-*.json",
+    "workflow-wananimate22mixv1-*.json",
+    "workflow-wananimate22uni3cmovev2-*.json",
+    "workflow-wan-all-in-one-alpha-*.json",
+    "workflow-wan-21_t2v_video-x-video-_-motion-transfer-*.json",
+    "workflow-transform-your-videos-using-wan-21-ditto-*.json",
+    "workflow-qwen-image-edit-2509-*.json"
+  ],
+  "pull_targets_not_on_pool": [
+    {
+      "id": "storyboard_ui2",
+      "url": "https://github.com/NickPittas/StoryboardUI2",
+      "via": "github_mirror_or_pinokio",
+      "roles": ["desktop_storyboard", "angle_library"]
+    },
+    {
+      "id": "ominicontrol",
+      "url": "https://github.com/Yuanshi9815/OminiControl",
+      "via": "comfy_custom_node",
+      "roles": ["flux_subject_lock"]
+    },
+    {
+      "id": "comfy_org_seedance",
+      "url": "https://comfy.org/workflows/",
+      "via": "comfy_cloud_or_partner",
+      "roles": ["cloud_board_to_video"]
+    }
+  ],
+  "integration_pipeline": {
+    "description": "Recommended multi-launcher director chain for bleeding-edge local demo",
+    "stages": [
+      {"id": "S0", "tool": "mok_tua|directors_console", "action": "sides → shots / CPE prompts"},
+      {"id": "S1", "tool": "sm_comfy|qwen_edit", "action": "storyboard stills multi-angle next-scene"},
+      {"id": "S1b", "tool": "facefusion|liveportrait", "action": "optional identity / face reenact"},
+      {"id": "S2", "tool": "tts_story|qwen3_tts|ace_step", "action": "VO + music bed"},
+      {"id": "S3", "tool": "wan2gp|sm_comfy_wan|framepack", "action": "I2V / animate / long form"},
+      {"id": "S3b", "tool": "dreamtalk|wan_infinitetalk", "action": "lipsync / talking avatar"},
+      {"id": "S3c", "tool": "freemocap", "action": "body track → pose maps for retarget"},
+      {"id": "S5", "tool": "mok_tua_stitch", "action": "ffmpeg concat + audit receipts"}
+    ]
+  },
+  "launch_matrix": {
+    "gui": ["Pinokio Start", "Stability Matrix Launch", "Director's Console Open Web UI", "Open WebUI tools → mok-tua"],
+    "tui_cli": [
+      "mok_tua_cli inventory|stage|sides|run|batch",
+      "curl /v1/tools/call",
+      "git -C pinokio/api/<app> pull",
+      "ssh gpu-host comfy_gpu-host_host_runtime.sh"
+    ],
+    "api": ["mok-tua :8799", "Comfy :8188", "Director's Console :9800/:9820", "ACE-Step REST", "Headroom :8787"]
+  }
+}
