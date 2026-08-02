@@ -3,6 +3,13 @@
 All notable changes to **mok-tua** are documented here.  
 Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are local lab (America/New_York context).
 
+## [0.5.1] — 2026-08-02
+
+### Changed
+
+- README **personal origin** note: Pinokio + Stability Matrix on Mac/Linux, the “how does everything talk?” gap, Gateway Tech hardware museum nostalgia, C64 deck lineage with ai-gateway.
+- **Capability collage** rewritten and annotated: C64 conductor strip on top; lanes for **image gen**, **video gen**, **director orchestration**, **voice gen**, **movement gen** using real Comfy / Director’s Console chrome where available (`docs/assets/mokups/capability-collage.html` → `products-capabilities.png`).
+
 ## [0.5.0] — 2026-08-02
 
 ### Added

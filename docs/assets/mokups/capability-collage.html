@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>mok-tua · annotated capability collage</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1400px;
+    background: #070b14;
+    color: #e8eefc;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    padding: 28px 32px 36px;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #4fd1c5;
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .lede {
+    color: #9db0d0;
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 95ch;
+    margin-bottom: 18px;
+  }
+
+  /* ---- C64 conductor strip ---- */
+  .c64-band {
+    background: linear-gradient(160deg, #5a5a5a, #2e2e2e 45%, #1c1c1c);
+    border-radius: 14px;
+    padding: 14px 16px 16px;
+    margin-bottom: 22px;
+    box-shadow: 0 16px 40px rgba(0,0,0,.45);
+  }
+  .c64-label {
+    text-align: center;
+    font: 10px/1 ui-monospace, Menlo, monospace;
+    letter-spacing: .22em;
+    color: #bbb;
+    margin-bottom: 10px;
+  }
+  .c64-row {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 14px;
+    align-items: stretch;
+  }
+  .crt {
+    background: #40318d;
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-family: "VT323", "Courier New", monospace;
+    font-size: 18px;
+    line-height: 1.15;
+    color: #a5a0ff;
+    min-height: 210px;
+    box-shadow: inset 0 0 40px rgba(0,0,0,.35);
+    position: relative;
+    overflow: hidden;
+  }
+  .crt::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom, transparent 0 2px, rgba(0,0,0,.07) 2px 3px
+    );
+    pointer-events: none;
+  }
+  .crt .hi { color: #fff; }
+  .crt .yl { color: #d5df7c; }
+  .crt .gn { color: #5ceb5a; }
+  .crt .rd { color: #ff7b7b; }
+  .crt .dim { color: #6c5eb5; }
+  .c64-note {
+    background: #121a2e;
+    border: 1px solid #2a3a58;
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+  }
+  .c64-note h2 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #e8eefc;
+  }
+  .c64-note p {
+    font-size: 13px;
+    color: #9db0d0;
+    line-height: 1.45;
+  }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .pill {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid #2a3a58;
+    color: #c9d4ea;
+    background: #0b1220;
+  }
+  .pill.accent { border-color: #4fd1c5; color: #4fd1c5; }
+
+  /* ---- capability grid ---- */
+  .section-h {
+    font-size: 13px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #9db0d0;
+    margin: 4px 0 12px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+  }
+  .card {
+    grid-column: span 2;
+    background: #121a2e;
+    border: 1px solid #2a3a58;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+  }
+  .card.wide { grid-column: span 3; }
+  .card-head {
+    padding: 10px 12px 8px;
+    border-bottom: 1px solid #2a3a58;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .cap-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .cap-tag.image { color: #7dd3fc; }
+  .cap-tag.video { color: #f0a35e; }
+  .cap-tag.voice { color: #c4b5fd; }
+  .cap-tag.move { color: #5ceb5a; }
+  .cap-tag.dir { color: #fbbf24; }
+  .card-head h3 {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .card-head .tools {
+    font-size: 11px;
+    color: #9db0d0;
+  }
+  .shot {
+    flex: 1;
+    position: relative;
+    background: #0b1220;
+    min-height: 150px;
+    overflow: hidden;
+  }
+  .shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+  .shot.synth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .card-foot {
+    padding: 8px 12px 10px;
+    font-size: 11px;
+    color: #9db0d0;
+    border-top: 1px solid #2a3a58;
+    line-height: 1.35;
+  }
+  .gui-badge {
+    position: absolute;
+    top: 8px; left: 8px;
+    font-size: 10px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    background: rgba(7,11,20,.82);
+    border: 1px solid #2a3a58;
+    color: #4fd1c5;
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  /* synthetic panels for tools without public GUI dump */
+  .wave {
+    width: 100%;
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 12px;
+  }
+  .wave i {
+    display: block;
+    width: 8px;
+    border-radius: 4px;
+    background: linear-gradient(to top, #7c3aed, #c4b5fd);
+  }
+  .wave i:nth-child(odd) { background: linear-gradient(to top, #f0a35e, #fde68a); }
+  .synth-label {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #c9d4ea;
+  }
+  .skel {
+    width: 100%;
+    max-width: 280px;
+    height: 140px;
+    position: relative;
+  }
+  .skel svg { width: 100%; height: 100%; }
+  .legend {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    font-size: 11px;
+    color: #9db0d0;
+  }
+  .legend strong { color: #e8eefc; font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="eyebrow">mok-tua · capability map · vendor GUI + C64 conductor</div>
+  <h1>Five jobs. Real tools. One conductor.</h1>
+  <p class="lede">
+    mok-tua does not reskin ComfyUI or Director’s Console. It <strong>orchestrates</strong> them —
+    voice, image, movement, video — while the C64-themed TUI (or modern skin) is the operator prompt
+    on top. Below: conductor strip first, then each capability annotated with the tool GUI (or honest
+    stylized stand-in where we only ship the tier, not a product screenshot).
+  </p>
+
+  <!-- C64 at top -->
+  <div class="c64-band">
+    <div class="c64-label">CONDUCTOR · COMMODORE 64 SKIN · TUI + GUI OPTIONS</div>
+    <div class="c64-row">
+      <div class="crt">
+        <div class="hi"> **** MOK-TUA V0.5  CONDUCTOR ****</div>
+        <div class="dim"> 64K RAM SYSTEM  38911 BASIC BYTES FREE</div>
+        <br/>
+        <div class="hi">READY.</div>
+        <br/>
+        <div class="yl">LOAD"PIPELINE",8,1</div>
+        <div class="dim">SEARCHING FOR VOICE · IMAGE · MOVE · VIDEO</div>
+        <div class="dim">LINKING DIRECTOR DESK + COMFY + HEADROOM</div>
+        <div class="hi">READY.</div>
+        <br/>
+        <div class="gn"> ORCH: ON   QQQ: LOCAL-ONLY   DRY: TOGGLE</div>
+        <div class="gn"> STILL→VIDEO→FACE→VOICE  VIA PROVIDERS</div>
+        <div class="rd"> CLOUD: BLOCKED UNLESS YOU OPT IN</div>
+        <br/>
+        <div class="yl"> [D]OCTOR [P]ROVIDERS [R]UN [S]MOKE [Q]UIT</div>
+        <div class="hi">READY.<span style="background:#a5a0ff;width:10px;height:14px;display:inline-block;margin-left:2px;vertical-align:text-bottom;"></span></div>
+      </div>
+      <div class="c64-note">
+        <h2>TUI + GUI (not either/or)</h2>
+        <p>
+          <strong>TUI</strong> — mok-tua C64 or modern skin: doctor, providers, run, smoke, lock.<br/>
+          <strong>GUI peers</strong> — each tool keeps its internal interface (Comfy node graph,
+          Director’s storyboard, Pinokio Start, LiteLLM Admin).<br/>
+          Same stack as the Commodore-themed maintenance deck work on the broader ai-gateway —
+          fixed palette, line discipline, READY. prompt.
+        </p>
+        <div class="pill-row">
+          <span class="pill accent">tui --skin c64</span>
+          <span class="pill">API :8799</span>
+          <span class="pill">CLI verbs</span>
+          <span class="pill">vendor GUIs unchanged</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-h">Capability lanes · what talks to what</div>
+  <div class="grid">
+
+    <!-- IMAGE GEN -->
+    <div class="card wide">
+      <div class="card-head">
+        <span class="cap-tag image">1 · Image gen</span>
+        <h3>Stills & storyboard frames</h3>
+        <div class="tools">ComfyUI (Stability Matrix / Pinokio) · optional Grok Imagine / Nano Banana</div>
+      </div>
+      <div class="shot">
+        <span class="gui-badge">internal GUI · ComfyUI</span>
+        <img src="../mokup-comfyui.png" alt="ComfyUI templates gallery" />
+      </div>
+      <div class="card-foot">Node graph + templates — the paint desk mok-tua calls for local stills (and some video graphs).</div>
+    </div>
+
+    <!-- VIDEO GEN -->
+    <div class="card wide">
+      <div class="card-head">
+        <span class="cap-tag video">2 · Video gen</span>
+        <h3>Stills → short motion clips</h3>
+        <div class="tools">Wan / FramePack / AnimateDiff via Comfy · GPU worker</div>
+      </div>
+      <div class="shot">
+        <span class="gui-badge">internal GUI · Comfy video lane</span>
+        <img src="../vendor/comfyui-live-capture.png" alt="ComfyUI workspace used for image and video graphs" />
+      </div>
+      <div class="card-foot">Same Comfy workbench, video templates &amp; Wan pins — mok-tua stages S3 after storyboard stills.</div>
+    </div>
+
+    <!-- DIRECTOR -->
+    <div class="card wide">
+      <div class="card-head">
+        <span class="cap-tag dir">3 · Director orchestration</span>
+        <h3>Human desk + shot board</h3>
+        <div class="tools">Director’s Console (Pinokio) · mok-tua API/CLI/TUI conductor</div>
+      </div>
+      <div class="shot">
+        <span class="gui-badge">internal GUI · Director’s Console</span>
+        <img src="../mokup-directors-console.png" alt="Director's Console storyboard canvas" />
+      </div>
+      <div class="card-foot">Official storyboard canvas — creative session UI; mok-tua keeps ledger, QQQ gates, and launches.</div>
+    </div>
+
+    <!-- VOICE -->
+    <div class="card wide">
+      <div class="card-head">
+        <span class="cap-tag voice">4 · Voice gen</span>
+        <h3>Speech, beds, line reads</h3>
+        <div class="tools">ACE-Step · TTS-Story · Kokoro / local TTS · optional talk2ya path</div>
+      </div>
+      <div class="shot synth">
+        <div>
+          <div class="wave" id="wave"></div>
+          <div class="synth-label">Audio tier UIs stay in their apps<br/><span style="color:#9db0d0">mok-tua launches &amp; sequences — no PHI to cloud by default</span></div>
+        </div>
+        <span class="gui-badge">tier tools · Pinokio launch</span>
+      </div>
+      <div class="card-foot">Voice/music apps install via Pinokio; conductor schedules them after (or beside) picture stages.</div>
+    </div>
+
+    <!-- MOVEMENT -->
+    <div class="card" style="grid-column: span 3;">
+      <div class="card-head">
+        <span class="cap-tag move">5 · Movement gen</span>
+        <h3>Face · body · performance</h3>
+        <div class="tools">FaceFusion · LivePortrait · FreeMoCap · talking-head polish</div>
+      </div>
+      <div class="shot" style="display:grid;grid-template-columns:1.2fr 1fr;">
+        <div style="position:relative;overflow:hidden;">
+          <span class="gui-badge">example face polish</span>
+          <img src="../example-face-polish.jpg" alt="Face polish before/after style result" style="height:100%;object-fit:cover;" />
+        </div>
+        <div class="synth" style="background:#0f1729;">
+          <div class="skel">
+            <svg viewBox="0 0 280 140" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#5ceb5a"/>
+                  <stop offset="100%" stop-color="#4fd1c5"/>
+                </linearGradient>
+              </defs>
+              <!-- stick figure pose A -->
+              <g stroke="url(#g)" stroke-width="3" fill="none" opacity=".55">
+                <circle cx="70" cy="28" r="12"/>
+                <path d="M70 40 L70 78 M70 55 L48 68 M70 55 L92 68 M70 78 L52 112 M70 78 L88 112"/>
+              </g>
+              <!-- arrows -->
+              <path d="M110 70 L160 70" stroke="#f0a35e" stroke-width="2" marker-end="url(#arr)"/>
+              <defs>
+                <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#f0a35e"/>
+                </marker>
+              </defs>
+              <!-- pose B denser -->
+              <g stroke="url(#g)" stroke-width="3" fill="none">
+                <circle cx="200" cy="24" r="12"/>
+                <path d="M200 36 L200 76 M200 52 L170 48 M200 52 L230 58 M200 76 L178 118 M200 76 L222 118"/>
+                <circle cx="200" cy="24" r="3" fill="#5ceb5a" stroke="none"/>
+                <circle cx="200" cy="52" r="3" fill="#5ceb5a" stroke="none"/>
+                <circle cx="200" cy="76" r="3" fill="#5ceb5a" stroke="none"/>
+                <circle cx="170" cy="48" r="2.5" fill="#f0a35e" stroke="none"/>
+                <circle cx="230" cy="58" r="2.5" fill="#f0a35e" stroke="none"/>
+              </g>
+              <text x="140" y="132" text-anchor="middle" fill="#9db0d0" font-size="11" font-family="IBM Plex Sans,sans-serif">body / mocap tier (FreeMoCap · LivePortrait)</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="card-foot">Face identity + body motion after (or on) video — still vendor UIs; mok-tua only orders the chain.</div>
+    </div>
+
+    <!-- storyboard product sample span -->
+    <div class="card" style="grid-column: span 3;">
+      <div class="card-head">
+        <span class="cap-tag image">Product sample · storyboard sheet</span>
+        <h3>What image gen + director language produce</h3>
+        <div class="tools">mok-tua shot list → Comfy stills → multi-angle sheet</div>
+      </div>
+      <div class="shot">
+        <span class="gui-badge">output · not a vendor chrome</span>
+        <img src="../example-storyboard-sheet.jpg" alt="Six-panel instructor storyboard sheet" style="object-position:center;" />
+      </div>
+      <div class="card-foot">Illustrative instructor avatar sheet — the kind of deliverable the conductor is built to sequence.</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><strong>Image</strong> ComfyUI GUI</span>
+    <span><strong>Video</strong> Comfy / Wan pins</span>
+    <span><strong>Director</strong> Director’s Console GUI</span>
+    <span><strong>Voice</strong> ACE-Step / TTS tier (Pinokio)</span>
+    <span><strong>Movement</strong> FaceFusion · LivePortrait · FreeMoCap</span>
+    <span><strong>Conductor</strong> mok-tua C64 TUI · CLI · API</span>
+  </div>
+
+<script>
+const wave = document.getElementById("wave");
+const heights = [28,48,72,96,64,110,80,52,90,70,44,100,66,38,86,58,74,42,96,60,34,78,50,88];
+heights.forEach(h => {
+  const i = document.createElement("i");
+  i.style.height = h + "px";
+  wave.appendChild(i);
+});
+</script>
+</body>
+</html>
