@@ -32,6 +32,20 @@ Folder: `docs/assets/`
 | `mokup-c64-tui.png` | C64 320×200 PETSCII-style conductor TUI concept |
 | `mokups/*.html` | Sources for the above |
 
+## Presentation smoke (`pres-smoke/`)
+
+Silly **self-identity** chain: one Drive/source still → presentation mockups (not full video).
+
+| File | What |
+|------|------|
+| `pres-smoke/00-ceo-source-still.jpg` | Starter still (“ceo” forehead) — prompt fodder / LoadImage |
+| `pres-smoke/01-comdex-stage-keynote.jpg` | Full-body COMDEX-style keynote mock |
+| `pres-smoke/02-functions-board-demo.jpg` | Points at mok-tua functions list |
+| `pres-smoke/03-cartoon-nvidia-ceo-hangout.jpg` | Blatant cartoon buddy hangout (caricature) |
+| `pres-smoke/04-comdex-storyboard-sheet.jpg` | Six-panel presentation storyboard |
+
+Prefer these over generic generated faces when documenting “face locked through the pipeline.”
+
 ## Product art
 
 | File | Use |
