@@ -5,6 +5,7 @@ walking a fixed stage ladder — text expand → stills → video — against th
 tools you already run at home (local LLM gateway + ComfyUI).
 
 Built for small creative pipelines, not a hosted “movie studio” product.
+This is **orchestration** over known upstreams — not a new image model.
 
 ### Stages (hybrid Mac v1)
 
@@ -16,6 +17,16 @@ Built for small creative pipelines, not a hosted “movie studio” product.
 | Cloud | Overflow cost estimate only | Stub tables (HF ZeroGPU / RunPod) |
 
 Control API listens on **`:8799`**.
+
+### Built on (citations)
+
+| Piece | Role | Upstream |
+|-------|------|----------|
+| **[ai-gateway](https://github.com/the1truedan/ai-gateway)** | Headroom → LiteLLM path for S0 | org glue over [Headroom](https://github.com/chopratejas/headroom) + [LiteLLM](https://github.com/BerriAI/litellm) |
+| **[ComfyUI](https://github.com/comfyanonymous/ComfyUI)** | Still + video graphs | [comfyanonymous/ComfyUI](https://github.com/comfyanonymous/ComfyUI) |
+| **AnimateDiff Evolved** | Optional short motion | [Kosinkadink/ComfyUI-AnimateDiff-Evolved](https://github.com/Kosinkadink/ComfyUI-AnimateDiff-Evolved) |
+| **Wan / LTX / Qwen LoRAs** | Video + multi-angle / next-scene stills | Model authors on Hugging Face (see lab inventory) |
+| **xAI Grok Imagine / Nano Banana** | Optional cloud stills (QQQ-gated) | Provider APIs / Comfy partner nodes |
 
 ## Quick start (on the host)
 
