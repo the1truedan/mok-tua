@@ -93,19 +93,45 @@ Capability collage:
 
 ---
 
-## Integrated stack (concept art)
+## Integrated stack (real vendor UIs + polished mok-ups)
 
-Illustrations only — same look as the hero art. **No live lab dumps** (no hostnames, LAN IPs, home paths, or raw JSON).
+We **do not invent** ComfyUI / Director’s Console / LiteLLM. Those products already have standard interfaces — we **showcase them**, then show how mok-tua sits beside them as conductor (API · CLI · optional TUI).
 
-| Component | Concept |
-|-----------|---------|
-| **ComfyUI** — picture factory | <img src="docs/assets/concept-comfy-factory.jpg" alt="Abstract node-graph image factory" width="480" /> |
-| **Director’s Console** — human control desk | <img src="docs/assets/concept-directors-console.jpg" alt="Abstract director control panels" width="480" /> |
-| **Stack health** — conductor is awake | <img src="docs/assets/concept-stack-health.jpg" alt="Abstract green health pulse" width="480" /> |
-| **Providers** — engines you can pick | <img src="docs/assets/concept-providers-menu.jpg" alt="Abstract engine menu tiles" width="480" /> |
-| **Shared model pool** — storage health | <img src="docs/assets/concept-storage-pool.jpg" alt="Abstract honeycomb storage pool" width="480" /> |
+**No lab dumps:** no home paths, LAN IPs, or raw `/healthz` JSON.
 
-Asset index: [`docs/ASSETS.md`](docs/ASSETS.md).
+### Picture factory — ComfyUI (proper GUI)
+
+<p align="center">
+  <img src="docs/assets/mokup-comfyui.png" alt="ComfyUI templates gallery in mok-tua frame" width="900" />
+</p>
+
+### Director’s desk — official sample ([NickPittas/DirectorsConsole](https://github.com/NickPittas/DirectorsConsole))
+
+| Storyboard canvas | CPE film presets |
+|-------------------|------------------|
+| <img src="docs/assets/mokup-directors-console.png" alt="Director's Console storyboard canvas" width="420" /> | <img src="docs/assets/mokup-directors-cpe.png" alt="CPE film presets" width="420" /> |
+
+Also installable via **Pinokio** (“Director’s Console”).
+
+### LiteLLM routing (gateway example · no secrets)
+
+<p align="center">
+  <img src="docs/assets/mokup-litellm-routing.png" alt="LiteLLM-style model routing table for mok-tua" width="900" />
+</p>
+
+OpenAI-compatible aliases → local (or opt-in cloud) backends → mok-tua S0 expand.  
+Upstream Admin chrome sample (for look only): `docs/assets/mokup-litellm-admin-sample.png`.
+
+### Conductor TUI option — Commodore 64 canvas (320×200)
+
+Yes — **in scope**. Vendor tools keep their modern GUIs; mok-tua can expose a **PETSCII-style TUI** on a true C64 resolution grid for prompt / doctor / run (or a modern Textual TUI). `tui/` is not shipped yet; CLI already covers the verbs.
+
+<p align="center">
+  <img src="docs/assets/mokup-c64-tui.png" alt="mok-tua C64-resolution TUI concept" width="720" />
+</p>
+
+Full interface design + integration rules: **[`docs/INTERFACES.md`](docs/INTERFACES.md)**  
+Asset credits: [`docs/ASSETS.md`](docs/ASSETS.md).
 
 ---
 

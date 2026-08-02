@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>LiteLLM routing — mok-up</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font: 14px/1.4 Inter, system-ui, sans-serif;
+    background: #f4f6fb;
+    color: #0f172a;
+    padding: 28px 32px 40px;
+  }
+  .chrome {
+    max-width: 1080px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(15,23,42,.12);
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+  }
+  .top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #fff;
+  }
+  .logo { font-weight: 700; font-size: 16px; letter-spacing: -0.02em; }
+  .logo span { color: #2563eb; }
+  nav a {
+    color: #64748b;
+    text-decoration: none;
+    margin-right: 14px;
+    font-size: 13px;
+  }
+  nav a.active { color: #0f172a; font-weight: 600; border-bottom: 2px solid #2563eb; padding-bottom: 2px; }
+  .body { display: grid; grid-template-columns: 200px 1fr; min-height: 520px; }
+  aside {
+    background: #0b1220;
+    color: #cbd5e1;
+    padding: 18px 12px;
+  }
+  aside h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #64748b; margin: 12px 8px 8px; }
+  aside .item {
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin: 2px 0;
+    font-size: 13px;
+  }
+  aside .item.on { background: #1e293b; color: #fff; }
+  main { padding: 22px 24px; }
+  h1 { font-size: 20px; margin-bottom: 4px; }
+  .sub { color: #64748b; font-size: 13px; margin-bottom: 18px; }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #64748b;
+    padding: 8px 10px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+  }
+  .model { font-weight: 600; font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; }
+  .route {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    color: #334155;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 4px 8px;
+    display: inline-block;
+  }
+  .pill {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+  }
+  .pill.local { background: #ecfdf5; border-color: #a7f3d0; color: #047857; }
+  .pill.cloud { background: #fff7ed; border-color: #fed7aa; color: #c2410c; }
+  .flow {
+    margin-top: 22px;
+    padding: 16px;
+    background: #0b1220;
+    color: #e2e8f0;
+    border-radius: 10px;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .flow .c { color: #38bdf8; }
+  .flow .g { color: #4ade80; }
+  .flow .a { color: #fbbf24; }
+  .note {
+    margin-top: 14px;
+    font-size: 12px;
+    color: #64748b;
+  }
+</style>
+</head>
+<body>
+  <div class="chrome">
+    <div class="top">
+      <div class="logo">Lite<span>LLM</span> Proxy</div>
+      <nav>
+        <a href="#">Models</a>
+        <a class="active" href="#">Router</a>
+        <a href="#">Keys</a>
+        <a href="#">Logs</a>
+        <a href="#">Settings</a>
+      </nav>
+    </div>
+    <div class="body">
+      <aside>
+        <h3>Gateway</h3>
+        <div class="item on">Model routing</div>
+        <div class="item">Fallbacks</div>
+        <div class="item">Budgets</div>
+        <h3>Integrations</h3>
+        <div class="item">OpenAI-compatible</div>
+        <div class="item">Headroom / chat</div>
+        <div class="item">mok-tua S0 expand</div>
+      </aside>
+      <main>
+        <h1>Model routing <span class="badge">example · no secrets</span></h1>
+        <p class="sub">OpenAI-compatible entrypoint → alias → local or optional cloud backend. Values are illustrative (not a live dump).</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Alias (client sees)</th>
+              <th>Routes to</th>
+              <th>Class</th>
+              <th>Use in mok-tua</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="model">manager-worker-code</span></td>
+              <td><span class="route">ollama / local-code</span></td>
+              <td><span class="pill local">local</span></td>
+              <td>script expand, shot lists</td>
+            </tr>
+            <tr>
+              <td><span class="model">manager-worker-vision</span></td>
+              <td><span class="route">local-vlm · vision</span></td>
+              <td><span class="pill local">local</span></td>
+              <td>panel QA, board review</td>
+            </tr>
+            <tr>
+              <td><span class="model">manager-worker-reason</span></td>
+              <td><span class="route">local-reason · long ctx</span></td>
+              <td><span class="pill local">local</span></td>
+              <td>continuity / edit notes</td>
+            </tr>
+            <tr>
+              <td><span class="model">manager-worker-phi</span></td>
+              <td><span class="route">air-gap · phi-safe</span></td>
+              <td><span class="pill local">local · gated</span></td>
+              <td>care / private text never cloud</td>
+            </tr>
+            <tr>
+              <td><span class="model">manager-embed</span></td>
+              <td><span class="route">local-embed</span></td>
+              <td><span class="pill local">local</span></td>
+              <td>catalog / Johnny search</td>
+            </tr>
+            <tr>
+              <td><span class="model">overflow-public</span></td>
+              <td><span class="route">optional cloud · QQQ3</span></td>
+              <td><span class="pill cloud">cloud · opt-in</span></td>
+              <td>public material only</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="flow">
+          <div><span class="c">client</span>  POST /v1/chat/completions  model=<span class="a">manager-worker-code</span></div>
+          <div>        ↓</div>
+          <div><span class="c">LiteLLM / Headroom</span>  resolve alias → backend + budget + log</div>
+          <div>        ↓</div>
+          <div><span class="g">local runtime</span>  (or blocked if data-class = private)</div>
+          <div>        ↓</div>
+          <div><span class="c">mok-tua</span>  S0 expand → shots → stills providers</div>
+        </div>
+        <p class="note">mok-up: standardized LiteLLM Admin look · routing table is synthetic for docs · no master keys, no LAN hosts.</p>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

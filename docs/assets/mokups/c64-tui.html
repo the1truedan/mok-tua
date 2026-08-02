@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>mok-tua TUI — C64 canvas</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 24px;
+    font-family: system-ui, sans-serif;
+    color: #ccc;
+  }
+  h1 { font-size: 15px; font-weight: 600; color: #e8e8e8; letter-spacing: .02em; }
+  .meta { font-size: 12px; color: #888; max-width: 640px; text-align: center; line-height: 1.45; }
+  /* C64 physical frame */
+  .bezel {
+    background: linear-gradient(160deg, #6b6b6b, #3a3a3a 40%, #2a2a2a);
+    border-radius: 10px;
+    padding: 18px 18px 22px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.15);
+  }
+  .label {
+    font: 10px/1 ui-monospace, Menlo, monospace;
+    color: #bbb;
+    letter-spacing: .2em;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  /* Native C64: 320×200 — scaled ×3 for readability = 960×600 */
+  .crt {
+    width: 960px;
+    height: 600px;
+    background: #40318d; /* C64 blue */
+    image-rendering: pixelated;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 60px rgba(0,0,0,.45);
+  }
+  .scan {
+    pointer-events: none;
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0 2px,
+      rgba(0,0,0,.08) 2px 3px
+    );
+    opacity: .55;
+  }
+  .screen {
+    width: 320px;
+    height: 200px;
+    transform: scale(3);
+    transform-origin: top left;
+    font-family: "VT323", "Courier New", monospace;
+    font-size: 8px; /* ~PETSCII cell at scale */
+    line-height: 8px;
+    color: #7869c4; /* light blue-ish on classic */
+    padding: 8px;
+    white-space: pre;
+    letter-spacing: 0;
+  }
+  /* Classic light cyan text on blue */
+  .screen {
+    color: #a5a0ff;
+  }
+  .hi { color: #ffffff; }
+  .yl { color: #d5df7c; }
+  .gn { color: #5ceb5a; }
+  .rd { color: #ff7b7b; }
+  .dim { color: #6c5eb5; }
+  .cursor {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: #a5a0ff;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .opts {
+    display: flex;
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .opt {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #aaa;
+    max-width: 300px;
+  }
+  .opt strong { color: #eee; display: block; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+  <h1>mok-tua · interface options</h1>
+  <p class="meta">
+    Left path: <strong>GUI</strong> = vendor tools (ComfyUI, Director’s Console, LiteLLM Admin) as-is.<br/>
+    Right path: <strong>TUI</strong> = mok-tua conductor on a Commodore 64 native canvas (320×200, PETSCII-style cells),
+    scaled 3× for screenshots. Prompt entry stays monospaced and deliberate — not a modern chat skin.
+  </p>
+
+  <div class="bezel">
+    <div class="label">COMMODORE 64 · 320×200 · MOK-TUA TUI (CONCEPT)</div>
+    <div class="crt">
+      <div class="screen" id="scr"></div>
+      <div class="scan"></div>
+    </div>
+  </div>
+
+  <div class="opts">
+    <div class="opt">
+      <strong>TUI (this)</strong>
+      CLI/TUI via rich/textual or c64-style skin ·
+      doctor · providers · run · smoke · lock
+    </div>
+    <div class="opt">
+      <strong>GUI (peers)</strong>
+      ComfyUI node graph · Director’s Console storyboard ·
+      LiteLLM Admin · Pinokio Start
+    </div>
+    <div class="opt">
+      <strong>API</strong>
+      :8799 OpenAI tools + /v1/runs ·
+      Headroom/LiteLLM for S0 expand
+    </div>
+  </div>
+
+<script>
+const lines = [
+  {t: " **** MOK-TUA V0.4  CONDUCTOR ****", c: "hi"},
+  {t: " 64K RAM SYSTEM  38911 BASIC BYTES FREE", c: "dim"},
+  {t: "", c: ""},
+  {t: "READY.", c: "hi"},
+  {t: "", c: ""},
+  {t: "LOAD\"STORY\",8,1", c: "yl"},
+  {t: "SEARCHING FOR STORY", c: "dim"},
+  {t: "LOADING FIXTURES/SAMPLE_INSTRUCTOR", c: "dim"},
+  {t: "READY.", c: "hi"},
+  {t: "", c: ""},
+  {t: "RUN", c: "yl"},
+  {t: "", c: ""},
+  {t: " SHOTS: 12   QQQ: LOCAL-ONLY   DRY: ON", c: "gn"},
+  {t: " STILL: LOCAL_QWEN_EDIT", c: "gn"},
+  {t: " VIDEO: LOCAL_WAN (MRGPU PIN)", c: "gn"},
+  {t: " CLOUD: BLOCKED (PRIVATE DATA)", c: "rd"},
+  {t: "", c: ""},
+  {t: " > PROMPT: medium close-up, instructor,", c: "hi"},
+  {t: "   soft key, classroom, next-scene lock", c: "hi"},
+  {t: "", c: ""},
+  {t: " [D]OCTOR [P]ROVIDERS [R]UN [S]MOKE", c: "yl"},
+  {t: " [L]OCK   [Q]UIT", c: "yl"},
+  {t: "", c: ""},
+  {t: "READY.", c: "hi"},
+];
+const el = document.getElementById("scr");
+let out = "";
+for (const row of lines) {
+  if (!row.t) { out += "\n"; continue; }
+  out += `<span class="${row.c}">${row.t.padEnd(38).slice(0,38)}</span>\n`;
+}
+out += `<span class="hi">.</span><span class="cursor"></span>`;
+el.innerHTML = out;
+</script>
+</body>
+</html>
