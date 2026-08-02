@@ -34,11 +34,13 @@ Folder: `docs/assets/`
 | File | Use |
 |------|-----|
 | `hero-prompt-to-product.jpg` | README hero |
-| `products-capabilities.jpg` | Capability collage |
+| `products-capabilities.png` | **Annotated** capability collage (C64 strip + 5 lanes) — prefer this |
+| `products-capabilities.jpg` | JPEG twin of the above |
 | `example-storyboard-sheet.jpg` | Example stills sheet |
 | `example-face-polish.jpg` | Face polish look |
 | `08-product-map.png` | Product map |
 | `concept-*.jpg` | Optional abstract metaphors (not substitutes for vendor UIs) |
+| `mokups/capability-collage.html` | Source for annotated collage (Chrome headless → PNG) |
 
 ## Attribution
 

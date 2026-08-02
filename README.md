@@ -31,6 +31,18 @@ It does **not** replace every app. It is the **conductor**:
 
 ---
 
+## Why this exists (personal note)
+
+I had **Pinokio** and **Stability Matrix** on both Mac and Linux — one-click installs for ComfyUI, FaceFusion, video tools, voice tools, Director’s Console, the works. Each app was fine in isolation. What perplexed me was the next problem: **how do they all talk?**
+
+Story in one place, stills from another, video on a GPU box, face polish in a third UI, voice somewhere else, privacy rules you cannot forget when the content is real caregiving work. Ports, model folders, “which machine is running what,” and no single shot ledger. Installers solve *presence*; they do not solve *pipeline*.
+
+**mok-tua** is the conductor I needed for that gap — not another generative model, not a reskin of Comfy. It keeps the run ordered: shots, stages, QQQ gates, launch recipes, receipts. The tools keep their own GUIs.
+
+The **Commodore 64** conductor skin is deliberate nostalgia. Time at the **Gateway Tech hardware museum** (and parallel **C64-themed deck work** on the broader **ai-gateway** maintenance surface) pulled me back to a fixed palette, a monospaced prompt, and a `READY.` line. So the TUI borrows that spirit while vendor apps stay modern. You can drive the same verbs from CLI, API, C64 TUI, or modern TUI — and still open Comfy or Director’s Console when you want the full internal GUI.
+
+---
+
 ## What you get (pictures worth a thousand words)
 
 <p align="center">
@@ -85,11 +97,24 @@ flowchart LR
 | **ACE-Step / TTS-Story** | Music beds & spoken lines | Audio tier tools |
 | **Grok Imagine / Nano Banana** | Optional paid/cloud stills | Only with keys + privacy gate |
 
-Capability collage:
+### Capability collage (annotated)
+
+C64 conductor strip on top · five jobs labeled · real internal GUIs where we have them (Comfy, Director’s Console) · honest tier stand-ins for voice/body apps that stay inside Pinokio.
 
 <p align="center">
-  <img src="docs/assets/products-capabilities.jpg" alt="Four capability tiles: storyboard, face, music, motion" width="720" />
+  <img src="docs/assets/products-capabilities.png" alt="Annotated collage: C64 TUI conductor strip, then image gen, video gen, director orchestration, voice gen, movement gen" width="900" />
 </p>
+
+| # | Capability | What you see | Tool surface mok-tua talks to |
+|---|------------|--------------|-------------------------------|
+| — | **Conductor** (top) | C64-themed TUI + GUI options note | `tui --skin c64` · CLI · API `:8799` |
+| 1 | **Image gen** | ComfyUI templates / node workbench | Local stills (SM / Pinokio Comfy); optional cloud stills |
+| 2 | **Video gen** | Comfy video / Wan lane | GPU worker after storyboard stills |
+| 3 | **Director orchestration** | Director’s Console storyboard canvas | Peer GUI + mok-tua ledger / launches |
+| 4 | **Voice gen** | Audio tier (waveform stand-in) | ACE-Step · TTS-Story · Kokoro — Pinokio launch |
+| 5 | **Movement gen** | Face polish sample + body/mocap sketch | FaceFusion · LivePortrait · FreeMoCap |
+
+Source HTML for the collage: [`docs/assets/mokups/capability-collage.html`](docs/assets/mokups/capability-collage.html).
 
 ---
 
@@ -220,6 +245,7 @@ Deep CLI, tier locks (T0–T4), pull hygiene, ask-packet federation, ROBUST Comf
 
 | Ver | What changed (human) |
 |-----|----------------------|
+| **0.5.1** | Annotated capability collage + personal origin (Pinokio/SM gap, Gateway Tech C64 nostalgia, ai-gateway deck) |
 | **0.5** | Conductor TUI shipped (`tui/`): C64 + modern skins, CLI `tui` verb, vendor GUI mok-ups kept |
 | **0.4** | Clearer public story + product map + non-doxxing vendor/mok-up art |
 | **0.3** | Tier lock, gpu-host monitor, ask-packets, ROBUST Comfy roster |
