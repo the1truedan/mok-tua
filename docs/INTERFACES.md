@@ -5,8 +5,8 @@
 | Ask | Answer |
 |-----|--------|
 | Can mok-tua use **vendor GUIs** as-is? | **Yes.** ComfyUI, Director’s Console, LiteLLM Admin, Pinokio — those *are* the established surfaces. mok-tua does not reskin them. |
-| Can we show a **C64 320×200 + PETSCII-style** prompt TUI? | **Yes as a skin / mode** for the *conductor* (mok-tua CLI/TUI). Spec is mock-complete; implementation is a thin `textual`/`rich` (or curses) front-end over existing CLI commands. |
-| Is that “within available tools”? | **Yes.** Catalog already lists GUI + TUI + API launch modes. `tui/` is empty today — CLI covers the same verbs. |
+| Can we show a **C64 320×200 + PETSCII-style** prompt TUI? | **Yes as a skin / mode** for the *conductor* (mok-tua CLI/TUI). Shipped: Textual full-screen (optional) + stdlib REPL fallback, both over CLI verbs. |
+| Is that “within available tools”? | **Yes.** Catalog lists GUI + TUI + API. Run: `python3 scripts/mok_tua_cli.py tui --skin c64` or `./scripts/run_tui.sh`. |
 
 ## Three layers (do not conflate)
 
@@ -49,14 +49,25 @@ Docs art: **official upstream screenshots** (or generic live UI with **no lab pa
 | Palette | VIC-II 16 colors (classic blue `#40318D` + light blue text) |
 | Input | Line-oriented prompt, not floating chat bubbles |
 
-**Implementation path (available stack):**
+**Implementation (shipped v0.5):**
 
-1. Keep verbs in `scripts/mok_tua_cli.py` (`doctor`, `providers`, `run`, `smoke`, `lock`, …).  
-2. Add `tui/` with **Textual** or **rich.live** full-screen app.  
-3. Optional skin: CSS/theme that forces 40-column monospaced layout + C64 colors (or true 320×200 framebuffer for demos).  
-4. Alternate modern TUI skin for day-to-day ops.
+1. Verbs stay in `scripts/mok_tua_cli.py` (`doctor`, `providers`, `run`, `smoke`, `lock`, …).  
+2. `tui/` is a thin front-end: `tui/bridge.py` spawns the CLI; no second business-logic path.  
+3. Skins: `tui/themes/c64.tcss` (VIC-II blue) · `tui/themes/modern.tcss` (navy ops).  
+4. Full-screen via **Textual** when installed (`pip install -r tui/requirements.txt`); otherwise **stdlib REPL** (`--repl`).  
+5. Entry points: `python -m tui`, `mok_tua_cli.py tui`, `./scripts/run_tui.sh`.
 
-Mock: `docs/assets/mokup-c64-tui.png` · source `docs/assets/mokups/c64-tui.html`.
+| Command | Effect |
+|---------|--------|
+| `python3 scripts/mok_tua_cli.py tui` | C64 skin (default) |
+| `… tui --skin modern` | Modern navy TUI |
+| `… tui --repl` | Line-oriented (no Textual) |
+| In-TUI: `D` / `doctor` | CLI doctor |
+| In-TUI: `R` / `run [path]` | Dry-run story (default fixture) |
+| In-TUI: `P` `S` `L` `T` `H` `Q` | providers · smoke · lock · status · help · quit |
+
+Mock (docs art): `docs/assets/mokup-c64-tui.png` · source `docs/assets/mokups/c64-tui.html`.  
+True **320×200 framebuffer** remains the screenshot canvas; the live TUI uses terminal cells with the same palette and prompt discipline.
 
 **Not in scope for C64 skin:** reimplementing Comfy’s node graph in PETSCII. That stays GUI.
 
@@ -77,6 +88,6 @@ Mock: `docs/assets/mokup-c64-tui.png` · source `docs/assets/mokups/c64-tui.html
 |---------|--------|
 | API | Live |
 | CLI | Live |
-| TUI (`tui/`) | Scaffold empty — mock + design in this doc |
+| TUI (`tui/`) | **Live** — Textual skins + stdlib REPL; bridge → CLI |
 | Vendor GUI ties | Live via providers + launch recipes |
-| C64 TUI | Design + mock; implement as theme on Textual when ready |
+| C64 TUI | **Live skin** (`--skin c64`) + docs mock for true 320×200 art |

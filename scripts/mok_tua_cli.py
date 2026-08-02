@@ -28,12 +28,13 @@ def main() -> int:
     p = argparse.ArgumentParser(
         prog="mok-tua",
         description=(
-            "mok-tua v0.3 — director stack process\n"
+            "mok-tua v0.5 — director stack process\n"
             "  models: inventory|stage\n"
             "  story:  sides|run|batch\n"
             "  stack:  providers|doctor|launch|stop|pull|status\n"
             "  process: discover|audit|stage-app|smoke|lock\n"
-            "  federation: packet|nodes|chains (ask_packet.v1 trusted lab)"
+            "  federation: packet|nodes|chains (ask_packet.v1 trusted lab)\n"
+            "  ui: tui (--skin c64|modern)"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
@@ -190,7 +191,35 @@ def main() -> int:
     ch_sub.add_parser("verify", help="Verify hash links")
     ch_sub.add_parser("tip", help="Show tip hash / path")
 
+    # --- conductor TUI ---
+    tui_p = sub.add_parser(
+        "tui",
+        help="Full-screen / line TUI over CLI verbs (C64 or modern skin)",
+    )
+    tui_p.add_argument(
+        "--skin",
+        choices=["c64", "modern"],
+        default="c64",
+        help="c64 = PETSCII-style 40-col canvas; modern = navy ops chrome",
+    )
+    tui_p.add_argument(
+        "--repl",
+        action="store_true",
+        help="Force stdlib line REPL (no Textual)",
+    )
+
     args = p.parse_args()
+
+    if args.cmd == "tui":
+        # Ensure repo root on path for `import tui`
+        if str(ROOT) not in sys.path:
+            sys.path.insert(0, str(ROOT))
+        from tui.__main__ import main as tui_main
+
+        argv = ["--skin", args.skin]
+        if args.repl:
+            argv.append("--repl")
+        return tui_main(argv)
 
     if args.cmd == "inventory":
         import stage_models
