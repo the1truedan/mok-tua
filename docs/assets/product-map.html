@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>mok-tua — product map</title>
+<style>
+  :root {
+    --bg: #0b1220;
+    --card: #121a2e;
+    --line: #2a3a58;
+    --text: #e8eefc;
+    --muted: #9db0d0;
+    --accent: #f0a35e;
+    --teal: #4fd1c5;
+    --green: #68d391;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 28px 32px 40px;
+    background: radial-gradient(1200px 600px at 20% -10%, #1a2744 0%, var(--bg) 55%);
+    color: var(--text);
+    font: 15px/1.45 "Segoe UI", system-ui, sans-serif;
+  }
+  h1 { margin: 0 0 6px; font-size: 28px; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); margin-bottom: 22px; max-width: 70ch; }
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin: 18px 0 28px;
+  }
+  .step {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-align: center;
+    position: relative;
+  }
+  .step strong { display: block; color: var(--accent); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+  .step span { font-size: 14px; }
+  .arrow-row { text-align: center; color: var(--teal); font-size: 22px; margin: -6px 0 18px; letter-spacing: 1.2em; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+  }
+  .card h3 { margin: 0 0 8px; font-size: 17px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  .tag.local { color: var(--green); }
+  .tag.cloud { color: var(--accent); }
+  footer { margin-top: 22px; color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+  <h1>mok-tua — from words to pictures (and video)</h1>
+  <p class="sub">
+    One local control desk for creative AI: turn a script or “sides” into storyboard stills,
+    then optional short video — using tools you already run on your own machines.
+  </p>
+
+  <div class="flow">
+    <div class="step"><strong>1 · Script</strong><span>Plain text, PDF, or Final Draft</span></div>
+    <div class="step"><strong>2 · Shots</strong><span>Break into panels &amp; angles</span></div>
+    <div class="step"><strong>3 · Stills</strong><span>Storyboard images (local or cloud)</span></div>
+    <div class="step"><strong>4 · Motion</strong><span>Optional video on GPU box</span></div>
+    <div class="step"><strong>5 · Receipt</strong><span>What ran, where, cost gate</span></div>
+  </div>
+  <div class="arrow-row">→ → → →</div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="tag local">Core · control desk</div>
+      <h3>mok-tua API &amp; CLI</h3>
+      <p>The conductor. Tracks shots, picks engines, dry-runs safely, and keeps private data off the public cloud by default.</p>
+    </div>
+    <div class="card">
+      <div class="tag local">Writing helper</div>
+      <h3>Headroom (local LLM gateway)</h3>
+      <p>Expands a rough idea into structured shot lists using your home language models — not a chat bot on the internet.</p>
+    </div>
+    <div class="card">
+      <div class="tag local">Picture factory</div>
+      <h3>ComfyUI (storyboards &amp; video)</h3>
+      <p>Open node-based image/video engine. Mac Studio for stills; big GPU tower for longer video when you need it.</p>
+    </div>
+    <div class="card">
+      <div class="tag local">Director UI</div>
+      <h3>Director’s Console</h3>
+      <p>Human-friendly control surface for launches and creative sessions — peer of mok-tua, not a replacement for it.</p>
+    </div>
+    <div class="card">
+      <div class="tag local">Face &amp; body</div>
+      <h3>FaceFusion · FreeMoCap · LivePortrait</h3>
+      <p>Swap / polish faces, capture body motion, and animate portraits when a shot needs a person who looks consistent.</p>
+    </div>
+    <div class="card">
+      <div class="tag local">Sound</div>
+      <h3>ACE-Step · TTS-Story · voice zoo</h3>
+      <p>Music beds and spoken lines for training clips and music-video style pieces — local first.</p>
+    </div>
+    <div class="card">
+      <div class="tag cloud">Optional cloud stills</div>
+      <h3>Grok Imagine · Nano Banana</h3>
+      <p>Only when you choose them. Cost and privacy gates keep medical / private material from auto-uploading.</p>
+    </div>
+    <div class="card">
+      <div class="tag local">Storage watch</div>
+      <h3>ai-data pool + bees dashboard</h3>
+      <p>Shared model library on the home server, with a Grafana board so you can see size, duplicates, and health at a glance.</p>
+    </div>
+  </div>
+  <footer>Live lab snapshot art · M.A.N.A.G.E.R. LLC · mok-tua v0.3</footer>
+</body>
+</html>
