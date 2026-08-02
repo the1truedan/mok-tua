@@ -93,19 +93,19 @@ Capability collage:
 
 ---
 
-## Live lab screenshots (integrated stack)
+## Integrated stack (concept art)
 
-These were captured from a running home lab (not mockups of the whole product surface).
+Illustrations only — same look as the hero art. **No live lab dumps** (no hostnames, LAN IPs, home paths, or raw JSON).
 
-| Component | Snapshot |
-|-----------|----------|
-| **ComfyUI** (picture factory) | <img src="docs/assets/04-comfyui-queue.png" alt="ComfyUI interface" width="480" /> |
-| **Director’s Console** | <img src="docs/assets/05-directors-console.png" alt="Director console UI" width="480" /> |
-| **mok-tua health** | <img src="docs/assets/07-card-health.png" alt="API health JSON card" width="480" /> |
-| **Provider list** | <img src="docs/assets/07-card-providers.png" alt="Providers JSON card" width="480" /> |
-| **Storage / bees board** (shared model pool) | <img src="docs/assets/06-grafana-bees.png" alt="Grafana ai-data bees dashboard" width="480" /> |
+| Component | Concept |
+|-----------|---------|
+| **ComfyUI** — picture factory | <img src="docs/assets/concept-comfy-factory.jpg" alt="Abstract node-graph image factory" width="480" /> |
+| **Director’s Console** — human control desk | <img src="docs/assets/concept-directors-console.jpg" alt="Abstract director control panels" width="480" /> |
+| **Stack health** — conductor is awake | <img src="docs/assets/concept-stack-health.jpg" alt="Abstract green health pulse" width="480" /> |
+| **Providers** — engines you can pick | <img src="docs/assets/concept-providers-menu.jpg" alt="Abstract engine menu tiles" width="480" /> |
+| **Shared model pool** — storage health | <img src="docs/assets/concept-storage-pool.jpg" alt="Abstract honeycomb storage pool" width="480" /> |
 
-More captures: `docs/assets/` · captions in [`docs/ASSETS.md`](docs/ASSETS.md).
+Asset index: [`docs/ASSETS.md`](docs/ASSETS.md).
 
 ---
 
