@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "updated": "2026-08-02",
+  "pool_root": "/Volumes/ai-data/models",
+  "purpose": "mok-tua storyboard path inventory (Qwen multi-angle / next-scene / lightning / video bases)",
+  "johnny_chipper_path": "work/catalog/johnny-chipper/models-storyboard/",
+  "items": [
+    {
+      "id": "qwen_edit_multi_angles",
+      "role": "storyboard_camera",
+      "status": "present",
+      "path": "loras/Qwen-Edit-2509-Multiple-angles.safetensors",
+      "size_bytes": 235929600,
+      "size_human": "225M",
+      "source": "https://huggingface.co/dx8152/Qwen-Edit-2509-Multiple-angles",
+      "notes": "Primary multi-angle LoRA for local_qwen_edit"
+    },
+    {
+      "id": "qwen_edit_lightning_2509",
+      "role": "storyboard_speed",
+      "status": "present",
+      "path": "loras/Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+      "size_human": "810M",
+      "source": "https://huggingface.co/lightx2v/Qwen-Image-Lightning",
+      "notes": "Recommended with multi-angle for faster steps"
+    },
+    {
+      "id": "qwen_edit_lightning_2511",
+      "role": "storyboard_speed",
+      "status": "present",
+      "path": "loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors",
+      "size_human": "810M"
+    },
+    {
+      "id": "next_scene_v2",
+      "role": "storyboard_continuity",
+      "status": "present",
+      "path": "loras/next-scene_lora-v2-3000.safetensors",
+      "size_human": "281M",
+      "source": "https://huggingface.co/lovis93/next-scene-qwen-image-lora-2509",
+      "notes": "Downloaded 2026-08-02 via hf; load at strength 0.7–0.8 with Next Scene: prompts"
+    },
+    {
+      "id": "qwen_image_fp8",
+      "role": "base_image",
+      "status": "present",
+      "path": "diffusion_models/qwen_image_fp8_e4m3fn.safetensors"
+    },
+    {
+      "id": "animatediff_mm_v15_v2_fp16",
+      "role": "video_fallback",
+      "status": "present",
+      "path": "animatediff/mm_sd_v15_v2.fp16.safetensors",
+      "size_human": "867M"
+    },
+    {
+      "id": "wan_t2v_1_3b",
+      "role": "video_primary",
+      "status": "present",
+      "path": "diffusion_models/wan2.1_t2v_1.3B_bf16.safetensors"
+    },
+    {
+      "id": "ltx_video_2b",
+      "role": "video_alt",
+      "status": "present",
+      "path": "diffusion_models/ltx-video-2b-v0.9.5.safetensors"
+    }
+  ],
+  "defaults_recommendation": {
+    "still_provider_when_multi_angle_present": "local_qwen_edit",
+    "still_provider_until_api_graph_exported": "local_sd_minimal",
+    "video_provider": "local_wan",
+    "video_fallback": "local_animatediff"
+  },
+  "gaps": [
+    "Export real Comfy API graph for workflows/qwen_next_scene_angles.api.json (pin still placeholder)",
+    "Export animatediff_basic.api.json from AnimateDiff-Evolved",
+    "Confirm Qwen-Image-Edit base (not only Qwen-Image) if using edit workflows"
+  ]
+}

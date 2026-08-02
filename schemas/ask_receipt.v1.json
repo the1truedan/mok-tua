@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mok-tua.local/schemas/ask_receipt.v1.json",
+  "title": "ask_receipt.v1",
+  "description": "Mirror of ask_packet after work: actual resource use, artifact hash, node claim, CHAINS link. Provenance ≠ correctness verification.",
+  "type": "object",
+  "required": ["schema", "packet_id", "created", "node_id", "status", "actual", "custody"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "ask_receipt.v1" },
+    "packet_id": { "type": "string" },
+    "created": { "type": "string" },
+    "node_id": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["awarded", "running", "ok", "failed", "timeout", "cancelled", "audit_mismatch"]
+    },
+    "lock_ref_claimed": { "type": "string" },
+    "actual": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wall_sec": { "type": "number", "minimum": 0 },
+        "peak_gb": { "type": "number", "minimum": 0 },
+        "cost_usd": { "type": "number", "minimum": 0 }
+      }
+    },
+    "expect": {
+      "type": "object",
+      "description": "Copy of packet expect for delta/calibration",
+      "additionalProperties": true
+    },
+    "artifact_hash": { "type": ["string", "null"] },
+    "attestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["none", "self_report", "spot_audit", "tee"]
+        },
+        "detail": { "type": "string" }
+      }
+    },
+    "custody": {
+      "type": "object",
+      "required": ["chain_id", "actor", "prev_hash", "content_hash"],
+      "additionalProperties": false,
+      "properties": {
+        "chain_id": { "type": "string", "const": "mok-tua-render" },
+        "actor": { "type": "string" },
+        "prev_hash": { "type": "string" },
+        "content_hash": { "type": "string" },
+        "sig": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

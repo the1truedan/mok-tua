@@ -1,24 +1,24 @@
-# Pre-flight cost / time / SLA estimates for MOCK-TUA.
+# Pre-flight cost / time / SLA estimates for mok-tua.
 # Numbers are planning defaults; refresh from provider pages as needed.
 
 providers:
-  local_mac:
+  local_m4rv:
     type: local
     cost_usd: 0.0
     est_still_sec: 25
     est_video_sec_per_s: 8
     sla: best-effort
-    notes: "Live SM ComfyUI on MAC (MPS); image/storyboard preferred"
+    notes: "Live SM ComfyUI on M4RV (MPS); image/storyboard preferred"
 
-  local_gpu:
+  local_mrgpu:
     type: local
     cost_usd: 0.0
     est_still_sec: 12
     est_video_sec_per_s: 4
     sla: best-effort
-    notes: "CUDA Comfy on GPU; video / Wan / I2V preferred"
+    notes: "CUDA Comfy on MRGPU; video / Wan / I2V preferred"
 
-  local_storage_cpu:
+  local_tower_cpu:
     type: local
     cost_usd: 0.0
     est_still_sec: 120
@@ -47,6 +47,51 @@ providers:
     sla: priority-queue
     notes: "HF Pro ~$9/mo; 40 min/day ZeroGPU; overage $1/10min"
 
+  grok_imagine:
+    type: paid
+    cost_usd: 0.02
+    est_still_sec: 8
+    est_video_sec_per_s: 0
+    sla: api
+    notes: "xAI grok-imagine-image ~$0.002–0.05/img by resolution/quality; set XAI_API_KEY"
+    env_key: XAI_API_KEY
+
+  grok_imagine_quality:
+    type: paid
+    cost_usd: 0.05
+    est_still_sec: 15
+    est_video_sec_per_s: 0
+    sla: api
+    notes: "grok-imagine-image-quality higher tier"
+    env_key: XAI_API_KEY
+
+  grok_imagine_video:
+    type: paid
+    cost_usd: 0.0
+    on_demand_per_hour: 0
+    est_video_sec_per_s: 2
+    cost_usd_per_sec: 0.01
+    sla: api
+    notes: "Planning: ~$0.01–0.07/sec depending on resolution; confirm xAI pricing"
+    env_key: XAI_API_KEY
+
+  nano_banana:
+    type: paid
+    cost_usd: 0.04
+    est_still_sec: 10
+    est_video_sec_per_s: 0
+    sla: api
+    notes: "Google Gemini / Comfy partner Nano Banana; confirm live Google/Comfy Cloud pricing"
+    env_keys: [GOOGLE_API_KEY, GEMINI_API_KEY, COMFY_API_KEY]
+
+  seedance_cloud:
+    type: paid
+    cost_usd: 0.0
+    est_video_sec_per_s: 5
+    sla: partner
+    notes: "ByteDance Seedance via Comfy partner nodes / Comfy Cloud; earmark"
+    status: earmark
+
   runpod_rtx4090:
     type: paid
     on_demand_per_hour: 0.39
@@ -63,13 +108,29 @@ providers:
     sla: spot-variable
     notes: "Planning stub"
 
+  # Trusted federation / future crowd (ask_packet.v1). Not a public market yet.
+  # Join key: tier_lock lock_ref on node advertisements (config/crowd_nodes.json).
+  crowd_federated:
+    type: crowd
+    cost_usd: 0.0
+    est_still_sec: 40
+    est_video_sec_per_s: 12
+    sla: best-effort-retry
+    data_classes: [public]
+    status: earmark
+    notes: "Trusted lab federation first (m4rv/mrgpu/tower). PHI structurally unroutable. See docs/ASK_PACKET_FEDERATION.md"
+
 defaults:
   prefer:
-    - local_mac
-    - local_gpu
+    - local_m4rv
+    - local_mrgpu
+    - grok_imagine
+    - nano_banana
     - hf_zerogpu_pro
     - hf_zerogpu_free
+    - crowd_federated
     - runpod_rtx4090
   refuse_if_data_class:
     - phi
     - phi-adjacent
+  # Packet emit invariant: crowd_federated only when data_class=public (QQQ3+)

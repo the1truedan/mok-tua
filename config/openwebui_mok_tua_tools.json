@@ -1,0 +1,31 @@
+{
+  "name": "mok-tua",
+  "description": "Stage storyboard models on ai-data and run mok-tua storyboard jobs (via HTTP tools).",
+  "openapi_url_note": "Point Open WebUI external tools / OpenAPI import at http://host.docker.internal:8799/openapi.json or use the OpenAI tools schema at GET /v1/tools/openai and route calls to POST /v1/tools/call",
+  "base_url": "http://127.0.0.1:8799",
+  "endpoints": {
+    "tools_schema": "GET /v1/tools/openai",
+    "tool_call": "POST /v1/tools/call",
+    "stage": "POST /v1/stage/models",
+    "inventory": "GET /v1/stage/inventory",
+    "sides_text": "POST /v1/sides/from_text",
+    "sides_file": "POST /v1/sides/from_file",
+    "run": "POST /v1/runs",
+    "batch": "POST /v1/runs/batch"
+  },
+  "example_tool_call": {
+    "name": "mok_tua_run_storyboard",
+    "arguments": {
+      "markdown": "---\ntitle: demo\n---\n# Scene 1\n## Shot 1.1\nprompt: instructor in studio\ncamera: medium close-up\n",
+      "dry_run": true,
+      "still_provider": "local_qwen_edit"
+    }
+  },
+  "openwebui_setup": [
+    "Ensure mok-tua is on :8799 (./scripts/run_host.sh)",
+    "In Open WebUI: Admin → Settings → Tools / Functions",
+    "Add OpenAPI server or custom tool that POSTs to http://host.docker.internal:8799/v1/tools/call",
+    "Or import tools from GET http://host.docker.internal:8799/v1/tools/openai",
+    "Do not stream multi-GB model downloads through the chat UI — use mok_tua_stage_models dry_run first, then live from CLI if needed"
+  ]
+}

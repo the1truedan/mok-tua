@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "updated": "2026-08-02",
+  "description": "Camera grammar for mok-tua storyboard panels. Ported/inspired by StoryboardUI2 (144 angles) + dx8152 multi-angle natural language + lovis93 Next Scene prefix.",
+  "sources": [
+    "https://github.com/NickPittas/StoryboardUI2",
+    "https://huggingface.co/dx8152/Qwen-Edit-2509-Multiple-angles",
+    "https://huggingface.co/lovis93/next-scene-qwen-image-lora-2509"
+  ],
+  "next_scene": {
+    "enabled_default": true,
+    "prefix": "Next Scene:",
+    "strength_hint": "0.7-0.8 LoRA strength for next-scene_lora-v2-3000"
+  },
+  "shot_sizes": ["close-up", "medium shot", "wide shot"],
+  "heights": ["low-angle", "eye-level", "elevated", "high-angle"],
+  "directions": [
+    "front",
+    "front-right quarter",
+    "right side",
+    "back-right quarter",
+    "back",
+    "back-left quarter",
+    "left side",
+    "front-left quarter",
+    "front-right quarter view",
+    "top-down",
+    "wide-angle",
+    "close-up"
+  ],
+  "token_formats": {
+    "storyboard_ui2_sks": "<sks> {direction} {height} shot {size}",
+    "dx8152_natural": "{camera_instruction}",
+    "default": "dx8152_natural"
+  },
+  "camera_phrases": {
+    "slow push-in from medium-wide": "Move the camera slightly forward from a medium-wide shot toward the subject.",
+    "static medium close-up": "Turn the camera to a medium close-up, eye-level, static frame.",
+    "slow orbit right": "Rotate the camera 30 degrees to the right while keeping the subject centered.",
+    "top-down": "Turn the camera to a top-down view.",
+    "wide establishing": "Turn the camera to a wide-angle lens, establishing shot.",
+    "close-up": "Turn the camera to a close-up.",
+    "pan left": "Move the camera left.",
+    "pan right": "Move the camera right.",
+    "dolly in": "Move the camera forward.",
+    "dolly out": "Move the camera back / pull back.",
+    "tilt up": "Tilt the camera up.",
+    "tilt down": "Tilt the camera down.",
+    "low angle": "Low-angle eye-level shot looking up at the subject.",
+    "high angle": "High-angle shot looking down at the subject."
+  },
+  "presets": [
+    {
+      "id": "wide_establishing",
+      "size": "wide shot",
+      "height": "eye-level",
+      "direction": "front",
+      "natural": "Turn the camera to a wide-angle lens, front eye-level establishing shot."
+    },
+    {
+      "id": "medium_talking",
+      "size": "medium shot",
+      "height": "eye-level",
+      "direction": "front",
+      "natural": "Medium shot, eye-level, subject facing camera."
+    },
+    {
+      "id": "closeup_emotion",
+      "size": "close-up",
+      "height": "eye-level",
+      "direction": "front",
+      "natural": "Turn the camera to a close-up, eye-level."
+    },
+    {
+      "id": "over_shoulder_right",
+      "size": "medium shot",
+      "height": "eye-level",
+      "direction": "front-right quarter",
+      "natural": "Front-right quarter view, eye-level medium shot."
+    },
+    {
+      "id": "high_angle_wide",
+      "size": "wide shot",
+      "height": "high-angle",
+      "direction": "front",
+      "natural": "High-angle wide shot looking down."
+    }
+  ]
+}
