@@ -75,10 +75,31 @@ flowchart LR
   <img src="docs/assets/08-product-map.png" alt="Product map: five steps and eight capability cards" width="900" />
 </p>
 
-### Example outputs (illustrative)
+### Presentation smoke (same silly face · not full video)
 
-| Stills | Face polish |
-|--------|-------------|
+Starter still = the goofy **“ceo” forehead** selfie (vulnerable, absurd, intentional).  
+That identity is the only face in these mockups — COMDEX keynote, functions board, cartoon NVIDIA-booth hangout, six-panel presentation storyboard. **Mock stills only** (smoke for storyboard / I2V / director language), not a finished video.
+
+| 0 · Source still (prompt fodder) | 1 · COMDEX keynote mock |
+|----------------------------------|-------------------------|
+| <img src="docs/assets/pres-smoke/00-ceo-source-still.jpg" alt="Source still: selfie with handwritten ceo on forehead" width="420" /> | <img src="docs/assets/pres-smoke/01-comdex-stage-keynote.jpg" alt="Same face on stage presenting mok-tua conductor" width="420" /> |
+
+| 2 · Functions board demo | 3 · Cartoon hangout (blatant silly) |
+|--------------------------|-------------------------------------|
+| <img src="docs/assets/pres-smoke/02-functions-board-demo.jpg" alt="Same person pointing at mok-tua functions list" width="420" /> | <img src="docs/assets/pres-smoke/03-cartoon-nvidia-ceo-hangout.jpg" alt="Cartoon stylized hangout with NVIDIA CEO caricature, both holding mok-tua stickers" width="420" /> |
+
+<p align="center">
+  <img src="docs/assets/pres-smoke/04-comdex-storyboard-sheet.jpg" alt="Six-panel COMDEX presentation storyboard for mok-tua functions" width="900" />
+</p>
+
+<p align="center"><em>Walk-on → image gen → I2V → director desk → voice → READY. — presentation smoke storyboard from the same face.</em></p>
+
+Folder: [`docs/assets/pres-smoke/`](docs/assets/pres-smoke/) · reuse `00-ceo-source-still.jpg` as LoadImage for live Comfy/Wan experiments.
+
+### Other illustrative outputs
+
+| Stills (generic instructor sheet) | Face polish look |
+|-----------------------------------|------------------|
 | <img src="docs/assets/example-storyboard-sheet.jpg" alt="Six-panel instructor storyboard" width="420" /> | <img src="docs/assets/example-face-polish.jpg" alt="Portrait polish before/after style" width="420" /> |
 
 ---
@@ -247,6 +268,7 @@ Deep CLI, tier locks (T0–T4), pull hygiene, ask-packet federation, ROBUST Comf
 
 | Ver | What changed (human) |
 |-----|----------------------|
+| **0.5.3** | Presentation smoke: CEO still → COMDEX keynote, functions board, cartoon hangout, storyboard sheet |
 | **0.5.2** | Collage: distinct complex image vs Wan I2V graphs, Drive source still, full uncropped layout |
 | **0.5.1** | Annotated capability collage + personal origin (Pinokio/SM gap, Gateway Tech C64 nostalgia, ai-gateway deck) |
 | **0.5** | Conductor TUI shipped (`tui/`): C64 + modern skins, CLI `tui` verb, vendor GUI mok-ups kept |

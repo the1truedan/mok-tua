@@ -3,6 +3,12 @@
 All notable changes to **mok-tua** are documented here.  
 Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are local lab (America/New_York context).
 
+## [0.5.3] — 2026-08-02
+
+### Added
+
+- **Presentation smoke** set (`docs/assets/pres-smoke/`): source “ceo” still → COMDEX keynote mock, functions-board demo, cartoon NVIDIA-booth hangout, six-panel storyboard. Same face identity throughout; mock stills only (no full video). Wired into README as primary silly/disclosure examples.
+
 ## [0.5.2] — 2026-08-02
 
 ### Changed
