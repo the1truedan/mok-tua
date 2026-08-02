@@ -6,12 +6,12 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #070b14; }
   body {
     width: 1400px;
-    background: #070b14;
     color: #e8eefc;
     font-family: "IBM Plex Sans", system-ui, sans-serif;
-    padding: 28px 32px 36px;
+    padding: 28px 32px 40px;
   }
   .eyebrow {
     font-size: 11px;
@@ -91,16 +91,8 @@
     justify-content: center;
     gap: 8px;
   }
-  .c64-note h2 {
-    font-size: 15px;
-    font-weight: 600;
-    color: #e8eefc;
-  }
-  .c64-note p {
-    font-size: 13px;
-    color: #9db0d0;
-    line-height: 1.45;
-  }
+  .c64-note h2 { font-size: 15px; font-weight: 600; color: #e8eefc; }
+  .c64-note p { font-size: 13px; color: #9db0d0; line-height: 1.45; }
   .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
   .pill {
     font-size: 11px;
@@ -112,7 +104,6 @@
   }
   .pill.accent { border-color: #4fd1c5; color: #4fd1c5; }
 
-  /* ---- capability grid ---- */
   .section-h {
     font-size: 13px;
     letter-spacing: .1em;
@@ -120,24 +111,20 @@
     color: #9db0d0;
     margin: 4px 0 12px;
   }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 12px;
-  }
+
+  /* Full-width stacked cards — no crop, entire graph visible */
+  .stack { display: flex; flex-direction: column; gap: 14px; }
+
   .card {
-    grid-column: span 2;
     background: #121a2e;
     border: 1px solid #2a3a58;
     border-radius: 12px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    min-height: 280px;
   }
-  .card.wide { grid-column: span 3; }
   .card-head {
-    padding: 10px 12px 8px;
+    padding: 12px 14px 10px;
     border-bottom: 1px solid #2a3a58;
     display: flex;
     flex-direction: column;
@@ -154,55 +141,124 @@
   .cap-tag.voice { color: #c4b5fd; }
   .cap-tag.move { color: #5ceb5a; }
   .cap-tag.dir { color: #fbbf24; }
-  .card-head h3 {
-    font-size: 15px;
-    font-weight: 600;
-  }
-  .card-head .tools {
-    font-size: 11px;
-    color: #9db0d0;
-  }
+  .cap-tag.src { color: #f472b6; }
+  .card-head h3 { font-size: 16px; font-weight: 600; }
+  .card-head .tools { font-size: 12px; color: #9db0d0; }
+
+  /* CRITICAL: never crop workflow screenshots */
   .shot {
-    flex: 1;
     position: relative;
     background: #0b1220;
-    min-height: 150px;
-    overflow: hidden;
-  }
-  .shot img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-  }
-  .shot.synth {
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
   }
-  .card-foot {
-    padding: 8px 12px 10px;
-    font-size: 11px;
-    color: #9db0d0;
-    border-top: 1px solid #2a3a58;
-    line-height: 1.35;
+  .shot img.full {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    object-position: center top;
+    display: block;
+    border-radius: 6px;
+    background: #0a0f1a;
   }
   .gui-badge {
     position: absolute;
-    top: 8px; left: 8px;
+    top: 16px; left: 16px;
+    z-index: 2;
     font-size: 10px;
     letter-spacing: .06em;
     text-transform: uppercase;
-    background: rgba(7,11,20,.82);
+    background: rgba(7,11,20,.88);
     border: 1px solid #2a3a58;
     color: #4fd1c5;
-    padding: 2px 8px;
+    padding: 3px 9px;
     border-radius: 999px;
   }
+  .card-foot {
+    padding: 10px 14px 12px;
+    font-size: 12px;
+    color: #9db0d0;
+    border-top: 1px solid #2a3a58;
+    line-height: 1.4;
+  }
 
-  /* synthetic panels for tools without public GUI dump */
+  /* dual pane for video: source still + graph */
+  .dual {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 10px;
+    width: 100%;
+    align-items: stretch;
+  }
+  .dual .side {
+    background: #0a0f1a;
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .dual .side .lbl {
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #f0a35e;
+  }
+  .dual .side img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  .dual .graph {
+    min-width: 0;
+  }
+  .dual .graph img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+
+  /* storyboard strip from source still */
+  .sb-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+  }
+  .sb-cell {
+    background: #0a0f1a;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #2a3a58;
+  }
+  .sb-cell .frame {
+    height: 160px;
+    overflow: hidden;
+    position: relative;
+  }
+  .sb-cell .frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .sb-cell .cap {
+    font-size: 11px;
+    padding: 6px 8px;
+    color: #c9d4ea;
+    border-top: 1px solid #2a3a58;
+  }
+
+  .row2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
   .wave {
     width: 100%;
     height: 120px;
@@ -225,13 +281,12 @@
     font-size: 12px;
     color: #c9d4ea;
   }
-  .skel {
-    width: 100%;
-    max-width: 280px;
-    height: 140px;
-    position: relative;
+  .shot.synth {
+    min-height: 180px;
+    flex-direction: column;
+    padding: 24px;
   }
-  .skel svg { width: 100%; height: 100%; }
+
   .legend {
     margin-top: 16px;
     display: flex;
@@ -244,16 +299,15 @@
 </style>
 </head>
 <body>
-  <div class="eyebrow">mok-tua · capability map · vendor GUI + C64 conductor</div>
+  <div class="eyebrow">mok-tua · capability map · vendor GUI + C64 conductor · full workflows uncropped</div>
   <h1>Five jobs. Real tools. One conductor.</h1>
   <p class="lede">
-    mok-tua does not reskin ComfyUI or Director’s Console. It <strong>orchestrates</strong> them —
-    voice, image, movement, video — while the C64-themed TUI (or modern skin) is the operator prompt
-    on top. Below: conductor strip first, then each capability annotated with the tool GUI (or honest
-    stylized stand-in where we only ship the tier, not a product screenshot).
+    mok-tua does not reskin ComfyUI or Director’s Console. It <strong>orchestrates</strong> them.
+    Image vs video are <strong>different complex graphs</strong> (not the same templates gallery twice).
+    Storyboard + image-to-video examples share one Drive source still. Layout uses
+    <code>object-fit: contain</code> so node graphs are fully visible — no crop.
   </p>
 
-  <!-- C64 at top -->
   <div class="c64-band">
     <div class="c64-label">CONDUCTOR · COMMODORE 64 SKIN · TUI + GUI OPTIONS</div>
     <div class="c64-row">
@@ -269,7 +323,7 @@
         <div class="hi">READY.</div>
         <br/>
         <div class="gn"> ORCH: ON   QQQ: LOCAL-ONLY   DRY: TOGGLE</div>
-        <div class="gn"> STILL→VIDEO→FACE→VOICE  VIA PROVIDERS</div>
+        <div class="gn"> STILL→I2V→FACE→VOICE  VIA PROVIDERS</div>
         <div class="rd"> CLOUD: BLOCKED UNLESS YOU OPT IN</div>
         <br/>
         <div class="yl"> [D]OCTOR [P]ROVIDERS [R]UN [S]MOKE [Q]UIT</div>
@@ -279,10 +333,8 @@
         <h2>TUI + GUI (not either/or)</h2>
         <p>
           <strong>TUI</strong> — mok-tua C64 or modern skin: doctor, providers, run, smoke, lock.<br/>
-          <strong>GUI peers</strong> — each tool keeps its internal interface (Comfy node graph,
-          Director’s storyboard, Pinokio Start, LiteLLM Admin).<br/>
-          Same stack as the Commodore-themed maintenance deck work on the broader ai-gateway —
-          fixed palette, line discipline, READY. prompt.
+          <strong>GUI peers</strong> — each tool keeps its internal interface.<br/>
+          Same spirit as the Commodore-themed maintenance deck on ai-gateway.
         </p>
         <div class="pill-row">
           <span class="pill accent">tui --skin c64</span>
@@ -294,139 +346,157 @@
     </div>
   </div>
 
-  <div class="section-h">Capability lanes · what talks to what</div>
-  <div class="grid">
-
-    <!-- IMAGE GEN -->
-    <div class="card wide">
-      <div class="card-head">
-        <span class="cap-tag image">1 · Image gen</span>
-        <h3>Stills & storyboard frames</h3>
-        <div class="tools">ComfyUI (Stability Matrix / Pinokio) · optional Grok Imagine / Nano Banana</div>
-      </div>
-      <div class="shot">
-        <span class="gui-badge">internal GUI · ComfyUI</span>
-        <img src="../mokup-comfyui.png" alt="ComfyUI templates gallery" />
-      </div>
-      <div class="card-foot">Node graph + templates — the paint desk mok-tua calls for local stills (and some video graphs).</div>
+  <div class="section-h">Source still · Drive (I2V + storyboard subject)</div>
+  <div class="card" style="margin-bottom:14px;">
+    <div class="card-head">
+      <span class="cap-tag src">0 · Source identity</span>
+      <h3>Drive still used for image→video + storyboard examples</h3>
+      <div class="tools">Google Drive file · staged as vendor/drive-source-still-i2v.jpg · one face across shots</div>
     </div>
-
-    <!-- VIDEO GEN -->
-    <div class="card wide">
-      <div class="card-head">
-        <span class="cap-tag video">2 · Video gen</span>
-        <h3>Stills → short motion clips</h3>
-        <div class="tools">Wan / FramePack / AnimateDiff via Comfy · GPU worker</div>
-      </div>
-      <div class="shot">
-        <span class="gui-badge">internal GUI · Comfy video lane</span>
-        <img src="../vendor/comfyui-live-capture.png" alt="ComfyUI workspace used for image and video graphs" />
-      </div>
-      <div class="card-foot">Same Comfy workbench, video templates &amp; Wan pins — mok-tua stages S3 after storyboard stills.</div>
-    </div>
-
-    <!-- DIRECTOR -->
-    <div class="card wide">
-      <div class="card-head">
-        <span class="cap-tag dir">3 · Director orchestration</span>
-        <h3>Human desk + shot board</h3>
-        <div class="tools">Director’s Console (Pinokio) · mok-tua API/CLI/TUI conductor</div>
-      </div>
-      <div class="shot">
-        <span class="gui-badge">internal GUI · Director’s Console</span>
-        <img src="../mokup-directors-console.png" alt="Director's Console storyboard canvas" />
-      </div>
-      <div class="card-foot">Official storyboard canvas — creative session UI; mok-tua keeps ledger, QQQ gates, and launches.</div>
-    </div>
-
-    <!-- VOICE -->
-    <div class="card wide">
-      <div class="card-head">
-        <span class="cap-tag voice">4 · Voice gen</span>
-        <h3>Speech, beds, line reads</h3>
-        <div class="tools">ACE-Step · TTS-Story · Kokoro / local TTS · optional talk2ya path</div>
-      </div>
-      <div class="shot synth">
-        <div>
-          <div class="wave" id="wave"></div>
-          <div class="synth-label">Audio tier UIs stay in their apps<br/><span style="color:#9db0d0">mok-tua launches &amp; sequences — no PHI to cloud by default</span></div>
+    <div class="shot">
+      <span class="gui-badge">source still · not cropped in graph panels below</span>
+      <div class="sb-strip">
+        <div class="sb-cell">
+          <div class="frame"><img src="../vendor/drive-source-still-i2v.jpg" alt="Source still full" style="object-position:center 20%;" /></div>
+          <div class="cap">1 · Master still (I2V in)</div>
         </div>
-        <span class="gui-badge">tier tools · Pinokio launch</span>
+        <div class="sb-cell">
+          <div class="frame"><img src="../vendor/drive-source-still-i2v.jpg" alt="MCU crop" style="object-position:center 15%; transform:scale(1.35); transform-origin:center 30%;" /></div>
+          <div class="cap">2 · Storyboard · MCU</div>
+        </div>
+        <div class="sb-cell">
+          <div class="frame"><img src="../vendor/drive-source-still-i2v.jpg" alt="CU crop" style="object-position:center 10%; transform:scale(1.8); transform-origin:center 25%;" /></div>
+          <div class="cap">3 · Storyboard · CU</div>
+        </div>
+        <div class="sb-cell">
+          <div class="frame"><img src="../vendor/drive-source-still-i2v.jpg" alt="I2V frame" style="object-position:center 25%;" /></div>
+          <div class="cap">4 · → Wan / video graph</div>
+        </div>
       </div>
-      <div class="card-foot">Voice/music apps install via Pinokio; conductor schedules them after (or beside) picture stages.</div>
+    </div>
+    <div class="card-foot">Same subject feeds still graphs, storyboard angles, and image-to-video — conductor keeps the shot ledger.</div>
+  </div>
+
+  <div class="section-h">Capability lanes · complex graphs fully visible</div>
+  <div class="stack">
+
+    <!-- IMAGE GEN — complex still workflow -->
+    <div class="card">
+      <div class="card-head">
+        <span class="cap-tag image">1 · Image gen · complex still workflow</span>
+        <h3>Two-pass hires / latent upscale graph (not the templates gallery)</h3>
+        <div class="tools">ComfyUI · official examples: 2_pass_txt2img / hiresfix_latent_workflow · Stability Matrix / Pinokio</div>
+      </div>
+      <div class="shot">
+        <span class="gui-badge">internal GUI · complex IMAGE node graph · full width uncropped</span>
+        <img class="full" src="../vendor/comfyui-complex-image-hiresfix.png" alt="ComfyUI complex two-pass hiresfix latent image workflow node graph" />
+      </div>
+      <div class="card-foot">Stills / storyboard frames: multi-node image graph (pass 1 → latent upscale → pass 2). Distinct from the video graph below.</div>
+    </div>
+
+    <!-- VIDEO GEN — complex I2V workflow + source -->
+    <div class="card">
+      <div class="card-head">
+        <span class="cap-tag video">2 · Video gen · complex image→video workflow</span>
+        <h3>Wan 2.2 I2V graph (nodes for frames, end-frame, save video)</h3>
+        <div class="tools">ComfyUI Wan pin · image-to-video · source still on left · full graph on right</div>
+      </div>
+      <div class="shot">
+        <span class="gui-badge">internal GUI · complex VIDEO / I2V node graph · uncropped</span>
+        <div class="dual">
+          <div class="side">
+            <div class="lbl">I2V input still</div>
+            <img src="../vendor/drive-source-still-i2v.jpg" alt="Drive source still into I2V" />
+            <div class="lbl" style="color:#9db0d0;">LoadImage → Wan sampler → SaveVideo</div>
+          </div>
+          <div class="graph">
+            <img src="../vendor/comfyui-complex-video-i2v-wan.png" alt="ComfyUI Wan 2.2 complex image-to-video workflow node graph" />
+          </div>
+        </div>
+      </div>
+      <div class="card-foot">Video lane is a different graph family (I2V / frames / VAE video path) — not a reskin of the stills templates UI.</div>
+    </div>
+
+    <div class="row2">
+      <!-- DIRECTOR -->
+      <div class="card">
+        <div class="card-head">
+          <span class="cap-tag dir">3 · Director orchestration</span>
+          <h3>Human desk + shot board</h3>
+          <div class="tools">Director’s Console · Pinokio · mok-tua conductor</div>
+        </div>
+        <div class="shot">
+          <span class="gui-badge">internal GUI · Director’s Console</span>
+          <img class="full" src="../mokup-directors-console.png" alt="Director's Console storyboard canvas" />
+        </div>
+        <div class="card-foot">Storyboard canvas + CPE; mok-tua owns ledger, QQQ, launches.</div>
+      </div>
+
+      <!-- VOICE -->
+      <div class="card">
+        <div class="card-head">
+          <span class="cap-tag voice">4 · Voice gen</span>
+          <h3>Speech, beds, line reads</h3>
+          <div class="tools">ACE-Step · TTS-Story · Kokoro · Pinokio launch</div>
+        </div>
+        <div class="shot synth">
+          <span class="gui-badge">tier tools · Pinokio launch</span>
+          <div class="wave" id="wave"></div>
+          <div class="synth-label">Audio tier UIs stay in their apps<br/><span style="color:#9db0d0">mok-tua sequences · no PHI to cloud by default</span></div>
+        </div>
+        <div class="card-foot">Voice/music after or beside picture stages.</div>
+      </div>
     </div>
 
     <!-- MOVEMENT -->
-    <div class="card" style="grid-column: span 3;">
+    <div class="card">
       <div class="card-head">
         <span class="cap-tag move">5 · Movement gen</span>
-        <h3>Face · body · performance</h3>
-        <div class="tools">FaceFusion · LivePortrait · FreeMoCap · talking-head polish</div>
+        <h3>Face · body · performance on the same identity</h3>
+        <div class="tools">FaceFusion · LivePortrait · FreeMoCap · source still above</div>
       </div>
-      <div class="shot" style="display:grid;grid-template-columns:1.2fr 1fr;">
-        <div style="position:relative;overflow:hidden;">
-          <span class="gui-badge">example face polish</span>
-          <img src="../example-face-polish.jpg" alt="Face polish before/after style result" style="height:100%;object-fit:cover;" />
-        </div>
-        <div class="synth" style="background:#0f1729;">
-          <div class="skel">
-            <svg viewBox="0 0 280 140" xmlns="http://www.w3.org/2000/svg">
+      <div class="shot">
+        <span class="gui-badge">same Drive still · face / body tier</span>
+        <div class="dual" style="grid-template-columns: 1fr 1fr;">
+          <div class="side">
+            <div class="lbl" style="color:#5ceb5a;">Identity lock</div>
+            <img src="../vendor/drive-source-still-i2v.jpg" alt="Source for face consistency" />
+          </div>
+          <div class="side" style="justify-content:center; align-items:center;">
+            <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px;">
               <defs>
                 <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0%" stop-color="#5ceb5a"/>
                   <stop offset="100%" stop-color="#4fd1c5"/>
                 </linearGradient>
               </defs>
-              <!-- stick figure pose A -->
-              <g stroke="url(#g)" stroke-width="3" fill="none" opacity=".55">
-                <circle cx="70" cy="28" r="12"/>
-                <path d="M70 40 L70 78 M70 55 L48 68 M70 55 L92 68 M70 78 L52 112 M70 78 L88 112"/>
+              <g stroke="url(#g)" stroke-width="3" fill="none" opacity=".5">
+                <circle cx="80" cy="40" r="14"/>
+                <path d="M80 54 L80 100 M80 70 L52 90 M80 70 L108 90 M80 100 L58 150 M80 100 L102 150"/>
               </g>
-              <!-- arrows -->
-              <path d="M110 70 L160 70" stroke="#f0a35e" stroke-width="2" marker-end="url(#arr)"/>
-              <defs>
-                <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-                  <path d="M0,0 L6,3 L0,6 Z" fill="#f0a35e"/>
-                </marker>
-              </defs>
-              <!-- pose B denser -->
+              <path d="M130 95 L180 95" stroke="#f0a35e" stroke-width="2"/>
+              <polygon points="180,90 192,95 180,100" fill="#f0a35e"/>
               <g stroke="url(#g)" stroke-width="3" fill="none">
-                <circle cx="200" cy="24" r="12"/>
-                <path d="M200 36 L200 76 M200 52 L170 48 M200 52 L230 58 M200 76 L178 118 M200 76 L222 118"/>
-                <circle cx="200" cy="24" r="3" fill="#5ceb5a" stroke="none"/>
-                <circle cx="200" cy="52" r="3" fill="#5ceb5a" stroke="none"/>
-                <circle cx="200" cy="76" r="3" fill="#5ceb5a" stroke="none"/>
-                <circle cx="170" cy="48" r="2.5" fill="#f0a35e" stroke="none"/>
-                <circle cx="230" cy="58" r="2.5" fill="#f0a35e" stroke="none"/>
+                <circle cx="230" cy="36" r="14"/>
+                <path d="M230 50 L230 98 M230 68 L198 62 M230 68 L262 74 M230 98 L205 155 M230 98 L255 155"/>
+                <circle cx="230" cy="36" r="3" fill="#5ceb5a" stroke="none"/>
+                <circle cx="230" cy="68" r="3" fill="#5ceb5a" stroke="none"/>
+                <circle cx="230" cy="98" r="3" fill="#5ceb5a" stroke="none"/>
               </g>
-              <text x="140" y="132" text-anchor="middle" fill="#9db0d0" font-size="11" font-family="IBM Plex Sans,sans-serif">body / mocap tier (FreeMoCap · LivePortrait)</text>
+              <text x="160" y="188" text-anchor="middle" fill="#9db0d0" font-size="12" font-family="IBM Plex Sans,sans-serif">mocap / talking-head after I2V</text>
             </svg>
           </div>
         </div>
       </div>
-      <div class="card-foot">Face identity + body motion after (or on) video — still vendor UIs; mok-tua only orders the chain.</div>
-    </div>
-
-    <!-- storyboard product sample span -->
-    <div class="card" style="grid-column: span 3;">
-      <div class="card-head">
-        <span class="cap-tag image">Product sample · storyboard sheet</span>
-        <h3>What image gen + director language produce</h3>
-        <div class="tools">mok-tua shot list → Comfy stills → multi-angle sheet</div>
-      </div>
-      <div class="shot">
-        <span class="gui-badge">output · not a vendor chrome</span>
-        <img src="../example-storyboard-sheet.jpg" alt="Six-panel instructor storyboard sheet" style="object-position:center;" />
-      </div>
-      <div class="card-foot">Illustrative instructor avatar sheet — the kind of deliverable the conductor is built to sequence.</div>
+      <div class="card-foot">Face + body tools keep their own UIs; conductor orders them after video when needed.</div>
     </div>
   </div>
 
   <div class="legend">
-    <span><strong>Image</strong> ComfyUI GUI</span>
-    <span><strong>Video</strong> Comfy / Wan pins</span>
+    <span><strong>Image</strong> complex still graph (hiresfix / 2-pass)</span>
+    <span><strong>Video</strong> complex Wan I2V graph + Drive still</span>
     <span><strong>Director</strong> Director’s Console GUI</span>
-    <span><strong>Voice</strong> ACE-Step / TTS tier (Pinokio)</span>
+    <span><strong>Voice</strong> ACE-Step / TTS tier</span>
     <span><strong>Movement</strong> FaceFusion · LivePortrait · FreeMoCap</span>
     <span><strong>Conductor</strong> mok-tua C64 TUI · CLI · API</span>
   </div>

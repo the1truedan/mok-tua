@@ -99,22 +99,24 @@ flowchart LR
 
 ### Capability collage (annotated)
 
-C64 conductor strip on top · five jobs labeled · real internal GUIs where we have them (Comfy, Director’s Console) · honest tier stand-ins for voice/body apps that stay inside Pinokio.
+C64 conductor strip on top · **full uncropped** complex graphs · one Drive **source still** for storyboard angles + image→video · real Director’s Console chrome · tier stand-ins for voice/body.
 
 <p align="center">
-  <img src="docs/assets/products-capabilities.png" alt="Annotated collage: C64 TUI conductor strip, then image gen, video gen, director orchestration, voice gen, movement gen" width="900" />
+  <img src="docs/assets/products-capabilities.png" alt="Annotated collage: C64 TUI, Drive source still for I2V/storyboard, complex Comfy image graph, complex Wan I2V video graph, director, voice, movement" width="900" />
 </p>
 
 | # | Capability | What you see | Tool surface mok-tua talks to |
 |---|------------|--------------|-------------------------------|
-| — | **Conductor** (top) | C64-themed TUI + GUI options note | `tui --skin c64` · CLI · API `:8799` |
-| 1 | **Image gen** | ComfyUI templates / node workbench | Local stills (SM / Pinokio Comfy); optional cloud stills |
-| 2 | **Video gen** | Comfy video / Wan lane | GPU worker after storyboard stills |
+| 0 | **Source still** | Drive identity still → storyboard crops → I2V | Same subject across shots (`vendor/drive-source-still-i2v.jpg`) |
+| — | **Conductor** (top) | C64-themed TUI + GUI options | `tui --skin c64` · CLI · API `:8799` |
+| 1 | **Image gen** | **Complex still graph** (2-pass hires / latent upscale) | ComfyUI image workflow — not the templates gallery |
+| 2 | **Video gen** | **Complex Wan I2V graph** + source still inset | Comfy Wan pin / GPU worker — different node family than stills |
 | 3 | **Director orchestration** | Director’s Console storyboard canvas | Peer GUI + mok-tua ledger / launches |
 | 4 | **Voice gen** | Audio tier (waveform stand-in) | ACE-Step · TTS-Story · Kokoro — Pinokio launch |
-| 5 | **Movement gen** | Face polish sample + body/mocap sketch | FaceFusion · LivePortrait · FreeMoCap |
+| 5 | **Movement gen** | Same Drive still + mocap sketch | FaceFusion · LivePortrait · FreeMoCap |
 
-Source HTML for the collage: [`docs/assets/mokups/capability-collage.html`](docs/assets/mokups/capability-collage.html).
+Layouts use `object-fit: contain` so node graphs are **fully visible** (no crop).  
+Source HTML: [`docs/assets/mokups/capability-collage.html`](docs/assets/mokups/capability-collage.html).
 
 ---
 
@@ -245,6 +247,7 @@ Deep CLI, tier locks (T0–T4), pull hygiene, ask-packet federation, ROBUST Comf
 
 | Ver | What changed (human) |
 |-----|----------------------|
+| **0.5.2** | Collage: distinct complex image vs Wan I2V graphs, Drive source still, full uncropped layout |
 | **0.5.1** | Annotated capability collage + personal origin (Pinokio/SM gap, Gateway Tech C64 nostalgia, ai-gateway deck) |
 | **0.5** | Conductor TUI shipped (`tui/`): C64 + modern skins, CLI `tui` verb, vendor GUI mok-ups kept |
 | **0.4** | Clearer public story + product map + non-doxxing vendor/mok-up art |

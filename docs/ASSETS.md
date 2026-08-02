@@ -20,6 +20,9 @@ Folder: `docs/assets/`
 | `mokup-directors-cpe.png` | Same repo — CPE film presets |
 | `mokup-litellm-admin-sample.png` | Upstream LiteLLM Admin sample asset |
 | `vendor/*` | Raw downloads / captures used to build frames |
+| `vendor/comfyui-complex-image-hiresfix.png` | Official ComfyUI **2-pass hiresfix** image graph (distinct from video) |
+| `vendor/comfyui-complex-video-i2v-wan.png` | Community **Wan 2.2 I2V** complex video graph |
+| `vendor/drive-source-still-i2v.jpg` | Drive source still for storyboard + I2V examples (file id `1ylwLiKiYcFtHT-jhBBIfrOoc2mcQJ_il`) |
 
 ## mok-ups (code-built, not AI sketches)
 

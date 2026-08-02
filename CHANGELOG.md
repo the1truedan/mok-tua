@@ -3,6 +3,17 @@
 All notable changes to **mok-tua** are documented here.  
 Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are local lab (America/New_York context).
 
+## [0.5.2] — 2026-08-02
+
+### Changed
+
+- Capability collage regenerated for **differentiation + no crop**:
+  - Image lane = complex **2-pass hiresfix** Comfy graph (not templates gallery).
+  - Video lane = complex **Wan 2.2 I2V** graph with Drive **source still** inset.
+  - Storyboard angle strip + movement identity use the same Drive still.
+  - Full-page layout (`object-fit: contain`, stacked cards) so graphs are not clipped.
+- Asset stage: `vendor/comfyui-complex-image-hiresfix.png`, `vendor/comfyui-complex-video-i2v-wan.png`, `vendor/drive-source-still-i2v.jpg`.
+
 ## [0.5.1] — 2026-08-02
 
 ### Changed
