@@ -1,4 +1,5 @@
 .env
+work/
 work/runs/
 __pycache__/
 *.pyc
@@ -6,3 +7,5 @@ __pycache__/
 api/.venv/
 *.egg-info/
 *.bak-*
+docs/assets/*.html
+.DS_Store
