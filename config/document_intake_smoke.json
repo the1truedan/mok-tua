@@ -1,0 +1,14 @@
+{
+  "schema": "mok_tua_document_intake_smoke.v1",
+  "purpose": "Safe staging for scanner JPG drops and A.I.D.A. receipt/form ingestion tests",
+  "work_root_env": "MOK_TUA_DOCUMENT_WORK_ROOT",
+  "default_work_root": "work/document-intake",
+  "folders": ["incoming", "normalized", "pdf", "forms", "catalog", "receipts", "quarantine", "review"],
+  "accepted_drop_extensions": [".jpg", ".jpeg", ".png", ".pdf"],
+  "never_auto_publish": true,
+  "never_overwrite_originals": true,
+  "required_evidence": ["sha256", "media_type", "source_filename", "received_at_utc", "operator_scope", "aida_route", "review_status"],
+  "aida_route_env": "MOK_TUA_AIDA_ROUTE",
+  "context_catalog": "catalog/context_receipts.jsonl",
+  "chains_receipts": "receipts/chains.jsonl"
+}
