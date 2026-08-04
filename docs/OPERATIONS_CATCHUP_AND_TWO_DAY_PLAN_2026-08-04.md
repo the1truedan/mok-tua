@@ -5,6 +5,10 @@
 This plan reconciles the current Hippo handoffs, Pinokio staging records, UV
 cache incident notes, Comfy roster, and the A.I.D.A. scan intake path.
 
+Procedure citations are indexed in
+[`HIPPO_CITED_PROCEDURE_INDEX.md`](./HIPPO_CITED_PROCEDURE_INDEX.md); use that
+compact index at session start instead of replaying full handoff documents.
+
 ## Current truth
 
 The local provider catalog is path-complete but not live in this shell: the
@@ -129,4 +133,3 @@ Mok-tua is ready for a release candidate when every advertised lane has either
 one receipt-backed smoke artifact or an explicit `staged`, `optional`, or
 `blocked` status with the reason recorded. “Installed” and “path present” are
 not equivalent to “orchestrated and live.”
-
