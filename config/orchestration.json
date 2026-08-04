@@ -219,6 +219,12 @@
     }
   },
   "integration_earmarks": {
+    "pinokio_mrgpu_staging": {
+      "status": "audited",
+      "path": "config/pinokio_mrgpu_staging.json",
+      "host": "mrgpu",
+      "use": "Ranked audit gates for video, lipsync, voice, music, mocap, and body-animation Pinokio providers"
+    },
     "director_stack_catalog": {
       "status": "locked",
       "path": "config/director_stack_catalog.json",
