@@ -49,27 +49,50 @@ Docs art: **official upstream screenshots** (or generic live UI with **no lab pa
 | Palette | VIC-II 16 colors (classic blue `#40318D` + light blue text) |
 | Input | Line-oriented prompt, not floating chat bubbles |
 
-**Implementation (shipped v0.5):**
+**Implementation (shipped v0.5.5 conductor):**
 
-1. Verbs stay in `scripts/mok_tua_cli.py` (`doctor`, `providers`, `run`, `smoke`, `lock`, …).  
+1. Verbs stay in `scripts/mok_tua_cli.py` (`doctor`, `providers`, `run`, `smoke`, `lock`, `receipt`, …).  
 2. `tui/` is a thin front-end: `tui/bridge.py` spawns the CLI; no second business-logic path.  
-3. Skins: `tui/themes/c64.tcss` (VIC-II blue) · `tui/themes/modern.tcss` (navy ops).  
-4. Full-screen via **Textual** when installed (`pip install -r tui/requirements.txt`); otherwise **stdlib REPL** (`--repl`).  
-5. Entry points: `python -m tui`, `mok_tua_cli.py tui`, `./scripts/run_tui.sh`.
+3. **Launch:** PETSCII demoscene **MOK-TUA** block-font splash → two-pane deck.  
+4. **Left pane:** launch intro (prompt recommendations **or** `--prompt` CLI seed) + RichLog.  
+5. **Right pane:** system stats (gpu-host + desk) with **VIC-II style bars** (`████░`).  
+6. Skins (`.tcss`): **`c64`** default (aliases `1980crt`, `tui-c64-mode-default-1980crt-tui`) · **`green`** / `matrix` · **`mono`** / `paper` · **`modern`**.  
+7. Media: `show PATH` (in-pane still / video thumb) · `play PATH` (external mpv/timg/open).  
+8. Full-screen via **Textual** when installed (`pip install -r tui/requirements.txt`); otherwise **stdlib REPL** (`--repl`).  
+9. Entry points: `python -m tui`, `mok_tua_cli.py tui`, `./scripts/run_tui.sh`.
 
 | Command | Effect |
 |---------|--------|
-| `python3 scripts/mok_tua_cli.py tui` | C64 skin (default) |
+| `python3 scripts/mok_tua_cli.py tui` | C64 skin (default) + PETSCII boot |
+| `… tui --skin green` | Green phosphor on black |
+| `… tui --skin mono` | White text on black |
 | `… tui --skin modern` | Modern navy TUI |
+| `… tui --prompt "…"` | Seed left intro with prompt text |
 | `… tui --repl` | Line-oriented (no Textual) |
 | In-TUI: `D` / `doctor` | CLI doctor |
 | In-TUI: `R` / `run [path]` | Dry-run story (default fixture) |
-| In-TUI: `P` `S` `L` `T` `H` `Q` | providers · smoke · lock · status · help · quit |
+| In-TUI: `P` `S` `L` `T` `M` `H` `Q` | providers · smoke · lock · status · monitor · help · quit |
+| In-TUI: `show` / `play` / `receipt stamp` | media + provenance |
+
+**C64 font note:** true PETSCII ROM font is a **terminal font** choice (Kitty/WezTerm/iTerm). The TUI ships block-element demoscene logos + VIC-II palette; it cannot force C64 ROM glyphs in every emulator.
 
 Mock (docs art): `docs/assets/mokup-c64-tui.png` · source `docs/assets/mokups/c64-tui.html`.  
 True **320×200 framebuffer** remains the screenshot canvas; the live TUI uses terminal cells with the same palette and prompt discipline.
 
 **Not in scope for C64 skin:** reimplementing Comfy’s node graph in PETSCII. That stays GUI.
+
+### Provenance (screenshots / clips)
+
+```bash
+python3 scripts/mok_tua_cli.py receipt stamp PATH --renderer gpu-host_comfy_animatediff \
+  --qqq QQQ0 --prompt "…" --model DreamShaper_8 --wall-clock-s 48
+# optional burn-in caption bar:
+python3 scripts/mok_tua_cli.py receipt stamp PATH --renderer … --burn-caption
+python3 scripts/mok_tua_cli.py receipt show PATH
+```
+
+Sidecar: `<artifact>.receipt.json` (renderer, model, host_role, prompt, wall_clock_s, tokens, gpu/cpu).  
+See I2V incident rules: every clip needs `renderer` + `qqq` + `gpu_evidence`.
 
 ### API
 

@@ -3,6 +3,22 @@
 All notable changes to **mok-tua** are documented here.  
 Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are local lab (America/New_York context).
 
+## [0.5.5] — 2026-08-05
+
+### Added
+
+- **Artifact receipts** (`api/artifact_receipt.py`, CLI `receipt show|stamp`): sidecar `.receipt.json` with renderer, model, host_role, prompt, wall_clock_s, tokens, gpu/cpu; optional `--burn-caption` via ffmpeg.
+- **Conductor TUI 0.5.5:** PETSCII demoscene **MOK-TUA** loading splash → **two-pane** deck (left intro/log, right VIC-II stat bars).
+- Skins: `c64` default (aliases `1980crt`, `tui-c64-mode-default-1980crt-tui`) · `green`/`matrix` · `mono`/`paper` · `modern`.
+- TUI media verbs: `show` / `thumb` / `play` (in-pane stills + external mpv/timg/open).
+- CLI `tui --prompt "…"` seeds left-pane launch intro.
+- FramePack launch recipe wiring on private branch (port **7864**, shared models, runtime registry) — from prior dirty tree.
+
+### Changed
+
+- `docs/INTERFACES.md` documents split deck, provenance CLI, font/theme notes.
+- Unit tests expanded (receipt + petscii/skin/media command resolve).
+
 ## [0.5.4] — 2026-08-05
 
 ### Added

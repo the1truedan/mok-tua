@@ -10,6 +10,7 @@ EXTRA=()
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --skin) SKIN="$2"; shift 2 ;;
+    --prompt) EXTRA+=(--prompt "$2"); shift 2 ;;
     --repl) EXTRA+=(--repl); shift ;;
     *) EXTRA+=("$1"); shift ;;
   esac

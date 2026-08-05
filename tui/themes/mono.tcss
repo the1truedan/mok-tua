@@ -1,18 +1,15 @@
-/* Commodore 64 canvas — VIC-II blue + light blue text
-   Default skin (aliases: 1980crt, tui-c64-mode-default-1980crt-tui).
-   Native spirit: 40-col monospaced, line-oriented prompt.
-   True 320×200 framebuffer remains docs mock; this is the ops skin. */
+/* White / light gray text on black (alias: paper) */
 
 Screen {
-    background: #40318d;
-    color: #a5a0ff;
+    background: #000000;
+    color: #e0e0e0;
     layout: vertical;
 }
 
 #chrome {
     dock: top;
     height: auto;
-    background: #40318d;
+    background: #111111;
     color: #ffffff;
     padding: 0 1;
     text-style: bold;
@@ -21,15 +18,15 @@ Screen {
 #menu {
     dock: top;
     height: auto;
-    background: #40318d;
-    color: #d5df7c;
+    background: #000000;
+    color: #b0b0b0;
     padding: 0 1;
 }
 
 #boot {
     height: 1fr;
-    background: #40318d;
-    color: #a5a0ff;
+    background: #000000;
+    color: #ffffff;
     padding: 1 2;
     text-style: bold;
 }
@@ -48,24 +45,24 @@ Screen {
     width: 1fr;
     height: 1fr;
     min-width: 28;
-    border-left: solid #6c5eb5;
-    background: #40318d;
+    border-left: solid #555555;
+    background: #000000;
 }
 
 #log {
     height: 1fr;
-    background: #40318d;
-    color: #a5a0ff;
-    border: solid #6c5eb5;
+    background: #000000;
+    color: #e0e0e0;
+    border: solid #555555;
     padding: 0 1;
-    scrollbar-background: #40318d;
-    scrollbar-color: #7869c4;
+    scrollbar-background: #000000;
+    scrollbar-color: #888888;
 }
 
 #stats {
     height: 1fr;
-    background: #40318d;
-    color: #d5df7c;
+    background: #000000;
+    color: #cccccc;
     padding: 0 1;
     overflow-y: auto;
 }
@@ -73,7 +70,7 @@ Screen {
 #prompt-row {
     dock: bottom;
     height: auto;
-    background: #40318d;
+    background: #111111;
     padding: 0 1 1 1;
 }
 
@@ -83,7 +80,7 @@ Screen {
 }
 
 Input {
-    background: #40318d;
+    background: #000000;
     color: #ffffff;
     border: none;
     padding: 0 1;
@@ -91,6 +88,6 @@ Input {
 }
 
 Input:focus {
-    background: #40318d;
+    background: #1a1a1a;
     border: none;
 }

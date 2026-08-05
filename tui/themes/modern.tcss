@@ -24,6 +24,31 @@ Screen {
     padding: 0 1;
 }
 
+#boot {
+    height: 1fr;
+    background: #0b1220;
+    color: #9fb4d9;
+    padding: 1 2;
+}
+
+#main-panes {
+    height: 1fr;
+    layout: horizontal;
+}
+
+#left-pane {
+    width: 2fr;
+    height: 1fr;
+}
+
+#right-pane {
+    width: 1fr;
+    height: 1fr;
+    min-width: 28;
+    border-left: solid #2a3a5c;
+    background: #0b1220;
+}
+
 #log {
     height: 1fr;
     background: #0b1220;
@@ -32,6 +57,14 @@ Screen {
     padding: 0 1;
     scrollbar-background: #0b1220;
     scrollbar-color: #3d5a8a;
+}
+
+#stats {
+    height: 1fr;
+    background: #0b1220;
+    color: #9fb4d9;
+    padding: 0 1;
+    overflow-y: auto;
 }
 
 #prompt-row {
