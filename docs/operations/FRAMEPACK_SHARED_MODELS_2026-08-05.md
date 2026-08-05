@@ -67,32 +67,37 @@ cd /mnt/ai-data/stability-matrix/Data/Packages/FramePack\ Studio
 git restore diffusers_helper modules
 ```
 
-2. **No host venv** — system `python3` is wrong. Install deps with **uv** into a **host-local** venv (not on NFS):
+2. **Empty SM package `venv` / `No module named 'einops'`** — Stability Matrix Packages → Launch uses `package/venv` (pip-only until linked). Install host-local SM **3.10** env + symlink:
 
 ```bash
 scp ~/mok-tua/scripts/run_framepack_shared_models.sh gpu-host:/tmp/
 ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --install-deps'
-# then launch
+# Stability Matrix: Packages → FramePack Studio → Launch
+# or CLI:
 ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7865'
 ```
 
 | Item | Path |
 |------|------|
-| Host venv | `~/pinokio-host-runtimes/framepack-linux-amd64/env` |
+| **SM GUI host venv (3.10)** | `~/pinokio-host-runtimes/framepack-sm310-linux-amd64/env` |
+| Package `venv` | **symlink** → SM GUI host venv |
+| Optional CLI 3.12 | `~/pinokio-host-runtimes/framepack-linux-amd64/env` |
 | UV cache | `/mnt/ai-data/uv-cache/mrgpu` (`UV_LINK_MODE=copy`) |
 | Package code | NFS SM package (source only) |
 | Weights | `/mnt/ai-data/models` + `hf_hub` |
 
-`--install-deps` = batch `uv pip install` torch(cu128) + `requirements.txt`. Re-run after requirements change.
+`--install-deps` = torch(cu128) + `requirements.txt` (**einops** included) + link `package/venv`.  
+Full SM GUI + M4RV orchestration: `docs/operations/FRAMEPACK_SM_GUI_AND_ORCHESTRATION_2026-08-05.md`
 
-## Smoke (next)
+## Smoke
 
 ```bash
 scp ~/mok-tua/scripts/run_framepack_shared_models.sh gpu-host:/tmp/
 ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --install-deps'
+# SM Packages → Launch  OR  CLI:
 ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7865'
 ```
 
-1. Launch with wrapper on MRGPU  
+1. Launch (SM GUI or wrapper) on MRGPU  
 2. Confirm no new multi-GB dirs under package tree  
 3. One short I2V job → receipt under `work/framepack/receipts/` (or `~/work/framepack/receipts` fallback)  

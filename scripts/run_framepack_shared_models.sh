@@ -8,13 +8,22 @@
 #   - Prefer --offline when hub snapshots already exist
 #
 # Usage (on MRGPU):
-#   bash /path/to/mok-tua/scripts/run_framepack_shared_models.sh [--offline] [extra studio.py args]
+#   bash scripts/run_framepack_shared_models.sh --install-deps   # SM GUI + CLI envs
+#   bash scripts/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7865
+#   Stability Matrix Packages → Launch (uses package/venv → host-local SM 3.10)
 set -euo pipefail
 
 SHARED_MODELS="${SHARED_MODELS:-/mnt/ai-data/models}"
 HF_HUB="${HF_HUB:-${SHARED_MODELS}/hf_hub}"
 FP_PKG="${FP_PKG:-/mnt/ai-data/stability-matrix/Data/Packages/FramePack Studio}"
-# Host-local venv (never NFS) — matches FaceFusion/Maestro pattern
+# SM Assets Python (Stability Matrix package venv baseline on Linux)
+SM_PY_DEFAULT="/mnt/ai-data/stability-matrix/Data/Assets/Python/cpython-3.10.18-linux-x86_64-gnu/bin/python3"
+SM_PY="${FRAMEPACK_SM_PYTHON:-$SM_PY_DEFAULT}"
+# Host-local venvs (never put site-packages on NFS package tree)
+#   SM310 — preferred for SM GUI (same 3.10 as package/venv; package/venv → symlink here)
+#   CLI   — optional 3.12 path used by older launcher installs
+HOST_SM_ENV_ROOT="${FRAMEPACK_SM_HOST_ENV:-$HOME/pinokio-host-runtimes/framepack-sm310-linux-amd64}"
+HOST_SM_VENV="${HOST_SM_ENV_ROOT}/env"
 HOST_ENV_ROOT="${FRAMEPACK_HOST_ENV:-$HOME/pinokio-host-runtimes/framepack-linux-amd64}"
 HOST_VENV="${HOST_ENV_ROOT}/env"
 UV_BIN="${UV_BIN:-$HOME/.local/bin/uv}"
@@ -29,10 +38,13 @@ RECEIPT_DIR="${FRAMEPACK_RECEIPTS:-/mnt/ai-data/work/framepack/receipts}"
 FALLBACK_ROOT="${FRAMEPACK_FALLBACK_ROOT:-$HOME/work/framepack}"
 
 INSTALL_DEPS=0
+LINK_SM_VENV=1
 PASSTHRU=()
 for a in "$@"; do
   if [[ "$a" == "--install-deps" ]]; then
     INSTALL_DEPS=1
+  elif [[ "$a" == "--no-link-sm-venv" ]]; then
+    LINK_SM_VENV=0
   else
     PASSTHRU+=("$a")
   fi
@@ -147,18 +159,25 @@ except OSError as e:
     sys.exit(1)
 PY
 
-# --- Python resolution (host venv > package venv > FRAMEPACK_PYTHON) ---
+# --- Python resolution (prefer SM 3.10 host / package venv for GUI parity) ---
 resolve_python() {
   if [[ -n "${FRAMEPACK_PYTHON:-}" && -x "${FRAMEPACK_PYTHON}" ]]; then
     echo "$FRAMEPACK_PYTHON"
     return
   fi
-  if [[ -x "$HOST_VENV/bin/python" ]]; then
-    echo "$HOST_VENV/bin/python"
+  # SM GUI path: package/venv (often symlink → host SM 3.10)
+  if [[ -x "$FP_PKG/venv/bin/python" ]]; then
+    if "$FP_PKG/venv/bin/python" -c "import einops,torch" 2>/dev/null; then
+      echo "$FP_PKG/venv/bin/python"
+      return
+    fi
+  fi
+  if [[ -x "$HOST_SM_VENV/bin/python" ]]; then
+    echo "$HOST_SM_VENV/bin/python"
     return
   fi
-  if [[ -x "$FP_PKG/venv/bin/python" ]]; then
-    echo "$FP_PKG/venv/bin/python"
+  if [[ -x "$HOST_VENV/bin/python" ]]; then
+    echo "$HOST_VENV/bin/python"
     return
   fi
   if [[ -x "$FP_PKG/.venv/bin/python" ]]; then
@@ -168,8 +187,44 @@ resolve_python() {
   echo ""
 }
 
+link_sm_package_venv() {
+  # Stability Matrix Launch uses package/venv. Keep site-packages host-local.
+  if [[ "$LINK_SM_VENV" != "1" ]]; then
+    return 0
+  fi
+  if [[ ! -x "$HOST_SM_VENV/bin/python" ]]; then
+    echo "WARN: SM host venv missing ($HOST_SM_VENV) — skip package/venv link" >&2
+    return 0
+  fi
+  if [[ -L "$FP_PKG/venv" ]]; then
+    ln -sfn "$HOST_SM_VENV" "$FP_PKG/venv"
+    echo "package/venv → $HOST_SM_VENV (symlink refreshed)"
+    return 0
+  fi
+  if [[ -d "$FP_PKG/venv" ]]; then
+    # Empty SM-created venv is ~pip only; back it up once
+    if [[ ! -e "$FP_PKG/venv.sm-empty.bak" ]]; then
+      echo "Backing up package venv → venv.sm-empty.bak"
+      mv "$FP_PKG/venv" "$FP_PKG/venv.sm-empty.bak"
+    else
+      rm -rf "$FP_PKG/venv"
+    fi
+  fi
+  ln -sfn "$HOST_SM_VENV" "$FP_PKG/venv"
+  echo "package/venv → $HOST_SM_VENV (SM GUI Launch uses this)"
+}
+
+install_into_venv() {
+  local py="$1" label="$2"
+  echo "=== install deps → $label ($py) ==="
+  "$UV_BIN" pip install --python "$py" \
+    torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+  "$UV_BIN" pip install --python "$py" -r "$FP_PKG/requirements.txt"
+  PYTHONPATH="$FP_PKG${PYTHONPATH:+:$PYTHONPATH}" "$py" -c \
+    "import einops,torch,diffusers_helper,modules; print('ok', 'einops', einops.__version__, 'torch', torch.__version__, 'cuda', torch.cuda.is_available())"
+}
+
 install_deps() {
-  local py
   if [[ ! -x "$UV_BIN" ]]; then
     echo "uv not found at $UV_BIN — install: curl -LsSf https://astral.sh/uv/install.sh | sh" >&2
     return 1
@@ -179,32 +234,57 @@ install_deps() {
     echo "  cd \"$FP_PKG\" && git restore diffusers_helper modules" >&2
     return 1
   fi
-  mkdir -p "$HOST_ENV_ROOT"
-  if [[ ! -x "$HOST_VENV/bin/python" ]]; then
-    echo "Creating host venv: $HOST_VENV"
-    "$UV_BIN" venv "$HOST_VENV" --python 3.12
+
+  # Primary: SM 3.10 host-local (Stability Matrix Packages → Launch)
+  mkdir -p "$HOST_SM_ENV_ROOT"
+  if [[ ! -x "$HOST_SM_VENV/bin/python" ]]; then
+    if [[ -x "$SM_PY" ]]; then
+      echo "Creating SM-compatible host venv (3.10): $HOST_SM_VENV"
+      "$UV_BIN" venv "$HOST_SM_VENV" --python "$SM_PY"
+    else
+      echo "WARN: SM python not found at $SM_PY — falling back to 3.10 from uv" >&2
+      "$UV_BIN" venv "$HOST_SM_VENV" --python 3.10
+    fi
   fi
-  py="$HOST_VENV/bin/python"
-  echo "Installing torch (CUDA) into host venv via uv..."
-  "$UV_BIN" pip install --python "$py" \
-    torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
-  echo "Installing requirements.txt via uv..."
-  "$UV_BIN" pip install --python "$py" -r "$FP_PKG/requirements.txt"
-  echo "$py" >"$HOST_ENV_ROOT/python.path"
-  echo "Deps installed. Smoke:"
-  PYTHONPATH="$FP_PKG${PYTHONPATH:+:$PYTHONPATH}" "$py" -c \
-    "import torch,diffusers_helper,modules; print('ok', torch.__version__, torch.cuda.is_available())"
+  install_into_venv "$HOST_SM_VENV/bin/python" "SM310-host"
+  echo "$HOST_SM_VENV/bin/python" >"$HOST_SM_ENV_ROOT/python.path"
+  link_sm_package_venv
+
+  # Optional CLI 3.12 env (kept if already present; create only if FRAMEPACK_ALSO_CLI_ENV=1)
+  if [[ "${FRAMEPACK_ALSO_CLI_ENV:-0}" == "1" ]]; then
+    mkdir -p "$HOST_ENV_ROOT"
+    if [[ ! -x "$HOST_VENV/bin/python" ]]; then
+      "$UV_BIN" venv "$HOST_VENV" --python 3.12
+    fi
+    install_into_venv "$HOST_VENV/bin/python" "CLI-3.12-host"
+    echo "$HOST_VENV/bin/python" >"$HOST_ENV_ROOT/python.path"
+  fi
+
+  echo "Deps ready for SM GUI + launcher."
+  echo "  SM host: $HOST_SM_VENV"
+  echo "  package/venv: $(readlink -f "$FP_PKG/venv" 2>/dev/null || echo missing)"
+  echo "Re-launch FramePack Studio from Stability Matrix Packages UI, or:"
+  echo "  bash $0 --offline --server 0.0.0.0 --port 7865"
 }
 
 if [[ "$INSTALL_DEPS" == "1" ]]; then
   install_deps
+  # --install-deps alone: stop unless user also passed launch args
+  if [[ $# -eq 0 ]]; then
+    exit 0
+  fi
+fi
+
+# Refresh SM link if host env exists (GUI path)
+if [[ -x "$HOST_SM_VENV/bin/python" ]]; then
+  link_sm_package_venv || true
 fi
 
 PY="$(resolve_python)"
 if [[ -z "$PY" ]]; then
   echo "ERROR: no FramePack venv. Run once on MRGPU:" >&2
   echo "  bash $0 --install-deps" >&2
-  echo "Host env target: $HOST_VENV" >&2
+  echo "SM host env: $HOST_SM_VENV" >&2
   exit 1
 fi
 
@@ -217,12 +297,70 @@ if [[ ! -d "$FP_PKG/diffusers_helper" ]]; then
   echo "  cd \"$FP_PKG\" && git restore diffusers_helper modules" >&2
   exit 1
 fi
-if ! "$PY" -c "import diffusers_helper" 2>/dev/null; then
-  echo "ERROR: venv missing deps (diffusers_helper import path or pip packages)." >&2
+if ! PYTHONPATH="$FP_PKG${PYTHONPATH:+:$PYTHONPATH}" "$PY" -c "import einops,torch,diffusers_helper" 2>/dev/null; then
+  echo "ERROR: venv missing deps (einops/torch/diffusers_helper)." >&2
+  echo "  SM GUI uses package/venv — often empty until --install-deps links host SM 3.10 env." >&2
   echo "  bash $0 --install-deps" >&2
   exit 1
 fi
 
 cd "$FP_PKG"
+
+# Parse bind/port from passthru for shared runtime registry (dual lifecycle).
+FP_BIND="${FRAMEPACK_BIND:-0.0.0.0}"
+FP_PORT="${FRAMEPACK_PORT:-7864}"
+_args=("$@")
+for ((i=0; i<${#_args[@]}; i++)); do
+  if [[ "${_args[$i]}" == "--server" && $((i+1)) -lt ${#_args[@]} ]]; then
+    FP_BIND="${_args[$((i+1))]}"
+  fi
+  if [[ "${_args[$i]}" == "--port" && $((i+1)) -lt ${#_args[@]} ]]; then
+    FP_PORT="${_args[$((i+1))]}"
+  fi
+done
+
+RUNTIME_DIR="${MOCK_TUA_RUNTIME_DIR:-/mnt/ai-data/work/mok-tua/runtime}"
+mkdir -p "$RUNTIME_DIR" 2>/dev/null || true
+RUNTIME_JSON="$RUNTIME_DIR/framepack_studio.json"
+# Registry before exec (pid = this process group leader; mok-tua also records spawn pid).
+CMD_JSON=$(python3 -c 'import json,sys; print(json.dumps(sys.argv[1:]))' -- "$PY" studio.py "${OFFLINE_ARGS[@]}" "$@")
+export RUNTIME_JSON FP_BIND FP_PORT FP_PKG SHARED_MODELS HF_HOME CMD_JSON
+python3 - <<'PY' 2>/dev/null || true
+import json, os, time
+from pathlib import Path
+path = Path(os.environ["RUNTIME_JSON"])
+port = os.environ.get("FP_PORT") or "7864"
+try:
+    port_i = int(port)
+except ValueError:
+    port_i = None
+rec = {
+  "schema": "mok_tua_runtime.v1",
+  "id": "framepack_studio",
+  "owner": os.environ.get("FRAMEPACK_OWNER", "mok_tua"),
+  "pid": os.getpid(),
+  "host_role": "gpu-host",
+  "bind": os.environ.get("FP_BIND", "0.0.0.0"),
+  "port": port_i,
+  "open": f"http://gpu-host:{port}/",
+  "cmd": json.loads(os.environ.get("CMD_JSON") or "[]"),
+  "fp_pkg": os.environ.get("FP_PKG"),
+  "shared_models": os.environ.get("SHARED_MODELS"),
+  "hf_home": os.environ.get("HF_HOME"),
+  "started_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+  "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+  "source": "run_framepack_shared_models.sh",
+}
+try:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(rec, indent=2) + "\n")
+    print("runtime", path)
+except OSError as e:
+    import sys
+    print("WARN runtime registry:", e, file=sys.stderr)
+PY
+
 echo "Launching FramePack with SHARED_MODELS=$SHARED_MODELS HF_HOME=$HF_HOME PY=$PY"
+echo "LAN open: http://gpu-host:${FP_PORT}/  (bind ${FP_BIND})"
+# mok-tua spawn records parent bash pid + process group for stop.
 exec "$PY" studio.py "${OFFLINE_ARGS[@]}" "$@"

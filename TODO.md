@@ -23,6 +23,7 @@
 | D10 | Hybrid Grok I2V demo labeled **not** local GPU | `docs/DEMO_VIDEO_PROOF_…` |
 | D11 | C64 TUI REPL smoke (`--skin c64` → READY. / help) | unit 12 OK + REPL |
 | D12 | Overnight E0–E16 storyboard→clip runbook + comic fixtures | overnight runbook · `fixtures/la_dark_one_…` |
+| D13 | FramePack SM GUI `einops` miss — host SM 3.10 venv + package/venv symlink | `framepack-sm310-linux-amd64` · ops FRAMEPACK_SM_GUI… |
 
 ---
 
@@ -32,7 +33,7 @@
 
 | # | Item | Gate |
 |---|------|------|
-| **1** | FramePack Studio **launch smoke** on gpu-host (`--offline` preferred) + one short I2V → receipt | shared `hf_hub`; no package re-download |
+| **1** | FramePack Studio **launch smoke** on gpu-host — SM GUI + CLI (`--offline`) + one short I2V → receipt | **einops/SM venv fixed** (sm310 host + package/venv symlink) · re-Launch Packages UI · shared `hf_hub` |
 | **2** | If hub empty: one intentional `FRAMEPACK_ALLOW_DOWNLOAD=1` seed into **shared** hub only | never package-local HF tree |
 | **3** | Wan 2.2 / Wan2GP **one-clip I2V** when ports/adapters live | honest skip until :786x up |
 | **4** | W0 identity: stage **IPAdapter FaceID + InstantID** weights; FaceFusion CUDA residual | likeness ≠ prompt alone |

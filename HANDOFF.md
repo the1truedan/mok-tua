@@ -21,7 +21,7 @@
 | C64 TUI REPL | READY. / help OK |
 | MRGPU AnimateDiff | GPU peak 100% · report in `docs/reports/` |
 | Pinokio gamut | HTTP matrix + honest Wan skip |
-| FramePack | shared map + uv host deps; **UI I2V smoke next** |
+| FramePack | SM GUI einops fixed (sm310 host venv + package/venv link); **re-Launch SM UI / I2V smoke next** |
 | Public flip | pending human |
 
 ## Earmark — plain GitHub English
