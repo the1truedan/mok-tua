@@ -34,7 +34,8 @@ def main() -> int:
             "  stack:  providers|doctor|launch|stop|pull|status\n"
             "  process: discover|audit|stage-app|smoke|lock\n"
             "  federation: packet|nodes|chains (ask_packet.v1 trusted lab)\n"
-            "  ui: tui (--skin c64|modern)"
+            "  ui: tui (--skin c64|green|mono|modern · --prompt TEXT)\n"
+            "  provenance: receipt show|stamp"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
@@ -191,16 +192,55 @@ def main() -> int:
     ch_sub.add_parser("verify", help="Verify hash links")
     ch_sub.add_parser("tip", help="Show tip hash / path")
 
+    # --- provenance receipts ---
+    rcpt = sub.add_parser(
+        "receipt",
+        help="Artifact provenance: sidecar .receipt.json (+ optional caption burn-in)",
+    )
+    rcpt_sub = rcpt.add_subparsers(dest="receipt_cmd", required=True)
+    rs = rcpt_sub.add_parser("show", help="Show receipt for artifact or .receipt.json")
+    rs.add_argument("path")
+    rst = rcpt_sub.add_parser(
+        "stamp",
+        help="Write receipt next to artifact (samples host_monitor when local)",
+    )
+    rst.add_argument("path")
+    rst.add_argument("--renderer", required=True, help="e.g. mrgpu_comfy_animatediff")
+    rst.add_argument("--qqq", default="QQQ0")
+    rst.add_argument("--prompt", default=None)
+    rst.add_argument("--model", default=None)
+    rst.add_argument(
+        "--cloud",
+        action="store_true",
+        help="Mark cloud_or_local=cloud (gpu_evidence n/a cloud)",
+    )
+    rst.add_argument("--host-role", default="gpu-host")
+    rst.add_argument("--wall-clock-s", type=float, default=None)
+    rst.add_argument("--tokens-total", type=int, default=None)
+    rst.add_argument(
+        "--burn-caption",
+        action="store_true",
+        help="Optional ffmpeg caption bar → *_cited.* (never default)",
+    )
+    rst.add_argument("--node", default="mrgpu")
+
     # --- conductor TUI ---
     tui_p = sub.add_parser(
         "tui",
-        help="Full-screen / line TUI over CLI verbs (C64 or modern skin)",
+        help="Full-screen / line TUI over CLI verbs (C64 default · green/mono · modern)",
     )
     tui_p.add_argument(
         "--skin",
-        choices=["c64", "modern"],
         default="c64",
-        help="c64 = PETSCII-style 40-col canvas; modern = navy ops chrome",
+        help=(
+            "c64 (default; aliases 1980crt, tui-c64-mode-default-1980crt-tui) · "
+            "green · mono · modern"
+        ),
+    )
+    tui_p.add_argument(
+        "--prompt",
+        default=None,
+        help="Seed left-pane launch intro with this prompt",
     )
     tui_p.add_argument(
         "--repl",
@@ -217,6 +257,8 @@ def main() -> int:
         from tui.__main__ import main as tui_main
 
         argv = ["--skin", args.skin]
+        if args.prompt:
+            argv.extend(["--prompt", args.prompt])
         if args.repl:
             argv.append("--repl")
         return tui_main(argv)
@@ -644,6 +686,43 @@ def main() -> int:
                 }
             )
             return 0
+        return 2
+
+    if args.cmd == "receipt":
+        import artifact_receipt
+
+        if args.receipt_cmd == "show":
+            try:
+                rec = artifact_receipt.load_receipt(args.path)
+            except FileNotFoundError as exc:
+                _j({"ok": False, "error": str(exc)})
+                return 1
+            _j(rec)
+            return 0
+        if args.receipt_cmd == "stamp":
+            tokens = None
+            if args.tokens_total is not None:
+                tokens = {
+                    "input": None,
+                    "output": None,
+                    "total": args.tokens_total,
+                    "note": "cli --tokens-total",
+                }
+            out = artifact_receipt.stamp_from_monitor(
+                args.path,
+                renderer=args.renderer,
+                qqq=args.qqq,
+                prompt=args.prompt,
+                model=args.model,
+                cloud_or_local="cloud" if args.cloud else "local",
+                host_role=args.host_role,
+                wall_clock_s=args.wall_clock_s,
+                tokens=tokens,
+                node=args.node,
+                burn=args.burn_caption,
+            )
+            _j(out)
+            return 0 if out.get("ok") else 1
         return 2
 
     return 2

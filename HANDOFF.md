@@ -1,7 +1,7 @@
 # HANDOFF — mok-tua (latest)
 
 **Date:** 2026-08-05  
-**Version:** **0.5.4**  
+**Version:** **0.5.5** (TUI split + receipts; prior full-gamut **0.5.4**)  
 **Branch:** `agent/mok-tua-staged-pulls-runbooks`  
 **Visibility:** **PRIVATE** (human flip only)
 
@@ -18,7 +18,7 @@
 | Check | Result |
 |-------|--------|
 | Unit tests | 12 OK |
-| C64 TUI REPL | READY. / help OK |
+| C64 TUI | PETSCII boot · two-pane · VIC-II stats · skins c64/green/mono |
 | MRGPU AnimateDiff | GPU peak 100% · report in `docs/reports/` |
 | Pinokio gamut | HTTP matrix + honest Wan skip |
 | FramePack | SM310 + recipe + registry · port **7864** · hub **seed downloading** · UI I2V after Gradio up |
@@ -47,6 +47,7 @@ Before public flip / GH Release copy: **wait-what** from [mattpocock/skills](htt
 ```text
 Continue from mok-tua HANDOFF.md → docs/operations/SESSION_HANDOFF_2026-08-05_FULL_GAMUT_STAGED_SMOKE.md
 Grok I2V ≠ MRGPU local — see I2V_GROK_VS_MRGPU incident.
-FramePack: SM venv fixed; launch/stop via mok-tua on :7864 LAN; UI I2V receipt next.
+TUI 0.5.5: PETSCII load · left intro/--prompt · right VIC-II stats · receipt stamp · show/play.
+FramePack: launch recipe on :7864; UI I2V receipt next.
 Next: short FramePack I2V + receipt; W0 identity; wait-what README pass; human public flip only.
 ```

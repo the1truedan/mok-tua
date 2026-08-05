@@ -1,0 +1,93 @@
+/* Green phosphor on black — classic terminal (alias: matrix) */
+
+Screen {
+    background: #000000;
+    color: #33ff33;
+    layout: vertical;
+}
+
+#chrome {
+    dock: top;
+    height: auto;
+    background: #001a00;
+    color: #66ff66;
+    padding: 0 1;
+    text-style: bold;
+}
+
+#menu {
+    dock: top;
+    height: auto;
+    background: #000000;
+    color: #22cc22;
+    padding: 0 1;
+}
+
+#boot {
+    height: 1fr;
+    background: #000000;
+    color: #33ff33;
+    padding: 1 2;
+    text-style: bold;
+}
+
+#main-panes {
+    height: 1fr;
+    layout: horizontal;
+}
+
+#left-pane {
+    width: 2fr;
+    height: 1fr;
+}
+
+#right-pane {
+    width: 1fr;
+    height: 1fr;
+    min-width: 28;
+    border-left: solid #1a8c1a;
+    background: #000000;
+}
+
+#log {
+    height: 1fr;
+    background: #000000;
+    color: #33ff33;
+    border: solid #1a8c1a;
+    padding: 0 1;
+    scrollbar-background: #000000;
+    scrollbar-color: #22cc22;
+}
+
+#stats {
+    height: 1fr;
+    background: #000000;
+    color: #66ff66;
+    padding: 0 1;
+    overflow-y: auto;
+}
+
+#prompt-row {
+    dock: bottom;
+    height: auto;
+    background: #001a00;
+    padding: 0 1 1 1;
+}
+
+#ready {
+    color: #99ff99;
+    width: auto;
+}
+
+Input {
+    background: #000000;
+    color: #33ff33;
+    border: none;
+    padding: 0 1;
+    width: 1fr;
+}
+
+Input:focus {
+    background: #001100;
+    border: none;
+}

@@ -29,10 +29,15 @@ Commands (type name or shortcut):
   I  inventory   Model stage inventory
   N  nodes       Federation node list
   C  chains      CHAINS tip / verify (chains tip)
+  M  monitor     One-shot gpu-host sample
+  show PATH      Preview still / video thumb in left pane
+  play PATH      External mpv/timg/open for media
+  thumb PATH     Mini preview (alias of show)
+  receipt …      show PATH | stamp PATH --renderer … [--burn-caption]
   H  help        This screen
   Q  quit        Exit TUI
 
-Skins: --skin c64 | modern
+Skins: c64 (default) | 1980crt | green | mono | modern
 Same verbs as: python3 scripts/mok_tua_cli.py <cmd>
 API always available on :8799 when host is up.
 """
@@ -68,6 +73,7 @@ def resolve_command(line: str) -> tuple[str, list[str] | None, str | None]:
         "i": "inventory",
         "n": "nodes",
         "c": "chains",
+        "m": "monitor",
         "h": "help",
         "q": "quit",
         "?": "help",
@@ -130,6 +136,17 @@ def resolve_command(line: str) -> tuple[str, list[str] | None, str | None]:
     if head == "monitor":
         return ("monitor", ["monitor", *rest], None)
 
+    if head in ("show", "thumb", "play"):
+        if not rest:
+            return (head, None, f"usage: {head} PATH")
+        # local TUI handlers use argv form [verb, path]
+        return (head, [head, *rest], None)
+
+    if head == "receipt":
+        if not rest:
+            return ("receipt", None, "usage: receipt show PATH | receipt stamp PATH …")
+        return ("receipt", ["receipt", *rest], None)
+
     if head == "launch":
         if not rest:
             return ("launch", None, "usage: launch <provider|chain:demo|…> [--live]")
@@ -157,6 +174,7 @@ def resolve_command(line: str) -> tuple[str, list[str] | None, str | None]:
         "packet",
         "nodes",
         "chains",
+        "receipt",
     }
     if head in known:
         return (head, [head, *rest], None)
@@ -209,7 +227,16 @@ def run_cli(
 
 
 def boot_banner(skin: str = "c64", version: str = "0.5") -> str:
-    if skin == "c64":
+    c64ish = skin in (
+        "c64",
+        "1980crt",
+        "tui-c64-mode-default-1980crt-tui",
+        "green",
+        "matrix",
+        "mono",
+        "paper",
+    )
+    if c64ish:
         return (
             f" **** MOK-TUA V{version}  CONDUCTOR ****\n"
             " 64K RAM SYSTEM  38911 BASIC BYTES FREE\n"
@@ -217,12 +244,13 @@ def boot_banner(skin: str = "c64", version: str = "0.5") -> str:
             "READY.\n"
             "\n"
             " [D]OCTOR [P]ROVIDERS [R]UN [S]MOKE\n"
-            " [L]OCK   [T]STATUS  [H]ELP  [Q]UIT\n"
+            " [L]OCK   [T]STATUS  [M]ONITOR [H]ELP [Q]UIT\n"
+            " show/play PATH · receipt stamp PATH\n"
             "\n"
             "READY."
         )
     return (
         f"mok-tua conductor TUI v{version}  skin={skin}\n"
-        "Type help · shortcuts D/P/R/S/L/T/H/Q · same verbs as CLI\n"
+        "Type help · shortcuts D/P/R/S/L/T/M/H/Q · same verbs as CLI\n"
         "READY."
     )

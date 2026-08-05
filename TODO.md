@@ -1,7 +1,7 @@
 # mok-tua TODO
 
 **Last updated:** 2026-08-05  
-**Version baseline:** **0.5.4** (full-gamut staged smoke packet)  
+**Version baseline:** **0.5.5** (TUI split + receipts; full-gamut packet was 0.5.4)  
 **Visibility:** private until human go · see `docs/PUBLIC_RELEASE_PROTECT_BRANCH_2026-08-05.md`  
 **Handoff:** `docs/operations/SESSION_HANDOFF_2026-08-05_FULL_GAMUT_STAGED_SMOKE.md`
 
@@ -24,6 +24,9 @@
 | D11 | C64 TUI REPL smoke (`--skin c64` → READY. / help) | unit 12 OK + REPL |
 | D12 | Overnight E0–E16 storyboard→clip runbook + comic fixtures | overnight runbook · `fixtures/la_dark_one_…` |
 | D13 | FramePack SM GUI `einops` miss — host SM 3.10 venv + package/venv symlink | `framepack-sm310-linux-amd64` · ops FRAMEPACK_SM_GUI… |
+| D14 | FramePack launch recipe + port map pushed private | `api/providers.py` · orchestration `local_framepack` |
+| D15 | Conductor TUI 0.5.5: PETSCII boot, two-pane, VIC-II stats, green/mono skins | `tui/` · INTERFACES |
+| D16 | Artifact receipt sidecar + optional burn-caption | `api/artifact_receipt.py` · CLI `receipt` |
 
 ---
 
@@ -43,7 +46,7 @@
 | # | Item | Gate |
 |---|------|------|
 | **5** | ~~`local_framepack` provider~~ **wired** — close after live I2V | `orchestration.json` + `LAUNCH_RECIPES` + runtime registry |
-| **6** | C64 deck earmark keys: QQQ cycle, video provider, face-ref, estimate burn | W3 framework |
+| **6** | C64 deck earmark keys: QQQ cycle, video provider, face-ref, estimate burn | W3 framework · TUI shell ready |
 | **7** | ACE-Step default local BGM path | QQQ0 |
 | **8** | Postiz draft-only after render (no auto-post) | human OAuth later |
 | **9** | Suno MCP **doc + QQQ1 only** (not default) | earmark |

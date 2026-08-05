@@ -7,6 +7,7 @@ import sys
 
 from tui import DEFAULT_SKIN, __version__
 from tui.bridge import HELP_TEXT, boot_banner, resolve_command, run_cli
+from tui.petscii import intro_recommendations, intro_with_prompt, loading_screen_text
 
 # VIC-II-ish ANSI (best-effort)
 _C64_BG = "\033[48;2;64;49;141m"
@@ -38,19 +39,22 @@ def _paint(skin: str, text: str, kind: str = "body") -> str:
     return f"{_C64_BG}{palette.get(kind, _C64_FG)}{text}{_RESET}"
 
 
-def run_repl(skin: str = DEFAULT_SKIN) -> int:
+def run_repl(skin: str = DEFAULT_SKIN, *, seed_prompt: str | None = None) -> int:
     """Blocking line REPL. Returns process exit code."""
-    if skin == "c64" and _color_ok():
+    c64ish = skin in ("c64", "1980crt", "tui-c64-mode-default-1980crt-tui")
+    if c64ish and _color_ok():
         sys.stdout.write(_CLEAR)
         sys.stdout.write(f"{_C64_BG}{_C64_FG}")
-        # Fill a few screen lines for CRT feel
-        cols = 40
-        rows = 12
-        for _ in range(rows):
-            sys.stdout.write(" " * cols + "\n")
+        print(_paint(skin, loading_screen_text(__version__, step=12)))
+        print()
         sys.stdout.write(_CLEAR)
 
-    print(_paint(skin, boot_banner(skin, __version__.rsplit(".", 1)[0])))
+    print(_paint(skin, boot_banner(skin, __version__)))
+    print()
+    if seed_prompt:
+        print(_paint(skin, intro_with_prompt(seed_prompt), "yl"))
+    else:
+        print(_paint(skin, intro_recommendations(), "yl"))
     print()
 
     while True:
