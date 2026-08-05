@@ -11,10 +11,11 @@
         "local_sd_minimal",
         "local_qwen_edit",
         "local_wan",
-        "local_animatediff"
+        "local_animatediff",
+        "local_framepack"
       ],
       "still_providers": ["local_sd_minimal", "local_qwen_edit"],
-      "video_providers": ["local_wan", "local_animatediff"]
+      "video_providers": ["local_animatediff", "local_wan", "local_framepack"]
     },
     "QQQ3": {
       "label": "Free/public overflow",
@@ -31,7 +32,7 @@
         "crowd_federated"
       ],
       "still_providers": ["local_qwen_edit", "local_sd_minimal", "grok_imagine", "crowd_federated"],
-      "video_providers": ["local_wan", "local_animatediff", "crowd_federated"],
+      "video_providers": ["local_animatediff", "local_wan", "local_framepack", "crowd_federated", "grok_imagine_video"],
       "requires": ["data_class_public"],
       "notes": "crowd_federated = trusted federation / public ask packets only; never PHI"
     },
@@ -52,7 +53,8 @@
         "local_sd_minimal",
         "local_qwen_edit",
         "local_wan",
-        "local_animatediff"
+        "local_animatediff",
+        "local_framepack"
       ],
       "still_providers": [
         "local_qwen_edit",
@@ -61,8 +63,9 @@
         "nano_banana"
       ],
       "video_providers": [
-        "local_wan",
         "local_animatediff",
+        "local_wan",
+        "local_framepack",
         "seedance_cloud",
         "grok_imagine_video"
       ],

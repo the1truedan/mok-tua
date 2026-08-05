@@ -22,6 +22,20 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG_DIR = Path(os.environ.get("MOCK_TUA_CONFIG", ROOT / "config"))
 AI_DATA = Path(os.environ.get("AI_DATA_ROOT", "/Volumes/ai-data"))
 LAUNCH_DIR = Path(os.environ.get("MOCK_TUA_LAUNCH_DIR", ROOT / "work" / "launches"))
+# Shared process registry (NFS-visible on lab hosts) so GUI/CLI agree on pid/port.
+RUNTIME_DIR = Path(
+    os.environ.get(
+        "MOCK_TUA_RUNTIME_DIR",
+        str(AI_DATA / "work" / "mok-tua" / "runtime"),
+    )
+)
+# FramePack reserved port (avoid ACE-Step default 7865 collision).
+FRAMEPACK_PORT = int(os.environ.get("FRAMEPACK_PORT", "7864"))
+FRAMEPACK_BIND = os.environ.get("FRAMEPACK_BIND", "0.0.0.0")
+FRAMEPACK_OPEN = os.environ.get(
+    "FRAMEPACK_OPEN",
+    f"http://gpu-host:{FRAMEPACK_PORT}/",
+)
 
 
 # Explicit launch recipes (shell-level). Prefer these over parsing pinokio start.js.
@@ -118,7 +132,10 @@ LAUNCH_RECIPES: dict[str, dict[str, Any]] = {
     },
     "ace_step": {
         "kind": "pinokio",
-        "probe": [{"type": "http_any", "ports": list(range(7860, 7900))}],
+        "probe": [
+            {"type": "http", "url": "http://127.0.0.1:7865/", "label": "ace_local"},
+            {"type": "http", "url": "http://gpu-host:7865/", "label": "ace_lan"},
+        ],
         "app_root": "pinokio/api/ace-step.pinokio.git",
         "cwd_rel": "app",
         "cmd": [
@@ -127,7 +144,8 @@ LAUNCH_RECIPES: dict[str, dict[str, Any]] = {
             "uv run acestep --port ${PORT:-7865}",
         ],
         "default_port": 7865,
-        "note": "Music gen Gradio/API; Pinokio Start also works",
+        "open": "http://gpu-host:7865/",
+        "note": "Music gen Gradio/API; port 7865 reserved (FramePack uses 7864)",
     },
     "facefusion": {
         "kind": "pinokio",
@@ -167,10 +185,47 @@ LAUNCH_RECIPES: dict[str, dict[str, Any]] = {
     },
     "framepack_studio": {
         "kind": "stability_matrix",
-        "probe": [{"type": "path", "path": str(AI_DATA / "stability-matrix/mac-Data/Packages/FramePack Studio")}],
+        "probe": [
+            {
+                "type": "http",
+                "url": f"http://127.0.0.1:{FRAMEPACK_PORT}/",
+                "label": "framepack_local",
+            },
+            {
+                "type": "http",
+                "url": f"http://gpu-host:{FRAMEPACK_PORT}/",
+                "label": "framepack_lan",
+            },
+            {
+                "type": "path",
+                "path": str(AI_DATA / "stability-matrix/Data/Packages/FramePack Studio"),
+                "label": "linux_sm_pkg",
+                "live": False,
+            },
+            {
+                "type": "path",
+                "path": str(AI_DATA / "stability-matrix/mac-Data/Packages/FramePack Studio"),
+                "label": "mac_sm_pkg",
+                "live": False,
+            },
+        ],
+        "open": FRAMEPACK_OPEN,
+        "prefer_script": str(ROOT / "scripts" / "run_framepack_shared_models.sh"),
+        # No forced --offline: launcher auto-offline when shared Hunyuan hub present.
+        # First seed: FRAMEPACK_ALLOW_DOWNLOAD=1 (writes into shared hf_hub only).
+        "prefer_script_args": [
+            "--server",
+            FRAMEPACK_BIND,
+            "--port",
+            str(FRAMEPACK_PORT),
+        ],
+        "default_port": FRAMEPACK_PORT,
         "cmd": None,
-        "note": "Launch via Stability Matrix GUI (no stable CLI recipe yet)",
-        "gui_only": True,
+        "note": (
+            "Shared-models launcher (hf_hub symlink + host venv). "
+            "LAN Gradio at open URL. SM GUI after --install-deps. Port 7864. "
+            "First hub seed: FRAMEPACK_ALLOW_DOWNLOAD=1 (shared hub only)."
+        ),
     },
 }
 
@@ -231,32 +286,59 @@ def _http_ok(url: str, timeout: float = 2.0) -> dict[str, Any]:
 
 def _probe_one(spec: dict[str, Any]) -> dict[str, Any]:
     t = spec.get("type")
+    # live=False probes report install presence only (do not mark provider live).
+    contributes_live = bool(spec.get("live", True))
     if t == "http":
         r = _http_ok(str(spec["url"]))
         r["label"] = spec.get("label") or spec["url"]
+        r["contributes_live"] = contributes_live
         return r
     if t == "tcp":
         host = str(spec.get("host") or "127.0.0.1")
         port = int(spec["port"])
         ok = _tcp_open(host, port)
-        return {"ok": ok, "label": f"{host}:{port}", "type": "tcp"}
+        return {
+            "ok": ok,
+            "label": f"{host}:{port}",
+            "type": "tcp",
+            "contributes_live": contributes_live,
+        }
     if t == "http_any":
         ports = spec.get("ports") or []
         for port in ports:
             if _tcp_open("127.0.0.1", int(port)):
-                return {"ok": True, "label": f"127.0.0.1:{port}", "port": int(port)}
-        return {"ok": False, "label": f"ports {ports[0]}-{ports[-1]}" if ports else "none"}
+                return {
+                    "ok": True,
+                    "label": f"127.0.0.1:{port}",
+                    "port": int(port),
+                    "contributes_live": contributes_live,
+                }
+        return {
+            "ok": False,
+            "label": f"ports {ports[0]}-{ports[-1]}" if ports else "none",
+            "contributes_live": contributes_live,
+        }
     if t == "path":
         p = Path(str(spec["path"]))
-        return {"ok": p.exists(), "label": str(p), "type": "path"}
+        return {
+            "ok": p.exists(),
+            "label": str(p),
+            "type": "path",
+            "contributes_live": contributes_live,
+        }
     if t == "process":
         match = str(spec.get("match") or "")
         try:
             out = subprocess.check_output(["pgrep", "-fl", match], text=True, stderr=subprocess.DEVNULL)
-            return {"ok": bool(out.strip()), "label": match, "sample": out.strip()[:120]}
+            return {
+                "ok": bool(out.strip()),
+                "label": match,
+                "sample": out.strip()[:120],
+                "contributes_live": contributes_live,
+            }
         except Exception:
-            return {"ok": False, "label": match}
-    return {"ok": False, "error": f"unknown_probe:{t}"}
+            return {"ok": False, "label": match, "contributes_live": contributes_live}
+    return {"ok": False, "error": f"unknown_probe:{t}", "contributes_live": False}
 
 
 def app_by_id(app_id: str) -> dict[str, Any] | None:
@@ -293,14 +375,15 @@ def list_providers(
             for spec in recipe["probe"]:
                 pr = _probe_one(spec)
                 probes.append(pr)
-                if pr.get("ok"):
+                if pr.get("ok") and pr.get("contributes_live", True):
                     live = True
         elif probe and app.get("ports"):
             for name, port in (app.get("ports") or {}).items():
                 ok = _tcp_open("127.0.0.1", int(port))
-                probes.append({"ok": ok, "label": f"{name}:{port}"})
+                probes.append({"ok": ok, "label": f"{name}:{port}", "contributes_live": True})
                 live = live or ok
         state = load_launch_state(aid)
+        runtime = load_runtime_state(aid)
         rows.append(
             {
                 "id": aid,
@@ -316,10 +399,12 @@ def list_providers(
                 "probes": probes,
                 "launchable": bool(recipe) and not recipe.get("gui_only"),
                 "gui_only": bool(recipe.get("gui_only")),
-                "open": recipe.get("open"),
+                "open": recipe.get("open") or (runtime or {}).get("open"),
                 "note": recipe.get("note") or app.get("mok_tua_hook"),
-                "launched_pid": state.get("pid") if state else None,
-                "launched_at": state.get("started_at") if state else None,
+                "launched_pid": (state or runtime or {}).get("pid"),
+                "launched_at": (state or runtime or {}).get("started_at"),
+                "runtime_owner": (runtime or {}).get("owner") or ((state or {}).get("owner")),
+                "runtime_port": (runtime or {}).get("port") or recipe.get("default_port"),
             }
         )
     rows.sort(key=lambda r: (r.get("priority") if r.get("priority") is not None else 99, r.get("id") or ""))
@@ -393,15 +478,57 @@ def load_launch_state(app_id: str) -> dict[str, Any] | None:
         return None
 
 
+def load_runtime_state(app_id: str) -> dict[str, Any] | None:
+    """Shared NFS runtime registry (dual lifecycle: mok-tua + SM/external)."""
+    path = RUNTIME_DIR / f"{app_id}.json"
+    if not path.is_file():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
+
+
+def save_runtime_state(app_id: str, state: dict[str, Any]) -> None:
+    """Best-effort shared registry write (NFS may be missing on pure desk dev)."""
+    try:
+        RUNTIME_DIR.mkdir(parents=True, exist_ok=True)
+        payload = {
+            "schema": "mok_tua_runtime.v1",
+            "id": app_id,
+            **state,
+            "updated_at": _utc(),
+        }
+        (RUNTIME_DIR / f"{app_id}.json").write_text(
+            json.dumps(payload, indent=2) + "\n", encoding="utf-8"
+        )
+    except OSError:
+        pass
+
+
+def clear_runtime_state(app_id: str) -> None:
+    path = RUNTIME_DIR / f"{app_id}.json"
+    try:
+        if path.is_file():
+            path.unlink()
+    except OSError:
+        pass
+
+
 def save_launch_state(app_id: str, state: dict[str, Any]) -> None:
     LAUNCH_DIR.mkdir(parents=True, exist_ok=True)
+    if "owner" not in state:
+        state = {**state, "owner": "mok_tua"}
     (LAUNCH_DIR / f"{app_id}.json").write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
+    # Mirror to shared registry for SM/browser operators on LAN.
+    save_runtime_state(app_id, state)
 
 
 def clear_launch_state(app_id: str) -> None:
     path = LAUNCH_DIR / f"{app_id}.json"
     if path.is_file():
         path.unlink()
+    clear_runtime_state(app_id)
 
 
 def _spawn(cmd: list[str], *, cwd: Path, env: dict[str, str] | None, log_path: Path) -> int:
@@ -479,12 +606,54 @@ def launch_provider(
 
     if recipe.get("prefer_script"):
         script = Path(str(recipe["prefer_script"]))
-        if script.is_file() and not dry_run:
-            log = LAUNCH_DIR / f"{app_id}.log"
-            pid = _spawn(["bash", str(script)], cwd=script.parent, env=None, log_path=log)
-            state = {"id": app_id, "pid": pid, "started_at": _utc(), "cmd": [str(script)], "log": str(log)}
-            save_launch_state(app_id, state)
-            return {"ok": True, "status": "spawned", **state, "open": recipe.get("open")}
+        use_port = port or recipe.get("default_port")
+        script_args = [str(a) for a in (recipe.get("prefer_script_args") or [])]
+        if use_port is not None:
+            # Allow --port N override when caller passes port=
+            if "--port" in script_args:
+                i = script_args.index("--port")
+                if i + 1 < len(script_args):
+                    script_args[i + 1] = str(use_port)
+            env_port = {"PORT": str(use_port), "FRAMEPACK_PORT": str(use_port)}
+        else:
+            env_port = None
+        open_url = recipe.get("open")
+        if use_port is not None and app_id == "framepack_studio":
+            open_url = f"http://gpu-host:{use_port}/"
+        cmd = ["bash", str(script), *script_args]
+        if dry_run:
+            return {
+                "ok": True,
+                "status": "dry_run",
+                "id": app_id,
+                "cmd": cmd,
+                "script_exists": script.is_file(),
+                "open": open_url,
+                "note": recipe.get("note"),
+            }
+        if not script.is_file():
+            return {
+                "ok": False,
+                "error": "prefer_script_missing",
+                "path": str(script),
+                "hint": "Run from a checkout that has scripts/run_framepack_shared_models.sh",
+            }
+        log = LAUNCH_DIR / f"{app_id}.log"
+        pid = _spawn(cmd, cwd=script.parent, env=env_port, log_path=log)
+        state = {
+            "id": app_id,
+            "pid": pid,
+            "started_at": _utc(),
+            "cmd": cmd,
+            "log": str(log),
+            "owner": "mok_tua",
+            "bind": FRAMEPACK_BIND if app_id == "framepack_studio" else None,
+            "port": int(use_port) if use_port is not None else None,
+            "open": open_url,
+            "host_role": "gpu-host",
+        }
+        save_launch_state(app_id, state)
+        return {"ok": True, "status": "spawned", **state, "open": open_url}
 
     # multi-process (Director's Console)
     if recipe.get("multi"):
@@ -568,9 +737,24 @@ def launch_provider(
 
 
 def stop_provider(app_id: str) -> dict[str, Any]:
-    state = load_launch_state(app_id)
+    state = load_launch_state(app_id) or load_runtime_state(app_id)
     if not state:
-        return {"ok": False, "error": "no_launch_state", "id": app_id, "hint": "Only stops processes mok-tua spawned"}
+        return {
+            "ok": False,
+            "error": "no_launch_state",
+            "id": app_id,
+            "hint": "Only stops processes recorded in work/launches or shared runtime registry",
+        }
+    owner = str(state.get("owner") or "mok_tua")
+    # Allow mok_tua to stop what it spawned; external/sm need explicit override.
+    if owner not in ("mok_tua", "sm_via_wrapper", "external_registered") and not state.get("force_stop"):
+        return {
+            "ok": False,
+            "error": "foreign_owner",
+            "id": app_id,
+            "owner": owner,
+            "hint": "Set force_stop on runtime record or stop from the owning surface",
+        }
     killed = []
     pids = []
     if state.get("pid"):
@@ -591,7 +775,7 @@ def stop_provider(app_id: str) -> dict[str, Any]:
         except PermissionError as exc:
             return {"ok": False, "error": str(exc), "pid": pid}
     clear_launch_state(app_id)
-    return {"ok": True, "status": "stopped", "id": app_id, "killed": killed}
+    return {"ok": True, "status": "stopped", "id": app_id, "killed": killed, "owner": owner}
 
 
 def _git_root_for_pull(path: Path, *, prefer_nested: bool = True) -> Path | None:
