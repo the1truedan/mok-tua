@@ -1,0 +1,372 @@
+{
+  "schema": "mok_tua_public_release_packet.v1",
+  "generated_at": "2026-08-05T19:25:29.241403+00:00",
+  "earmark": "2026-08-05T16:20:00-05:00",
+  "repo": "the1truedan/mok-tua",
+  "visibility": "PRIVATE_until_human_go",
+  "gates": {
+    "G1_credential_scrub": "pass",
+    "G2_lan_path_scrub": "pass_tracked_tree",
+    "G3_smoke": "pass_with_skips",
+    "G4_privacy_readme": "pass",
+    "G5_human_flip": "pending",
+    "branch_protection": "post_public_only_free_plan"
+  },
+  "http_probes": [
+    {
+      "name": "pinokio_control",
+      "role_label": "desk-host role / loopback",
+      "http": 200,
+      "error": null
+    },
+    {
+      "name": "comfy_system_stats",
+      "role_label": "gpu-host:8188",
+      "http": 200,
+      "error": null
+    },
+    {
+      "name": "maestro",
+      "role_label": "gpu-host:7860",
+      "http": 200,
+      "error": null
+    },
+    {
+      "name": "facefusion",
+      "role_label": "gpu-host:7870",
+      "http": 200,
+      "error": null
+    },
+    {
+      "name": "directors_ui",
+      "role_label": "gpu-host:5173",
+      "http": 200,
+      "error": null
+    },
+    {
+      "name": "directors_cpe",
+      "role_label": "gpu-host:9800",
+      "http": 200,
+      "error": null
+    },
+    {
+      "name": "directors_orch",
+      "role_label": "gpu-host:9820",
+      "http": 404,
+      "error": "HTTPError"
+    }
+  ],
+  "pterm_search_hits": [
+    {
+      "q": "comfy",
+      "app_id": "comfyui.pinokio.git",
+      "title": "ComfyUI",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/comfyui.pinokio.git"
+    },
+    {
+      "q": "comfy",
+      "app_id": "phosphene",
+      "title": "Phosphene",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/phosphene"
+    },
+    {
+      "q": "comfy",
+      "app_id": "ace-step.pinokio.git",
+      "title": "ACE-Step 1.5",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/ace-step.pinokio.git"
+    },
+    {
+      "q": "comfy",
+      "app_id": "wanMRGPU.git",
+      "title": "Wan2GP",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/wanMRGPU.git"
+    },
+    {
+      "q": "facefusion",
+      "app_id": "facefusion-pinokio.git",
+      "title": "FaceFusion 3.6.1",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/facefusion-pinokio.git"
+    },
+    {
+      "q": "maestro",
+      "app_id": "Maestro.git",
+      "title": "Maestro",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/Maestro.git"
+    },
+    {
+      "q": "maestro",
+      "app_id": "Maestro",
+      "title": "Maestro",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/Maestro"
+    },
+    {
+      "q": "director",
+      "app_id": "directorsconsole.pinokio.git",
+      "title": "Director's Console",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/directorsconsole.pinokio.git"
+    },
+    {
+      "q": "director",
+      "app_id": "Maestro.git",
+      "title": "Maestro",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/Maestro.git"
+    },
+    {
+      "q": "director",
+      "app_id": "Maestro",
+      "title": "Maestro",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/Maestro"
+    },
+    {
+      "q": "director",
+      "app_id": "phosphene",
+      "title": "Phosphene",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/phosphene"
+    },
+    {
+      "q": "wan",
+      "app_id": "wan.git",
+      "title": "_Wan2GP",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/wan.git"
+    },
+    {
+      "q": "wan",
+      "app_id": "wanMRGPU.git",
+      "title": "Wan2GP",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/wanMRGPU.git"
+    },
+    {
+      "q": "wan",
+      "app_id": "wan2gp.git",
+      "title": "Wan2GP",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/wan2gp.git"
+    },
+    {
+      "q": "wan",
+      "app_id": "Maestro.git",
+      "title": "Maestro",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/Maestro.git"
+    },
+    {
+      "q": "tts",
+      "app_id": "Qwen3-TTS-MLX-WebUI-Enhanced.git",
+      "title": "Qwen3-TTS MLX WebUI Enhanced",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/Qwen3-TTS-MLX-WebUI-Enhanced.git"
+    },
+    {
+      "q": "tts",
+      "app_id": "alltalk-tts.git",
+      "title": "AllTalk-TTS v2",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/alltalk-tts.git"
+    },
+    {
+      "q": "tts",
+      "app_id": "Ultimate-TTS-Studio-SUP3R-Edition-Pinokio.git",
+      "title": "Ultimate-TTS-Studio-SUP3R-Edition",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/Ultimate-TTS-Studio-SUP3R-Edition-Pinokio.git"
+    },
+    {
+      "q": "tts",
+      "app_id": "Qwen3-TTS-Pinokio.git",
+      "title": "Qwen3-TTS",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/Qwen3-TTS-Pinokio.git"
+    },
+    {
+      "q": "ace-step",
+      "app_id": "ace-step-ui.pinokio.git",
+      "title": "ACE-Step UI",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/ace-step-ui.pinokio.git"
+    },
+    {
+      "q": "ace-step",
+      "app_id": "ace-step.pinokio.git",
+      "title": "ACE-Step 1.5",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/ace-step.pinokio.git"
+    },
+    {
+      "q": "ace-step",
+      "app_id": "acejam.pinokio.git",
+      "title": "AceJAM",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/acejam.pinokio.git"
+    },
+    {
+      "q": "ace-step",
+      "app_id": "Maestro.git",
+      "title": "Maestro",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/Maestro.git"
+    },
+    {
+      "q": "freemocap",
+      "app_id": "FreeMoCap.pinokio.git",
+      "title": "FreeMoCap",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/FreeMoCap.pinokio.git"
+    },
+    {
+      "q": "cogstudio",
+      "app_id": "cogstudio.git",
+      "title": "CogStudio",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/cogstudio.git"
+    },
+    {
+      "q": "dreamtalk",
+      "app_id": "dreamtalk.git",
+      "title": "dreamtalk",
+      "state": "offline",
+      "ready": false,
+      "running": false,
+      "host": "desk-host",
+      "matched_terms_count": 1,
+      "ref": "pinokio://desk-host:42000/api/dreamtalk.git"
+    }
+  ],
+  "demo_videos": {
+    "manager_vibe_demo_hybrid_12s.mp4": {
+      "bytes": 3331307,
+      "sha256": "d0f6bf702c0a14cddb5c7492a6c2a3dfca5c6cbbe10ec4063042b11e65b67cab",
+      "duration_s": 14.583333,
+      "staging": "ai-data social-staging manager_vibe_demo_20260805T1620"
+    },
+    "manager_vibe_demo_local_kenburns.mp4": {
+      "bytes": 1654446,
+      "sha256": "c7596197279133abdf5524a335c8277bfe66017bf1adedb03900eaa4a21f3515",
+      "duration_s": 12.5,
+      "staging": "ai-data social-staging manager_vibe_demo_20260805T1620"
+    }
+  },
+  "evidence_cite": {
+    "overnight_scorecard": "work/smoke/mok-tua-overnight-2026-08-05/scorecard.json",
+    "manager_comic": "work/social-staging/2026-08/manager_updates_20260805T152028Z/",
+    "affinity_catalog": "control-repo data/catalog/pinokio_api_host_affinity_2026-08-05.json"
+  },
+  "skips": [
+    "Wan Gradio ports 7861-7865 not listening (honest skip)",
+    "directors_orch :9820 returned 404 (UI/CPE up)",
+    "Grok Imagine video third clip rate-limited (panel_05 used local kenburns beat)",
+    "Mac-only Pinokio apps skipped per affinity policy"
+  ]
+}

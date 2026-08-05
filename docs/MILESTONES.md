@@ -11,7 +11,9 @@ Ledger also mirrored in `~/grokcode/data/progress/milestones.jsonl` (repo=`mok-t
 | **0.5.0** | 2026-08-02 | `2026.08-mok-tua-v0.5-conductor` | Conductor TUI (C64 + modern skins), CLI `tui` verb, Textual + stdlib REPL bridge over CLI verbs. |
 | **0.5.1–0.5.2** | 2026-08-02 | (changelog) | Personal origin note; capability collage (image / I2V / director / voice / movement); Drive still differentiation. |
 | **0.5.3** | 2026-08-02 | `2026.08-mok-tua-v0.5-conductor` | Presentation-smoke mockups (silly CEO still → COMDEX / board / cartoon booth / six-panel storyboard). |
+| **0.5.4** | 2026-08-05 | `2026.08-mok-tua-full-gamut-staged-smoke` | Full-gamut framework; FramePack shared-models launcher; Pinokio gamut + MRGPU AnimateDiff smoke; Grok-vs-MRGPU I2V provenance incident; C64 TUI re-smoke; staged-pulls branch docs; public flip still human-gated. |
 | **ops** | 2026-08-01→02 | `2026.08-mok-tua-comfy-ai-data-wire` | Comfy + ai-data connectivity probe; MRGPU Comfy live; tier smoke **26 pass / 0 hard fail** (`mok_tua_tier_smoke_2026-08-02.json`). |
+| **ops** | 2026-08-05 | `2026.08-i2v-grok-vs-mrgpu-context-ambiguity` | Process incident: cloud Grok I2V misread as local GPU; dual-path labeling rules. |
 
 ## Evidence (lab / grokcode catalog)
 
@@ -19,6 +21,9 @@ Ledger also mirrored in `~/grokcode/data/progress/milestones.jsonl` (repo=`mok-t
 - `~/grokcode/data/catalog/comfy_mok_tua_smoke_result_2026-08-01.json`
 - `~/grokcode/data/catalog/mok_tua_tier_smoke_2026-08-02.json`
 - `~/grokcode/data/catalog/comfy_mrgpu_full_stack_2026-08-02.json`
+- `~/grokcode/data/catalog/mok_tua_full_gamut_framework_2026-08-05.json`
+- `~/grokcode/data/catalog/mok_tua_public_release_packet_2026-08-05.json`
+- `docs/reports/MRGPU_LOCAL_RENDER_SMOKE_2026-08-05.md` · `docs/reports/PINOKIO_GAMUT_SMOKE_2026-08-05.md`
 - `~/grokcode/config/comfy_story_orchestration.json` (`mok_tua_sync` pointer)
 
 ## Policy (unchanged)
@@ -31,5 +36,5 @@ Ledger also mirrored in `~/grokcode/data/progress/milestones.jsonl` (repo=`mok-t
 
 | Remote | URL pattern |
 |--------|-------------|
-| Forgejo | `http://192.168.1.2:33333/the1truedan/mok-tua.git` |
-| GitHub (private) | `https://github.com/the1truedan/mok-tua.git` |
+| Optional private mirror | operator-configured Forgejo/Gitea URL (no LAN in public docs) |
+| GitHub | `https://github.com/the1truedan/mok-tua.git` |

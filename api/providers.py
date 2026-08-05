@@ -37,7 +37,7 @@ LAUNCH_RECIPES: dict[str, dict[str, Any]] = {
         "kind": "stability_matrix",
         "probe": [
             {"type": "http", "url": "http://127.0.0.1:8188/system_stats"},
-            {"type": "http", "url": "http://192.168.1.5:8188/system_stats", "label": "mrgpu"},
+            {"type": "http", "url": "http://gpu-host:8188/system_stats", "label": "mrgpu"},
         ],
         "open": "http://127.0.0.1:8188",
         "cwd": str(AI_DATA / "stability-matrix/mac-Data/Packages/ComfyUI"),

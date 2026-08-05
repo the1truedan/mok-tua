@@ -9,8 +9,8 @@
     },
     "mrgpu": {
       "role": "video",
-      "host": "192.168.1.5",
-      "comfy_url": "http://192.168.1.5:8188",
+      "host": "gpu-host",
+      "comfy_url": "http://gpu-host:8188",
       "gpu": "RTX 4060 Ti 16G"
     }
   },
@@ -35,7 +35,7 @@
       {
         "id": "mok_tua",
         "name": "mok-tua",
-        "path": "/Users/dtm/mok-tua",
+        "path": "~/mok-tua",
         "path_ok": true,
         "sha": "2f2e9f15f6ac",
         "dirty": true,

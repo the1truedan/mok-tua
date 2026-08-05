@@ -3,6 +3,33 @@
 All notable changes to **mok-tua** are documented here.  
 Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are local lab (America/New_York context).
 
+## [0.5.4] — 2026-08-05
+
+### Added
+
+- **Full-gamut MRGPU framework** (`docs/roadmap/FULL_GAMUT_MRGPU_FRAMEWORK_2026-08-05.md`): orchestration → video → audio → identity/body → social ladder; Adobe Character Animator explicitly **back-burner**; shared `/mnt/ai-data/models` law.
+- **FramePack shared-models launcher** (`scripts/run_framepack_shared_models.sh`): `hf_download` → shared `hf_hub`, host-local uv venv, `--install-deps` batch, NFS write fallback, offline-by-default when hub present.
+- **Ops docs:** FramePack shared models, I2V Grok-vs-MRGPU provenance **incident**, full-gamut session handoff, protect-after-public sequencing, overnight storyboard→clip runbook, demo dual-path proof.
+- **Smoke reports:** Pinokio gamut HTTP/pterm matrix; MRGPU local Comfy stills + AnimateDiff generative video (GPU peak 100%).
+- **TODO.md** open/closed operator board; LA Dark One April Fools sides fixture (public-safe).
+- Pinokio staging config: `framepack_studio.shared_models` + role-label host addresses (`gpu-host`).
+
+### Changed
+
+- Tracked LAN addresses scrubbed to role labels in configs/docs where still private-prep.
+- `.hippo/` gitignored; REPEATED_CONTEXT_BUNDLE + OPERATORS extended for staged pulls and provenance rules.
+- C64 conductor TUI reconfirmed (`tui --skin c64` REPL READY. smoke).
+
+### Incident / policy
+
+- **Cloud Grok Imagine I2V must not be labeled as MRGPU local.** Hybrid demo kept as QQQ1 evidence; canonical local proof is AnimateDiff/Comfy receipt path. See `docs/operations/I2V_GROK_VS_MRGPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md`.
+
+### Not in this version
+
+- Public visibility flip (human-gated).
+- FramePack end-to-end I2V job receipt (deps/map ready; UI smoke next).
+- Wan Gradio live ports (honest skip at probe).
+
 ## [0.5.3] — 2026-08-02
 
 ### Added

@@ -3,10 +3,10 @@
   "generated_at": "2026-08-04T00:45:00Z",
   "host": {
     "id": "mrgpu",
-    "address": "192.168.1.5",
+    "address": "gpu-host",
     "gpu": "NVIDIA GeForce RTX 4060 Ti 16GB",
     "pinokio_version": "8.0.40",
-    "control_plane": "http://192.168.1.5:42000",
+    "control_plane": "http://gpu-host:42000",
     "pinokio_home": "/mnt/ai-data/pinokio",
     "app_root": "/mnt/ai-data/pinokio/api",
     "model_root": "/mnt/ai-data/models",
@@ -35,14 +35,26 @@
       "rank": 1,
       "id": "wan2gp",
       "app_dir": "wan.git",
-      "ref": "pinokio://192.168.1.5:42000/api/wan.git",
-      "capabilities": ["video", "i2v", "wan", "ltx", "hunyuan", "qwen"],
+      "ref": "pinokio://gpu-host:42000/api/wan.git",
+      "capabilities": [
+        "video",
+        "i2v",
+        "wan",
+        "ltx",
+        "hunyuan",
+        "qwen"
+      ],
       "mok_tua_stage": "S3_video",
       "source_present": true,
       "runtime_state": "offline",
       "nested_app_git": "app",
       "upstream": "https://github.com/deepbeepmeep/Wan2GP",
-      "audit": {"head": "4ed4c744a396", "dirty_count": 3, "unmerged_count": 0, "verified_at": "2026-08-04T01:15:00Z"},
+      "audit": {
+        "head": "4ed4c744a396",
+        "dirty_count": 3,
+        "unmerged_count": 0,
+        "verified_at": "2026-08-04T01:15:00Z"
+      },
       "pull_gate": "current_with_local_plugins",
       "next_gate": "smoke one low-VRAM I2V job and expose a stable submit/status/collect adapter"
     },
@@ -50,13 +62,22 @@
       "rank": 2,
       "id": "facefusion",
       "app_dir": "facefusion-pinokio.git",
-      "ref": "pinokio://192.168.1.5:42000/api/facefusion-pinokio.git",
-      "capabilities": ["face_swap", "face_enhance", "lipsync", "finishing"],
+      "ref": "pinokio://gpu-host:42000/api/facefusion-pinokio.git",
+      "capabilities": [
+        "face_swap",
+        "face_enhance",
+        "lipsync",
+        "finishing"
+      ],
       "mok_tua_stage": "S4_face",
       "source_present": true,
       "runtime_state": "offline",
       "nested_app_git": "facefusion",
-      "audit": {"head": "759306c542ff", "dirty_count": 2, "unmerged_count": 0},
+      "audit": {
+        "head": "759306c542ff",
+        "dirty_count": 2,
+        "unmerged_count": 0
+      },
       "pull_gate": "blocked_dirty_wrapper",
       "next_gate": "audit nested facefusion repo, add consent gate, define media input/output contract"
     },
@@ -64,12 +85,23 @@
       "rank": 3,
       "id": "tts_story",
       "app_dir": "TTS-Story.git",
-      "ref": "pinokio://192.168.1.5:42000/api/TTS-Story.git",
-      "capabilities": ["tts", "multi_voice", "dialogue", "narration"],
+      "ref": "pinokio://gpu-host:42000/api/TTS-Story.git",
+      "capabilities": [
+        "tts",
+        "multi_voice",
+        "dialogue",
+        "narration"
+      ],
       "mok_tua_stage": "S4_voice",
       "source_present": true,
       "runtime_state": "offline",
-      "audit": {"head": "d7be7f16ea68", "dirty_count": 25, "unmerged_count": 0, "upstream_delta": 0, "verified_at": "2026-08-04T01:10:00Z"},
+      "audit": {
+        "head": "d7be7f16ea68",
+        "dirty_count": 25,
+        "unmerged_count": 0,
+        "upstream_delta": 0,
+        "verified_at": "2026-08-04T01:10:00Z"
+      },
       "pull_gate": "current_metadata_dirty",
       "next_gate": "exclude AppleDouble/NFS metadata from audits; identify API or job interface"
     },
@@ -77,13 +109,22 @@
       "rank": 4,
       "id": "ace_step",
       "app_dir": "ace-step.pinokio.git",
-      "ref": "pinokio://192.168.1.5:42000/api/ace-step.pinokio.git",
-      "capabilities": ["music", "score", "stems", "audio"],
+      "ref": "pinokio://gpu-host:42000/api/ace-step.pinokio.git",
+      "capabilities": [
+        "music",
+        "score",
+        "stems",
+        "audio"
+      ],
       "mok_tua_stage": "S4_music",
       "source_present": true,
       "runtime_state": "offline",
       "nested_app_git": "app",
-      "audit": {"head": "c81078ede0d1", "dirty_count": 9, "unmerged_count": 0},
+      "audit": {
+        "head": "c81078ede0d1",
+        "dirty_count": 9,
+        "unmerged_count": 0
+      },
       "pull_gate": "blocked_dirty_wrapper",
       "next_gate": "audit nested app, verify REST contract, normalize audio outputs"
     },
@@ -91,13 +132,21 @@
       "rank": 5,
       "id": "dreamtalk",
       "app_dir": "dreamtalk.git",
-      "ref": "pinokio://192.168.1.5:42000/api/dreamtalk.git",
-      "capabilities": ["talking_head", "lipsync", "portrait_animation"],
+      "ref": "pinokio://gpu-host:42000/api/dreamtalk.git",
+      "capabilities": [
+        "talking_head",
+        "lipsync",
+        "portrait_animation"
+      ],
       "mok_tua_stage": "S4_talking_head",
       "source_present": true,
       "runtime_state": "offline",
       "nested_app_git": "app",
-      "audit": {"head": "835f83897530", "dirty_count": 1, "unmerged_count": 0},
+      "audit": {
+        "head": "835f83897530",
+        "dirty_count": 1,
+        "unmerged_count": 0
+      },
       "pull_gate": "review_single_change",
       "next_gate": "compare with FaceFusion and Wan talking-avatar paths; avoid overlapping adapters"
     },
@@ -105,13 +154,25 @@
       "rank": 6,
       "id": "freemocap",
       "app_dir": "FreeMoCap.pinokio.git",
-      "ref": "pinokio://192.168.1.5:42000/api/FreeMoCap.pinokio.git",
-      "capabilities": ["mocap", "body_tracking", "pose", "video_ingest"],
+      "ref": "pinokio://gpu-host:42000/api/FreeMoCap.pinokio.git",
+      "capabilities": [
+        "mocap",
+        "body_tracking",
+        "pose",
+        "video_ingest"
+      ],
       "mok_tua_stage": "S4_motion_capture",
       "source_present": true,
       "runtime_state": "offline",
       "nested_app_git": "app",
-      "audit": {"wrapper_head": "220a815e35c2", "app_head": "088dace201fd", "dirty_count": 9, "unmerged_count": 0, "upstream_delta": 0, "verified_at": "2026-08-04T01:10:00Z"},
+      "audit": {
+        "wrapper_head": "220a815e35c2",
+        "app_head": "088dace201fd",
+        "dirty_count": 9,
+        "unmerged_count": 0,
+        "upstream_delta": 0,
+        "verified_at": "2026-08-04T01:10:00Z"
+      },
       "pull_gate": "nested_app_current_wrapper_preserved",
       "next_gate": "define pose interchange and camera-input workflow; treat as capture peer"
     },
@@ -119,13 +180,21 @@
       "rank": 7,
       "id": "ai4animationpy",
       "app_dir": "ai4animationpy.pinokio.git",
-      "ref": "pinokio://192.168.1.5:42000/api/ai4animationpy.pinokio.git",
-      "capabilities": ["body_animation", "mocap_processing", "character_animation"],
+      "ref": "pinokio://gpu-host:42000/api/ai4animationpy.pinokio.git",
+      "capabilities": [
+        "body_animation",
+        "mocap_processing",
+        "character_animation"
+      ],
       "mok_tua_stage": "S4_motion_processing",
       "source_present": true,
       "runtime_state": "offline",
       "nested_app_git": "app",
-      "audit": {"head": "b778b03ea928", "dirty_count": 0, "unmerged_count": 0},
+      "audit": {
+        "head": "b778b03ea928",
+        "dirty_count": 0,
+        "unmerged_count": 0
+      },
       "pull_gate": "safe_candidate",
       "next_gate": "audit nested app dependencies and document input/output formats"
     },
@@ -133,13 +202,25 @@
       "rank": 8,
       "id": "directors_console",
       "app_dir": "directorsconsole.pinokio.git",
-      "ref": "pinokio://192.168.1.5:42000/api/directorsconsole.pinokio.git",
-      "capabilities": ["director_ui", "storyboard", "multi_node", "prompt_engineering"],
+      "ref": "pinokio://gpu-host:42000/api/directorsconsole.pinokio.git",
+      "capabilities": [
+        "director_ui",
+        "storyboard",
+        "multi_node",
+        "prompt_engineering"
+      ],
       "mok_tua_stage": "control_surface",
       "source_present": true,
       "runtime_state": "offline",
       "nested_app_git": "app",
-      "audit": {"wrapper_head": "40702f0948ae", "app_head": "e16ecbb594ab", "dirty_count": 9, "unmerged_count": 0, "upstream_delta": 0, "verified_at": "2026-08-04T01:10:00Z"},
+      "audit": {
+        "wrapper_head": "40702f0948ae",
+        "app_head": "e16ecbb594ab",
+        "dirty_count": 9,
+        "unmerged_count": 0,
+        "upstream_delta": 0,
+        "verified_at": "2026-08-04T01:10:00Z"
+      },
       "pull_gate": "nested_app_current_wrapper_preserved",
       "next_gate": "preserve as peer UI; integrate through documented services instead of duplicating orchestration"
     },
@@ -147,13 +228,22 @@
       "rank": 9,
       "id": "cogstudio",
       "app_dir": "cogstudio.git",
-      "ref": "pinokio://192.168.1.5:42000/api/cogstudio.git",
+      "ref": "pinokio://gpu-host:42000/api/cogstudio.git",
       "upstream": "https://github.com/pinokiofactory/cogstudio",
-      "capabilities": ["video", "i2v", "v2v", "video_extend", "cogvideox"],
+      "capabilities": [
+        "video",
+        "i2v",
+        "v2v",
+        "video_extend",
+        "cogvideox"
+      ],
       "mok_tua_stage": "S3_video_optional",
       "source_present": true,
       "runtime_state": "staged_uninstalled",
-      "audit": {"head": "186f2ed0f43a", "verified_at": "2026-08-04T01:20:00Z"},
+      "audit": {
+        "head": "186f2ed0f43a",
+        "verified_at": "2026-08-04T01:20:00Z"
+      },
       "pull_gate": "source_current",
       "next_gate": "defer dependency and model install; WanGP is the broader 16GB-first provider"
     },
@@ -164,26 +254,60 @@
       "stability_matrix_package": "/mnt/ai-data/stability-matrix/Data/Packages/FramePack Studio",
       "upstream": "https://github.com/FP-Studio/framepack-studio",
       "branch": "develop",
-      "capabilities": ["video", "i2v", "t2v", "video_extend", "framepack", "queue", "upscale"],
+      "capabilities": [
+        "video",
+        "i2v",
+        "t2v",
+        "video_extend",
+        "framepack",
+        "queue",
+        "upscale"
+      ],
       "mok_tua_stage": "S3_video_optional",
       "source_present": true,
-      "runtime_state": "clean_source_staged_existing_sm_package_incomplete",
-      "audit": {"staged_head": "172f643acaa0", "sm_head": "3ed5157124f7", "sm_tracked_deletions": 47, "verified_at": "2026-08-04T01:43:40Z"},
+      "runtime_state": "shared_models_mapped_pending_smoke",
+      "audit": {
+        "staged_head": "172f643acaa0",
+        "sm_head": "3ed5157124f7",
+        "sm_tracked_deletions": 47,
+        "verified_at": "2026-08-04T01:43:40Z"
+      },
       "pull_gate": "clean_ff_only_current",
-      "next_gate": "repair the Stability Matrix package through Stability Matrix or build a thin Pinokio launcher; do not duplicate model downloads"
+      "next_gate": "Launch via mok-tua scripts/run_framepack_shared_models.sh; ensure hf_download symlink; smoke 1 job offline if hub present; do not duplicate model downloads into package tree",
+      "shared_models": {
+        "root": "/mnt/ai-data/models",
+        "hf_hub": "/mnt/ai-data/models/hf_hub",
+        "lora_dir": "/mnt/ai-data/models/loras",
+        "package_hf_symlink": "hf_download -> /mnt/ai-data/models/hf_hub",
+        "sm_model_directory_override": "/mnt/ai-data/models/",
+        "launch": "scripts/run_framepack_shared_models.sh",
+        "policy": "dedupe; no package-local re-download; --offline when hub present"
+      }
     },
     {
       "rank": 11,
       "id": "maestro",
       "app_dir": "Maestro",
-      "ref": "pinokio://192.168.1.5:42000/api/Maestro",
+      "ref": "pinokio://gpu-host:42000/api/Maestro",
       "upstream": "https://github.com/Blizaine/Maestro",
       "branch": "main",
-      "capabilities": ["video", "image", "music", "director", "shot_planning", "wan", "ltx", "flux"],
+      "capabilities": [
+        "video",
+        "image",
+        "music",
+        "director",
+        "shot_planning",
+        "wan",
+        "ltx",
+        "flux"
+      ],
       "mok_tua_stage": "S3_video_optional",
       "source_present": true,
       "runtime_state": "source_staged_uninstalled",
-      "audit": {"head": "eeff5428cc7e", "verified_at": "2026-08-04T01:43:40Z"},
+      "audit": {
+        "head": "eeff5428cc7e",
+        "verified_at": "2026-08-04T01:43:40Z"
+      },
       "pull_gate": "launcher_remediation_required",
       "next_gate": "replace plain git pull with ff-only; review unsafe-best-match and direct third-party CUDA wheels; keep nested seedvc pinned before dependency install"
     }

@@ -16,7 +16,7 @@ WORK = Path(os.environ.get("WORK_FALLBACK", ROOT / "work"))
 SMOKE_DIR = WORK / "smoke"
 AI_DATA = Path(os.environ.get("AI_DATA_ROOT", "/Volumes/ai-data"))
 API_BASE = os.environ.get("MOCK_TUA_URL", "http://127.0.0.1:8799")
-COMFY_MRGPU = os.environ.get("COMFY_MRGPU_URL", "http://192.168.1.5:8188")
+COMFY_MRGPU = os.environ.get("COMFY_MRGPU_URL", "http://gpu-host:8188")
 COMFY_LOCAL = os.environ.get("COMFY_LOCAL_URL", "http://127.0.0.1:8188")
 
 # Minimal Comfy object_info keys for T4 storyboard/video path

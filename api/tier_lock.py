@@ -142,8 +142,8 @@ def write_lock(
             "m4rv": {"role": "stills", "comfy": COMFY_HINT_LOCAL()},
             "mrgpu": {
                 "role": "video",
-                "host": os.environ.get("MRGPU_HOST", "192.168.1.5"),
-                "comfy_url": os.environ.get("COMFY_MRGPU_URL", "http://192.168.1.5:8188"),
+                "host": os.environ.get("MRGPU_HOST", "gpu-host"),
+                "comfy_url": os.environ.get("COMFY_MRGPU_URL", "http://gpu-host:8188"),
                 "gpu": "RTX 4060 Ti 16G",
             },
         },

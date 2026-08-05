@@ -18,7 +18,7 @@
     "mrgpu": {
       "host": "mrgpu",
       "label": "MRGPU ComfyUI (container or host runtime)",
-      "base_url": "http://192.168.1.5:8188",
+      "base_url": "http://gpu-host:8188",
       "role": "video",
       "mode": "remote"
     },
@@ -41,7 +41,7 @@
     "mrgpu_litellm": {
       "host": "mrgpu",
       "label": "MRGPU LiteLLM worker+cloud",
-      "base_url": "http://192.168.1.5:4000/v1",
+      "base_url": "http://gpu-host:4000/v1",
       "role": "llm_worker_cloud",
       "mode": "live"
     },
