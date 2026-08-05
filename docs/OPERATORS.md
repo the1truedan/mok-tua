@@ -326,6 +326,47 @@ Full recon export: `context/mock-tua.md`.
 
 Set via request `qqq` or env `MOCK_TUA_QQQ`.
 
+## Host roles (portable defaults)
+
+Configs and API defaults use **role hostnames**, not home LAN IPs:
+
+| Role | Env overrides | Example default |
+|------|---------------|-----------------|
+| `gpu-host` | `gpu-host_HOST`, `COMFY_gpu-host_URL` | `http://gpu-host:8188` |
+| `control-host` | operator mirror / control API | `http://control-host:8799` |
+| `desk-host` | desk Pinokio control plane | `http://desk-host:42000` |
+
+Map these in `/etc/hosts`, mDNS, or replace via env for your lab. Optional untracked `config/local.override.json` is gitignored.
+
+## Public flip + branch protection (free GitHub)
+
+Private free-plan repos **cannot** enable branch protection (API 403:
+“Upgrade to GitHub Pro or make this repository public”). Sequence:
+
+1. Scrub remotes (no userinfo) + LAN/home paths in tracked files  
+2. Push clean tip while still private  
+3. Human: `gh repo edit <owner>/mok-tua --visibility public`  
+4. **Immediately** protect `main` (block force-push; optional PR reviews)  
+5. Optional: attach demo video to a GH Release (prefer release asset over large binaries in git)
+
+Example post-public protection (adjust for solo vs team):
+
+```bash
+gh api -X PUT "repos/OWNER/mok-tua/branches/main/protection" \
+  --input - <<'JSON'
+{
+  "required_status_checks": null,
+  "enforce_admins": true,
+  "required_pull_request_reviews": null,
+  "restrictions": null,
+  "allow_force_pushes": false,
+  "allow_deletions": false
+}
+JSON
+```
+
+Never auto-flip visibility from agents. See control-repo private→public prep for the 16:20 packet.
+
 ## License
 
 MIT — see LICENSE.

@@ -142,8 +142,8 @@ def write_lock(
             "desk-host": {"role": "stills", "comfy": COMFY_HINT_LOCAL()},
             "gpu-host": {
                 "role": "video",
-                "host": os.environ.get("gpu-host_HOST", "REDACTED-LAN-IP"),
-                "comfy_url": os.environ.get("COMFY_gpu-host_URL", "http://REDACTED-LAN-IP:8188"),
+                "host": os.environ.get("gpu-host_HOST", "gpu-host"),
+                "comfy_url": os.environ.get("COMFY_gpu-host_URL", "http://gpu-host:8188"),
                 "gpu": "RTX 4060 Ti 16G",
             },
         },

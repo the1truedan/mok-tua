@@ -21,7 +21,7 @@ from typing import Any, Callable
 ROOT = Path(__file__).resolve().parents[1]
 WORK = Path(os.environ.get("WORK_FALLBACK", ROOT / "work"))
 SMOKE_DIR = WORK / "smoke"
-DEFAULT_gpu-host_HOST = os.environ.get("gpu-host_HOST", "REDACTED-LAN-IP")
+DEFAULT_gpu-host_HOST = os.environ.get("gpu-host_HOST", "gpu-host")
 DEFAULT_SSH = os.environ.get("gpu-host_SSH", f"redacted@{DEFAULT_gpu-host_HOST}")
 GROKCODE_METRICS = Path.home() / "grokcode" / "config" / "metrics_nodes.json"
 

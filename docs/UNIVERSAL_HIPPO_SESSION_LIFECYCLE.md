@@ -64,5 +64,5 @@ To disable wrapper capture temporarily, set `HIPPO_AUTO_CONTEXT=0`. To disable
 sharing while retaining local consolidation, run `hippo sleep --no-share`.
 
 The finalizer lives at
-`/Users/redacted/mok-tua/scripts/hippo-session-finalize.sh` and is intentionally
+`scripts/hippo-session-finalize.sh` (repo-relative) and is intentionally
 small so Grok/Tok wrappers can call it without importing repo Python code.

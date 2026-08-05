@@ -1,6 +1,6 @@
 {
   "schema": "crowd_nodes.v1",
-  "updated": "2026-08-02T18:16:50Z",
+  "updated": "2026-08-05T20:40:02Z",
   "notes": "Trusted lab federation only. Re-seed: mok-tua nodes seed --force",
   "nodes": [
     {
@@ -31,7 +31,7 @@
         "expand",
         "llm"
       ],
-      "last_heartbeat": "2026-08-02T18:16:50Z",
+      "last_heartbeat": "2026-08-05T20:40:02Z",
       "trusted": true,
       "notes": "desk-host SM Comfy \u2014 stills preferred"
     },
@@ -39,7 +39,7 @@
       "schema": "node_advertisement.v1",
       "id": "gpu-host",
       "pubkey": null,
-      "endpoint": "http://REDACTED-LAN-IP:8188",
+      "endpoint": "http://gpu-host:8188",
       "lock_hashes_resident": [
         "T0_orchestrators@60c4f00b9e1325de",
         "T1_vid_gen@4e103167334b165a",
@@ -68,7 +68,7 @@
         "face",
         "tts"
       ],
-      "last_heartbeat": "2026-08-02T18:16:50Z",
+      "last_heartbeat": "2026-08-05T20:40:02Z",
       "trusted": true,
       "notes": "gpu-host Comfy \u2014 video / Wan preferred"
     },
@@ -76,7 +76,7 @@
       "schema": "node_advertisement.v1",
       "id": "tower",
       "pubkey": null,
-      "endpoint": "http://REDACTED-LAN-IP:8799",
+      "endpoint": "http://control-host:8799",
       "lock_hashes_resident": [
         "T0_orchestrators@60c4f00b9e1325de"
       ],
@@ -95,7 +95,7 @@
         "stitch",
         "expand"
       ],
-      "last_heartbeat": "2026-08-02T18:16:50Z",
+      "last_heartbeat": "2026-08-05T20:40:02Z",
       "trusted": true,
       "notes": "Tower control / CPU \u2014 no GPU video"
     }

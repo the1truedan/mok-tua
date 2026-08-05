@@ -18,7 +18,7 @@
     "gpu-host": {
       "host": "gpu-host",
       "label": "gpu-host ComfyUI (container or host runtime)",
-      "base_url": "http://REDACTED-LAN-IP:8188",
+      "base_url": "http://gpu-host:8188",
       "role": "video",
       "mode": "remote"
     },
@@ -41,7 +41,7 @@
     "gpu-host_litellm": {
       "host": "gpu-host",
       "label": "gpu-host LiteLLM worker+cloud",
-      "base_url": "http://REDACTED-LAN-IP:4000/v1",
+      "base_url": "http://gpu-host:4000/v1",
       "role": "llm_worker_cloud",
       "mode": "live"
     },

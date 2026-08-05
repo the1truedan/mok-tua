@@ -8,6 +8,10 @@ api/.venv/
 *.egg-info/
 *.bak-*
 .DS_Store
+# Local memory + operator overrides (never publish)
+.hippo/
+config/local.override.json
+config/local.*.json
 # Never commit live lab dumps (PII / topology)
 docs/assets/0[1-7]-*.png
 docs/assets/card-*.html

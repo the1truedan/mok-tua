@@ -20,7 +20,7 @@ Turnstone is preferred for unattended or multi-step work because it already has 
 3. Route the handoff to a new Turnstone workstream using the local `tier-nvidia-agent`/Qwen coder alias exposed by LiteLLM.
 4. Ask the local agent first for a read-only plan and repository status. Permit edits only after the plan is logged.
 5. Use a two-pass loop: implementation agent, then an independent local review agent. The reviewer must run tests/diff checks and may propose patches but must not silently broaden scope.
-6. Require a final handoff artifact in `~/grokcode/docs` (or the repo's `docs/`) and a durable session record in AgentsView/Turnstone history.
+6. Require a final handoff artifact in the control-repo `docs/` (or this repo's `docs/`) and a durable session record in AgentsView/Turnstone history.
 7. Resume cloud work only when explicitly authorized and only from the local handoff; never assume cloud context survived a provider failure.
 
 ## Local roles
@@ -43,12 +43,12 @@ Use separate sessions and model aliases for planner, implementer, and reviewer. 
 ## Safe launch/checks
 
 ```sh
-# gpu-host control-plane health (read-only)
-python3 ~/grokcode/tok_tua/turnstone_client.py --base http://REDACTED-LAN-IP:8090 health
-python3 ~/grokcode/tok_tua/turnstone_client.py --base http://REDACTED-LAN-IP:8090 models
+# GPU-host control-plane health (read-only; set TURNSTONE_BASE if different)
+python3 "$HOME/grokcode/tok_tua/turnstone_client.py" --base http://gpu-host:8090 health
+python3 "$HOME/grokcode/tok_tua/turnstone_client.py" --base http://gpu-host:8090 models
 
 # local fallback smoke (choose the repo's approved wrapper)
-cd ~/grokcode
+cd "$HOME/grokcode"
 ./scripts/tok-tua --help
 ```
 
@@ -56,4 +56,4 @@ Before edits, capture `git status --short`, branch/commit, and the exact model a
 
 ## AgentsView history
 
-LM Studio histories are imported with `scripts/import/lmstudio_to_agentsview.py`. AgentsView's live SQLite archive is local APFS at `/Users/redacted/.agentsview/data`; the NFS copy under `/Volumes/ai-data` is backup-only. This is intentional: SQLite journals and locks are unreliable on the NFS mount.
+LM Studio histories are imported with `scripts/import/lmstudio_to_agentsview.py`. AgentsView's live SQLite archive is local APFS under `~/.agentsview/data`; the NFS copy under the shared `ai-data` mount is backup-only. This is intentional: SQLite journals and locks are unreliable on the NFS mount.

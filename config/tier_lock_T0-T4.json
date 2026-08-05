@@ -9,8 +9,8 @@
     },
     "gpu-host": {
       "role": "video",
-      "host": "REDACTED-LAN-IP",
-      "comfy_url": "http://REDACTED-LAN-IP:8188",
+      "host": "gpu-host",
+      "comfy_url": "http://gpu-host:8188",
       "gpu": "RTX 4060 Ti 16G"
     }
   },
@@ -35,7 +35,7 @@
       {
         "id": "mok_tua",
         "name": "mok-tua",
-        "path": "/Users/redacted/mok-tua",
+        "path": "~/mok-tua",
         "path_ok": true,
         "sha": "2f2e9f15f6ac",
         "dirty": true,

@@ -7,7 +7,7 @@ if [[ "${HIPPO_AUTO_CONTEXT:-1}" == "0" ]]; then
   exit 0
 fi
 
-HIPPO_BIN="${HIPPO_BIN:-/Users/redacted/.local/bin/hippo}"
+HIPPO_BIN="${HIPPO_BIN:-hippo}"
 LOG_FILE="${HIPPO_SESSION_LOG:-${HOME}/.hippo/logs/wrapper-session.log}"
 mkdir -p "$(dirname "${LOG_FILE}")" 2>/dev/null || true
 
