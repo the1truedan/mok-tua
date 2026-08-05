@@ -159,28 +159,32 @@ except OSError as e:
     sys.exit(1)
 PY
 
-# --- Python resolution (prefer SM 3.10 host / package venv for GUI parity) ---
+# --- Python resolution (prefer import-ready envs; SM 3.10 first for GUI parity) ---
+_python_ready() {
+  local py="$1"
+  [[ -x "$py" ]] || return 1
+  PYTHONPATH="$FP_PKG${PYTHONPATH:+:$PYTHONPATH}" "$py" -c "import einops,torch" 2>/dev/null
+}
+
 resolve_python() {
   if [[ -n "${FRAMEPACK_PYTHON:-}" && -x "${FRAMEPACK_PYTHON}" ]]; then
     echo "$FRAMEPACK_PYTHON"
     return
   fi
   # SM GUI path: package/venv (often symlink → host SM 3.10)
-  if [[ -x "$FP_PKG/venv/bin/python" ]]; then
-    if "$FP_PKG/venv/bin/python" -c "import einops,torch" 2>/dev/null; then
-      echo "$FP_PKG/venv/bin/python"
-      return
-    fi
+  if _python_ready "$FP_PKG/venv/bin/python"; then
+    echo "$FP_PKG/venv/bin/python"
+    return
   fi
-  if [[ -x "$HOST_SM_VENV/bin/python" ]]; then
+  if _python_ready "$HOST_SM_VENV/bin/python"; then
     echo "$HOST_SM_VENV/bin/python"
     return
   fi
-  if [[ -x "$HOST_VENV/bin/python" ]]; then
+  if _python_ready "$HOST_VENV/bin/python"; then
     echo "$HOST_VENV/bin/python"
     return
   fi
-  if [[ -x "$FP_PKG/.venv/bin/python" ]]; then
+  if _python_ready "$FP_PKG/.venv/bin/python"; then
     echo "$FP_PKG/.venv/bin/python"
     return
   fi
