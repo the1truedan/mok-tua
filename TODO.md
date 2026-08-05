@@ -33,16 +33,16 @@
 
 | # | Item | Gate |
 |---|------|------|
-| **1** | FramePack Studio **launch smoke** on gpu-host — SM GUI + CLI (`--offline`) + one short I2V → receipt | **einops/SM venv fixed** (sm310 host + package/venv symlink) · re-Launch Packages UI · shared `hf_hub` |
+| **1** | FramePack **UI I2V** + receipt (`renderer: mrgpu_framepack`, qqq, gpu_evidence) | SM venv + launch recipe wired · port **7864** |
 | **2** | If hub empty: one intentional `FRAMEPACK_ALLOW_DOWNLOAD=1` seed into **shared** hub only | never package-local HF tree |
-| **3** | Wan 2.2 / Wan2GP **one-clip I2V** when ports/adapters live | honest skip until :786x up |
+| **3** | Wan 2.2 / Wan2GP **one-clip I2V** when ports/adapters live | honest skip until Wan ports up (not FramePack 7864) |
 | **4** | W0 identity: stage **IPAdapter FaceID + InstantID** weights; FaceFusion CUDA residual | likeness ≠ prompt alone |
 
 ### P1 — conductor + social
 
 | # | Item | Gate |
 |---|------|------|
-| **5** | `local_framepack` provider entry in mok-tua providers catalog | after launch smoke |
+| **5** | ~~`local_framepack` provider~~ **wired** — close after live I2V | `orchestration.json` + `LAUNCH_RECIPES` + runtime registry |
 | **6** | C64 deck earmark keys: QQQ cycle, video provider, face-ref, estimate burn | W3 framework |
 | **7** | ACE-Step default local BGM path | QQQ0 |
 | **8** | Postiz draft-only after render (no auto-post) | human OAuth later |
@@ -75,7 +75,7 @@ python3 -m unittest discover -s tests -q
 python3 scripts/mok_tua_cli.py tui --repl --skin c64
 # FramePack (gpu-host):
 #   scp scripts/run_framepack_shared_models.sh gpu-host:/tmp/
-#   ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7865'
+#   ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7864'
 ```
 
 ---

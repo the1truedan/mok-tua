@@ -89,15 +89,46 @@ ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.
 `--install-deps` = torch(cu128) + `requirements.txt` (**einops** included) + link `package/venv`.  
 Full SM GUI + M4RV orchestration: `docs/operations/FRAMEPACK_SM_GUI_AND_ORCHESTRATION_2026-08-05.md`
 
+## Lifecycle (mok-tua · SM · LAN)
+
+| Surface | Start | Stop |
+|---------|-------|------|
+| mok-tua | `launch framepack_studio --live` | `stop framepack_studio` |
+| Wrapper | `--offline --server 0.0.0.0 --port 7864` | stop via registry / mok-tua |
+| SM GUI | Packages → Launch (after `--install-deps`) | SM stop only if SM owns process |
+| Browser | `http://gpu-host:7864/` | use mok-tua stop |
+
+**Port 7864** (ACE-Step **7865**). Registry: `/mnt/ai-data/work/mok-tua/runtime/framepack_studio.json`
+
 ## Smoke
 
 ```bash
 scp ~/mok-tua/scripts/run_framepack_shared_models.sh gpu-host:/tmp/
 ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --install-deps'
 # SM Packages → Launch  OR  CLI:
-ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7865'
+ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7864'
 ```
 
 1. Launch (SM GUI or wrapper) on MRGPU  
 2. Confirm no new multi-GB dirs under package tree  
-3. One short I2V job → receipt under `work/framepack/receipts/` (or `~/work/framepack/receipts` fallback)  
+3. HTTP OK on `http://gpu-host:7864/` from desk  
+4. One short I2V job → receipt under `work/framepack/receipts/` (or `~/work/framepack/receipts` fallback)  
+
+### Hub seed note (2026-08-05)
+
+Shared `hf_hub` was empty (README only). First launch with `--offline` fails on  
+`hunyuanvideo-community/HunyuanVideo` text_encoder.
+
+| Blocker | Fix |
+|---------|-----|
+| Empty hub | `FRAMEPACK_ALLOW_DOWNLOAD=1` seed into **shared** hub only |
+| NFS uid 501 vs 1000 write deny on `hf_hub` | From Mac: `chmod -R g+rwX /Volumes/ai-data/models/hf_hub` + mkdir hub/transformers/diffusers |
+| SM empty venv / einops | `--install-deps` + package/venv → host SM 3.10 |
+
+```bash
+ssh gpu-host 'FRAMEPACK_ALLOW_DOWNLOAD=1 bash /tmp/run_framepack_shared_models.sh --server 0.0.0.0 --port 7864'
+# log: /mnt/ai-data/work/framepack/logs/launch_7864_seed2.log
+```
+
+**In progress (operator):** seed download writing to `/mnt/ai-data/models/hf_hub` (multi‑GB Hunyuan shards; Gradio comes up after load).  
+After snapshots land under `…/hf_hub/hub/models--*hunyuan*`, prefer offline / auto-offline.

@@ -1,6 +1,6 @@
 {
   "schema": "crowd_nodes.v1",
-  "updated": "2026-08-05T20:40:02Z",
+  "updated": "2026-08-05T22:15:05Z",
   "notes": "Trusted lab federation only. Re-seed: mok-tua nodes seed --force",
   "nodes": [
     {
@@ -31,7 +31,7 @@
         "expand",
         "llm"
       ],
-      "last_heartbeat": "2026-08-05T20:40:02Z",
+      "last_heartbeat": "2026-08-05T22:15:05Z",
       "trusted": true,
       "notes": "M4RV SM Comfy \u2014 stills preferred"
     },
@@ -68,7 +68,7 @@
         "face",
         "tts"
       ],
-      "last_heartbeat": "2026-08-05T20:40:02Z",
+      "last_heartbeat": "2026-08-05T22:15:05Z",
       "trusted": true,
       "notes": "MRGPU Comfy \u2014 video / Wan preferred"
     },
@@ -95,7 +95,7 @@
         "stitch",
         "expand"
       ],
-      "last_heartbeat": "2026-08-05T20:40:02Z",
+      "last_heartbeat": "2026-08-05T22:15:05Z",
       "trusted": true,
       "notes": "Tower control / CPU \u2014 no GPU video"
     }

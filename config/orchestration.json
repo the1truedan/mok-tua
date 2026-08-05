@@ -122,8 +122,20 @@
       "host": "mrgpu",
       "workflow_pin": "animatediff_basic",
       "qqq": ["QQQ0", "QQQ1"],
-      "status": "pin_pending",
-      "note": "Zealousideal_Money99-era AD fallback / short loops; not primary narrative path"
+      "status": "smoke_ok_2026-08-05",
+      "note": "Short loops / GPU smoke proven; not primary long-form narrative"
+    },
+    "local_framepack": {
+      "type": "local_framepack",
+      "host": "mrgpu",
+      "provider_id": "framepack_studio",
+      "port": 7864,
+      "bind": "0.0.0.0",
+      "open": "http://gpu-host:7864/",
+      "launch": "scripts/run_framepack_shared_models.sh",
+      "qqq": ["QQQ0", "QQQ1"],
+      "status": "launch_recipe_wired_pending_ui_i2v_smoke",
+      "note": "Longer keyframe/newsies I2V; shared hf_hub; port 7864 (ACE-Step uses 7865)"
     },
     "seedance_cloud": {
       "type": "comfy_partner",
@@ -278,8 +290,25 @@
       "path": "/Volumes/ai-data/pinokio/api/FreeMoCap.pinokio.git"
     },
     "framepack_studio": {
-      "status": "installed_sm",
-      "path": "/Volumes/ai-data/stability-matrix/mac-Data/Packages/FramePack Studio"
+      "status": "launchable_shared_models",
+      "path_linux": "/mnt/ai-data/stability-matrix/Data/Packages/FramePack Studio",
+      "path_mac": "/Volumes/ai-data/stability-matrix/mac-Data/Packages/FramePack Studio",
+      "port": 7864,
+      "open": "http://gpu-host:7864/",
+      "launch": "scripts/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7864",
+      "sm_gui": "Requires package/venv → host SM 3.10 env via --install-deps; then SM Launch or open LAN URL",
+      "runtime_registry": "/mnt/ai-data/work/mok-tua/runtime/framepack_studio.json"
+    },
+    "port_map": {
+      "comfy": 8188,
+      "maestro": 7860,
+      "framepack": 7864,
+      "ace_step": 7865,
+      "facefusion": 7870,
+      "mok_tua_api": 8799,
+      "directors_ui": 5173,
+      "directors_cpe": 9800,
+      "directors_orch": 9820
     },
     "ominicontrol": {
       "status": "tier_b",

@@ -100,14 +100,16 @@
       "id": "framepack_studio",
       "tier": "T1_vid_gen",
       "name": "FramePack Studio",
-      "path": "stability-matrix/mac-Data/Packages",
+      "path": "stability-matrix/Data/Packages",
       "path_glob": "FramePack*",
+      "path_mac": "stability-matrix/mac-Data/Packages",
       "kind": "stability_matrix",
       "roles": ["framepack", "long_video", "keyframe"],
-      "mok_tua_hook": "Optional S3 long-form after storyboard keyframes",
-      "status": "installed_sm",
+      "mok_tua_hook": "video_provider=local_framepack; launch/stop via mok-tua; LAN http://gpu-host:7864/",
+      "status": "launchable_shared_models",
       "priority": 2,
-      "bleeding_edge": true
+      "bleeding_edge": true,
+      "ports": {"ui": 7864}
     },
     {
       "id": "ace_step",

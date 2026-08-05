@@ -28,8 +28,10 @@
 scp ~/mok-tua/scripts/run_framepack_shared_models.sh gpu-host:/tmp/
 ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --install-deps'
 # Then SM GUI Launch, or:
-ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7865'
+ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7864'
 ```
+
+**Port:** FramePack **7864** (ACE-Step keeps **7865**).  
 
 If SM “repairs” the package and recreates a real `venv/` directory, re-run `--install-deps` (re-links).
 
@@ -51,25 +53,32 @@ If SM “repairs” the package and recreates a real `venv/` directory, re-run `
 
 ## 3. Launch matrix (mok-tua stack)
 
-| Surface | How to start | When to use |
-|---------|--------------|-------------|
-| **Stability Matrix Packages** | Packages → FramePack Studio → Launch | Human GUI smoke on gpu-host |
-| **CLI wrapper** | `run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7865` | SSH from M4RV; receipts; shared HF policy |
-| **Pinokio** | pterm / app if FramePack app present | Lifecycle with other gpu-host apps |
-| **mok-tua conductor** | provider earmark `local_framepack` (W1) | Orchestrated shots after provider wired |
+| Surface | How to start | Stop | Sees process? |
+|---------|--------------|------|----------------|
+| **mok-tua conductor** | `mok_tua_cli.py launch framepack_studio --live` | `stop framepack_studio` | launch state + NFS runtime registry |
+| **CLI wrapper** | `run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7864` | mok-tua stop / kill pgid | writes `work/mok-tua/runtime/framepack_studio.json` |
+| **Stability Matrix Packages** | Packages → Launch (after `--install-deps` venv link) | SM stop if SM owns PID | SM only for *its* spawn; use LAN URL if mok-tua owns |
+| **Browser (LAN)** | `http://gpu-host:7864/` | n/a | Gradio queue / background jobs UI |
+
+**Dual control truth:** SM GUI and mok-tua do **not** share process ownership automatically.  
+**Robust model:** one owner (prefer mok-tua) + shared registry + same wrapper for any start path + LAN Gradio for everyone.
 
 ### From M4RV (desk-host) — orchestrate, don’t reinstall on Mac
 
 ```bash
-# 1) one-time / after requirements change
+# 1) one-time / after requirements change (also fixes SM GUI einops)
 scp ~/mok-tua/scripts/run_framepack_shared_models.sh gpu-host:/tmp/
 ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --install-deps'
 
-# 2) smoke launch (Gradio; port matches lab habit)
-ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7865'
+# 2) smoke launch (Gradio on reserved port 7864)
+ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7864'
+# or: python3 scripts/mok_tua_cli.py launch framepack_studio --live
 
-# 3) open UI from desk browser: http://gpu-host:7865  (role DNS / hosts)
+# 3) open UI from desk browser
+open http://gpu-host:7864/
 ```
+
+Shared registry: `/mnt/ai-data/work/mok-tua/runtime/framepack_studio.json`  
 
 Comfy stills/video remain `http://gpu-host:8188` via mok-tua `ComfyClient` — separate path.
 

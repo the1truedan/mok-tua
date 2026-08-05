@@ -327,7 +327,7 @@ RUNTIME_DIR="${MOCK_TUA_RUNTIME_DIR:-/mnt/ai-data/work/mok-tua/runtime}"
 mkdir -p "$RUNTIME_DIR" 2>/dev/null || true
 RUNTIME_JSON="$RUNTIME_DIR/framepack_studio.json"
 # Registry before exec (pid = this process group leader; mok-tua also records spawn pid).
-CMD_JSON=$(python3 -c 'import json,sys; print(json.dumps(sys.argv[1:]))' -- "$PY" studio.py "${OFFLINE_ARGS[@]}" "$@")
+CMD_JSON=$(python3 -c 'import json,sys; print(json.dumps(sys.argv[1:]))' _ "$PY" studio.py "${OFFLINE_ARGS[@]}" "$@")
 export RUNTIME_JSON FP_BIND FP_PORT FP_PKG SHARED_MODELS HF_HOME CMD_JSON
 python3 - <<'PY' 2>/dev/null || true
 import json, os, time
