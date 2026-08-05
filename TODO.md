@@ -51,9 +51,10 @@
 
 | # | Item | Gate |
 |---|------|------|
+| **9b** | **wait-what earmark** — plain-English pass on README / Release / PR bodies for **native English speakers, not AI aficionados** | [mattpocock/skills `wait-what`](https://github.com/mattpocock/skills/blob/main/skills/productivity/wait-what/SKILL.md) · doc `docs/roadmap/WAIT_WHAT_GITHUB_PLAIN_ENGLISH_EARMARK_2026-08-05.md` · install optional |
 | **10** | Human: review packet → `gh repo edit … --visibility public` | **never agent-unattended** |
 | **11** | Immediately enable `main` branch protection post-flip | free public allows it |
-| **12** | Optional GH Release + attach **gpu-host** mp4 (prefer local proof over hybrid) | asset not git blob |
+| **12** | Optional GH Release + attach **gpu-host** mp4 (prefer local proof over hybrid) | asset not git blob; body gets wait-what pass first |
 
 ### Explicit non-goals (this quarter unless reopened)
 
