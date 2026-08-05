@@ -29,6 +29,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
 - Public visibility flip (human-gated).
 - FramePack end-to-end I2V job receipt (deps/map ready; UI smoke next).
 - Wan Gradio live ports (honest skip at probe).
+- **wait-what** skill install — earmark only for plain-English GitHub posts ([mattpocock/skills](https://github.com/mattpocock/skills)); see `docs/roadmap/WAIT_WHAT_GITHUB_PLAIN_ENGLISH_EARMARK_2026-08-05.md`.
 
 ## [0.5.3] — 2026-08-02
 

@@ -24,10 +24,17 @@
 | FramePack | shared map + uv host deps; **UI I2V smoke next** |
 | Public flip | pending human |
 
+## Earmark — plain GitHub English
+
+Before public flip / GH Release copy: **wait-what** from [mattpocock/skills](https://github.com/mattpocock/skills)  
+→ re-pitch for **native English speakers, not AI aficionados**  
+→ `docs/roadmap/WAIT_WHAT_GITHUB_PLAIN_ENGLISH_EARMARK_2026-08-05.md` (install optional; earmark only)
+
 ## Paste for new chat
 
 ```text
 Continue from mok-tua HANDOFF.md → docs/operations/SESSION_HANDOFF_2026-08-05_FULL_GAMUT_STAGED_SMOKE.md
 Grok I2V ≠ MRGPU local — see I2V_GROK_VS_MRGPU incident.
-Next: FramePack --offline launch smoke; W0 identity; human public flip only.
+Earmark: mattpocock/skills wait-what for plain-English GH posts (not AI-aficionado tone).
+Next: FramePack --offline launch smoke; W0 identity; wait-what README pass; human public flip only.
 ```
