@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-05 (lab close → 2026-08-06 UTC)  
 **Repo:** `~/mok-tua` · dual remote **github** + **forgejo** (no userinfo in URLs)  
-**Branch:** `agent/mok-tua-staged-pulls-runbooks` (tip matches private `main` before this packet; see post-push tip)  
+**Branch:** `agent/mok-tua-staged-pulls-runbooks` · private `main` @ **`da0696d`** (GitHub pushed)  
 **Version:** **0.5.6** (CEO MRGPU examples + accurate collage; TUI **0.5.5**; full-gamut **0.5.4**)  
 **Visibility:** **PRIVATE** — public flip **human-gated only**  
 **Control mirror:** `~/grokcode/docs/operations/SESSION_HANDOFF_2026-08-05_MOK_TUA_0.5.6_PRIVATE_PUSH.md`
