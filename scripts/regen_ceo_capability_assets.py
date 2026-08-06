@@ -10,7 +10,7 @@ Outputs (committed assets):
   docs/assets/hero-prompt-to-product.jpg  (compose from FaceID panels + strip)
 
 Usage:
-  COMFY_URL=http://192.168.1.5:8188 python3 scripts/regen_ceo_capability_assets.py
+  COMFY_URL=http://gpu-host:8188 python3 scripts/regen_ceo_capability_assets.py
   SKIP_AD=1  … skip AnimateDiff
   SKIP_HERO=1 … skip hero compose
 """
@@ -41,7 +41,7 @@ try:
 except Exception:  # pragma: no cover
     sample_host = None  # type: ignore
 
-COMFY_URL = os.environ.get("COMFY_URL", os.environ.get("COMFY_MRGPU_URL", "http://192.168.1.5:8188")).rstrip("/")
+COMFY_URL = os.environ.get("COMFY_URL", os.environ.get("COMFY_MRGPU_URL", "http://gpu-host:8188")).rstrip("/")
 CKPT = os.environ.get("MOK_TUA_CKPT", "DreamShaper_8_pruned.safetensors")
 # Explicit loaders (Unified FaceID needs ViT-H filename pattern our pool lacks)
 FACEID_BIN = os.environ.get("MOK_TUA_FACEID_BIN", "ip-adapter-faceid-plusv2_sd15.bin")
@@ -421,7 +421,7 @@ def sample_gpu() -> dict[str, Any]:
                 "BatchMode=yes",
                 "-o",
                 "ConnectTimeout=4",
-                "dtm@192.168.1.5",
+                os.environ.get("MOCK_TUA_SSH_TARGET", "operator@gpu-host"),
                 "nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total,temperature.gpu --format=csv,noheader,nounits",
             ],
             capture_output=True,
@@ -980,7 +980,7 @@ def main() -> int:
     summary = {
         "schema": "mok_tua_ceo_capability_regen.v2_faceid",
         "ts_utc": _utc(),
-        "comfy": COMFY_URL.replace("192.168.1.5", "gpu-host"),
+        "comfy": "gpu-host:8188",  # role label only; never log raw COMFY_URL
         "checkpoint": CKPT,
         "faceid_bin": FACEID_BIN,
         "identity": "IPAdapter FaceID PLUS V2 from padded 00-ceo-source-still",

@@ -49,7 +49,7 @@ class ArtifactReceiptTests(unittest.TestCase):
                 p,
                 renderer="grok_imagine_i2v",
                 cloud_or_local="cloud",
-                host_role="192.168.1.99",
+                host_role="gpu-host",
                 qqq="QQQ1",
             )
             self.assertEqual(rec["host_role"], "host-redacted")

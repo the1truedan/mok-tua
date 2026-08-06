@@ -56,7 +56,7 @@ Pres-smoke 01–04 remain mock / route-unknown.
 ## Operator re-run
 
 ```bash
-export COMFY_URL=http://192.168.1.5:8188   # or gpu-host if resolved
+export COMFY_URL=http://gpu-host:8188
 python3 scripts/regen_ceo_ipadapter_panels_0_5_7.py
 # poster:
 # Chrome headless → docs/assets/mokups/capability-collage.html → products-capabilities.png

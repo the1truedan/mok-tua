@@ -1,7 +1,7 @@
 {
   "schema": "mok_tua_artifact_receipt.v1",
   "artifact": {
-    "path": "/Users/dtm/mok-tua/work/ceo_capability_regen/ceo_animatediff_faceid.mp4",
+    "path": "work/ceo_capability_regen/ceo_animatediff_faceid.mp4",
     "name": "ceo_animatediff_faceid.mp4",
     "sha256": "26061c017810382c400864c0e3236c1012e03e3c74a7da1a26328361801e9b20",
     "kind": "video",
