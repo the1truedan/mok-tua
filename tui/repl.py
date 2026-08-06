@@ -16,6 +16,9 @@ _C64_HI = "\033[38;2;255;255;255m"
 _C64_YL = "\033[38;2;213;223;124m"
 _C64_GN = "\033[38;2;92;235;90m"
 _C64_RD = "\033[38;2;255;123;123m"
+# Inverse boot: light-blue paper + deep ink (matches themes/c64.tcss #boot)
+_C64_BOOT_BG = "\033[48;2;165;160;255m"
+_C64_BOOT_FG = "\033[38;2;26;20;72m"
 _RESET = "\033[0m"
 _CLEAR = "\033[2J\033[H"
 
@@ -29,6 +32,12 @@ def _color_ok() -> bool:
 def _paint(skin: str, text: str, kind: str = "body") -> str:
     if skin != "c64" or not _color_ok():
         return text
+    if kind == "boot":
+        # Paint each line so inverse covers the full logo block on the TTY.
+        out_lines = []
+        for ln in text.splitlines():
+            out_lines.append(f"{_C64_BOOT_BG}{_C64_BOOT_FG}{ln}{_RESET}")
+        return "\n".join(out_lines)
     palette = {
         "body": _C64_FG,
         "hi": _C64_HI,
@@ -44,8 +53,8 @@ def run_repl(skin: str = DEFAULT_SKIN, *, seed_prompt: str | None = None) -> int
     c64ish = skin in ("c64", "1980crt", "tui-c64-mode-default-1980crt-tui")
     if c64ish and _color_ok():
         sys.stdout.write(_CLEAR)
-        sys.stdout.write(f"{_C64_BG}{_C64_FG}")
-        print(_paint(skin, loading_screen_text(__version__, step=12)))
+        # Inverse PETSCII loader — fixed-width glyphs + high contrast
+        print(_paint(skin, loading_screen_text(__version__, step=12), "boot"))
         print()
         sys.stdout.write(_CLEAR)
 

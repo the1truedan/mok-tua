@@ -23,12 +23,17 @@ Screen {
     padding: 0 1;
 }
 
+/* Inverse phosphor boot: bright green field + black ink for block logo */
 #boot {
     height: 1fr;
-    background: #000000;
-    color: #33ff33;
+    background: #33ff33;
+    color: #001a00;
     padding: 1 2;
     text-style: bold;
+    content-align: center middle;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #main-panes {

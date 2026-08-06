@@ -91,8 +91,13 @@ def build_app(
             )
             yield Static(title, id="chrome")
             yield Static(menu, id="menu")
-            # Boot splash (full width) then replaced by panes via display toggle
-            yield Static(loading_screen_text(ver, step=0), id="boot")
+            # Boot splash (full width) then replaced by panes via display toggle.
+            # markup=False: plain monospaced block art — no Rich wrap/markup glitches.
+            boot_txt = loading_screen_text(ver, step=0)
+            try:
+                yield Static(boot_txt, id="boot", markup=False)
+            except TypeError:
+                yield Static(boot_txt, id="boot")
             with Horizontal(id="main-panes"):
                 with Vertical(id="left-pane"):
                     yield RichLog(

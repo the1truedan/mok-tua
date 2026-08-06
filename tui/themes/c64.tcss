@@ -26,12 +26,18 @@ Screen {
     padding: 0 1;
 }
 
+/* Inverse VIC-II boot: light-blue paper + deep ink so block logo stays legible.
+   (Normal deck stays classic light-on-dark below.) */
 #boot {
     height: 1fr;
-    background: #40318d;
-    color: #a5a0ff;
+    background: #a5a0ff;
+    color: #1a1448;
     padding: 1 2;
     text-style: bold;
+    content-align: center middle;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #main-panes {
