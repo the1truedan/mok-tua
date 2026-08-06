@@ -156,8 +156,10 @@
 </div>
 
 <div class="honest">
-  <strong>Honest residuals:</strong> InsightFace FaceID (buffalo_l incomplete / antelope loader error) —
-  identity path is <code>ip-adapter-plus-face_sd15</code> + img2img from CEO still, not FaceID Plus V2 embeddings.
+  <strong>Identity path (2026-08-05/06):</strong> IPAdapter <code>FaceID PLUS V2</code>
+  (<code>ip-adapter-faceid-plusv2_sd15.bin</code> + LoRA + CLIP vision H + InsightFace buffalo_l) with
+  <strong>padded</strong> face ref from <code>00-ceo-source-still.jpg</code> (extreme close-up fails det until padded).
+  <strong>Residuals:</strong> InstantID weights empty · Director <code>/api/backends []</code> · FramePack mp4 finalize open · Wan ports.
   Grok Imagine I2V ≠ gpu-host local. Public flip human-gated only.
 </div>
 
@@ -234,15 +236,15 @@
   <div class="card-head">
     <div class="cap-tag ui">4 · ComfyUI IRL (gpu-host)</div>
     <h3>Live node graph surface on gpu-host</h3>
-    <div class="tools">:8188 · DreamShaper_8 + IPAdapter plus-face · role label gpu-host</div>
+    <div class="tools">:8188 · DreamShaper_8 + IPAdapter FaceID PLUS V2 · role label gpu-host</div>
   </div>
   <div class="shot">
     <img src="../capabilities/ui/ui-comfy-ceo.png" alt="ComfyUI live screenshot" />
   </div>
   <div class="sausage">
     <div><span class="k">path:</span> <span class="path">docs/assets/capabilities/ui/ui-comfy-ceo.png</span></div>
-    <div class="prompt"><span class="k">workflow:</span> LoadImage(00-ceo-source-still) → IPAdapterAdvanced(plus-face) → KSampler img2img → SaveImage</div>
-    <div class="tool"><span class="k">tool:</span> ComfyUI 0.29.0 · RTX 4060 Ti · screenshot headless · no lab home paths in caption</div>
+    <div class="prompt"><span class="k">workflow:</span> LoadImage(padded CEO ref) → IPAdapterFaceID(plusv2) → KSampler → SaveImage</div>
+    <div class="tool"><span class="k">tool:</span> ComfyUI 0.29.0 · RTX 4060 Ti · screenshot · no lab home paths in caption</div>
   </div>
 </section>
 
@@ -250,8 +252,8 @@
 <section class="card">
   <div class="card-head">
     <div class="cap-tag gen">5 · storyboard panels (individual)</div>
-    <h3>Six CEO-context panels · IPAdapter plus-face img2img</h3>
-    <div class="tools">Each panel is its own file under capabilities/panels/ with receipt</div>
+    <h3>Six CEO FaceID panels · explicit FaceID PLUS V2</h3>
+    <div class="tools">Each panel under capabilities/panels/ · identity from 00-ceo-source-still</div>
   </div>
   <div class="shot grid6">
     <img src="../capabilities/panels/01-wide.jpg" alt="panel 1 wide" />
@@ -263,8 +265,8 @@
   </div>
   <div class="sausage">
     <div><span class="k">path:</span> <span class="path">docs/assets/capabilities/panels/01-wide.jpg … 06-outdoor.jpg</span></div>
-    <div class="prompt"><span class="k">prompt (wide):</span> cinematic storyboard panel, wide shot tech meetup classroom, same man as the reference selfie photo, … handwritten black marker letters spelling ceo on forehead, blue hoodie, projector mok-tua …</div>
-    <div class="tool"><span class="k">tool:</span> gpu-host_comfy_ipadapter_plusface_img2img · DreamShaper_8 + ip-adapter-plus-face_sd15 · denoise≈0.38–0.52 · QQQ0 · receipt per panel</div>
+    <div class="prompt"><span class="k">prompt (wide):</span> cinematic storyboard panel, wide shot classroom-like tech meetup, same man as reference selfie… handwritten black marker 'ceo' on forehead when forehead visible…</div>
+    <div class="tool"><span class="k">tool:</span> gpu-host_comfy_faceid_storyboard · DreamShaper_8 + faceid-plusv2 · QQQ0 · scripts/regen_ceo_capability_assets.py</div>
   </div>
 </section>
 
@@ -272,15 +274,32 @@
 <section class="card">
   <div class="card-head">
     <div class="cap-tag gen">5b · storyboard sheet</div>
-    <h3>Collaged 2×3 sheet for README</h3>
+    <h3>Collaged 3×2 sheet for README</h3>
   </div>
   <div class="shot">
     <img src="../example-storyboard-sheet.jpg" alt="storyboard sheet" />
   </div>
   <div class="sausage">
     <div><span class="k">path:</span> <span class="path">docs/assets/example-storyboard-sheet.jpg</span></div>
-    <div class="prompt"><span class="k">prompt:</span> 6-panel collage of panels above (same IPAdapter path)</div>
-    <div class="tool"><span class="k">tool:</span> scripts/regen_ceo_ipadapter_panels_0_5_7.py · receipt docs/assets/receipts/example-storyboard-sheet.receipt.json</div>
+    <div class="prompt"><span class="k">prompt:</span> 6-panel collage of FaceID panels above</div>
+    <div class="tool"><span class="k">tool:</span> scripts/regen_ceo_capability_assets.py · receipt docs/assets/receipts/example-storyboard-sheet.receipt.json</div>
+  </div>
+</section>
+
+<!-- HERO -->
+<section class="card">
+  <div class="card-head">
+    <div class="cap-tag gen">5c · README hero</div>
+    <h3>CEO as character — storyboard wall + player chrome</h3>
+    <div class="tools">Replaces stock woman-instructor concept art</div>
+  </div>
+  <div class="shot">
+    <img src="../hero-prompt-to-product.jpg" alt="CEO hero prompt to product" />
+  </div>
+  <div class="sausage">
+    <div><span class="k">path:</span> <span class="path">docs/assets/hero-prompt-to-product.jpg</span></div>
+    <div class="prompt"><span class="k">compose:</span> 6 FaceID panels + AD strip frame in video chrome · brand mok-tua · storyboard · animate · teach</div>
+    <div class="tool"><span class="k">tool:</span> gpu-host_ceo_hero_compose · QQQ0 · receipt docs/assets/receipts/hero-prompt-to-product.receipt.json</div>
   </div>
 </section>
 
@@ -288,22 +307,22 @@
 <section class="card">
   <div class="card-head">
     <div class="cap-tag gen">6 · face polish</div>
-    <h3>BEFORE source · AFTER IPAdapter polish</h3>
+    <h3>BEFORE source · AFTER FaceID polish</h3>
   </div>
   <div class="shot">
     <img src="../example-face-polish.jpg" alt="face polish before after" />
   </div>
   <div class="sausage">
     <div><span class="k">path:</span> <span class="path">docs/assets/example-face-polish.jpg</span></div>
-    <div class="prompt"><span class="k">prompt:</span> portrait photo polish of same man as the reference selfie… handwritten black marker letters spelling ceo on forehead… navy backdrop · denoise=0.32</div>
-    <div class="tool"><span class="k">tool:</span> gpu-host_comfy_ipadapter_plusface_polish · QQQ0 · receipt docs/assets/receipts/example-face-polish.receipt.json</div>
+    <div class="prompt"><span class="k">prompt:</span> portrait photo polish of same man as reference selfie… handwritten black marker ceo on forehead… navy backdrop · denoise=0.42</div>
+    <div class="tool"><span class="k">tool:</span> gpu-host_comfy_faceid_face_polish · QQQ0 · receipt docs/assets/receipts/example-face-polish.receipt.json</div>
   </div>
 </section>
 
 <!-- 7 ANIMATEDIFF -->
 <section class="card">
   <div class="card-head">
-    <div class="cap-tag video">7 · short loop (AnimateDiff)</div>
+    <div class="cap-tag video">7 · short loop (AnimateDiff + FaceID)</div>
     <h3>Frame strip from gpu-host short loop · not cloud Grok</h3>
   </div>
   <div class="shot">
@@ -311,8 +330,8 @@
   </div>
   <div class="sausage">
     <div><span class="k">path:</span> <span class="path">docs/assets/ceo-i2v-frame-strip.jpg</span></div>
-    <div class="prompt"><span class="k">prompt:</span> short loop of CEO face cues · subtle head motion and blink · dual monitor glow · coherent face</div>
-    <div class="tool"><span class="k">tool:</span> gpu-host_comfy_animatediff · mm_sd_v15_v2 · GPU peak 100% · QQQ0 · receipt docs/assets/receipts/ceo-i2v-frame-strip.receipt.json · NOT Grok Imagine</div>
+    <div class="prompt"><span class="k">prompt:</span> short loop of CEO face · subtle head motion and blink · dual monitor glow · coherent face</div>
+    <div class="tool"><span class="k">tool:</span> gpu-host_comfy_faceid_animatediff · mm_sd_v15_v2 · FaceID PLUS V2 · QQQ0 · NOT Grok Imagine</div>
   </div>
 </section>
 

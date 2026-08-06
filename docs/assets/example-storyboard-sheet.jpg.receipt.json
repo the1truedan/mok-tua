@@ -3,103 +3,100 @@
   "artifact": {
     "path": "/Users/redacted/mok-tua/docs/assets/example-storyboard-sheet.jpg",
     "name": "example-storyboard-sheet.jpg",
-    "sha256": "b9239824bd11a7d48361e5d1f9b1bf09bb11c93f9cc4c8f4d46dd26aecaef5de",
+    "sha256": "ccf02c7053f0645db623a0c81aca0d5d4acbd0b8848903dfcbce705689480a74",
     "kind": "image",
     "exists": true
   },
-  "renderer": "gpu-host_comfy_ipadapter_plusface_storyboard",
+  "renderer": "gpu-host_comfy_faceid_storyboard",
   "provider": "comfy",
   "cloud_or_local": "local",
-  "model": "DreamShaper_8_pruned.safetensors+ip-adapter-plus-face_sd15.safetensors",
+  "model": "DreamShaper_8_pruned.safetensors+ip-adapter-faceid-plusv2_sd15.bin",
   "host_role": "gpu-host",
   "qqq": "QQQ0",
-  "prompt": "6-panel CEO storyboard IPAdapter plus-face img2img from 00-ceo-source-still.jpg",
+  "prompt": "6-panel CEO storyboard FaceID from 00-ceo-source-still.jpg",
   "negative_prompt": null,
   "seed": null,
-  "wall_clock_s": 23.09,
+  "wall_clock_s": 28.04,
   "tokens": {
     "input": null,
     "output": null,
     "total": null,
     "note": "n/a local comfy"
   },
-  "gpu": {},
+  "gpu": {
+    "peak_util_pct": 98.0,
+    "note": "sampled around panel jobs"
+  },
   "cpu": {},
-  "gpu_evidence": null,
-  "sampled_by": "manual",
-  "ts_utc": "2026-08-06T01:25:46Z",
-  "caption_line": "gpu-host_comfy_ipadapter_plusface_storyboard \u00b7 DreamShaper_8_pruned.safetensors+ip-adapter-plus-face_sd15.safetensors \u00b7 gp\u2026",
+  "gpu_evidence": "peak_util=98.0% host_role=gpu-host",
+  "sampled_by": "host_monitor_or_ssh",
+  "ts_utc": "2026-08-06T01:35:31Z",
+  "caption_line": "gpu-host_comfy_faceid_storyboard \u00b7 DreamShaper_8_pruned.safetensors+ip-adapter-faceid-plusv2_sd15.bin \u00b7 gpu-host \u00b7 28.0s \u00b7\u2026",
   "extra": {
     "panels": [
       {
         "id": "wide",
-        "path": "docs/assets/capabilities/panels/01-wide.jpg",
-        "seed": 43000,
-        "denoise": 0.52,
-        "prompt": "cinematic storyboard panel, wide shot tech meetup classroom, same man as the reference selfie photo, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker letters spelling ceo on forehead (not hearts, not doodles), blue hoodie, standing by projector showing mok-tua, audience laptops, natural light, 35mm photo",
-        "seconds": 4.552446126937866,
-        "prompt_id": "93306719-fbd8-4651-ad7f-d50e6cacad8f",
-        "ipadapter": "ip-adapter-plus-face_sd15.safetensors",
-        "ip_weight": 0.7
+        "seed": 52000,
+        "prompt": "cinematic storyboard panel, wide shot classroom-like tech meetup, same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, hoodie, standing presenting mok-tua on projector, audience of laptops, natural light",
+        "faceid_bin": "ip-adapter-faceid-plusv2_sd15.bin",
+        "faceid_weight": 0.95,
+        "seconds": 6.047079086303711,
+        "prompt_id": "840bdd84-bd61-4fce-b7b8-64b96da79e71",
+        "filename": "ceo_faceid_wide_00001_.png"
       },
       {
         "id": "medium",
-        "path": "docs/assets/capabilities/panels/02-medium.jpg",
-        "seed": 43019,
-        "denoise": 0.5,
-        "prompt": "cinematic storyboard panel, medium shot at desk, same man as the reference selfie photo, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker letters spelling ceo on forehead (not hearts, not doodles), sticky notes, dual monitors with terminal, teaching a colleague, warm lamp, photoreal",
-        "seconds": 3.023084878921509,
-        "prompt_id": "eeed679e-0295-4b7e-a40c-eea7bc0dcda0",
-        "ipadapter": "ip-adapter-plus-face_sd15.safetensors",
-        "ip_weight": 0.7
+        "seed": 52019,
+        "prompt": "cinematic storyboard panel, medium shot at desk, same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, sticky notes, dual monitors with terminal and IDE, teaching a colleague, warm lamp",
+        "faceid_bin": "ip-adapter-faceid-plusv2_sd15.bin",
+        "faceid_weight": 0.95,
+        "seconds": 3.020080089569092,
+        "prompt_id": "1879f937-bc5f-4017-8cd7-f9a341a61f36",
+        "filename": "ceo_faceid_medium_00001_.png"
       },
       {
         "id": "closeup",
-        "path": "docs/assets/capabilities/panels/03-closeup.jpg",
-        "seed": 43038,
-        "denoise": 0.38,
-        "prompt": "cinematic storyboard panel, close-up face, same man as the reference selfie photo, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker letters spelling ceo on forehead (not hearts, not doodles), speaking, shallow DOF, soft key light, photoreal",
-        "seconds": 4.534626007080078,
-        "prompt_id": "7207d5d2-874c-4de3-977f-e42b70c23dd4",
-        "ipadapter": "ip-adapter-plus-face_sd15.safetensors",
-        "ip_weight": 0.78
+        "seed": 52038,
+        "prompt": "cinematic storyboard panel, close-up face, same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, speaking enthusiastically, shallow depth of field, soft key light",
+        "faceid_bin": "ip-adapter-faceid-plusv2_sd15.bin",
+        "faceid_weight": 0.9,
+        "seconds": 4.529782056808472,
+        "prompt_id": "a68e68a4-7d26-44bb-a5ac-59c03bcac124",
+        "filename": "ceo_faceid_closeup_00001_.png"
       },
       {
         "id": "ots",
-        "path": "docs/assets/capabilities/panels/04-ots.jpg",
-        "seed": 43057,
-        "denoise": 0.52,
-        "prompt": "cinematic storyboard panel, over-shoulder whiteboard, same man as the reference selfie photo, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker letters spelling ceo on forehead (not hearts, not doodles) partial profile, writing shots stills I2V on board, office, photoreal",
-        "seconds": 4.529689788818359,
-        "prompt_id": "5221e7b4-4695-42e3-a5b0-5610832551aa",
-        "ipadapter": "ip-adapter-plus-face_sd15.safetensors",
-        "ip_weight": 0.7
+        "seed": 52057,
+        "prompt": "cinematic storyboard panel, over-shoulder whiteboard sketch, same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible partial profile, writing 'shots \u00b7 stills \u00b7 I2V' on board, office",
+        "faceid_bin": "ip-adapter-faceid-plusv2_sd15.bin",
+        "faceid_weight": 0.95,
+        "seconds": 4.5263519287109375,
+        "prompt_id": "8a5ebca8-0888-46eb-91f9-f68d7a0501a3",
+        "filename": "ceo_faceid_ots_00001_.png"
       },
       {
         "id": "profile",
-        "path": "docs/assets/capabilities/panels/05-profile.jpg",
-        "seed": 43076,
-        "denoise": 0.5,
-        "prompt": "cinematic storyboard panel, profile walking hallway, same man as the reference selfie photo, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker letters spelling ceo on forehead (not hearts, not doodles), notebook, candid, fluorescent hallway",
-        "seconds": 3.0177321434020996,
-        "prompt_id": "ff679776-23a2-4323-a0a0-f407ec7d3ec5",
-        "ipadapter": "ip-adapter-plus-face_sd15.safetensors",
-        "ip_weight": 0.7
+        "seed": 52076,
+        "prompt": "cinematic storyboard panel, profile walking hallway, same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, carrying notebook, candid photojournalism, fluorescent hallway",
+        "faceid_bin": "ip-adapter-faceid-plusv2_sd15.bin",
+        "faceid_weight": 0.95,
+        "seconds": 3.017047882080078,
+        "prompt_id": "466fea47-5739-4e8f-9da7-545bb4dd23aa",
+        "filename": "ceo_faceid_profile_00001_.png"
       },
       {
         "id": "outdoor",
-        "path": "docs/assets/capabilities/panels/06-outdoor.jpg",
-        "seed": 43095,
-        "denoise": 0.5,
-        "prompt": "cinematic storyboard panel, outdoor medium campus path, same man as the reference selfie photo, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker letters spelling ceo on forehead (not hearts, not doodles), after demo, brick buildings bokeh",
-        "seconds": 3.023871898651123,
-        "prompt_id": "34e097a4-5dcb-420d-9a6f-9803c5b79b55",
-        "ipadapter": "ip-adapter-plus-face_sd15.safetensors",
-        "ip_weight": 0.7
+        "seed": 52095,
+        "prompt": "cinematic storyboard panel, outdoor medium shot campus path, same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, smiling after demo, trees and brick buildings soft bokeh",
+        "faceid_bin": "ip-adapter-faceid-plusv2_sd15.bin",
+        "faceid_weight": 0.95,
+        "seconds": 4.529524087905884,
+        "prompt_id": "11a8ca98-3019-4bd5-8013-e791dbe2d4c8",
+        "filename": "ceo_faceid_outdoor_00001_.png"
       }
     ],
-    "identity": "ip-adapter-plus-face_sd15 + img2img from CEO still",
-    "faceid_insightface": "residual \u2014 buffalo_l incomplete / antelope loader error",
-    "version": "0.5.7"
+    "comfy_url_role": "gpu-host:8188",
+    "identity": "IPAdapter FaceID PLUS V2 + padded 00-ceo-source-still",
+    "face_ref": "ceo_face_padded.jpg"
   }
 }

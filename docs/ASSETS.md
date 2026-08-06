@@ -50,14 +50,14 @@ Prefer these over generic generated faces when documenting “face locked throug
 
 | File | Use |
 |------|-----|
-| `hero-prompt-to-product.jpg` | README hero |
+| `hero-prompt-to-product.jpg` | README hero — **CEO FaceID** storyboard wall + player (replaces stock woman concept) |
 | `products-capabilities.png` | **0.5.7 transparency poster** — individual IRL cards + path/prompt under each (prefer this) |
 | `products-capabilities.jpg` | JPEG twin of the above |
 | `capabilities/ui/*` | IRL screenshots: TUI boot/deck, CLI, Comfy, FramePack, Director |
-| `capabilities/panels/*` | Individual IPAdapter plus-face storyboard panels + receipts |
-| `example-storyboard-sheet.jpg` | **gpu-host** CEO hybrid storyboard (replaces old instructor woman sheet) |
-| `example-face-polish.jpg` | **gpu-host** CEO img2img polish (BEFORE = source still) |
-| `ceo-i2v-frame-strip.jpg` | AnimateDiff frame strip from CEO short loop |
+| `capabilities/panels/*` | Individual **FaceID PLUS V2** storyboard panels |
+| `example-storyboard-sheet.jpg` | **gpu-host FaceID PLUS V2** 6-panel CEO storyboard |
+| `example-face-polish.jpg` | **gpu-host FaceID** polish (BEFORE = source still) |
+| `ceo-i2v-frame-strip.jpg` | AnimateDiff + FaceID frame strip (not cloud Grok) |
 | `mokup-c64-tui-live*.png` | Real TUI boot/deck documentation stills (0.5.5+) |
 | `receipts/*.receipt.json` | Provenance sidecars for regenerated assets |
 | `08-product-map.png` | Product map |
