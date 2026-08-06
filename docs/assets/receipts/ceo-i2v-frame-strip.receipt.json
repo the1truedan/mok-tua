@@ -1,0 +1,34 @@
+{
+  "schema": "mok_tua_artifact_receipt.v1",
+  "artifact": {
+    "path": "/Users/dtm/mok-tua/docs/assets/ceo-i2v-frame-strip.jpg",
+    "name": "ceo-i2v-frame-strip.jpg",
+    "sha256": "74dc33e1ae46ededd13240b760b149f977811196bd5486e3cfcffac4e493bd6f",
+    "kind": "image",
+    "exists": true
+  },
+  "renderer": "mrgpu_comfy_animatediff_frame_strip",
+  "provider": "comfy",
+  "cloud_or_local": "local",
+  "model": "DreamShaper_8_pruned.safetensors+mm_sd_v15_v2.fp16",
+  "host_role": "gpu-host",
+  "qqq": "QQQ0",
+  "prompt": "short loop of same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, subtle head motion and blink, dual monitor glow, coding at desk, gentle camera push-in, coherent face, cinematic",
+  "negative_prompt": null,
+  "seed": null,
+  "wall_clock_s": 27.61,
+  "tokens": {
+    "input": null,
+    "output": null,
+    "total": null,
+    "note": "n/a"
+  },
+  "gpu": {
+    "peak_util_pct": 37.0
+  },
+  "cpu": {},
+  "gpu_evidence": "peak_util=37.0% host_role=gpu-host",
+  "sampled_by": "host_monitor",
+  "ts_utc": "2026-08-06T00:21:07Z",
+  "caption_line": "mrgpu_comfy_animatediff_frame_strip \u00b7 DreamShaper_8_pruned.safetensors+mm_sd_v15_v2.fp16 \u00b7 gpu-host \u00b7 27.6s \u00b7 n/a \u00b7 GPU\u2026"
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "mok_tua_capability_stamp.v1",
+  "version": "0.5.6",
+  "ts_utc": "2026-08-06T00:24:00Z",
+  "visibility": "private",
+  "comfy": {
+    "role_url": "http://gpu-host:8188",
+    "version": "0.29.0",
+    "device": "NVIDIA GeForce RTX 4060 Ti"
+  },
+  "tested": [
+    "unit_tests_20",
+    "tui_petscii_boot",
+    "tui_two_pane_stats",
+    "receipt_stamp",
+    "mrgpu_comfy_stills",
+    "ceo_storyboard_hybrid",
+    "ceo_face_polish_img2img",
+    "mrgpu_animatediff_short_loop",
+    "products_capabilities_collage"
+  ],
+  "pending": [
+    "framepack_ui_i2v_receipt",
+    "wan_live_ports",
+    "ipadapter_faceid_weights"
+  ],
+  "assets_regenerated": [
+    "docs/assets/example-storyboard-sheet.jpg",
+    "docs/assets/example-face-polish.jpg",
+    "docs/assets/ceo-i2v-frame-strip.jpg",
+    "docs/assets/products-capabilities.png",
+    "docs/assets/products-capabilities.jpg",
+    "docs/assets/mokup-c64-tui-live.png",
+    "docs/assets/mokup-c64-tui-live-boot.png",
+    "docs/assets/mokup-c64-tui-live-stack.png"
+  ],
+  "assets_unchanged_policy": [
+    "docs/assets/pres-smoke/00-ceo-source-still.jpg",
+    "docs/assets/pres-smoke/01-comdex-stage-keynote.jpg",
+    "docs/assets/pres-smoke/02-functions-board-demo.jpg",
+    "docs/assets/pres-smoke/03-cartoon-nvidia-ceo-hangout.jpg",
+    "docs/assets/pres-smoke/04-comdex-storyboard-sheet.jpg"
+  ],
+  "identity_note": "IPAdapter nodes present; weight files incomplete — storyboard wide shots prompt-locked; CU + polish use LoadImage img2img from CEO source still"
+}

@@ -3,6 +3,30 @@
 All notable changes to **mok-tua** are documented here.  
 Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are local lab (America/New_York context).
 
+## [0.5.6] — 2026-08-05
+
+### Added
+
+- **Smoke-tested capability stamp** (`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`, `capability_stamp_0.5.6.json`).
+- **CEO-identity example assets (MRGPU Comfy):**
+  - `example-storyboard-sheet.jpg` hybrid storyboard (prompt-locked wide + LoadImage CU)
+  - `example-face-polish.jpg` img2img polish (BEFORE = `00-ceo-source-still`)
+  - `ceo-i2v-frame-strip.jpg` from AnimateDiff short loop (GPU peak 100%; mp4 in `work/`)
+- **Accurate `products-capabilities.png`** — still → conductor → stills/polish/loop (not Drive crop montage).
+- Live TUI documentation stills: `mokup-c64-tui-live*.png` (PETSCII boot + two-pane).
+- Receipts under `docs/assets/receipts/` + sidecars; regen helper `scripts/regen_ceo_capability_assets.py`.
+
+### Changed
+
+- Capability collage HTML rewritten for workflow accuracy and citation footers.
+- README illustrative outputs point at CEO MRGPU examples (not generic instructor / stock polish).
+
+### Honest limits
+
+- IPAdapter FaceID **weights incomplete** on host — identity labeled prompt-lock / img2img, not FaceID.
+- Pres-smoke 01–04 still route-unknown mocks (unchanged).
+- FramePack UI I2V and Wan live ports remain pending / honest skip.
+
 ## [0.5.5] — 2026-08-05
 
 ### Added

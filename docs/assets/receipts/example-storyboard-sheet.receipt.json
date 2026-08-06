@@ -1,0 +1,87 @@
+{
+  "schema": "mok_tua_artifact_receipt.v1",
+  "artifact": {
+    "path": "/Users/dtm/mok-tua/docs/assets/example-storyboard-sheet.jpg",
+    "name": "example-storyboard-sheet.jpg",
+    "sha256": "bf0c5686007962e1f4af5da1439532632c4f6604db18d2026234ea04fff828e2",
+    "kind": "image",
+    "exists": true
+  },
+  "renderer": "mrgpu_comfy_storyboard_hybrid",
+  "provider": "comfy",
+  "cloud_or_local": "local",
+  "model": "DreamShaper_8_pruned.safetensors",
+  "host_role": "gpu-host",
+  "qqq": "QQQ0",
+  "prompt": "CEO hybrid storyboard: txt2img wide/medium + img2img close-up from 00-ceo-source-still; IPAdapter weights incomplete",
+  "negative_prompt": null,
+  "seed": null,
+  "wall_clock_s": 20.94,
+  "tokens": {
+    "input": null,
+    "output": null,
+    "total": null,
+    "note": "n/a local comfy"
+  },
+  "gpu": {
+    "peak_util_pct": 100.0
+  },
+  "cpu": {},
+  "gpu_evidence": "peak_util=100.0% host_role=gpu-host",
+  "sampled_by": "host_monitor",
+  "ts_utc": "2026-08-06T00:22:31Z",
+  "caption_line": "mrgpu_comfy_storyboard_hybrid \u00b7 DreamShaper_8_pruned.safetensors \u00b7 gpu-host \u00b7 20.9s \u00b7 n/a local comfy \u00b7 GPU 100% \u00b7 QQQ0",
+  "extra": {
+    "panels": [
+      {
+        "id": "wide",
+        "mode": "txt",
+        "seed": 43000,
+        "prompt": "wide shot tech meetup classroom, full body of same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, blue hoodie, standing by projector showing mok-tua storyboard, audience laptops, natural window light, 35mm photo, not close-up",
+        "seconds": 3.2530720233917236,
+        "prompt_id": "07c41f91-4a92-4fbd-a185-6288438fc3b3"
+      },
+      {
+        "id": "medium",
+        "mode": "txt",
+        "seed": 43019,
+        "prompt": "medium shot at dual-monitor desk, same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, torso and hands visible, sticky notes, green terminal, teaching colleague, warm lamp, 50mm photo",
+        "seconds": 3.0195460319519043,
+        "prompt_id": "bcd73ae1-981c-49c4-b614-9c876cd18c5c"
+      },
+      {
+        "id": "closeup",
+        "mode": "img",
+        "seed": 43038,
+        "prompt": "close-up portrait, same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, handwritten ceo on forehead, speaking enthusiastically, soft key light, natural skin, no makeup gore",
+        "seconds": 3.020540952682495,
+        "prompt_id": "cba81a8a-11b7-4fb5-887b-48f88f28f3e0"
+      },
+      {
+        "id": "ots",
+        "mode": "txt",
+        "seed": 43057,
+        "prompt": "over-shoulder shot looking at whiteboard, same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible partial profile, writing shots stills I2V on board, office interior, mid shot",
+        "seconds": 3.1565568447113037,
+        "prompt_id": "a6db25c8-6c6c-45d3-8b28-41db7ad79c11"
+      },
+      {
+        "id": "profile",
+        "mode": "txt",
+        "seed": 43076,
+        "prompt": "profile three-quarter walking office hallway, full upper body, same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, notebook under arm, candid photojournalism",
+        "seconds": 3.018690824508667,
+        "prompt_id": "0c69abd3-447e-4ef1-b992-0a63e696adcc"
+      },
+      {
+        "id": "outdoor",
+        "mode": "txt",
+        "seed": 43095,
+        "prompt": "outdoor medium shot campus path, same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, full upper body, smiling after demo, trees brick buildings bokeh, daylight",
+        "seconds": 3.0199508666992188,
+        "prompt_id": "06effe80-6d0c-4e87-a78e-eeb23a0bd05d"
+      }
+    ],
+    "identity": "prompt-locked + CU img2img"
+  }
+}

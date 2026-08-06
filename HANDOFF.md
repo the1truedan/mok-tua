@@ -1,8 +1,8 @@
 # HANDOFF — mok-tua (latest)
 
 **Date:** 2026-08-05  
-**Version:** **0.5.5** (TUI split + receipts; prior full-gamut **0.5.4**)  
-**Branch:** `agent/mok-tua-staged-pulls-runbooks`  
+**Version:** **0.5.6** (CEO MRGPU examples + accurate collage; TUI 0.5.5; full-gamut 0.5.4)  
+**Branch:** `agent/mok-tua-staged-pulls-runbooks` → **main** (private)  
 **Visibility:** **PRIVATE** (human flip only)
 
 ## Start here
@@ -19,6 +19,9 @@
 |-------|--------|
 | Unit tests | 12 OK |
 | C64 TUI | PETSCII boot · two-pane · VIC-II stats · skins c64/green/mono |
+| CEO storyboard + face polish | MRGPU Comfy · receipts · GPU peak 100% on stills/AD |
+| products-capabilities.png | Accurate still→conductor→loop collage (not Drive montage) |
+| Smoke stamp 0.5.6 | `docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md` |
 | MRGPU AnimateDiff | GPU peak 100% · report in `docs/reports/` |
 | Pinokio gamut | HTTP matrix + honest Wan skip |
 | FramePack | SM310 + recipe + registry · port **7864** · hub **seed downloading** · UI I2V after Gradio up |
@@ -45,9 +48,8 @@ Before public flip / GH Release copy: **wait-what** from [mattpocock/skills](htt
 ## Paste for new chat
 
 ```text
-Continue from mok-tua HANDOFF.md → docs/operations/SESSION_HANDOFF_2026-08-05_FULL_GAMUT_STAGED_SMOKE.md
-Grok I2V ≠ MRGPU local — see I2V_GROK_VS_MRGPU incident.
-TUI 0.5.5: PETSCII load · left intro/--prompt · right VIC-II stats · receipt stamp · show/play.
-FramePack: launch recipe on :7864; UI I2V receipt next.
-Next: short FramePack I2V + receipt; W0 identity; wait-what README pass; human public flip only.
+Continue from mok-tua HANDOFF.md → docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md
+0.5.6: CEO MRGPU storyboard/polish/AD strip + accurate products-capabilities collage on private main.
+Grok I2V ≠ MRGPU local. IPAdapter weights incomplete → prompt-lock + CU img2img labeled.
+FramePack UI I2V receipt next; Wan ports honest skip; human public flip only.
 ```
