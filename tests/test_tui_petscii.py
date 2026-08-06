@@ -21,10 +21,30 @@ class PetsciiTests(unittest.TestCase):
         joined = "\n".join(lines)
         self.assertIn("█", joined)
 
+    def test_logo_rows_equal_width(self) -> None:
+        """Broken CLI render was uneven glyph rows (M was 4/5/6 wide)."""
+        lines = mok_tua_logo_lines()
+        widths = {len(ln) for ln in lines}
+        self.assertEqual(len(widths), 1, f"logo rows must share one width, got {widths}")
+        # MOK-TUA = 7 glyphs × 5 cols + 6 single-space gaps = 41
+        self.assertEqual(len(lines[0]), 41)
+
+    def test_glyphs_fixed_5x5(self) -> None:
+        from tui.petscii import _GLYPHS
+
+        for ch, rows in _GLYPHS.items():
+            self.assertEqual(len(rows), 5, ch)
+            for i, row in enumerate(rows):
+                self.assertEqual(len(row), 5, f"{ch!r} row {i}")
+
     def test_loading_and_intro(self) -> None:
         boot = loading_screen_text("0.5.5", step=8)
         self.assertIn("MOK-TUA", boot)
         self.assertIn("LOADING", boot)
+        # every logo row present once (no wrap-duplication of jagged lines)
+        logo = mok_tua_logo_lines()
+        for row in logo:
+            self.assertEqual(boot.count(row), 1)
         intro = intro_recommendations()
         self.assertIn("QQQ", intro)
         self.assertIn("FramePack", intro)

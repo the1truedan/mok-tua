@@ -24,11 +24,17 @@ Screen {
     padding: 0 1;
 }
 
+/* Inverse navy boot for high-contrast block logo */
 #boot {
     height: 1fr;
-    background: #0b1220;
-    color: #9fb4d9;
+    background: #d7e0f2;
+    color: #0b1220;
     padding: 1 2;
+    text-style: bold;
+    content-align: center middle;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #main-panes {

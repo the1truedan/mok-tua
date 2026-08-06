@@ -20,12 +20,15 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
 
 - Capability collage HTML rewritten for workflow accuracy and citation footers.
 - README illustrative outputs point at CEO MRGPU examples (not generic instructor / stock polish).
+- **PETSCII boot legibility:** fixed 5×5 glyph widths (M was 4/5/6 and shattered CLI alignment);
+  inverse loader colors (light-blue paper + deep ink) in Textual themes + REPL ANSI;
+  regen `mokup-c64-tui-live-boot.png`.
 
 ### Honest limits
 
-- IPAdapter FaceID **weights incomplete** on host — identity labeled prompt-lock / img2img, not FaceID.
+- IPAdapter FaceID weights now staged on shared pool (see ops IPADAPTER doc); InstantID residual open.
 - Pres-smoke 01–04 still route-unknown mocks (unchanged).
-- FramePack UI I2V and Wan live ports remain pending / honest skip.
+- FramePack UI I2V mp4 finalize and Wan live ports remain pending / honest skip.
 
 ## [0.5.5] — 2026-08-05
 

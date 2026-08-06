@@ -23,12 +23,17 @@ Screen {
     padding: 0 1;
 }
 
+/* Inverse paper boot: white field + black ink for block logo */
 #boot {
     height: 1fr;
-    background: #000000;
-    color: #ffffff;
+    background: #e8e8e8;
+    color: #000000;
     padding: 1 2;
     text-style: bold;
+    content-align: center middle;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #main-panes {
