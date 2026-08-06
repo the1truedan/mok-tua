@@ -1,0 +1,61 @@
+{
+  "schema": "mok_tua_capability_stamp.v1",
+  "version": "0.5.7",
+  "ts_utc": "2026-08-06T01:27:00Z",
+  "visibility": "private",
+  "comfy": {
+    "role_url": "http://gpu-host:8188",
+    "version": "0.29.0",
+    "device": "NVIDIA GeForce RTX 4060 Ti"
+  },
+  "tested": [
+    "unit_tests_22",
+    "tui_petscii_boot_fixed_inverse",
+    "tui_two_pane_stats",
+    "cli_repl_boot",
+    "receipt_stamp",
+    "gpu-host_comfy_ipadapter_plusface_panels",
+    "ceo_face_polish_ipadapter",
+    "gpu-host_animatediff_frame_strip_prior",
+    "irl_comfy_screenshot",
+    "irl_framepack_gradio_screenshot",
+    "irl_director_screenshot",
+    "products_capabilities_transparency_poster"
+  ],
+  "pending": [
+    "faceid_insightface_buffalo_complete",
+    "framepack_ui_i2v_mp4_artifact_ok",
+    "wan_live_ports",
+    "director_comfy_backend_register",
+    "instantid_residual"
+  ],
+  "identity": {
+    "source": "docs/assets/pres-smoke/00-ceo-source-still.jpg",
+    "path": "ip-adapter-plus-face_sd15 + img2img",
+    "faceid_insightface": "residual_incomplete_models"
+  },
+  "assets_regenerated": [
+    "docs/assets/products-capabilities.png",
+    "docs/assets/products-capabilities.jpg",
+    "docs/assets/example-storyboard-sheet.jpg",
+    "docs/assets/example-face-polish.jpg",
+    "docs/assets/capabilities/panels/01-wide.jpg",
+    "docs/assets/capabilities/panels/02-medium.jpg",
+    "docs/assets/capabilities/panels/03-closeup.jpg",
+    "docs/assets/capabilities/panels/04-ots.jpg",
+    "docs/assets/capabilities/panels/05-profile.jpg",
+    "docs/assets/capabilities/panels/06-outdoor.jpg",
+    "docs/assets/capabilities/ui/ui-tui-boot.png",
+    "docs/assets/capabilities/ui/ui-tui-deck.png",
+    "docs/assets/capabilities/ui/ui-cli-repl.png",
+    "docs/assets/capabilities/ui/ui-comfy-ceo.png",
+    "docs/assets/capabilities/ui/ui-framepack.png",
+    "docs/assets/capabilities/ui/ui-director.png",
+    "docs/assets/mokup-c64-tui-live-boot.png"
+  ],
+  "poster": {
+    "style": "vertical_transparency_cards",
+    "sausage_captions": "path + prompt/command + tool under each photo",
+    "not": "faux_multi_app_promo_montage"
+  }
+}

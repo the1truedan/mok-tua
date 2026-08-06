@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>mok-tua · accurate capability map · CEO still → conductor → stills / polish / loop</title>
+<title>mok-tua v0.5.7 · capability transparency poster</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { background: #070b14; }
+  html, body { background: #0a0e18; }
   body {
-    width: 1400px;
+    width: 1100px;
     color: #e8eefc;
     font-family: "IBM Plex Sans", system-ui, sans-serif;
-    padding: 28px 32px 40px;
+    padding: 28px 28px 48px;
   }
   .eyebrow {
     font-size: 11px;
@@ -21,48 +21,43 @@
     margin-bottom: 8px;
   }
   h1 {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.02em;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   .lede {
     color: #9db0d0;
-    font-size: 14px;
-    line-height: 1.5;
-    max-width: 100ch;
+    font-size: 13px;
+    line-height: 1.55;
+    max-width: 95ch;
     margin-bottom: 18px;
   }
   .flow {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
-    gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
     align-items: center;
-    background: #0f1729;
-    border: 1px solid #2a3a58;
-    border-radius: 12px;
-    padding: 14px 16px;
-    margin-bottom: 20px;
-    font-size: 12px;
-  }
-  .flow .box {
     background: #121a2e;
     border: 1px solid #2a3a58;
-    border-radius: 8px;
-    padding: 10px 12px;
-    text-align: center;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    font-size: 11px;
+    color: #c5d4ef;
   }
-  .flow .box strong { display: block; color: #4fd1c5; font-size: 11px; letter-spacing: .08em; margin-bottom: 4px; }
-  .flow .arrow { color: #f0a35e; font-weight: 700; font-size: 18px; }
+  .flow b { color: #4fd1c5; }
+  .flow .arrow { color: #f0a35e; font-weight: 700; margin: 0 2px; }
+
   .card {
     background: #121a2e;
     border: 1px solid #2a3a58;
     border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
   .card-head {
-    padding: 12px 14px 10px;
+    padding: 12px 14px 8px;
     border-bottom: 1px solid #2a3a58;
   }
   .cap-tag {
@@ -72,243 +67,295 @@
     text-transform: uppercase;
     color: #7dd3fc;
   }
-  .cap-tag.video { color: #f0a35e; }
-  .cap-tag.face { color: #c4b5fd; }
   .cap-tag.tui { color: #d5df7c; }
   .cap-tag.src { color: #f472b6; }
-  .card-head h3 { font-size: 16px; font-weight: 600; margin-top: 4px; }
-  .card-head .tools { font-size: 12px; color: #9db0d0; margin-top: 4px; }
+  .cap-tag.gen { color: #c4b5fd; }
+  .cap-tag.video { color: #f0a35e; }
+  .cap-tag.ui { color: #86efac; }
+  .card-head h3 { font-size: 15px; font-weight: 600; margin-top: 4px; }
+  .card-head .tools { font-size: 12px; color: #9db0d0; margin-top: 3px; }
+
   .shot {
-    position: relative;
     background: #0b1220;
-    padding: 12px;
+    padding: 12px 12px 0;
   }
-  .shot img.full {
+  .shot img {
     width: 100%;
     height: auto;
     display: block;
     border-radius: 6px;
     background: #0a0f1a;
+    max-height: 520px;
+    object-fit: contain;
   }
-  .gui-badge {
-    position: absolute;
-    top: 18px; left: 18px;
-    z-index: 2;
-    font-size: 10px;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    background: rgba(7,11,20,.9);
-    border: 1px solid #2a3a58;
-    color: #4fd1c5;
-    padding: 3px 9px;
-    border-radius: 999px;
-  }
-  .card-foot {
-    padding: 10px 14px 12px;
-    font-size: 12px;
-    color: #9db0d0;
-    border-top: 1px solid #2a3a58;
-    line-height: 1.45;
-  }
-  .card-foot code {
-    color: #c9d4ea;
-    font-size: 11px;
-  }
-  .row2 {
+  .shot.two {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 14px;
+    gap: 10px;
   }
-  .cite {
-    font-family: ui-monospace, Menlo, monospace;
-    font-size: 11px;
-    color: #a5b4d0;
+  .shot.grid6 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .shot.grid6 img { max-height: 200px; }
+
+  .sausage {
+    margin: 10px 12px 14px;
+    padding: 10px 12px;
     background: #0b1220;
-    border-top: 1px dashed #2a3a58;
-    padding: 8px 14px;
-  }
-  .section-h {
-    font-size: 13px;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: #9db0d0;
-    margin: 8px 0 12px;
-  }
-  .legend {
-    margin-top: 12px;
+    border: 1px solid #243047;
+    border-radius: 8px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
     font-size: 11px;
-    color: #9db0d0;
+    line-height: 1.45;
+    color: #b8c7e0;
+  }
+  .sausage .k { color: #4fd1c5; font-weight: 600; }
+  .sausage .path { color: #f0c674; word-break: break-all; }
+  .sausage .prompt { color: #d7e0f2; margin-top: 4px; white-space: pre-wrap; }
+  .sausage .tool { color: #9db0d0; margin-top: 4px; }
+
+  .honest {
+    background: #1a1520;
+    border: 1px solid #5b3a4a;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 12px;
+    color: #e8c4d0;
+    margin-bottom: 16px;
     line-height: 1.5;
   }
-  .legend strong { color: #e8eefc; }
-  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
-  .pill {
+  .footer {
+    margin-top: 8px;
     font-size: 11px;
-    padding: 3px 9px;
-    border-radius: 999px;
-    border: 1px solid #2a3a58;
-    color: #c9d4ea;
-    background: #0b1220;
+    color: #7a8bad;
+    line-height: 1.55;
   }
-  .pill.ok { border-color: #4fd1c5; color: #4fd1c5; }
 </style>
 </head>
 <body>
-  <div class="eyebrow">mok-tua v0.5.6 · tested capability map · gpu-host Comfy (gpu-host) · private</div>
-  <h1>How one source still moves through the conductor</h1>
-  <p class="lede">
-    Accuracy over montage. Identity seed is the real <strong>00-ceo-source-still</strong> selfie.
-    mok-tua does not reskin ComfyUI — it plans shots, stamps receipts, and launches gpu-host jobs.
-    Wide storyboard panels are prompt-locked txt2img (IPAdapter weights incomplete on host);
-    close-up + face polish use <strong>LoadImage → img2img</strong> from the source still.
-    Short motion = <strong>AnimateDiff</strong> on gpu-host (not cloud Grok I2V).
-  </p>
 
-  <div class="flow">
-    <div class="box"><strong>0 · SOURCE</strong>CEO selfie<br/>LoadImage seed</div>
-    <div class="arrow">→</div>
-    <div class="box"><strong>CONDUCTOR</strong>TUI · CLI · API<br/>QQQ0 · receipts</div>
-    <div class="arrow">→</div>
-    <div class="box"><strong>STILLS / POLISH</strong>Comfy DreamShaper_8<br/>storyboard + refine</div>
-    <div class="arrow">→</div>
-    <div class="box"><strong>LOOP / I2V family</strong>AnimateDiff short clip<br/>+ optional Wan graph</div>
-  </div>
+<div class="eyebrow">mok-tua v0.5.7 · private · tested capability map · sausage-made transparency</div>
+<h1>How one source still moves through real interfaces</h1>
+<p class="lede">
+  Individual cards with <strong>IRL screenshots</strong> and <strong>gpu-host-generated panels</strong> from the operator selfie
+  (<code>00-ceo-source-still.jpg</code>). Each photo lists path + prompt/command + renderer.
+  Not a faux multi-app promo montage.
+</p>
 
-  <div class="pills">
-    <span class="pill ok">unit 20 OK</span>
-    <span class="pill ok">TUI PETSCII boot</span>
-    <span class="pill ok">two-pane stats</span>
-    <span class="pill ok">receipt stamp</span>
-    <span class="pill ok">gpu-host stills GPU 100%</span>
-    <span class="pill ok">AnimateDiff QQQ0</span>
-    <span class="pill">FramePack UI I2V pending</span>
-    <span class="pill">Wan ports honest skip</span>
-  </div>
+<div class="flow">
+  <b>SOURCE</b> still <span class="arrow">→</span>
+  <b>TUI</b> boot/deck <span class="arrow">→</span>
+  <b>CLI</b> REPL <span class="arrow">→</span>
+  <b>Comfy</b> IPAdapter <span class="arrow">→</span>
+  panels / polish <span class="arrow">→</span>
+  <b>AnimateDiff</b> strip <span class="arrow">→</span>
+  <b>FramePack</b> UI <span class="arrow">→</span>
+  <b>Director</b> UI
+</div>
 
-  <div class="section-h" style="margin-top:18px">0 · Source identity · real still</div>
-  <div class="card">
-    <div class="card-head">
-      <span class="cap-tag src">0 · Source still</span>
-      <h3>00-ceo-source-still.jpg — prompt + LoadImage context</h3>
-      <div class="tools">Public-safe silly identity · forehead marker · used for polish + CU · reference for storyboard prompts</div>
-    </div>
-    <div class="shot">
-      <span class="gui-badge">identity seed · not a crop montage</span>
-      <img class="full" src="../pres-smoke/00-ceo-source-still.jpg" alt="CEO source still selfie" style="max-height:420px;width:auto;margin:0 auto;" />
-    </div>
-    <div class="cite">citation: source photo · route = operator selfie (not Comfy-generated) · reused as LoadImage for gpu-host jobs</div>
-    <div class="card-foot">This is the only face seed for the regenerated examples below. Pres-smoke 01–04 mockups remain unchanged historical art.</div>
-  </div>
+<div class="honest">
+  <strong>Honest residuals:</strong> InsightFace FaceID (buffalo_l incomplete / antelope loader error) —
+  identity path is <code>ip-adapter-plus-face_sd15</code> + img2img from CEO still, not FaceID Plus V2 embeddings.
+  Grok Imagine I2V ≠ gpu-host local. Public flip human-gated only.
+</div>
 
-  <div class="section-h">Conductor · live C64 deck (0.5.5+)</div>
-  <div class="card">
-    <div class="card-head">
-      <span class="cap-tag tui">Conductor TUI</span>
-      <h3>PETSCII loader → two-pane (log left · VIC-II stats right)</h3>
-      <div class="tools">python3 scripts/mok_tua_cli.py tui · skins c64 | green | mono | modern</div>
-    </div>
-    <div class="shot">
-      <span class="gui-badge">screen-accurate composite · tui strings + host_monitor</span>
-      <img class="full" src="../mokup-c64-tui-live-stack.png" alt="mok-tua C64 TUI boot then two-pane deck" />
-    </div>
-    <div class="cite">citation: mok-tua tui 0.5.5+ · no generative model · optional live Textual; composite from petscii + stats_panel when headless</div>
-    <div class="card-foot">Operator path: doctor / providers / run / smoke / receipt stamp / show · play. Vendor GUIs stay Comfy / Director’s Console.</div>
+<!-- 0 SOURCE -->
+<section class="card">
+  <div class="card-head">
+    <div class="cap-tag src">0 · source still</div>
+    <h3>Identity seed — handwritten “ceo” selfie</h3>
+    <div class="tools">LoadImage context for all downstream stills · not generative</div>
   </div>
+  <div class="shot">
+    <img src="../pres-smoke/00-ceo-source-still.jpg" alt="CEO source still" />
+  </div>
+  <div class="sausage">
+    <div><span class="k">path:</span> <span class="path">docs/assets/pres-smoke/00-ceo-source-still.jpg</span></div>
+    <div class="prompt"><span class="k">prompt:</span> (none — operator selfie · LoadImage seed only)</div>
+    <div class="tool"><span class="k">tool:</span> camera · host_role=desk · QQQ n/a · receipt n/a · unchanged identity source</div>
+  </div>
+</section>
 
-  <div class="section-h">Generated on gpu-host · cited</div>
-  <div class="card">
-    <div class="card-head">
-      <span class="cap-tag">1 · Storyboard sheet</span>
-      <h3>example-storyboard-sheet.jpg — six CEO-context panels</h3>
-      <div class="tools">gpu-host Comfy · DreamShaper_8_pruned · hybrid txt2img + CU img2img · QQQ0</div>
-    </div>
-    <div class="shot">
-      <span class="gui-badge">regenerated 2026-08-05 · replaces prior instructor woman sheet</span>
-      <img class="full" src="../example-storyboard-sheet.jpg" alt="Six panel CEO storyboard from mok-tua gpu-host" />
-    </div>
-    <div class="cite">renderer: gpu-host_comfy_storyboard_hybrid · model: DreamShaper_8_pruned · host_role: gpu-host · qqq: QQQ0 · identity: prompt-locked wide + LoadImage CU · receipt: docs/assets/receipts/example-storyboard-sheet.receipt.json</div>
-    <div class="card-foot">Honest identity note: full IPAdapter FaceID needs weight files on host (nodes present, weights incomplete). Wide shots are prompt-locked; CU uses source still.</div>
+<!-- 1 TUI BOOT -->
+<section class="card">
+  <div class="card-head">
+    <div class="cap-tag tui">1 · conductor TUI boot</div>
+    <h3>Fixed inverse PETSCII loader (MOK-TUA aligned glyphs)</h3>
+    <div class="tools">tui --skin c64 · 5×5 block font · reverse VIC-II colors</div>
   </div>
+  <div class="shot">
+    <img src="../capabilities/ui/ui-tui-boot.png" alt="PETSCII inverse boot" />
+  </div>
+  <div class="sausage">
+    <div><span class="k">path:</span> <span class="path">docs/assets/capabilities/ui/ui-tui-boot.png</span></div>
+    <div class="prompt"><span class="k">command:</span> python3 scripts/mok_tua_cli.py tui --skin c64</div>
+    <div class="tool"><span class="k">tool:</span> Textual/REPL · loading_screen_text() · version 0.5.7 · fixed glyph widths (was broken M 4/5/6)</div>
+  </div>
+</section>
 
-  <div class="row2">
-    <div class="card">
-      <div class="card-head">
-        <span class="cap-tag face">2 · Face polish</span>
-        <h3>example-face-polish.jpg</h3>
-        <div class="tools">gpu-host Comfy img2img denoise≈0.28 · DreamShaper_8</div>
-      </div>
-      <div class="shot">
-        <span class="gui-badge">BEFORE = source · AFTER = refine</span>
-        <img class="full" src="../example-face-polish.jpg" alt="CEO face polish before after" />
-      </div>
-      <div class="cite">renderer: gpu-host_comfy_img2img_face_polish · host_role: gpu-host · QQQ0 · receipt: example-face-polish.receipt.json</div>
-      <div class="card-foot">Shows how the same still is refined in-pipeline (not FaceFusion this wave).</div>
-    </div>
-    <div class="card">
-      <div class="card-head">
-        <span class="cap-tag video">3 · Short loop proof</span>
-        <h3>AnimateDiff frame strip</h3>
-        <div class="tools">gpu-host ADE mm_sd_v15_v2.fp16 + VHS · 16f @ 8fps · GPU peak 100%</div>
-      </div>
-      <div class="shot">
-        <span class="gui-badge">not cloud Grok I2V</span>
-        <img class="full" src="../ceo-i2v-frame-strip.jpg" alt="AnimateDiff CEO loop frames" />
-      </div>
-      <div class="cite">renderer: gpu-host_comfy_animatediff · model: DreamShaper_8 + mm_sd_v15_v2 · host_role: gpu-host · QQQ0 · mp4 in work/ (not git blob)</div>
-      <div class="card-foot">Documents <em>motion from conductor path</em>. True Wan LoadImage→I2V graph remains vendor example below when ports live.</div>
-    </div>
+<!-- 2 TUI DECK -->
+<section class="card">
+  <div class="card-head">
+    <div class="cap-tag tui">2 · conductor two-pane deck</div>
+    <h3>READY. left intro · right VIC-II stats</h3>
+    <div class="tools">After boot · skins c64 / green / mono / modern</div>
   </div>
+  <div class="shot">
+    <img src="../capabilities/ui/ui-tui-deck.png" alt="C64 two-pane deck" />
+  </div>
+  <div class="sausage">
+    <div><span class="k">path:</span> <span class="path">docs/assets/capabilities/ui/ui-tui-deck.png</span></div>
+    <div class="prompt"><span class="k">command:</span> python3 scripts/mok_tua_cli.py tui --skin c64</div>
+    <div class="tool"><span class="k">tool:</span> tui/app.py · host_monitor stats when reachable · QQQ0 default</div>
+  </div>
+</section>
 
-  <div class="section-h">Vendor graph families (unchanged chrome · labeled)</div>
-  <div class="card">
-    <div class="card-head">
-      <span class="cap-tag video">4 · I2V graph family (example)</span>
-      <h3>Comfy Wan-style complex video graph — not this CEO run</h3>
-      <div class="tools">docs/assets/vendor/comfyui-complex-video-i2v-wan.png · graph family only</div>
-    </div>
-    <div class="shot">
-      <span class="gui-badge">vendor example · do not claim as this smoke’s runtime</span>
-      <div style="display:grid;grid-template-columns:240px 1fr;gap:10px;align-items:start;">
-        <div>
-          <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#f0a35e;margin-bottom:6px;">I2V input still (this wave)</div>
-          <img src="../pres-smoke/00-ceo-source-still.jpg" alt="CEO still into I2V lane" style="width:100%;border-radius:6px;" />
-          <div style="font-size:11px;color:#9db0d0;margin-top:8px;">LoadImage → video sampler → SaveVideo / VHS</div>
-        </div>
-        <img class="full" src="../vendor/comfyui-complex-video-i2v-wan.png" alt="Wan I2V complex graph example" />
-      </div>
-    </div>
-    <div class="cite">citation: vendor graph screenshot · CEO still inset from this repo · actual CEO motion proof above = AnimateDiff receipt</div>
-    <div class="card-foot">Keeps accuracy: graph family vs executed job are separate claims.</div>
+<!-- 3 CLI REPL -->
+<section class="card">
+  <div class="card-head">
+    <div class="cap-tag tui">3 · CLI REPL launch</div>
+    <h3>Stdlib line REPL (no Textual required)</h3>
+    <div class="tools">Same verbs as API · inverse boot then READY.</div>
   </div>
+  <div class="shot">
+    <img src="../capabilities/ui/ui-cli-repl.png" alt="CLI REPL boot dump" />
+  </div>
+  <div class="sausage">
+    <div><span class="k">path:</span> <span class="path">docs/assets/capabilities/ui/ui-cli-repl.png</span></div>
+    <div class="prompt"><span class="k">command:</span> python3 scripts/mok_tua_cli.py tui --repl --skin c64</div>
+    <div class="tool"><span class="k">tool:</span> tui/repl.py · ANSI inverse boot · doctor / providers / run / smoke</div>
+  </div>
+</section>
 
-  <div class="row2">
-    <div class="card">
-      <div class="card-head">
-        <span class="cap-tag">5 · Image graph family</span>
-        <h3>Complex still / hiresfix (vendor)</h3>
-      </div>
-      <div class="shot">
-        <img class="full" src="../vendor/comfyui-complex-image-hiresfix.png" alt="Comfy complex still graph" />
-      </div>
-      <div class="cite">vendor example · CEO stills used DreamShaper minimal/img2img graphs</div>
-    </div>
-    <div class="card">
-      <div class="card-head">
-        <span class="cap-tag">6 · Director desk</span>
-        <h3>Director’s Console (unchanged)</h3>
-      </div>
-      <div class="shot">
-        <img class="full" src="../mokup-directors-console.png" alt="Director's Console" />
-      </div>
-      <div class="cite">upstream DirectorsConsole chrome · mok-tua owns ledger / QQQ / launches</div>
-    </div>
+<!-- 4 COMFY IRL -->
+<section class="card">
+  <div class="card-head">
+    <div class="cap-tag ui">4 · ComfyUI IRL (gpu-host)</div>
+    <h3>Live node graph surface on gpu-host</h3>
+    <div class="tools">:8188 · DreamShaper_8 + IPAdapter plus-face · role label gpu-host</div>
   </div>
+  <div class="shot">
+    <img src="../capabilities/ui/ui-comfy-ceo.png" alt="ComfyUI live screenshot" />
+  </div>
+  <div class="sausage">
+    <div><span class="k">path:</span> <span class="path">docs/assets/capabilities/ui/ui-comfy-ceo.png</span></div>
+    <div class="prompt"><span class="k">workflow:</span> LoadImage(00-ceo-source-still) → IPAdapterAdvanced(plus-face) → KSampler img2img → SaveImage</div>
+    <div class="tool"><span class="k">tool:</span> ComfyUI 0.29.0 · RTX 4060 Ti · screenshot headless · no lab home paths in caption</div>
+  </div>
+</section>
 
-  <div class="legend">
-    <strong>Tested this stamp:</strong> unit tests · TUI boot/deck · receipt CLI · gpu-host Comfy stills · CEO storyboard hybrid · CEO face polish img2img · AnimateDiff short loop.<br/>
-    <strong>Pending:</strong> FramePack UI I2V receipt · Wan live ports · IPAdapter FaceID weights install.<br/>
-    <strong>Never:</strong> label cloud Grok I2V as gpu-host local · invent provenance for untouched pres-smoke mocks.
+<!-- 5 STORYBOARD PANELS -->
+<section class="card">
+  <div class="card-head">
+    <div class="cap-tag gen">5 · storyboard panels (individual)</div>
+    <h3>Six CEO-context panels · IPAdapter plus-face img2img</h3>
+    <div class="tools">Each panel is its own file under capabilities/panels/ with receipt</div>
   </div>
+  <div class="shot grid6">
+    <img src="../capabilities/panels/01-wide.jpg" alt="panel 1 wide" />
+    <img src="../capabilities/panels/02-medium.jpg" alt="panel 2 medium" />
+    <img src="../capabilities/panels/03-closeup.jpg" alt="panel 3 closeup" />
+    <img src="../capabilities/panels/04-ots.jpg" alt="panel 4 ots" />
+    <img src="../capabilities/panels/05-profile.jpg" alt="panel 5 profile" />
+    <img src="../capabilities/panels/06-outdoor.jpg" alt="panel 6 outdoor" />
+  </div>
+  <div class="sausage">
+    <div><span class="k">path:</span> <span class="path">docs/assets/capabilities/panels/01-wide.jpg … 06-outdoor.jpg</span></div>
+    <div class="prompt"><span class="k">prompt (wide):</span> cinematic storyboard panel, wide shot tech meetup classroom, same man as the reference selfie photo, … handwritten black marker letters spelling ceo on forehead, blue hoodie, projector mok-tua …</div>
+    <div class="tool"><span class="k">tool:</span> gpu-host_comfy_ipadapter_plusface_img2img · DreamShaper_8 + ip-adapter-plus-face_sd15 · denoise≈0.38–0.52 · QQQ0 · receipt per panel</div>
+  </div>
+</section>
+
+<!-- 5b SHEET -->
+<section class="card">
+  <div class="card-head">
+    <div class="cap-tag gen">5b · storyboard sheet</div>
+    <h3>Collaged 2×3 sheet for README</h3>
+  </div>
+  <div class="shot">
+    <img src="../example-storyboard-sheet.jpg" alt="storyboard sheet" />
+  </div>
+  <div class="sausage">
+    <div><span class="k">path:</span> <span class="path">docs/assets/example-storyboard-sheet.jpg</span></div>
+    <div class="prompt"><span class="k">prompt:</span> 6-panel collage of panels above (same IPAdapter path)</div>
+    <div class="tool"><span class="k">tool:</span> scripts/regen_ceo_ipadapter_panels_0_5_7.py · receipt docs/assets/receipts/example-storyboard-sheet.receipt.json</div>
+  </div>
+</section>
+
+<!-- 6 FACE POLISH -->
+<section class="card">
+  <div class="card-head">
+    <div class="cap-tag gen">6 · face polish</div>
+    <h3>BEFORE source · AFTER IPAdapter polish</h3>
+  </div>
+  <div class="shot">
+    <img src="../example-face-polish.jpg" alt="face polish before after" />
+  </div>
+  <div class="sausage">
+    <div><span class="k">path:</span> <span class="path">docs/assets/example-face-polish.jpg</span></div>
+    <div class="prompt"><span class="k">prompt:</span> portrait photo polish of same man as the reference selfie… handwritten black marker letters spelling ceo on forehead… navy backdrop · denoise=0.32</div>
+    <div class="tool"><span class="k">tool:</span> gpu-host_comfy_ipadapter_plusface_polish · QQQ0 · receipt docs/assets/receipts/example-face-polish.receipt.json</div>
+  </div>
+</section>
+
+<!-- 7 ANIMATEDIFF -->
+<section class="card">
+  <div class="card-head">
+    <div class="cap-tag video">7 · short loop (AnimateDiff)</div>
+    <h3>Frame strip from gpu-host short loop · not cloud Grok</h3>
+  </div>
+  <div class="shot">
+    <img src="../ceo-i2v-frame-strip.jpg" alt="AnimateDiff frame strip" />
+  </div>
+  <div class="sausage">
+    <div><span class="k">path:</span> <span class="path">docs/assets/ceo-i2v-frame-strip.jpg</span></div>
+    <div class="prompt"><span class="k">prompt:</span> short loop of CEO face cues · subtle head motion and blink · dual monitor glow · coherent face</div>
+    <div class="tool"><span class="k">tool:</span> gpu-host_comfy_animatediff · mm_sd_v15_v2 · GPU peak 100% · QQQ0 · receipt docs/assets/receipts/ceo-i2v-frame-strip.receipt.json · NOT Grok Imagine</div>
+  </div>
+</section>
+
+<!-- 8 FRAMEPACK -->
+<section class="card">
+  <div class="card-head">
+    <div class="cap-tag video">8 · FramePack Gradio IRL</div>
+    <h3>Live I2V UI on gpu-host :7864</h3>
+    <div class="tools">Shared models · status receipt partial · mp4 finalize open</div>
+  </div>
+  <div class="shot">
+    <img src="../capabilities/ui/ui-framepack.png" alt="FramePack Gradio UI" />
+  </div>
+  <div class="sausage">
+    <div><span class="k">path:</span> <span class="path">docs/assets/capabilities/ui/ui-framepack.png</span></div>
+    <div class="prompt"><span class="k">UI fields:</span> drop 00-ceo-source-still · prompt e.g. “subtle head motion and blink, same person, handwritten ceo on forehead”</div>
+    <div class="tool"><span class="k">tool:</span> FramePack Studio Gradio · shared /mnt/ai-data/models · renderer gpu-host_framepack_i2v · receipt docs/assets/receipts/framepack_ceo_i2v.receipt.json (artifact_ok pending)</div>
+  </div>
+</section>
+
+<!-- 9 DIRECTOR -->
+<section class="card">
+  <div class="card-head">
+    <div class="cap-tag ui">9 · Director’s Console IRL</div>
+    <h3>Live peer GUI · CPE film presets</h3>
+    <div class="tools">Backends registry may be empty until Comfy registered in UI</div>
+  </div>
+  <div class="shot">
+    <img src="../capabilities/ui/ui-director.png" alt="Director Console UI" />
+  </div>
+  <div class="sausage">
+    <div><span class="k">path:</span> <span class="path">docs/assets/capabilities/ui/ui-director.png</span></div>
+    <div class="prompt"><span class="k">workflow:</span> Director UI → CPE → orch → (register Comfy backend) → gpu-host models via Comfy extra_model_paths</div>
+    <div class="tool"><span class="k">tool:</span> DirectorsConsole :5173 · screenshot IRL · residual: /api/backends empty until UI register</div>
+  </div>
+</section>
+
+<div class="footer">
+  mok-tua <strong>v0.5.7</strong> · smoke: docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md ·
+  stamp: docs/reports/capability_stamp_0.5.7.json ·
+  law: Grok I2V ≠ gpu-host local · public flip human-only ·
+  storage: hot scratch local SSD → promote finals to /ai-data · bees settled only
+</div>
+
 </body>
 </html>

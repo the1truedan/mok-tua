@@ -3,7 +3,7 @@
 **Turn a script into storyboard pictures — and, when you want, short video — on machines you own.**
 
 Local-first creative control desk for M.A.N.A.G.E.R.  
-Hybrid **v0.5.6** · private GitHub · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md)
+Hybrid **v0.5.7** · private GitHub · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md)
 
 [![Linktree](https://img.shields.io/badge/Linktree-the1truedan-43E55E?style=flat&logo=linktree&logoColor=white)](https://linktr.ee/the1truedan)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support-FF5E5B?style=flat&logo=ko-fi&logoColor=white)](https://ko-fi.com/the1truedan)
@@ -96,20 +96,20 @@ That identity is the only face in these mockups — COMDEX keynote, functions bo
 
 Folder: [`docs/assets/pres-smoke/`](docs/assets/pres-smoke/) · reuse `00-ceo-source-still.jpg` as LoadImage for live Comfy/Wan experiments.
 
-### Other illustrative outputs (gpu-host · CEO identity · cited)
+### Other illustrative outputs (gpu-host · CEO identity · cited · v0.5.7)
 
-Regenerated on **gpu-host Comfy** from `pres-smoke/00-ceo-source-still.jpg` (2026-08-05).  
-Receipts: [`docs/assets/receipts/`](docs/assets/receipts/).
+Regenerated on **gpu-host Comfy** from `pres-smoke/00-ceo-source-still.jpg` via **IPAdapter plus-face** img2img.  
+Individual panels: [`docs/assets/capabilities/panels/`](docs/assets/capabilities/panels/) · Receipts: [`docs/assets/receipts/`](docs/assets/receipts/).
 
-| Storyboard (hybrid DreamShaper_8) | Face polish (img2img denoise≈0.28) |
-|-----------------------------------|--------------------------------------|
-| <img src="docs/assets/example-storyboard-sheet.jpg" alt="Six-panel CEO storyboard from gpu-host Comfy" width="420" /> | <img src="docs/assets/example-face-polish.jpg" alt="CEO face polish before source still after Comfy refine" width="420" /> |
+| Storyboard sheet (IPAdapter plus-face) | Face polish BEFORE / AFTER |
+|----------------------------------------|----------------------------|
+| <img src="docs/assets/example-storyboard-sheet.jpg" alt="Six-panel CEO storyboard IPAdapter plus-face" width="420" /> | <img src="docs/assets/example-face-polish.jpg" alt="CEO face polish before source still after IPAdapter refine" width="420" /> |
 
-| AnimateDiff short-loop strip (not cloud Grok) | Conductor TUI (PETSCII boot → two-pane) |
-|-----------------------------------------------|----------------------------------------|
-| <img src="docs/assets/ceo-i2v-frame-strip.jpg" alt="gpu-host AnimateDiff frame strip" width="420" /> | <img src="docs/assets/mokup-c64-tui-live.png" alt="mok-tua C64 TUI two-pane deck" width="420" /> |
+| AnimateDiff short-loop strip (not cloud Grok) | Conductor TUI (fixed PETSCII boot → two-pane) |
+|-----------------------------------------------|-----------------------------------------------|
+| <img src="docs/assets/ceo-i2v-frame-strip.jpg" alt="gpu-host AnimateDiff frame strip" width="420" /> | <img src="docs/assets/capabilities/ui/ui-tui-boot.png" alt="mok-tua fixed inverse PETSCII boot" width="420" /> |
 
-<p align="center"><em>renderer · model · host_role · QQQ0 · gpu_evidence on each receipt — never claim cloud I2V as local GPU.</em></p>
+<p align="center"><em>path · prompt · renderer · host_role · QQQ0 on each card — never claim cloud I2V as local GPU.</em></p>
 
 ---
 
@@ -127,27 +127,30 @@ Receipts: [`docs/assets/receipts/`](docs/assets/receipts/).
 | **ACE-Step / TTS-Story** | Music beds & spoken lines | Audio tier tools |
 | **Grok Imagine / Nano Banana** | Optional paid/cloud stills | Only with keys + privacy gate |
 
-### Capability collage (accurate workflow · v0.5.6)
+### Capability transparency poster (IRL cards · v0.5.7)
 
-**One CEO source still** → conductor TUI → gpu-host storyboard / face polish / AnimateDiff loop · vendor graphs labeled as *family examples* when not this run.
+**Vertical poster of individual cards** — real UI screenshots + gpu-host panels from the CEO source still.  
+Under every photo: **path · prompt/command · tool/renderer**. Not a faux multi-app promo.
 
 <p align="center">
-  <img src="docs/assets/products-capabilities.png" alt="Accurate capability map: CEO source still, C64 TUI, gpu-host storyboard, face polish, AnimateDiff strip, vendor I2V graph family" width="900" />
+  <img src="docs/assets/products-capabilities.png" alt="Capability transparency poster: source still, fixed PETSCII boot, CLI, Comfy, IPAdapter panels, polish, AnimateDiff, FramePack, Director" width="900" />
 </p>
 
-| # | Capability | What you see | Tool surface / citation |
-|---|------------|--------------|-------------------------|
-| 0 | **Source still** | Real `00-ceo-source-still.jpg` (not a crop montage) | LoadImage / prompt context |
-| — | **Conductor** | PETSCII boot → two-pane VIC-II stats | `tui --skin c64` · CLI · API `:8799` |
-| 1 | **Storyboard** | Regenerated CEO six-panel sheet | gpu-host Comfy DreamShaper_8 · receipt |
-| 2 | **Face polish** | BEFORE source · AFTER img2img refine | gpu-host Comfy · receipt |
-| 3 | **Short loop** | AnimateDiff frame strip (GPU 100%) | gpu-host ADE + VHS · not Grok cloud |
-| 4 | **I2V graph family** | Wan-style complex graph (vendor example) | Labeled *not this CEO run* |
-| 5 | **Still graph family** | Hiresfix complex graph (vendor) | Example only |
-| 6 | **Director desk** | Director’s Console chrome | Peer GUI + mok-tua ledger |
+| # | Capability | What you see | Path / command |
+|---|------------|--------------|----------------|
+| 0 | **Source still** | Real selfie + handwritten “ceo” | `pres-smoke/00-ceo-source-still.jpg` |
+| 1 | **TUI boot** | Fixed inverse PETSCII MOK-TUA | `capabilities/ui/ui-tui-boot.png` · `tui --skin c64` |
+| 2 | **TUI deck** | Two-pane READY. + VIC-II stats | `capabilities/ui/ui-tui-deck.png` |
+| 3 | **CLI REPL** | Line launcher (no Textual) | `capabilities/ui/ui-cli-repl.png` · `tui --repl` |
+| 4 | **Comfy IRL** | Live graph UI on gpu-host | `capabilities/ui/ui-comfy-ceo.png` |
+| 5 | **Storyboard panels** | Six individual IPAdapter panels | `capabilities/panels/01–06-*.jpg` |
+| 6 | **Face polish** | BEFORE / AFTER | `example-face-polish.jpg` |
+| 7 | **Short loop** | AnimateDiff frame strip | `ceo-i2v-frame-strip.jpg` · not Grok |
+| 8 | **FramePack IRL** | Gradio :7864 | `capabilities/ui/ui-framepack.png` |
+| 9 | **Director IRL** | Live CPE UI | `capabilities/ui/ui-director.png` |
 
 Source HTML: [`docs/assets/mokups/capability-collage.html`](docs/assets/mokups/capability-collage.html).  
-Smoke matrix: [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md).
+Smoke matrix: [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md) · stamp [`capability_stamp_0.5.7.json`](docs/reports/capability_stamp_0.5.7.json).
 
 ---
 

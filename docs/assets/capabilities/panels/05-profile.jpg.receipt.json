@@ -1,0 +1,37 @@
+{
+  "schema": "mok_tua_artifact_receipt.v1",
+  "artifact": {
+    "path": "/Users/redacted/mok-tua/docs/assets/capabilities/panels/05-profile.jpg",
+    "name": "05-profile.jpg",
+    "sha256": "a9af07c804c0473f10d196bedc817ac95dcdbffb74b642a08e7477e35bda3f1c",
+    "kind": "image",
+    "exists": true
+  },
+  "renderer": "gpu-host_comfy_ipadapter_plusface_img2img",
+  "provider": "comfy",
+  "cloud_or_local": "local",
+  "model": "DreamShaper_8_pruned.safetensors+ip-adapter-plus-face_sd15.safetensors",
+  "host_role": "gpu-host",
+  "qqq": "QQQ0",
+  "prompt": "cinematic storyboard panel, profile walking hallway, same man as the reference selfie photo, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker letters spelling ceo on forehead (not hearts, not doodles), notebook, candid, fluorescent hallway",
+  "negative_prompt": null,
+  "seed": null,
+  "wall_clock_s": 3.02,
+  "tokens": {
+    "input": null,
+    "output": null,
+    "total": null,
+    "note": "n/a"
+  },
+  "gpu": {},
+  "cpu": {},
+  "gpu_evidence": null,
+  "sampled_by": "manual",
+  "ts_utc": "2026-08-06T01:25:42Z",
+  "caption_line": "gpu-host_comfy_ipadapter_plusface_img2img \u00b7 DreamShaper_8_pruned.safetensors+ip-adapter-plus-face_sd15.safetensors \u00b7 gpu-h\u2026",
+  "extra": {
+    "seed": 43076,
+    "denoise": 0.5,
+    "faceid_insightface": "residual_incomplete"
+  }
+}
