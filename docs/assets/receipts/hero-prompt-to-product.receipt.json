@@ -3,44 +3,35 @@
   "artifact": {
     "path": "/Users/redacted/mok-tua/docs/assets/hero-prompt-to-product.jpg",
     "name": "hero-prompt-to-product.jpg",
-    "sha256": "705107ed9cbec148f79238a47a1cd8699e51891ed3c3d066953833e27d31d7c6",
+    "sha256": "1ed10b53e88e25ce8fa4102245f5ab16d48d5872285c53c5f753f61b702a48ba",
     "kind": "image",
     "exists": true
   },
-  "renderer": "gpu-host_ceo_hero_compose",
+  "renderer": "gpu-host_ceo_hero_compose_v2",
   "provider": "compose+comfy_faceid",
   "cloud_or_local": "local",
-  "model": "DreamShaper_8_pruned.safetensors+ip-adapter-faceid-plusv2_sd15.bin",
+  "model": "DreamShaper_8+faceid-plusv2",
   "host_role": "gpu-host",
   "qqq": "QQQ0",
-  "prompt": "hero compose: 6 FaceID CEO panels + player chrome from AD/closeup",
+  "prompt": "hero: 6 FaceID panels + clean player still (closeup panel; no AD black-blade frames)",
   "negative_prompt": null,
   "seed": null,
-  "wall_clock_s": 72.79,
+  "wall_clock_s": null,
   "tokens": {
     "input": null,
     "output": null,
     "total": null,
     "note": "n/a"
   },
-  "gpu": {
-    "peak_util_pct": 98.0
-  },
+  "gpu": {},
   "cpu": {},
-  "gpu_evidence": "peak_util=98.0% host_role=gpu-host",
-  "sampled_by": "host_monitor",
-  "ts_utc": "2026-08-06T01:36:16Z",
-  "caption_line": "gpu-host_ceo_hero_compose \u00b7 DreamShaper_8_pruned.safetensors+ip-adapter-faceid-plusv2_sd15.bin \u00b7 gpu-host \u00b7 72.8s \u00b7 n/a \u00b7 \u2026",
+  "gpu_evidence": null,
+  "sampled_by": "manual",
+  "ts_utc": "2026-08-06T02:01:17Z",
+  "caption_line": "gpu-host_ceo_hero_compose_v2 \u00b7 DreamShaper_8+faceid-plusv2 \u00b7 gpu-host \u00b7 ? \u00b7 n/a \u00b7 gpu ? \u00b7 QQQ0",
   "extra": {
-    "panels": [
-      "panel_1_wide.png",
-      "panel_2_medium.png",
-      "panel_3_closeup.png",
-      "panel_4_ots.png",
-      "panel_5_profile.png",
-      "panel_6_outdoor.png"
-    ],
-    "player_source": "ceo-i2v-frame-strip.jpg",
-    "identity": "CEO only \u2014 no stock woman hero"
+    "player_source": "capabilities/panels/03-closeup.jpg",
+    "fix": "removed glitched multi-frame strip crop that showed black blade on forehead",
+    "identity": "CEO only"
   }
 }

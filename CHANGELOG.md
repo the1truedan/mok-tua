@@ -22,11 +22,20 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
 - README capability section documents sausage-made captions and 0.5.7 tested set.
 - Package TUI version **0.5.7**.
 
+### Fixed (example retouches — no SemVer bump)
+
+- **Hero player black-blade glitch:** `hero-prompt-to-product.jpg` right-hand player used a multi-frame
+  AnimateDiff strip crop that showed a black triangle across the forehead. Recomposed with a **single
+  clean FaceID closeup** (`capabilities/panels/03-closeup.jpg`); regen of
+  `product-capabilities/product-capabilities-07-hero.jpg` + index. Compose law: never paste multi-frame
+  AD strip into hero player.
+- Face polish + AD strip earlier retouches (gentle denoise; black-triangle frame filter).
+- Split `product-capabilities/product-capabilities-NN-*.jpg` cards (bandwidth) replace tall mega-PNG.
+
 ### Honest residuals
 
-- InsightFace **FaceID** (buffalo_l incomplete / antelope loader error) — not claimed; plus-face path used.
-- Storyboard panels remain face-weighted (wide scene variety limited without full FaceID).
 - FramePack mp4 `artifact_ok` finalize · Wan live ports · Director backends registry empty · InstantID.
+- FaceID PLUS V2 is live (padded InsightFace ref); identity still stylized DreamShaper.
 
 ## [0.5.6] — 2026-08-05
 
