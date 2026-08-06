@@ -3,14 +3,14 @@
   "generated_at": "2026-08-05T19:25:29.241403+00:00",
   "earmark": "2026-08-05T16:20:00-05:00",
   "repo": "the1truedan/mok-tua",
-  "visibility": "PRIVATE_until_human_go",
+  "visibility": "PUBLIC",
   "gates": {
     "G1_credential_scrub": "pass",
     "G2_lan_path_scrub": "pass_tracked_tree",
     "G3_smoke": "pass_with_skips",
     "G4_privacy_readme": "pass",
-    "G5_human_flip": "pending",
-    "branch_protection": "post_public_only_free_plan"
+    "G5_human_flip": "done",
+    "branch_protection": "enabled_on_public_main"
   },
   "http_probes": [
     {
@@ -368,5 +368,6 @@
     "directors_orch :9820 returned 404 (UI/CPE up)",
     "Grok Imagine video third clip rate-limited (panel_05 used local kenburns beat)",
     "Mac-only Pinokio apps skipped per affinity policy"
-  ]
+  ],
+  "flipped_at": "2026-08-06T02:55:45Z"
 }
