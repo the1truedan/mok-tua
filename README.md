@@ -96,9 +96,10 @@ That identity is the only face in these mockups — COMDEX keynote, functions bo
 
 Folder: [`docs/assets/pres-smoke/`](docs/assets/pres-smoke/) · reuse `00-ceo-source-still.jpg` as LoadImage for live Comfy/Wan experiments.
 
-### Other illustrative outputs (MRGPU · CEO identity · cited · v0.5.7)
+### Other illustrative outputs (MRGPU · CEO identity · **post-FaceID** · v0.5.7)
 
 Regenerated on **gpu-host Comfy** from `pres-smoke/00-ceo-source-still.jpg` via **IPAdapter FaceID PLUS V2** (padded face ref for InsightFace).  
+**Cite as (post-FaceID).** Older Ken Burns / hybrid Grok clips are **(pre-FaceID)** — see [`docs/assets/exports/README.md`](docs/assets/exports/README.md).  
 Individual panels: [`docs/assets/capabilities/panels/`](docs/assets/capabilities/panels/) · Receipts: [`docs/assets/receipts/`](docs/assets/receipts/) · script: `scripts/regen_ceo_capability_assets.py`.
 
 | Storyboard sheet (FaceID PLUS V2) | Face polish BEFORE / AFTER (gentle refine) |

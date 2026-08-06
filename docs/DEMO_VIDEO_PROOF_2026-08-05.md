@@ -1,17 +1,28 @@
 # Demo video proof — M.A.N.A.G.E.R. vibe coding (2026-08-05)
 
 **Earmark:** public release packet **16:20 CDT**  
-**Status:** dual-path evidence generated · attach as GH Release asset (do not bulk-commit large mp4)
+**Status:** dual-path evidence generated · attach as GH Release asset (do not bulk-commit large mp4)  
+**Citation era:** **(pre-FaceID)** — see `docs/assets/exports/README.md` for pre- vs post-FaceID table.
+
+> ## Era label (do not greenwash)
+>
+> Everything in **this** file is **(pre-FaceID)** relative to the later IPAdapter FaceID PLUS V2
+> CEO identity pack (`example-storyboard-sheet.jpg`, FaceID polish/strip, hero compose).
+>
+> - Ken Burns = ffmpeg zoompan of stills · **not** FaceID · **not** generative GPU film  
+> - Hybrid vibe = **Grok Imagine I2V** + kenburns · **not** MRGPU  
 
 > ## Correction (operator verification)
 >
 > The **hybrid** clip below was **Grok Imagine I2V + ffmpeg**, **not** MRGPU.  
 > That is why **no GPU usage** was observed.  
 >
-> **Canonical local path (use this):**  
+> **Canonical local generative path (still pre-FaceID selfie lock, but real GPU AD):**  
 > `docs/reports/MRGPU_LOCAL_RENDER_SMOKE_2026-08-05.md`  
 > Staging: `work/social-staging/2026-08/manager_mrgpu_local_render_20260805/`  
 > — ComfyUI DreamShaper stills + **AnimateDiff** on **RTX 4060 Ti**, ~48s e2e, GPU peak **100%**.
+>
+> **(post-FaceID)** CEO + brand exports: `docs/assets/exports/README.md` · FaceID stills under `docs/assets/example-*` · PETSCII Matrix `docs/assets/exports/mok-tua-petscii-matrix-export.mp4`.
 
 ## Prompt seed (workflow evidence)
 

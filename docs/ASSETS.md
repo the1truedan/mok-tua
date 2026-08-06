@@ -46,24 +46,44 @@ Silly **self-identity** chain: one Drive/source still → presentation mockups (
 
 Prefer these over generic generated faces when documenting “face locked through the pipeline.”
 
+## Pre-FaceID vs post-FaceID (cite labels)
+
+| Label | Use when |
+|-------|----------|
+| **(pre-FaceID)** | Ken Burns comic zoompan, hybrid Grok I2V, prompt-lock-only storyboards, stock-hero art — **not** FaceID selfie lock |
+| **(post-FaceID)** | FaceID PLUS V2 CEO panels / polish / AD strip / hero compose; brand PETSCII Matrix export (era packaging) |
+
+Canonical table: [`docs/assets/exports/README.md`](assets/exports/README.md).
+
 ## Product art
 
-| File | Use |
-|------|-----|
-| `hero-prompt-to-product.jpg` | README hero — **CEO FaceID** storyboard wall + player (replaces stock woman concept) |
-| `product-capabilities/product-capabilities-NN-*.jpg` | **0.5.7 split cards** (one image per component · preferred) |
-| `product-capabilities-index.jpg` | Thumbnail index of all split cards |
-| `products-capabilities.png` / `.jpg` | **Legacy path** — small index only (no longer a multi‑MB tall poster) |
-| `capabilities/ui/*` | IRL screenshots: TUI boot/deck, CLI, Comfy, FramePack, Director |
-| `capabilities/panels/*` | Individual **FaceID PLUS V2** storyboard panels |
-| `example-storyboard-sheet.jpg` | **MRGPU FaceID PLUS V2** 6-panel CEO storyboard |
-| `example-face-polish.jpg` | **MRGPU FaceID** gentle polish (BEFORE = source still) |
-| `ceo-i2v-frame-strip.jpg` | AnimateDiff + FaceID strip (black-triangle frames filtered) |
-| `mokup-c64-tui-live*.png` | Real TUI boot/deck documentation stills (0.5.5+) |
-| `receipts/*.receipt.json` | Provenance sidecars for regenerated assets |
-| `08-product-map.png` | Product map |
-| `concept-*.jpg` | Optional abstract metaphors (not substitutes for vendor UIs) |
-| `mokups/capability-collage.html` | Source for annotated collage (Chrome headless → PNG) |
+| File | Era | Use |
+|------|-----|-----|
+| `hero-prompt-to-product.jpg` | **(post-FaceID)** | README hero — CEO FaceID storyboard wall + clean player |
+| `product-capabilities/product-capabilities-NN-*.jpg` | **(post-FaceID)** | Split capability cards (preferred over tall mega-PNG) |
+| `product-capabilities-index.jpg` | **(post-FaceID)** | Thumbnail index of split cards |
+| `products-capabilities.png` / `.jpg` | **(post-FaceID)** packaging | Legacy path = small index only |
+| `capabilities/ui/*` | either (UI chrome) | IRL screenshots: TUI / CLI / Comfy / FramePack / Director |
+| `capabilities/panels/*` | **(post-FaceID)** | FaceID PLUS V2 storyboard panels |
+| `example-storyboard-sheet.jpg` | **(post-FaceID)** | MRGPU FaceID 6-panel CEO storyboard |
+| `example-face-polish.jpg` | **(post-FaceID)** | FaceID gentle polish (BEFORE = source still) |
+| `ceo-i2v-frame-strip.jpg` | **(post-FaceID)** | AnimateDiff + FaceID strip (glitch-filtered) |
+| `exports/mok-tua-petscii-matrix-export.mp4` | **(post-FaceID)** era · brand | Boot → µ rain → PETSCII MOK-TUA → rain-out (**not** a face demo) |
+| `mokup-c64-tui-live*.png` | pre or post (UI) | Real TUI boot/deck stills |
+| `receipts/*.receipt.json` | match asset era | Provenance sidecars |
+| `08-product-map.png` | n/a | Product map |
+| `concept-*.jpg` | **(pre-FaceID)** style | Abstract metaphors only |
+| `mokups/capability-collage.html` | source | Collage HTML |
+
+### (pre-FaceID) motion demos (staging — not git blobs)
+
+| File | Cite as |
+|------|---------|
+| `manager_vibe_demo_local_kenburns.mp4` | **(pre-FaceID)** · ffmpeg Ken Burns |
+| `manager_mrgpu_stills_kenburns_cpu_stitch.mp4` | **(pre-FaceID)** · CPU stitch |
+| `manager_vibe_demo_hybrid_12s.mp4` | **(pre-FaceID)** · Grok I2V hybrid · ≠ MRGPU |
+
+Staging roots under `/Volumes/ai-data/work/social-staging/2026-08/` — see `DEMO_VIDEO_PROOF_2026-08-05.md`.
 
 ## Attribution
 
