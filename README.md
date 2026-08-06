@@ -46,10 +46,10 @@ The **Commodore 64** conductor skin is deliberate nostalgia. Time at the **Gatew
 ## What you get (pictures worth a thousand words)
 
 <p align="center">
-  <img src="docs/assets/hero-prompt-to-product.jpg" alt="Storyboard wall leading into a short video frame" width="900" />
+  <img src="docs/assets/hero-prompt-to-product.jpg" alt="CEO FaceID storyboard wall into short video player chrome" width="900" />
 </p>
 
-<p align="center"><em>Idea → panels → motion. mok-tua keeps the steps ordered and auditable.</em></p>
+<p align="center"><em>Idea → panels → motion — CEO identity from <code>00-ceo-source-still.jpg</code> via FaceID PLUS V2 (not stock concept art). mok-tua keeps the steps ordered and auditable.</em></p>
 
 ### Prompt → product (one diagram)
 
@@ -98,16 +98,16 @@ Folder: [`docs/assets/pres-smoke/`](docs/assets/pres-smoke/) · reuse `00-ceo-so
 
 ### Other illustrative outputs (MRGPU · CEO identity · cited · v0.5.7)
 
-Regenerated on **gpu-host Comfy** from `pres-smoke/00-ceo-source-still.jpg` via **IPAdapter plus-face** img2img.  
-Individual panels: [`docs/assets/capabilities/panels/`](docs/assets/capabilities/panels/) · Receipts: [`docs/assets/receipts/`](docs/assets/receipts/).
+Regenerated on **gpu-host Comfy** from `pres-smoke/00-ceo-source-still.jpg` via **IPAdapter FaceID PLUS V2** (padded face ref for InsightFace).  
+Individual panels: [`docs/assets/capabilities/panels/`](docs/assets/capabilities/panels/) · Receipts: [`docs/assets/receipts/`](docs/assets/receipts/) · script: `scripts/regen_ceo_capability_assets.py`.
 
-| Storyboard sheet (IPAdapter plus-face) | Face polish BEFORE / AFTER |
-|----------------------------------------|----------------------------|
-| <img src="docs/assets/example-storyboard-sheet.jpg" alt="Six-panel CEO storyboard IPAdapter plus-face" width="420" /> | <img src="docs/assets/example-face-polish.jpg" alt="CEO face polish before source still after IPAdapter refine" width="420" /> |
+| Storyboard sheet (FaceID PLUS V2) | Face polish BEFORE / AFTER |
+|-----------------------------------|----------------------------|
+| <img src="docs/assets/example-storyboard-sheet.jpg" alt="Six-panel CEO storyboard FaceID PLUS V2" width="420" /> | <img src="docs/assets/example-face-polish.jpg" alt="CEO face polish before source still after FaceID refine" width="420" /> |
 
-| AnimateDiff short-loop strip (not cloud Grok) | Conductor TUI (fixed PETSCII boot → two-pane) |
-|-----------------------------------------------|-----------------------------------------------|
-| <img src="docs/assets/ceo-i2v-frame-strip.jpg" alt="MRGPU AnimateDiff frame strip" width="420" /> | <img src="docs/assets/capabilities/ui/ui-tui-boot.png" alt="mok-tua fixed inverse PETSCII boot" width="420" /> |
+| AnimateDiff + FaceID strip (not cloud Grok) | Conductor TUI (fixed PETSCII boot → two-pane) |
+|---------------------------------------------|-----------------------------------------------|
+| <img src="docs/assets/ceo-i2v-frame-strip.jpg" alt="MRGPU AnimateDiff FaceID frame strip" width="420" /> | <img src="docs/assets/capabilities/ui/ui-tui-boot.png" alt="mok-tua fixed inverse PETSCII boot" width="420" /> |
 
 <p align="center"><em>path · prompt · renderer · host_role · QQQ0 on each card — never claim cloud I2V as local GPU.</em></p>
 

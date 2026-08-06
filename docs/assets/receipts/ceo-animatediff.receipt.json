@@ -1,22 +1,22 @@
 {
   "schema": "mok_tua_artifact_receipt.v1",
   "artifact": {
-    "path": "/Users/dtm/mok-tua/work/ceo_capability_regen/ceo_animatediff.mp4",
-    "name": "ceo_animatediff.mp4",
-    "sha256": "3976f28e7ff6c485fe65212f39223becf6ba782cac7383347463430721a772f5",
+    "path": "/Users/dtm/mok-tua/work/ceo_capability_regen/ceo_animatediff_faceid.mp4",
+    "name": "ceo_animatediff_faceid.mp4",
+    "sha256": "26061c017810382c400864c0e3236c1012e03e3c74a7da1a26328361801e9b20",
     "kind": "video",
     "exists": true
   },
-  "renderer": "mrgpu_comfy_animatediff",
+  "renderer": "mrgpu_comfy_faceid_animatediff",
   "provider": "comfy",
   "cloud_or_local": "local",
-  "model": "DreamShaper_8_pruned.safetensors+mm_sd_v15_v2.fp16",
+  "model": "DreamShaper_8_pruned.safetensors+mm_sd_v15_v2.fp16+ip-adapter-faceid-plusv2_sd15.bin",
   "host_role": "gpu-host",
   "qqq": "QQQ0",
   "prompt": "short loop of same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, subtle head motion and blink, dual monitor glow, coding at desk, gentle camera push-in, coherent face, cinematic",
   "negative_prompt": null,
   "seed": null,
-  "wall_clock_s": 27.61,
+  "wall_clock_s": 36.65,
   "tokens": {
     "input": null,
     "output": null,
@@ -24,15 +24,15 @@
     "note": "n/a local comfy"
   },
   "gpu": {
-    "peak_util_pct": 37.0
+    "peak_util_pct": 3.0
   },
   "cpu": {},
-  "gpu_evidence": "peak_util=37.0% host_role=gpu-host",
+  "gpu_evidence": "peak_util=3.0% host_role=gpu-host",
   "sampled_by": "host_monitor",
-  "ts_utc": "2026-08-06T00:21:07Z",
-  "caption_line": "mrgpu_comfy_animatediff \u00b7 DreamShaper_8_pruned.safetensors+mm_sd_v15_v2.fp16 \u00b7 gpu-host \u00b7 27.6s \u00b7 n/a local comfy \u00b7 GPU\u2026",
+  "ts_utc": "2026-08-06T01:36:16Z",
+  "caption_line": "mrgpu_comfy_faceid_animatediff \u00b7 DreamShaper_8_pruned.safetensors+mm_sd_v15_v2.fp16+ip-adapter-faceid-plusv2_sd15.bin \u00b7\u2026",
   "extra": {
-    "note": "txt2vid AnimateDiff short loop for collage; identity prompt-locked CEO (not cloud I2V)",
+    "note": "FaceID-conditioned AnimateDiff short loop; not cloud I2V",
     "frames": 16,
     "fps": 8
   }
