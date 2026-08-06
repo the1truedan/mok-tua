@@ -74,4 +74,12 @@ FaceID install / path: [`docs/operations/IPADAPTER_FACEID_INSTALL_2026-08-05.md`
 
 ## GitHub play
 
-Prefer poster click → mp4 (Release or path). Inline player only with GitHub attachment URLs when available.
+**Repo front door:** README top = poster PNG linked to the `.mp4` blob path.
+
+| What you want | How |
+|---------------|-----|
+| See poster on repo home | `docs/assets/exports/mok-tua-petscii-matrix-poster.png` (README top) |
+| **Press to play** | Click poster or **▶ Press to play** → opens `mok-tua-petscii-matrix-export.mp4` on GitHub’s file page (native player + play button) |
+| Direct blob URL | `https://github.com/the1truedan/mok-tua/blob/main/docs/assets/exports/mok-tua-petscii-matrix-export.mp4` |
+
+**Law:** GitHub README markdown **cannot** inline-play a repo-tracked `.mp4` (no working `<video src=…repo path>`). Poster → blob is the supported “press to play” pattern. Inline autoplay would require a GitHub user-attachment CDN URL (issue drag-drop) or GitHub Pages — not used here.

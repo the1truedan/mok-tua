@@ -1,3 +1,17 @@
+<!-- Brand short at repo top: poster is click-to-play → GitHub blob video player (README cannot inline-play repo .mp4). -->
+<p align="center">
+  <a href="docs/assets/exports/mok-tua-petscii-matrix-export.mp4" title="Open playable PETSCII Matrix export (press play on the file page)">
+    <img src="docs/assets/exports/mok-tua-petscii-matrix-poster.png" alt="PETSCII Matrix brand short — click poster to open playable MP4" width="920" />
+  </a>
+</p>
+
+<p align="center">
+  <strong>PETSCII Matrix</strong> brand export · <em>(post-FaceID)</em> packaging era · not a face demo<br />
+  <a href="docs/assets/exports/mok-tua-petscii-matrix-export.mp4"><strong>▶ Press to play</strong></a>
+  · <a href="docs/assets/exports/README.md">cite table</a>
+  · <a href="docs/assets/exports/mok-tua-petscii-matrix-poster.png">poster</a>
+</p>
+
 # mok-tua
 
 **Turn a script into storyboard pictures — and, when you want, short video — on machines you own.**
