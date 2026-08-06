@@ -3,32 +3,34 @@
   "artifact": {
     "path": "/Users/dtm/mok-tua/docs/assets/ceo-i2v-frame-strip.jpg",
     "name": "ceo-i2v-frame-strip.jpg",
-    "sha256": "4b248aac3b0be4ebaa54090e23cb778443580525419fdaf79c6e36fa11015f4d",
+    "sha256": "f2b8c2b6d50812015873247e10ce9e5e76aaeb4fa5ce63dc89aba3d2fc3a537b",
     "kind": "image",
     "exists": true
   },
-  "renderer": "mrgpu_comfy_faceid_animatediff_frame_strip",
+  "renderer": "mrgpu_comfy_faceid_animatediff_frame_strip_filtered",
   "provider": "comfy",
   "cloud_or_local": "local",
-  "model": "DreamShaper_8_pruned.safetensors+mm_sd_v15_v2.fp16+ip-adapter-faceid-plusv2_sd15.bin",
+  "model": "DreamShaper_8+faceid",
   "host_role": "gpu-host",
   "qqq": "QQQ0",
-  "prompt": "short loop of same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, subtle head motion and blink, dual monitor glow, coding at desk, gentle camera push-in, coherent face, cinematic",
+  "prompt": "photorealistic short loop of same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, subtle natural head motion and blink, same person, office soft light green wall, clean face no artifacts, no black shapes, no triangles, coherent skin",
   "negative_prompt": null,
   "seed": null,
-  "wall_clock_s": 36.65,
+  "wall_clock_s": null,
   "tokens": {
     "input": null,
     "output": null,
     "total": null,
     "note": "n/a"
   },
-  "gpu": {
-    "peak_util_pct": 3.0
-  },
+  "gpu": {},
   "cpu": {},
-  "gpu_evidence": "peak_util=3.0% host_role=gpu-host",
-  "sampled_by": "host_monitor",
-  "ts_utc": "2026-08-06T01:36:16Z",
-  "caption_line": "mrgpu_comfy_faceid_animatediff_frame_strip \u00b7 DreamShaper_8_pruned.safetensors+mm_sd_v15_v2.fp16+ip-adapter-faceid-plusv\u2026"
+  "gpu_evidence": null,
+  "sampled_by": "manual",
+  "ts_utc": "2026-08-06T01:54:12Z",
+  "caption_line": "mrgpu_comfy_faceid_animatediff_frame_strip_filtered \u00b7 DreamShaper_8+faceid \u00b7 gpu-host \u00b7 ? \u00b7 n/a \u00b7 gpu ? \u00b7 QQQ0",
+  "extra": {
+    "note": "AnimateDiff FaceID frames filtered for black-triangle artifacts",
+    "frame_count": 4
+  }
 }
