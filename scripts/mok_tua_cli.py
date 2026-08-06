@@ -109,7 +109,7 @@ def main() -> int:
         default=None,
         nargs="?",
         const="gpu-host",
-        help="Sample host during live pull (default node: gpu-host)",
+        help="Sample host during live pull (default node: gpu_host)",
     )
     pull.add_argument("--priority-max", type=int, default=2)
 
@@ -154,7 +154,7 @@ def main() -> int:
     lw = lock_sub.add_parser("write", help="Write lock from catalog + git SHAs")
     lw.add_argument("--smoke-ref", default=None)
     ll = lock_sub.add_parser("load", help="Launch loading profile from lock")
-    ll.add_argument("profile", help="demo|full_local|video_gpu-host|face|audio|body")
+    ll.add_argument("profile", help="demo|full_local|video_gpu|face|audio|body")
     ll.add_argument("--live", action="store_true")
     ll.add_argument("--monitor", default=None, nargs="?", const="gpu-host")
 
@@ -205,7 +205,7 @@ def main() -> int:
         help="Write receipt next to artifact (samples host_monitor when local)",
     )
     rst.add_argument("path")
-    rst.add_argument("--renderer", required=True, help="e.g. gpu-host_comfy_animatediff")
+    rst.add_argument("--renderer", required=True, help="e.g. gpu_comfy_animatediff")
     rst.add_argument("--qqq", default="QQQ0")
     rst.add_argument("--prompt", default=None)
     rst.add_argument("--model", default=None)

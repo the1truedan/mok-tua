@@ -65,7 +65,7 @@ Canonical table: [`docs/assets/exports/README.md`](assets/exports/README.md).
 | `products-capabilities.png` / `.jpg` | **(post-FaceID)** packaging | Legacy path = small index only |
 | `capabilities/ui/*` | either (UI chrome) | IRL screenshots: TUI / CLI / Comfy / FramePack / Director |
 | `capabilities/panels/*` | **(post-FaceID)** | FaceID PLUS V2 storyboard panels |
-| `example-storyboard-sheet.jpg` | **(post-FaceID)** | gpu-host FaceID 6-panel CEO storyboard |
+| `example-storyboard-sheet.jpg` | **(post-FaceID)** | GPU-host FaceID 6-panel CEO storyboard |
 | `example-face-polish.jpg` | **(post-FaceID)** | FaceID gentle polish (BEFORE = source still) |
 | `ceo-i2v-frame-strip.jpg` | **(post-FaceID)** | AnimateDiff + FaceID strip (glitch-filtered) |
 | `exports/mok-tua-petscii-matrix-export.mp4` | **(post-FaceID)** era · brand | Boot → µ rain → PETSCII MOK-TUA → rain-out (**not** a face demo) |
@@ -80,8 +80,8 @@ Canonical table: [`docs/assets/exports/README.md`](assets/exports/README.md).
 | File | Cite as |
 |------|---------|
 | `manager_vibe_demo_local_kenburns.mp4` | **(pre-FaceID)** · ffmpeg Ken Burns |
-| `manager_gpu-host_stills_kenburns_cpu_stitch.mp4` | **(pre-FaceID)** · CPU stitch |
-| `manager_vibe_demo_hybrid_12s.mp4` | **(pre-FaceID)** · Grok I2V hybrid · ≠ gpu-host |
+| `manager_gpu_stills_kenburns_cpu_stitch.mp4` | **(pre-FaceID)** · CPU stitch |
+| `manager_vibe_demo_hybrid_12s.mp4` | **(pre-FaceID)** · Grok I2V hybrid · ≠ local GPU |
 
 Staging roots under `/Volumes/ai-data/work/social-staging/2026-08/` — see `DEMO_VIDEO_PROOF_2026-08-05.md`.
 

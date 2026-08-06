@@ -1,7 +1,7 @@
-# FramePack Studio — SM GUI launch + mok-tua orchestration (gpu-host)
+# FramePack Studio — SM GUI launch + mok-tua orchestration (GPU-host)
 
 **Date:** 2026-08-05  
-**Host:** gpu-host (gpu-host) · orchestrate from desk-host (desk-host) via SSH/role  
+**Host:** gpu-host (GPU-host) · orchestrate from desk-host (desk-host) via SSH/role  
 **Stamp:** `2026.08-framepack-sm-gui-venv-link`
 
 ---
@@ -132,5 +132,5 @@ test -d "$FP/diffusers_helper" && echo diffusers_helper_ok
 
 - `docs/operations/FRAMEPACK_SHARED_MODELS_2026-08-05.md`  
 - `scripts/run_framepack_shared_models.sh`  
-- `docs/roadmap/FULL_GAMUT_gpu-host_FRAMEWORK_2026-08-05.md`  
+- `docs/roadmap/FULL_GAMUT_GPU_FRAMEWORK_2026-08-05.md`  
 - UV NFS: control-repo `UV_CACHE_CROSS_HOST_NFS_INCIDENT_2026-08-04.md`  

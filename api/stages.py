@@ -50,7 +50,7 @@ def work_root() -> Path:
     if env and Path(env).is_dir():
         return Path(env)
     orch = load_json("orchestration.json")
-    preferred = (orch.get("outputs") or {}).get("work_root_desk-host")
+    preferred = (orch.get("outputs") or {}).get("work_root_DESK")
     if preferred and Path(preferred).is_dir():
         return Path(preferred)
     fallback = os.environ.get("WORK_FALLBACK", str(ROOT / "work"))
@@ -62,8 +62,8 @@ def work_root() -> Path:
 def endpoint_url(key: str) -> str:
     orch = load_json("orchestration.json")
     env_map = {
-        "desk-host": os.environ.get("COMFY_desk-host_URL"),
-        "gpu-host": os.environ.get("COMFY_gpu-host_URL"),
+        "desk-host": os.environ.get("COMFY_DESK_URL"),
+        "gpu-host": os.environ.get("COMFY_GPU_URL"),
         "headroom": os.environ.get("HEADROOM_BASE"),
     }
     if env_map.get(key):
@@ -362,8 +362,8 @@ def create_run_from_markdown(
     stages.append({"stage": "estimate", "result": est})
     (rdir / "estimate.json").write_text(dumps(est), encoding="utf-8")
 
-    desk-host_url = endpoint_url("desk-host")
-    gpu-host_url = endpoint_url("gpu-host")
+    desk_host_url = endpoint_url("desk-host")
+    gpu_host_url = endpoint_url("gpu-host")
     style_lock = None
     meta = story.get("meta") or {}
     if isinstance(meta, dict):
@@ -472,7 +472,7 @@ def create_run_from_markdown(
         "run_dir": str(rdir),
         "stages": stages,
         "shots": shot_results,
-        "endpoints": {"desk-host": desk-host_url, "gpu-host": gpu-host_url, "headroom": endpoint_url("headroom")},
+        "endpoints": {"desk-host": desk_host_url, "gpu-host": gpu_host_url, "headroom": endpoint_url("headroom")},
         "providers": {
             "still": still_name,
             "video": video_name,
@@ -564,15 +564,15 @@ def list_runs(limit: int = 20) -> list[dict[str, Any]]:
 
 
 def health() -> dict[str, Any]:
-    desk-host = comfy.probe(endpoint_url("desk-host"))
-    gpu-host = comfy.probe(endpoint_url("gpu-host"))
+    desk_host = comfy.probe(endpoint_url("desk-host"))
+    gpu_host = comfy.probe(endpoint_url("gpu-host"))
     orch = load_json("orchestration.json")
     return {
         "ok": True,
         "service": "mock-tua-api",
         "work_root": str(work_root()),
-        "comfy_desk-host": desk-host,
-        "comfy_gpu-host": gpu-host,
+        "comfy_desk": desk_host,
+        "comfy_gpu": gpu_host,
         "headroom": endpoint_url("headroom"),
         "qqq": _qqq_mode(),
         "dry_run": os.environ.get("MOCK_TUA_DRY_RUN", "1") not in ("0", "false"),

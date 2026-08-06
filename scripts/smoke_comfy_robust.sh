@@ -2,7 +2,7 @@
 # ROBUST capability smoke for mok-tua Comfy worker (object_info + roster).
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-COMFY_URL="${COMFY_gpu-host_URL:-${COMFY_URL:-http://gpu-host:8188}}"
+COMFY_URL="${COMFY_GPU_URL:-${COMFY_URL:-http://gpu-host:8188}}"
 ROSTER="${ROOT}/config/comfy_nodes_mok_tua_roster.json"
 CN="${COMFY_CUSTOM_NODES:-/Volumes/ai-data/comfyui/custom_nodes}"
 # On gpu-host:

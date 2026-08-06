@@ -15,11 +15,11 @@
 | D2 | LAN → role labels (`gpu-host` / …) in tracked configs | `config/*` scrub |
 | D3 | Protect-after-public sequencing (free GH private cannot protect) | `docs/PUBLIC_RELEASE_PROTECT_BRANCH_…` |
 | D4 | Pinokio gamut HTTP + pterm probes (honest skips) | `docs/reports/PINOKIO_GAMUT_SMOKE_…` |
-| D5 | Full-gamut gpu-host framework (Adobe Character Animator **back-burner**) | `docs/roadmap/FULL_GAMUT_…` |
+| D5 | Full-gamut GPU framework (Adobe Character Animator **back-burner**) | `docs/roadmap/FULL_GAMUT_…` |
 | D6 | FramePack shared models symlink + launcher + NFS write fallback | `scripts/run_framepack_shared_models.sh` |
 | D7 | Host-local uv venv batch (`--install-deps`) for FramePack | host runtime; ops FRAMEPACK doc |
-| D8 | I2V **Grok vs gpu-host** provenance incident closed in process | `docs/operations/I2V_GROK_VS_gpu-host_…` |
-| D9 | gpu-host Comfy stills + **AnimateDiff** generative smoke (GPU 100%) | `docs/reports/gpu-host_LOCAL_RENDER_…` |
+| D8 | I2V **Grok vs local GPU** provenance incident closed in process | `docs/operations/I2V_GROK_VS_GPU-host_…` |
+| D9 | GPU-host Comfy stills + **AnimateDiff** generative smoke (GPU 100%) | `docs/reports/GPU-host_LOCAL_RENDER_…` |
 | D10 | Hybrid Grok I2V demo labeled **not** local GPU | `docs/DEMO_VIDEO_PROOF_…` |
 | D11 | C64 TUI REPL smoke (`--skin c64` → READY. / help) | unit 12 OK + REPL |
 | D12 | Overnight E0–E16 storyboard→clip runbook + comic fixtures | overnight runbook · `fixtures/la_dark_one_…` |
@@ -27,7 +27,7 @@
 | D14 | FramePack launch recipe + port map pushed private | `api/providers.py` · orchestration `local_framepack` |
 | D15 | Conductor TUI 0.5.5: PETSCII boot, two-pane, VIC-II stats, green/mono skins | `tui/` · INTERFACES |
 | D16 | Artifact receipt sidecar + optional burn-caption | `api/artifact_receipt.py` · CLI `receipt` |
-| D17 | CEO gpu-host storyboard + face polish + AD strip + accurate collage | 0.5.6 · smoke stamp |
+| D17 | CEO GPU-host storyboard + face polish + AD strip + accurate collage | 0.5.6 · smoke stamp |
 | D18 | IPAdapter FaceID weights staged on shared pool (7 files) | `IPADAPTER_FACEID_INSTALL` · `stage_ipadapter_faceid.sh` |
 | D19 | Wan 14B I2V weight inventory (no re-pull) | `WAN_WEIGHTS_STAGING` |
 | D20 | Director HTTP path to models via Comfy documented | `DIRECTOR_MODELS_CONNECTIVITY` |
@@ -45,7 +45,7 @@
 
 | # | Item | Gate |
 |---|------|------|
-| **1** | FramePack **finalize mp4** + receipt `artifact_ok: true` (`renderer: gpu-host_framepack_i2v`) | GPU sampling already observed · capture/promote from local SSD |
+| **1** | FramePack **finalize mp4** + receipt `artifact_ok: true` (`renderer: gpu_framepack_i2v`) | GPU sampling already observed · capture/promote from local SSD |
 | **2** | If hub incomplete: one intentional `FRAMEPACK_ALLOW_DOWNLOAD=1` seed into **shared** hub only | never package-local HF tree |
 | **3** | Wan 2.2 / Wan2GP **one-clip I2V** when ports/adapters live | honest skip until Wan ports up (not FramePack 7864) |
 | **4** | W0 residual: complete InsightFace buffalo_l/antelope for true FaceID; InstantID; FaceFusion CUDA | plus-face path live · FaceID InsightFace residual |
@@ -68,7 +68,7 @@
 | **9b** | **wait-what earmark** — plain-English pass on README / Release / PR bodies for **native English speakers, not AI aficionados** | [mattpocock/skills `wait-what`](https://github.com/mattpocock/skills/blob/main/skills/productivity/wait-what/SKILL.md) · doc `docs/roadmap/WAIT_WHAT_GITHUB_PLAIN_ENGLISH_EARMARK_2026-08-05.md` · install optional |
 | **10** | Human: review packet → `gh repo edit … --visibility public` | **never agent-unattended** |
 | **11** | Immediately enable `main` branch protection post-flip | free public allows it |
-| **12** | Optional GH Release + attach **gpu-host** mp4 (prefer local proof over hybrid) | asset not git blob; body gets wait-what pass first |
+| **12** | Optional GH Release + attach **local-GPU** mp4 (prefer local proof over hybrid) | asset not git blob; body gets wait-what pass first |
 
 ### Explicit non-goals (this quarter unless reopened)
 
@@ -76,7 +76,7 @@
 - Auto-post to social  
 - PHI / medical bodies in this repo  
 - Recursive chmod of all ai-data  
-- Claiming cloud I2V as “gpu-host local”
+- Claiming cloud I2V as “local GPU”
 
 ---
 

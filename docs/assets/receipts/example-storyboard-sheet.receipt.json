@@ -7,7 +7,7 @@
     "kind": "image",
     "exists": true
   },
-  "renderer": "gpu-host_comfy_faceid_storyboard",
+  "renderer": "gpu_comfy_faceid_storyboard",
   "provider": "comfy",
   "cloud_or_local": "local",
   "model": "DreamShaper_8_pruned.safetensors+ip-adapter-faceid-plusv2_sd15.bin",
@@ -31,7 +31,7 @@
   "gpu_evidence": "peak_util=98.0% host_role=gpu-host",
   "sampled_by": "host_monitor_or_ssh",
   "ts_utc": "2026-08-06T01:35:31Z",
-  "caption_line": "gpu-host_comfy_faceid_storyboard \u00b7 DreamShaper_8_pruned.safetensors+ip-adapter-faceid-plusv2_sd15.bin \u00b7 gpu-host \u00b7 28.0s \u00b7\u2026",
+  "caption_line": "gpu_comfy_faceid_storyboard \u00b7 DreamShaper_8_pruned.safetensors+ip-adapter-faceid-plusv2_sd15.bin \u00b7 gpu-host \u00b7 28.0s \u00b7\u2026",
   "extra": {
     "panels": [
       {

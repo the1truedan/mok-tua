@@ -2,7 +2,7 @@
   "_meta": {
     "title": "AnimateDiff Evolved basic placeholder",
     "status": "placeholder",
-    "note": "Export API graph from ComfyUI-AnimateDiff-Evolved after smoke on gpu-host. Models under models/animatediff/. Use as QQQ0 fallback / short loops; prefer wan22_animate for narrative.",
+    "note": "Export API graph from ComfyUI-AnimateDiff-Evolved after smoke on GPU-host. Models under models/animatediff/. Use as QQQ0 fallback / short loops; prefer wan22_animate for narrative.",
     "tags": ["animatediff", "fallback"]
   },
   "nodes": {}

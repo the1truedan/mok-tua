@@ -358,7 +358,7 @@
       "tts_story",
       "facefusion"
     ],
-    "video_gpu-host": [
+    "video_gpu": [
       "sm_comfy",
       "wan2gp"
     ],

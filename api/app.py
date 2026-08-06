@@ -514,7 +514,7 @@ def pull_provider(provider_id: str, dry_run: bool = True) -> dict[str, Any]:
 @app.get("/v1/probe/comfy")
 def probe_comfy() -> dict[str, Any]:
     h = stages.health()
-    return {"desk-host": h.get("comfy_desk-host"), "gpu-host": h.get("comfy_gpu-host")}
+    return {"desk-host": h.get("comfy_desk"), "gpu-host": h.get("comfy_gpu")}
 
 
 def main() -> None:

@@ -8,7 +8,7 @@ documents into every prompt.
 | Procedure | Canonical source | Use before |
 |---|---|---|
 | Shared storage/NFS boundaries | `docs/REPEATED_CONTEXT_BUNDLE.md` | any `/mnt/ai-data` or `/Volumes/ai-data` access |
-| gpu-host Pinokio paths and staged pulls | `config/pinokio_gpu-host_staging.json` + `docs/OPERATORS.md` | Pinokio update/pull/install |
+| GPU-host Pinokio paths and staged pulls | `config/pinokio_gpu_staging.json` + `docs/OPERATORS.md` | Pinokio update/pull/install |
 | UV host split and corruption handling | `~/grokcode/docs/operations/UV_CACHE_CROSS_HOST_NFS_INCIDENT_2026-08-04.md` | uv/Pinokio dependency pulls |
 | Permission repair and probes | `~/grokcode/docs/operations/AI_DATA_NFS_CROSS_PLATFORM_PERMISSIONS_INCIDENT_2026-08-03.md` | chmod/chown/ACL/sudo decisions |
 | SSH bounded-command safety | `docs/REPEATED_CONTEXT_BUNDLE.md` | remote health or path checks |

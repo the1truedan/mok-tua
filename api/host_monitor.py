@@ -1,4 +1,4 @@
-"""gpu-host (and local) host resource sampling for pulls / loading profiles.
+"""GPU-host (and local) host resource sampling for pulls / loading profiles.
 
 Prefers Prometheus exporters from grokcode metrics_nodes.json when reachable;
 falls back to SSH + nvidia-smi / free / loadavg.
@@ -21,8 +21,8 @@ from typing import Any, Callable
 ROOT = Path(__file__).resolve().parents[1]
 WORK = Path(os.environ.get("WORK_FALLBACK", ROOT / "work"))
 SMOKE_DIR = WORK / "smoke"
-DEFAULT_gpu-host_HOST = os.environ.get("gpu-host_HOST", "gpu-host")
-DEFAULT_SSH = os.environ.get("gpu-host_SSH", f"operator@{DEFAULT_gpu-host_HOST}")
+DEFAULT_GPU_HOST = os.environ.get("GPU_HOST", "gpu-host")
+DEFAULT_SSH = os.environ.get("GPU_SSH", f"operator@{DEFAULT_GPU_HOST}")
 GROKCODE_METRICS = Path.home() / "grokcode" / "config" / "metrics_nodes.json"
 
 
@@ -47,9 +47,9 @@ def load_metrics_config() -> dict[str, Any]:
     return {
         "nodes": {
             "gpu-host": {
-                "host": DEFAULT_gpu-host_HOST,
-                "node_exporter": f"http://{DEFAULT_gpu-host_HOST}:9100/metrics",
-                "gpu_exporter": f"http://{DEFAULT_gpu-host_HOST}:9835/metrics",
+                "host": DEFAULT_GPU_HOST,
+                "node_exporter": f"http://{DEFAULT_GPU_HOST}:9100/metrics",
+                "gpu_exporter": f"http://{DEFAULT_GPU_HOST}:9835/metrics",
                 "gpu_fallback_ssh": DEFAULT_SSH,
             }
         }
@@ -117,7 +117,7 @@ def _parse_gpu_exporter(text: str) -> dict[str, Any]:
     return out
 
 
-def sample_gpu-host_ssh(ssh_target: str | None = None, timeout: float = 8.0) -> dict[str, Any]:
+def sample_gpu_ssh(ssh_target: str | None = None, timeout: float = 8.0) -> dict[str, Any]:
     target = ssh_target or DEFAULT_SSH
     remote = (
         "nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total,temperature.gpu "
@@ -193,7 +193,7 @@ def sample_host(node: str = "gpu-host") -> dict[str, Any]:
     # Need GPU detail or full sample failed → SSH fallback
     if not out.get("ok") or out.get("gpu_util_pct") is None:
         ssh = node_cfg.get("gpu_fallback_ssh") or DEFAULT_SSH
-        ssh_sample = sample_gpu-host_ssh(str(ssh))
+        ssh_sample = sample_gpu_ssh(str(ssh))
         if ssh_sample.get("ok"):
             merged = {**out, **{k: v for k, v in ssh_sample.items() if k not in ("source",)}}
             merged["source"] = "ssh" if not out.get("ok") else f"{out.get('source')}+ssh"

@@ -1,10 +1,10 @@
 {
   "version": 2,
   "updated": "2026-08-02",
-  "description": "mok-tua hybrid: desk-host Headroom + SM Comfy stills; gpu-host video; cloud overflow via QQQ providers (Grok Imagine, Nano Banana, Seedance earmark).",
+  "description": "mok-tua hybrid: desk-host Headroom + SM Comfy stills; GPU-host video; cloud overflow via QQQ providers (Grok Imagine, Nano Banana, Seedance earmark).",
   "model_pool": {
     "desk-host": "/Volumes/ai-data/models",
-    "gpu-host": "/mnt/ai-data/models",
+    "GPU-host": "/mnt/ai-data/models",
     "TOWER": "/mnt/ai-data/models"
   },
   "endpoints": {
@@ -17,7 +17,7 @@
     },
     "gpu-host": {
       "host": "gpu-host",
-      "label": "gpu-host ComfyUI (container or host runtime)",
+      "label": "GPU-host ComfyUI (container or host runtime)",
       "base_url": "http://gpu-host:8188",
       "role": "video",
       "mode": "remote"
@@ -36,11 +36,11 @@
       "role": "cloud",
       "mode": "stub",
       "live_model": "manager-openrouter-free",
-      "note": "NEW LAW: gpu-host may use cloud compute for mok-tua overflow; never PHI auto-cloud"
+      "note": "NEW LAW: GPU-host may use cloud compute for mok-tua overflow; never PHI auto-cloud"
     },
-    "gpu-host_litellm": {
+    "gpu_litellm": {
       "host": "gpu-host",
-      "label": "gpu-host LiteLLM worker+cloud",
+      "label": "GPU-host LiteLLM worker+cloud",
       "base_url": "http://gpu-host:4000/v1",
       "role": "llm_worker_cloud",
       "mode": "live"
@@ -152,8 +152,8 @@
     }
   },
   "outputs": {
-    "work_root_desk-host": "/Volumes/ai-data/work/story-anim",
-    "work_root_gpu-host": "/mnt/ai-data/work/story-anim",
+    "work_root_DESK": "/Volumes/ai-data/work/story-anim",
+    "work_root_GPU": "/mnt/ai-data/work/story-anim",
     "local_fallback": "./work"
   },
   "still_defaults": {
@@ -231,9 +231,9 @@
     }
   },
   "integration_earmarks": {
-    "pinokio_gpu-host_staging": {
+    "pinokio_gpu_staging": {
       "status": "audited",
-      "path": "config/pinokio_gpu-host_staging.json",
+      "path": "config/pinokio_gpu_staging.json",
       "host": "gpu-host",
       "use": "Ranked audit gates for video, lipsync, voice, music, mocap, and body-animation Pinokio providers"
     },
@@ -247,7 +247,7 @@
       "status": "locked",
       "path": "config/tier_lock_T0-T4.json",
       "mok_tua_version": "0.3.0",
-      "use": "Version pins + loading profiles (demo/full_local/video_gpu-host); smoke_ref under work/smoke/"
+      "use": "Version pins + loading profiles (demo/full_local/video_gpu); smoke_ref under work/smoke/"
     },
     "ask_packet_federation": {
       "status": "lab",
@@ -265,10 +265,10 @@
       "status": "locked",
       "path": "config/comfy_nodes_mok_tua_roster.json",
       "docs": "docs/COMFY_ROBUST_NODES.md",
-      "install": "scripts/comfy_robust_install_gpu-host.sh",
+      "install": "scripts/comfy_robust_install_gpu.sh",
       "smoke": "scripts/smoke_comfy_robust.sh",
       "updated": "2026-08-02",
-      "use": "A-E packs + F install order + G outside-Comfy; disable avoid-list on gpu-host"
+      "use": "A-E packs + F install order + G outside-Comfy; disable avoid-list on GPU-host"
     },
     "directors_console": {
       "status": "live_spawned",

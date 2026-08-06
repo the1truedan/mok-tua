@@ -12,7 +12,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
 - **IRL UI captures** under `docs/assets/capabilities/ui/`: PETSCII boot, two-pane deck, CLI REPL,
   ComfyUI, FramePack Gradio, Director’s Console.
 - **Individual storyboard panels** `docs/assets/capabilities/panels/01–06-*.jpg` + per-panel receipts.
-- Regen script: `scripts/regen_ceo_ipadapter_panels_0_5_7.py` (IPAdapter plus-face img2img on gpu-host).
+- Regen script: `scripts/regen_ceo_ipadapter_panels_0_5_7.py` (IPAdapter plus-face img2img on GPU-host).
 - Smoke stamp: `docs/reports/capability_stamp_0.5.7.json`.
 
 ### Changed
@@ -42,7 +42,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
 ### Added
 
 - **Smoke-tested capability stamp** (`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`, `capability_stamp_0.5.6.json`).
-- **CEO-identity example assets (gpu-host Comfy):**
+- **CEO-identity example assets (GPU-host Comfy):**
   - `example-storyboard-sheet.jpg` hybrid storyboard (prompt-locked wide + LoadImage CU)
   - `example-face-polish.jpg` img2img polish (BEFORE = `00-ceo-source-still`)
   - `ceo-i2v-frame-strip.jpg` from AnimateDiff short loop (GPU peak 100%; mp4 in `work/`)
@@ -53,7 +53,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
 ### Changed
 
 - Capability collage HTML rewritten for workflow accuracy and citation footers.
-- README illustrative outputs point at CEO gpu-host examples (not generic instructor / stock polish).
+- README illustrative outputs point at CEO GPU-host examples (not generic instructor / stock polish).
 - **PETSCII boot legibility:** fixed 5×5 glyph widths (M was 4/5/6 and shattered CLI alignment);
   inverse loader colors (light-blue paper + deep ink) in Textual themes + REPL ANSI;
   regen `mokup-c64-tui-live-boot.png`.
@@ -84,10 +84,10 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
 
 ### Added
 
-- **Full-gamut gpu-host framework** (`docs/roadmap/FULL_GAMUT_gpu-host_FRAMEWORK_2026-08-05.md`): orchestration → video → audio → identity/body → social ladder; Adobe Character Animator explicitly **back-burner**; shared `/mnt/ai-data/models` law.
+- **Full-gamut GPU framework** (`docs/roadmap/FULL_GAMUT_GPU_FRAMEWORK_2026-08-05.md`): orchestration → video → audio → identity/body → social ladder; Adobe Character Animator explicitly **back-burner**; shared `/mnt/ai-data/models` law.
 - **FramePack shared-models launcher** (`scripts/run_framepack_shared_models.sh`): `hf_download` → shared `hf_hub`, host-local uv venv, `--install-deps` batch, NFS write fallback, offline-by-default when hub present.
-- **Ops docs:** FramePack shared models, I2V Grok-vs-gpu-host provenance **incident**, full-gamut session handoff, protect-after-public sequencing, overnight storyboard→clip runbook, demo dual-path proof.
-- **Smoke reports:** Pinokio gamut HTTP/pterm matrix; gpu-host local Comfy stills + AnimateDiff generative video (GPU peak 100%).
+- **Ops docs:** FramePack shared models, I2V Grok-vs-GPU-host provenance **incident**, full-gamut session handoff, protect-after-public sequencing, overnight storyboard→clip runbook, demo dual-path proof.
+- **Smoke reports:** Pinokio gamut HTTP/pterm matrix; local GPU Comfy stills + AnimateDiff generative video (GPU peak 100%).
 - **TODO.md** open/closed operator board; LA Dark One April Fools sides fixture (public-safe).
 - Pinokio staging config: `framepack_studio.shared_models` + role-label host addresses (`gpu-host`).
 
@@ -99,7 +99,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
 
 ### Incident / policy
 
-- **Cloud Grok Imagine I2V must not be labeled as gpu-host local.** Hybrid demo kept as QQQ1 evidence; canonical local proof is AnimateDiff/Comfy receipt path. See `docs/operations/I2V_GROK_VS_gpu-host_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md`.
+- **Cloud Grok Imagine I2V must not be labeled as local GPU.** Hybrid demo kept as QQQ1 evidence; canonical local proof is AnimateDiff/Comfy receipt path. See `docs/operations/I2V_GROK_VS_LOCAL_GPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md`.
 
 ### Not in this version
 
@@ -169,7 +169,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
 
 ### Added
 
-- T0–T4 tier lock, smoke scorecard, gpu-host monitor, discover/audit/stage-app.
+- T0–T4 tier lock, smoke scorecard, GPU-host monitor, discover/audit/stage-app.
 - ask_packet.v1 federation, CHAINS receipts, trusted node award.
 - ROBUST Comfy roster / install scripts.
 

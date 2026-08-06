@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updated": "2026-08-02",
-  "scope": "ROBUST mok-tua Comfy worker (gpu-host primary, desk-host stills)",
+  "scope": "ROBUST mok-tua Comfy worker (GPU-host primary, desk-host stills)",
   "host_law": "Install/update nodes on gpu-host as uid 1000 when possible; fix .git a+rwx for Manager .cnr-id on NFS",
   "avoid": [
     {

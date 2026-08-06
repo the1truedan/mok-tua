@@ -17,7 +17,7 @@ readiness snapshot, not a failed install. The important runtime gates remain:
 
 - mok-tua API and Comfy health;
 - desk-host still worker;
-- gpu-host Wan/I2V worker;
+- GPU-host Wan/I2V worker;
 - one audio/TTS service with a stable output contract;
 - receipt-backed submit, poll, collect, and resume.
 
@@ -29,7 +29,7 @@ staged candidates, not automatically live adapters.
 
 ## Pinokio and UV path policy
 
-The canonical gpu-host paths are:
+The canonical GPU-host paths are:
 
 ```text
 /mnt/ai-data/pinokio
@@ -40,7 +40,7 @@ The canonical gpu-host paths are:
 /mnt/ai-data/models
 ```
 
-The gpu-host SSH audit on 2026-08-04 found `redacted` UID/GID 1000 and effective
+The GPU-host SSH audit on 2026-08-04 found `redacted` UID/GID 1000 and effective
 read/write/traverse access on Pinokio and both host-split UV cache roots. The
 export is Tower NFSv4.2 with `sec=sys`; directory modes are setgid/shared-write
 (2777). This does **not** prove every file is writable: UID-501 metadata and
@@ -48,7 +48,7 @@ dirty nested Git files can still block individual pulls.
 
 The previous UV failure was not a directory permission problem. A malformed
 cache object and a dangling host-specific symlink contaminated the shared
-cache. Keep gpu-host and desk-host cache roots separate, use `UV_LINK_MODE=copy` on
+cache. Keep GPU-host and desk-host cache roots separate, use `UV_LINK_MODE=copy` on
 NFS, quarantine only malformed entries, and never delete the entire cache.
 
 If a Pinokio pull cannot write its shared cache, use a host-local temporary
@@ -61,7 +61,7 @@ compiled `node_modules` on the shared NFS tree.
 | Lane | Preferred resource | Current posture | Assurance gate |
 |---|---|---|---|
 | Still/image | Stability Matrix Comfy on desk-host; Qwen edit graph | primary, path present | `/system_stats`, `/object_info`, one 512px local render + output hash |
-| Video/I2V | gpu-host Comfy Wan pin or Wan2GP | staged; submit contract incomplete | low-VRAM 8–16 frame clip, poll/collect receipt, no cloud |
+| Video/I2V | GPU-host Comfy Wan pin or Wan2GP | staged; submit contract incomplete | low-VRAM 8–16 frame clip, poll/collect receipt, no cloud |
 | Video fallback | AnimateDiff / FramePack | fallback/optional | only after explicit workflow export and smoke artifact |
 | Music/audio | ACE-Step | installed/staged, adapter pending | short WAV/MP3, duration/sample-rate metadata, receipt |
 | Voice | TTS-Story or Qwen3-TTS | installed/staged, contract audit pending | short synthetic line, normalized audio output, receipt |
@@ -75,7 +75,7 @@ delta, verify cache/model roots, and preserve local launcher changes.
 
 ## 2026-08-04 preparation
 
-1. Confirm the gpu-host Pinokio and host-split UV paths with the bounded SSH
+1. Confirm the GPU-host Pinokio and host-split UV paths with the bounded SSH
    probes; record UID/GID, modes, mount options, and free space.
 2. Run `providers`, `doctor`, and path-only `smoke`; record unavailable services
    as `unknown` or `not live`, never as absent.
@@ -93,7 +93,7 @@ delta, verify cache/model roots, and preserve local launcher changes.
 1. **T0:** mok-tua API, Headroom/LiteLLM, provider catalog, and CHAINS ledger.
 2. **T1:** one small Qwen still through mok-tua → Comfy; capture packet,
    provider, workflow/model, output hash, and receipt.
-3. **T1 video:** use that still for a short gpu-host I2V clip; require submit,
+3. **T1 video:** use that still for a short GPU-host I2V clip; require submit,
    status, collect, and resume evidence.
 4. **T2 audio:** generate one short synthetic voice line or music bed; record
    normalized format and hash.

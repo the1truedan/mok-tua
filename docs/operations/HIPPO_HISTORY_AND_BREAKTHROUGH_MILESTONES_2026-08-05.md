@@ -14,8 +14,8 @@ Use `HIPPO_CONTEXT_CITATIONS_ONLY=1` and cite IDs — do not dump full transcrip
 | ID | Tags | Topic | Version |
 |----|------|--------|---------|
 | `mem_a90a6784d352` | agent-context, repeated-reminder, mok-tua | 0.5.4 full-gamut staged smoke · FramePack launcher · Pinokio gamut · AnimateDiff GPU100% · public flip human | 0.5.4 |
-| `mem_3a6f16cb1fe7` | agent-context, repeated-reminder, mok-tua | I2V law: Grok Imagine ≠ gpu-host local · every clip needs renderer+qqq+gpu_evidence | 0.5.4+ |
-| `mem_4d41b64adf49` | agent-context, repeated-reminder, mok-tua | 0.5.6 CEO gpu-host assets · FaceID pool · Wan inventory · FramePack partial I2V · Director path · handoff packet | 0.5.6 |
+| `mem_3a6f16cb1fe7` | agent-context, repeated-reminder, mok-tua | I2V law: Grok Imagine ≠ local GPU · every clip needs renderer+qqq+gpu_evidence | 0.5.4+ |
+| `mem_4d41b64adf49` | agent-context, repeated-reminder, mok-tua | 0.5.6 CEO GPU-host assets · FaceID pool · Wan inventory · FramePack partial I2V · Director path · handoff packet | 0.5.6 |
 | `mem_3ba0c3707a4b` | agent-context, repeated-reminder, mok-tua | Render law: hot scratch local SSD; models/finals ai-data; bees settled only; uid 501 vs 1000 | policy |
 
 ### Control store (`~/grokcode/.hippo`) — index only
@@ -45,7 +45,7 @@ hippo remember "…" --tag agent-context --tag repeated-reminder --tag mok-tua -
 - Framework + staged-pulls runbooks  
 - FramePack **shared models** launcher + host uv deps  
 - Pinokio gamut HTTP matrix with **honest Wan skip**  
-- gpu-host Comfy still + **AnimateDiff** GPU peak **100%**  
+- GPU-host Comfy still + **AnimateDiff** GPU peak **100%**  
 - C64 TUI REPL smoke  
 - **Stamp:** `2026.08-mok-tua-full-gamut-staged-smoke`  
 - **Tip then:** `7949eac`
@@ -63,7 +63,7 @@ hippo remember "…" --tag agent-context --tag repeated-reminder --tag mok-tua -
 - Live documentation stills for collage  
 - **Commits:** `b579cf9` … `7c28521` lineage
 
-### B4 — CEO gpu-host capability examples (**0.5.6**) — complete
+### B4 — CEO GPU-host capability examples (**0.5.6**) — complete
 
 - Regen from `00-ceo-source-still` (not woman/stock man)  
 - Storyboard hybrid + face polish img2img + AD frame strip  
@@ -86,7 +86,7 @@ hippo remember "…" --tag agent-context --tag repeated-reminder --tag mok-tua -
 - Live Wan Gradio still **honest skip**  
 - **Stamp:** `2026.08-mok-tua-wan-weights-inventory`
 
-### B7 — FramePack UI I2V on gpu-host — **partial**
+### B7 — FramePack UI I2V on GPU-host — **partial**
 
 - Gradio **:7864** · shared hub FramePackI2V_HY **24G**  
 - SSE stages + GPU ~100% during sampling  
@@ -134,7 +134,7 @@ Prior plan stamps remain: `2026.08-mok-tua-pinokio-orchestration-release-plan`, 
 | 0.5.0–0.5.3 | 2026-08-02 | Conductor foundation / presentation smoke |
 | **0.5.4** | 2026-08-05 | Full-gamut staged smoke · FramePack shared models · I2V law |
 | **0.5.5** | 2026-08-05 | PETSCII TUI · receipts |
-| **0.5.6** | 2026-08-05 | CEO gpu-host examples · accurate collage · FaceID/Wan/FramePack/Director ops stamps |
+| **0.5.6** | 2026-08-05 | CEO GPU-host examples · accurate collage · FaceID/Wan/FramePack/Director ops stamps |
 
 ---
 

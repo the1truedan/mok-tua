@@ -108,13 +108,13 @@ def requires_from_inventory(op: str = "still") -> list[dict[str, Any]]:
 def _estimate_wall(op: str, duration_s: float, qqq: str) -> tuple[float, float, float]:
     pricing = _load_pricing()
     providers = pricing.get("providers") or {}
-    # prefer local_gpu-host for video, local_desk-host for still
+    # prefer local_gpu for video, local_desk for still
     if op in ("i2v", "video"):
-        key = "local_gpu-host"
+        key = "local_gpu"
         rate = float((providers.get(key) or {}).get("est_video_sec_per_s") or 4)
         wall = max(duration_s, 1.0) * rate
     else:
-        key = "local_desk-host"
+        key = "local_desk"
         wall = float((providers.get(key) or {}).get("est_still_sec") or 25)
     deadline = wall * 3.0
     max_usd = 0.0

@@ -7,7 +7,7 @@
 #   - Outputs → /mnt/ai-data/work/framepack/outputs
 #   - Prefer --offline when hub snapshots already exist
 #
-# Usage (on gpu-host):
+# Usage (on GPU-host):
 #   bash scripts/run_framepack_shared_models.sh --install-deps   # SM GUI + CLI envs
 #   bash scripts/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7865
 #   Stability Matrix Packages → Launch (uses package/venv → host-local SM 3.10)
@@ -286,7 +286,7 @@ fi
 
 PY="$(resolve_python)"
 if [[ -z "$PY" ]]; then
-  echo "ERROR: no FramePack venv. Run once on gpu-host:" >&2
+  echo "ERROR: no FramePack venv. Run once on GPU-host:" >&2
   echo "  bash $0 --install-deps" >&2
   echo "SM host env: $HOST_SM_VENV" >&2
   exit 1

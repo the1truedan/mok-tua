@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# F-order ROBUST custom_nodes install for mok-tua on gpu-host (shared NFS pool).
+# F-order ROBUST custom_nodes install for mok-tua on GPU-host (shared NFS pool).
 # Run ON gpu-host (or: ssh gpu-host 'bash -s' < this_script).
 # Does NOT install avoid-list nodes. Pins numpy after deps.
 set -euo pipefail
@@ -13,7 +13,7 @@ LOG="${LOG_DIR}/robust_install_${STAMP}.log"
 mkdir -p "$LOG_DIR"
 exec > >(tee -a "$LOG") 2>&1
 
-echo "=== comfy_robust_install_gpu-host $STAMP ==="
+echo "=== comfy_robust_install_gpu $STAMP ==="
 echo "CN=$CN VENV=$VENV"
 id
 [ -d "$CN" ] || { echo "missing CN"; exit 1; }

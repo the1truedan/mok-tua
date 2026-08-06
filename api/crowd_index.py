@@ -68,7 +68,7 @@ def seed_lab_nodes(*, force: bool = False) -> dict[str, Any]:
             "schema": "node_advertisement.v1",
             "id": "gpu-host",
             "pubkey": None,
-            "endpoint": os.environ.get("COMFY_gpu-host_URL", "http://gpu-host:8188"),
+            "endpoint": os.environ.get("COMFY_GPU_URL", "http://gpu-host:8188"),
             "lock_hashes_resident": [t0, t1, t2, t3],
             "models_digest_set": ["wan22", "qwen_edit_2509_fp8", "animatediff"],
             "vram_gb": 16.0,
@@ -81,7 +81,7 @@ def seed_lab_nodes(*, force: bool = False) -> dict[str, Any]:
             "roles": ["still", "i2v", "video", "face", "tts"],
             "last_heartbeat": _utc(),
             "trusted": True,
-            "notes": "gpu-host Comfy — video / Wan preferred",
+            "notes": "GPU-host Comfy — video / Wan preferred",
         },
         {
             "schema": "node_advertisement.v1",

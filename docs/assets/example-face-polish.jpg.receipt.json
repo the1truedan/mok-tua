@@ -7,7 +7,7 @@
     "kind": "image",
     "exists": true
   },
-  "renderer": "gpu-host_comfy_faceid_face_polish_gentle",
+  "renderer": "gpu_comfy_faceid_face_polish_gentle",
   "provider": "comfy",
   "cloud_or_local": "local",
   "model": "DreamShaper_8+faceid",
@@ -28,5 +28,5 @@
   "gpu_evidence": null,
   "sampled_by": "manual",
   "ts_utc": "2026-08-06T01:53:37Z",
-  "caption_line": "gpu-host_comfy_faceid_face_polish_gentle \u00b7 DreamShaper_8+faceid \u00b7 gpu-host \u00b7 ? \u00b7 n/a \u00b7 gpu ? \u00b7 QQQ0"
+  "caption_line": "gpu_comfy_faceid_face_polish_gentle \u00b7 DreamShaper_8+faceid \u00b7 gpu-host \u00b7 ? \u00b7 n/a \u00b7 gpu ? \u00b7 QQQ0"
 }

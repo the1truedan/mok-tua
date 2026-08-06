@@ -11,7 +11,7 @@
 2. **Capability poster:** [`docs/assets/products-capabilities.png`](docs/assets/products-capabilities.png) (vertical transparency cards)  
 3. **Collage source:** [`docs/assets/mokups/capability-collage.html`](docs/assets/mokups/capability-collage.html)  
 4. **TODO:** [`TODO.md`](TODO.md)  
-5. **I2V provenance:** [`docs/operations/I2V_GROK_VS_gpu-host_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md`](docs/operations/I2V_GROK_VS_gpu-host_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md)  
+5. **I2V provenance:** [`docs/operations/I2V_GROK_VS_LOCAL_GPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md`](docs/operations/I2V_GROK_VS_LOCAL_GPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md)  
 6. **Context pit (control):** `~/grokcode/docs/operations/AGENT_CONTEXT_PIT_AND_MULTI_CLI_CONTINUITY_2026-08-05.md`
 
 ## What 0.5.7 shipped
@@ -43,5 +43,5 @@
 ```text
 Continue from mok-tua HANDOFF.md · version 0.5.7
 products-capabilities.png = vertical transparency poster (IRL UIs + IPAdapter panels)
-FaceID InsightFace residual; plus-face path used. Grok I2V ≠ gpu-host local. Human public flip only.
+FaceID InsightFace residual; plus-face path used. Grok I2V ≠ local GPU. Human public flip only.
 ```

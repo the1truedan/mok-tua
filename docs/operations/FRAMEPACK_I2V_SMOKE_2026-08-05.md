@@ -1,4 +1,4 @@
-# FramePack UI I2V smoke — gpu-host
+# FramePack UI I2V smoke — GPU-host
 
 **Date:** 2026-08-05  
 **UI:** `http://gpu-host:7864/` · Gradio `/process`  
@@ -30,7 +30,7 @@ Observed stages in SSE: **VAE encoding → CLIP Vision encoding → Start sampli
 ## Receipt
 
 `docs/assets/receipts/framepack_ceo_i2v.receipt.json`  
-- `renderer: gpu-host_framepack_i2v`  
+- `renderer: gpu_framepack_i2v`  
 - `host_role: gpu-host`  
 - `cloud_or_local: local`  
 - Artifact: `work/ceo_capability_regen/framepack_ceo_i2v_smoke.mp4` when capture succeeds (not git blob)

@@ -2,16 +2,16 @@
 
 ## Recommended topology
 
-Use **Turnstone as the execution/control-plane API** on gpu-host, with LiteLLM and Headroom behind it. Use **pi and omp as local-only coding executors** through the gateway. Treat **Herdr as an optional operator TUI/multiplexer**, not as a second scheduler. This keeps one owner for workstreams, retries, budgets, and handoffs while Herdr only presents/monitors panes.
+Use **Turnstone as the execution/control-plane API** on GPU-host, with LiteLLM and Headroom behind it. Use **pi and omp as local-only coding executors** through the gateway. Treat **Herdr as an optional operator TUI/multiplexer**, not as a second scheduler. This keeps one owner for workstreams, retries, budgets, and handoffs while Herdr only presents/monitors panes.
 
 ```text
-repo task -> Turnstone workstream -> Headroom -> LiteLLM -> gpu-host Qwen coder
+repo task -> Turnstone workstream -> Headroom -> LiteLLM -> GPU-host Qwen coder
                          |                         |
                          +-> pi / omp local CLI    +-> tool/model policy
                          +-> Herdr panes (optional)
 ```
 
-Turnstone is preferred for unattended or multi-step work because it already has a workstream client and gpu-host endpoint. Herdr is preferred for a human-supervised session where several local agents need visible panes and intervention. Do not run both as independent orchestrators for the same task.
+Turnstone is preferred for unattended or multi-step work because it already has a workstream client and GPU-host endpoint. Herdr is preferred for a human-supervised session where several local agents need visible panes and intervention. Do not run both as independent orchestrators for the same task.
 
 ## Cloud-credit depletion policy
 

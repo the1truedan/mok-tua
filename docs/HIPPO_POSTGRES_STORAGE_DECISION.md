@@ -12,7 +12,7 @@ scope.
 ## Recommended topology now
 
 ```text
-Mac / gpu-host / Tower agents
+Mac / GPU-host / control-host agents
         │  MCP or HTTP
         ▼
 Hippo service boundary (one selected host)

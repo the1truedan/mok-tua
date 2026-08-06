@@ -17,7 +17,7 @@ Machine roster: `config/comfy_nodes_mok_tua_roster.json`.
 
 ```bash
 # on gpu-host
-bash ~/mok-tua/scripts/comfy_robust_install_gpu-host.sh
+bash ~/mok-tua/scripts/comfy_robust_install_gpu.sh
 # restart Comfy host runtime, then:
 COMFY_URL=http://127.0.0.1:8188 bash ~/mok-tua/scripts/smoke_comfy_robust.sh
 ```
@@ -25,7 +25,7 @@ COMFY_URL=http://127.0.0.1:8188 bash ~/mok-tua/scripts/smoke_comfy_robust.sh
 From Mac:
 
 ```bash
-ssh gpu-host 'bash -s' < scripts/comfy_robust_install_gpu-host.sh
+ssh gpu-host 'bash -s' < scripts/comfy_robust_install_gpu.sh
 ./scripts/smoke_comfy_robust.sh
 ```
 

@@ -1,4 +1,4 @@
-# Full-gamut gpu-host creative stack — mok-tua framework
+# Full-gamut GPU creative stack — mok-tua framework
 
 **Date:** 2026-08-05  
 **Status:** approved earmark framework (Adobe Character Animator **back-burner**)  
@@ -34,7 +34,7 @@ C64 deck / CLI  →  mok-tua (shots, QQQ, estimates, receipts)
 | Surface | Mapping |
 |---------|---------|
 | Stability Matrix | `ModelDirectoryOverride` = `/mnt/ai-data/models/` (already set on Linux SM Data) |
-| ComfyUI gpu-host | `extra_model_paths.yaml` → `base_path: /mnt/ai-data/models/` |
+| ComfyUI GPU-host | `extra_model_paths.yaml` → `base_path: /mnt/ai-data/models/` |
 | FramePack Studio | `hf_download` **symlink** → `/mnt/ai-data/models/hf_hub` |
 | FramePack LoRAs | `.framepack/settings.json` → `/mnt/ai-data/models/loras` |
 | FramePack outputs | `/mnt/ai-data/work/framepack/outputs` |
@@ -169,7 +169,7 @@ Local ACE-Step remains the release story.
 ## 8. Operator commands (FramePack shared)
 
 ```bash
-# On gpu-host — shared models, offline if hub already seeded
+# On GPU-host — shared models, offline if hub already seeded
 bash ~/mok-tua/scripts/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7865
 
 # Intentional first seed into SHARED hub only (not package tree)
@@ -188,8 +188,8 @@ ls -la /mnt/ai-data/stability-matrix/Data/Packages/FramePack\ Studio/hf_download
 ## 9. Related
 
 - `docs/PUBLIC_RELEASE_PROTECT_BRANCH_2026-08-05.md`  
-- `docs/reports/gpu-host_LOCAL_RENDER_SMOKE_2026-08-05.md`  
-- `config/pinokio_gpu-host_staging.json` (`framepack_studio.shared_models`)  
+- `docs/reports/GPU_LOCAL_RENDER_SMOKE_2026-08-05.md`  
+- `config/pinokio_gpu_staging.json` (`framepack_studio.shared_models`)  
 - `scripts/run_framepack_shared_models.sh`  
 - Control-repo: `docs/roadmap/MOK_TUA_PINOKIO_ORCHESTRATION_RELEASE_PLAN_2026-08-05.md`  
 

@@ -474,7 +474,7 @@ def plan_video(
                 "ok": True,
                 "status": "dry_run" if dry_run else "pin_pending",
                 "note": pin_load.get("note")
-                or "Video graphs require gpu-host Comfy + Wan/AD workflow pin API export",
+                or "Video graphs require GPU-host Comfy + Wan/AD workflow pin API export",
             }
         )
         if not dry_run:

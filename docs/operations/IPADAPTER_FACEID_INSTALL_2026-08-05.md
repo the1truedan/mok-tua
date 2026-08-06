@@ -1,7 +1,7 @@
 # IPAdapter FaceID weights — shared pool install
 
 **Date:** 2026-08-05  
-**Host:** gpu-host (gpu-host)  
+**Host:** gpu-host (GPU-host)  
 **Pool:** `/mnt/ai-data/models/ipadapter/`  
 **Comfy:** extra_model_paths `ipadapter: ipadapter | IpAdapter | …` · live `:8188`
 

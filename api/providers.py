@@ -65,7 +65,7 @@ LAUNCH_RECIPES: dict[str, dict[str, Any]] = {
         ],
         "env_extra": {"PYTORCH_MPS_HIGH_WATERMARK_RATIO": "0.0"},
         "prefer_script": str(Path.home() / "grokcode/scripts/comfy_launch_shared.sh"),
-        "note": "Uses SM ComfyUI package; gpu-host via comfy_gpu-host_host_runtime.sh",
+        "note": "Uses SM ComfyUI package; GPU-host via comfy_gpu_host_runtime.sh",
     },
     "directors_console": {
         "kind": "pinokio",

@@ -11,13 +11,13 @@
 Portable **shot-driven** storyboard + tiered staged rendering orchestrator for M.A.N.A.G.E.R.
 
 **Hybrid v0.3.0** (2026-08-02) — director stack **process**: live T0–T4 pull/smoke/lock,
-gpu-host resource monitor, discover→audit→stage nested CLI.
+GPU-host resource monitor, discover→audit→stage nested CLI.
 
 | Stage | Backend |
 |-------|---------|
 | S0 script expand | **Live Headroom** `:8787` |
 | S1/S2 stills / storyboard | **Local SM ComfyUI** `:8188` (minimal SD or Qwen pin) **or** cloud: **Grok Imagine** / **Nano Banana** |
-| S3 video | **gpu-host** Comfy Wan pin (primary) / AnimateDiff fallback / Seedance & Grok video earmarks |
+| S3 video | **GPU-host** Comfy Wan pin (primary) / AnimateDiff fallback / Seedance & Grok video earmarks |
 | Cloud overflow | QQQ-gated; PHI never auto-cloud |
 
 Control API: **`:8799`**. Director's Console peer: UI `:5173` · CPE `:9800` · orch `:9820`.
@@ -28,9 +28,9 @@ Control API: **`:8799`**. Director's Console peer: UI `:5173` · CPE `:9800` · 
 |-----|------|---------|
 | **0.5.0** | 2026-08-02 | Conductor **TUI** (`tui/`): `--skin c64\|modern`, CLI `tui` + `run_tui.sh`, bridge to existing CLI verbs; vendor GUI mok-ups retained — see `docs/INTERFACES.md`, root `CHANGELOG.md` |
 | **0.4.x** | 2026-08-02 | Human README, non-doxxing product art, vendor/mok-up showcase |
-| **0.3.0** | 2026-08-02 | T0–T4 **tier lock** (`config/tier_lock_T0-T4.json`) + loading profiles; live `pull --tier` with dirty/conflict safety; **gpu-host monitor** (RAM/CPU/GPU/temp via exporters+SSH); `smoke` T0–T4 scorecard; nested `discover` / `audit` / `stage-app` / `lock`; progress bars on pull/load; **ask_packet.v1** federation (Johnny BOM + CHAINS render receipts + trusted node award; PHI unbroadcastable) — `docs/ASK_PACKET_FEDERATION.md` |
+| **0.3.0** | 2026-08-02 | T0–T4 **tier lock** (`config/tier_lock_T0-T4.json`) + loading profiles; live `pull --tier` with dirty/conflict safety; **GPU-host monitor** (RAM/CPU/GPU/temp via exporters+SSH); `smoke` T0–T4 scorecard; nested `discover` / `audit` / `stage-app` / `lock`; progress bars on pull/load; **ask_packet.v1** federation (Johnny BOM + CHAINS render receipts + trusted node award; PHI unbroadcastable) — `docs/ASK_PACKET_FEDERATION.md` |
 | **0.2.x** | 2026-08 | Providers/catalog, sides ingest, Qwen multi-angle lock, Grok Imagine / Nano Banana dry-run, `mok_tua_cli` launch/pull |
-| **0.1.0** | 2026-07-27 | Initial scaffold — story parse, stages, Comfy/Headroom, gpu-host compose |
+| **0.1.0** | 2026-07-27 | Initial scaffold — story parse, stages, Comfy/Headroom, GPU-host compose |
 
 ## Quick start (host, recommended)
 
@@ -64,7 +64,7 @@ python3 scripts/mok_tua_cli.py tui --repl          # no Textual
 # status board
 python3 scripts/mok_tua_cli.py providers
 python3 scripts/mok_tua_cli.py doctor
-python3 scripts/mok_tua_cli.py monitor          # gpu-host RAM/CPU/GPU/temp
+python3 scripts/mok_tua_cli.py monitor          # GPU-host RAM/CPU/GPU/temp
 
 # dry-run launch recipes (safe)
 python3 scripts/mok_tua_cli.py launch demo
@@ -129,8 +129,8 @@ Audit hooks earmark grokcode tooling: `scripts/github_staging_repos.py`,
 | **T3** | Face/body — FaceFusion, DreamTalk, FreeMoCap, pose models |
 | **T4** | Comfy workflow pins + node object_info smoke |
 
-Loading profiles in the lock file: `demo`, `full_local`, `video_gpu-host`, `face`, `audio`, `body`.
-`lock load <profile>` walks the list with progress bars (and optional gpu-host monitor).
+Loading profiles in the lock file: `demo`, `full_local`, `video_gpu`, `face`, `audio`, `body`.
+`lock load <profile>` walks the list with progress bars (and optional GPU-host monitor).
 
 ## Ask-packet federation (trusted lab, not a public market)
 
@@ -149,14 +149,14 @@ python3 scripts/mok_tua_cli.py chains verify
 Schemas: `schemas/ask_packet.v1.json`, `ask_receipt.v1.json`, `node_advertisement.v1.json`.  
 Design: `docs/ASK_PACKET_FEDERATION.md`. Pricing earmark: `crowd_federated` (QQQ3, public only).
 
-## ROBUST Comfy worker (gpu-host)
+## ROBUST Comfy worker (GPU-host)
 
 Living roster + avoid-list: `config/comfy_nodes_mok_tua_roster.json`  
 Docs: `docs/COMFY_ROBUST_NODES.md`
 
 ```bash
 # on gpu-host — install P0/P1 nodes, deps, disable broken, fix .git perms
-bash scripts/comfy_robust_install_gpu-host.sh
+bash scripts/comfy_robust_install_gpu.sh
 # restart Comfy, then capability smoke:
 COMFY_URL=http://127.0.0.1:8188 bash scripts/smoke_comfy_robust.sh
 ./scripts/smoke_tiers.sh   # T0–T4 mok-tua stack
@@ -196,11 +196,11 @@ docker compose up -d --build
 
 Uses `host.docker.internal` for Headroom + desk-host Comfy.
 
-## gpu-host video worker
+## GPU-host video worker
 
 ```bash
 # preferred until nvidia-ctk: host runtime from grokcode
-ssh gpu-host 'bash ~/grokcode/scripts/comfy_gpu-host_host_runtime.sh smoke'
+ssh gpu-host 'bash ~/grokcode/scripts/comfy_gpu_host_runtime.sh smoke'
 
 # docker path (needs nvidia-container-toolkit):
 # docker compose -f docker-compose.gpu-host.yml up -d
@@ -256,7 +256,7 @@ List providers: `GET /v1/info`
 | Camera + Next Scene prompt grammar | **live** | `config/camera_angles.json` + `api/prompt_build.py` |
 | Qwen multi-angle + next-scene LoRAs | **weights on pool** | Inventory `config/lora_inventory_storyboard_2026-08-02.*`; API graph export still pending → pin placeholder |
 | StoryboardUI2 angle library | **ported (partial)** | presets/phrases in `camera_angles.json` (no PyQt6) |
-| Wan I2V on gpu-host | **pin_pending** | path in `workflow_pins.wan22_animate`; needs live submit + API-ready graph |
+| Wan I2V on GPU-host | **pin_pending** | path in `workflow_pins.wan22_animate`; needs live submit + API-ready graph |
 | AnimateDiff (Money99-era) | **fallback earmark** | `video_provider=local_animatediff` + export `animatediff_basic.api.json` |
 | Grok Imagine stills | **wired (dry_run safe)** | `still_provider=grok_imagine` + `XAI_API_KEY` for live |
 | Nano Banana stills | **wired (dry_run safe)** | `still_provider=nano_banana` + Google key or `comfy` CLI |
@@ -320,7 +320,7 @@ Full recon export: `context/mock-tua.md`.
 
 | Mode | Meaning |
 |------|---------|
-| **QQQ0** | Local only (Comfy desk-host/gpu-host) |
+| **QQQ0** | Local only (Comfy desk-host/GPU-host) |
 | **QQQ3** | Free/public overflow (HF ZeroGPU; limited Grok if public data) |
 | **QQQ1** | Paid cloud (Grok Imagine, Nano Banana, Seedance, RunPod) — requires non-PHI + explicit confirm |
 
@@ -332,7 +332,7 @@ Configs and API defaults use **role hostnames**, not home LAN IPs:
 
 | Role | Env overrides | Example default |
 |------|---------------|-----------------|
-| `gpu-host` | `gpu-host_HOST`, `COMFY_gpu-host_URL` | `http://gpu-host:8188` |
+| `gpu-host` | `GPU_HOST`, `COMFY_GPU_URL` | `http://gpu-host:8188` |
 | `control-host` | operator mirror / control API | `http://control-host:8799` |
 | `desk-host` | desk Pinokio control plane | `http://desk-host:42000` |
 

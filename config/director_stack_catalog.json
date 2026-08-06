@@ -325,7 +325,7 @@
       "mok_tua_cli inventory|stage|sides|run|batch",
       "curl /v1/tools/call",
       "git -C pinokio/api/<app> pull",
-      "ssh gpu-host comfy_gpu-host_host_runtime.sh"
+      "ssh gpu-host comfy_gpu_host_runtime.sh"
     ],
     "api": ["mok-tua :8799", "Comfy :8188", "Director's Console :9800/:9820", "ACE-Step REST", "Headroom :8787"]
   }
