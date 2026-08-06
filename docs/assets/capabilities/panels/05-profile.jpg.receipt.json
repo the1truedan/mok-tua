@@ -7,7 +7,7 @@
     "kind": "image",
     "exists": true
   },
-  "renderer": "mrgpu_comfy_ipadapter_plusface_img2img",
+  "renderer": "gpu_comfy_ipadapter_plusface_img2img",
   "provider": "comfy",
   "cloud_or_local": "local",
   "model": "DreamShaper_8_pruned.safetensors+ip-adapter-plus-face_sd15.safetensors",
@@ -28,7 +28,7 @@
   "gpu_evidence": null,
   "sampled_by": "manual",
   "ts_utc": "2026-08-06T01:25:42Z",
-  "caption_line": "mrgpu_comfy_ipadapter_plusface_img2img \u00b7 DreamShaper_8_pruned.safetensors+ip-adapter-plus-face_sd15.safetensors \u00b7 gpu-h\u2026",
+  "caption_line": "gpu_comfy_ipadapter_plusface_img2img \u00b7 DreamShaper_8_pruned.safetensors+ip-adapter-plus-face_sd15.safetensors \u00b7 gpu-h\u2026",
   "extra": {
     "seed": 43076,
     "denoise": 0.5,

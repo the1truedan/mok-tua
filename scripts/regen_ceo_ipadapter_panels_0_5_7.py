@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""0.5.7: CEO panels + polish via IPAdapter plus-face (img2img) on MRGPU Comfy.
+"""0.5.7: CEO panels + polish via IPAdapter plus-face (img2img) on GPU-host Comfy.
 
 InsightFace FaceID residual: buffalo_l incomplete / antelope loader error on host —
 this path uses ip-adapter-plus-face_sd15 + clip_vision_h (no InsightFace).
@@ -369,7 +369,7 @@ def main() -> int:
         write_receipt(
             build_receipt(
                 dest_assets,
-                renderer="mrgpu_comfy_ipadapter_plusface_img2img",
+                renderer="gpu_comfy_ipadapter_plusface_img2img",
                 provider="comfy",
                 cloud_or_local="local",
                 model=f"{CKPT}+{IP_FILE}",
@@ -389,7 +389,7 @@ def main() -> int:
     wall_sb = time.time() - t_all
     rec_sb = build_receipt(
         sheet,
-        renderer="mrgpu_comfy_ipadapter_plusface_storyboard",
+        renderer="gpu_comfy_ipadapter_plusface_storyboard",
         provider="comfy",
         cloud_or_local="local",
         model=f"{CKPT}+{IP_FILE}",
@@ -443,7 +443,7 @@ def main() -> int:
     face_polish_sheet(before_path, after_path, polish_out)
     rec_fp = build_receipt(
         polish_out,
-        renderer="mrgpu_comfy_ipadapter_plusface_polish",
+        renderer="gpu_comfy_ipadapter_plusface_polish",
         provider="comfy",
         cloud_or_local="local",
         model=f"{CKPT}+{IP_FILE}",

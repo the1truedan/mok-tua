@@ -21,7 +21,7 @@ So “Protect this branch” is unavailable until visibility is **public** (or t
 | 4b | **wait-what plain-English pass** on public front door (README intro, Release draft) — native speakers, not AI aficionados | earmark: `docs/roadmap/WAIT_WHAT_GITHUB_PLAIN_ENGLISH_EARMARK_2026-08-05.md` · upstream [mattpocock/skills](https://github.com/mattpocock/skills) |
 | 5 | Human `gh repo edit … --visibility public` | **human go only** |
 | 6 | Immediately enable `main` protection (no force-push) | same minute as flip |
-| 7 | Optional GH Release + demo video asset (MRGPU proof preferred; Release body wait-what clean) | same packet |
+| 7 | Optional GH Release + demo video asset (GPU-host proof preferred; Release body wait-what clean) | same packet |
 
 ## Commands (human go only)
 

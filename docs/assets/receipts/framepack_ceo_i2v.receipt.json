@@ -7,7 +7,7 @@
     "kind": "doc",
     "exists": true
   },
-  "renderer": "mrgpu_framepack_i2v",
+  "renderer": "gpu_framepack_i2v",
   "provider": "framepack_studio",
   "cloud_or_local": "local",
   "model": "FramePackI2V_HY (hf_hub 24G) \u00b7 HunyuanVideo hub partial(VAE)",
@@ -33,7 +33,7 @@
   "gpu_evidence": "peak observed ~100% util / ~11\u201313 GiB VRAM during job; end sample {'gpu_util_pct': 6.0, 'gpu_mem_used_mib': 4012.0, 'gpu_mem_total_mib': 16380.0, 'note': 'end-of-job sample'}",
   "sampled_by": "host_monitor",
   "ts_utc": "2026-08-06T00:50:46Z",
-  "caption_line": "mrgpu_framepack_i2v \u00b7 FramePackI2V_HY (hf_hub 24G) \u00b7 HunyuanVideo hub partial(VAE) \u00b7 gpu-host \u00b7 79.4s \u00b7 n/a FramePack \u00b7\u2026",
+  "caption_line": "gpu_framepack_i2v \u00b7 FramePackI2V_HY (hf_hub 24G) \u00b7 HunyuanVideo hub partial(VAE) \u00b7 gpu-host \u00b7 79.4s \u00b7 n/a FramePack \u00b7\u2026",
   "extra": {
     "gradio_event_id": "8104f8cb1a90406995e118a7e763eb70",
     "port": 7864,

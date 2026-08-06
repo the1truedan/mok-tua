@@ -7,7 +7,7 @@
     "kind": "video",
     "exists": true
   },
-  "renderer": "mrgpu_comfy_faceid_animatediff",
+  "renderer": "gpu_comfy_faceid_animatediff",
   "provider": "comfy",
   "cloud_or_local": "local",
   "model": "DreamShaper_8_pruned.safetensors+mm_sd_v15_v2.fp16+ip-adapter-faceid-plusv2_sd15.bin",
@@ -30,7 +30,7 @@
   "gpu_evidence": "peak_util=3.0% host_role=gpu-host",
   "sampled_by": "host_monitor",
   "ts_utc": "2026-08-06T01:36:16Z",
-  "caption_line": "mrgpu_comfy_faceid_animatediff \u00b7 DreamShaper_8_pruned.safetensors+mm_sd_v15_v2.fp16+ip-adapter-faceid-plusv2_sd15.bin \u00b7\u2026",
+  "caption_line": "gpu_comfy_faceid_animatediff \u00b7 DreamShaper_8_pruned.safetensors+mm_sd_v15_v2.fp16+ip-adapter-faceid-plusv2_sd15.bin \u00b7\u2026",
   "extra": {
     "note": "FaceID-conditioned AnimateDiff short loop; not cloud I2V",
     "frames": 16,

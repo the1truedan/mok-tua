@@ -92,14 +92,14 @@
     },
     {
       "q": "comfy",
-      "app_id": "wanMRGPU.git",
+      "app_id": "wan-gpu.git",
       "title": "Wan2GP",
       "state": "offline",
       "ready": false,
       "running": false,
       "host": "desk-host",
       "matched_terms_count": 1,
-      "ref": "pinokio://desk-host:42000/api/wanMRGPU.git"
+      "ref": "pinokio://desk-host:42000/api/wan-gpu.git"
     },
     {
       "q": "facefusion",
@@ -191,14 +191,14 @@
     },
     {
       "q": "wan",
-      "app_id": "wanMRGPU.git",
+      "app_id": "wan-gpu.git",
       "title": "Wan2GP",
       "state": "offline",
       "ready": false,
       "running": false,
       "host": "desk-host",
       "matched_terms_count": 1,
-      "ref": "pinokio://desk-host:42000/api/wanMRGPU.git"
+      "ref": "pinokio://desk-host:42000/api/wan-gpu.git"
     },
     {
       "q": "wan",

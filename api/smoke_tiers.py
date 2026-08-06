@@ -16,7 +16,7 @@ WORK = Path(os.environ.get("WORK_FALLBACK", ROOT / "work"))
 SMOKE_DIR = WORK / "smoke"
 AI_DATA = Path(os.environ.get("AI_DATA_ROOT", "/Volumes/ai-data"))
 API_BASE = os.environ.get("MOCK_TUA_URL", "http://127.0.0.1:8799")
-COMFY_MRGPU = os.environ.get("COMFY_MRGPU_URL", "http://gpu-host:8188")
+COMFY_GPU = os.environ.get("COMFY_GPU_URL", "http://gpu-host:8188")
 COMFY_LOCAL = os.environ.get("COMFY_LOCAL_URL", "http://127.0.0.1:8188")
 
 # Minimal Comfy object_info keys for T4 storyboard/video path
@@ -96,7 +96,7 @@ def smoke_t0() -> list[dict[str, Any]]:
 
 def smoke_t1() -> list[dict[str, Any]]:
     checks = []
-    for url, label in ((COMFY_MRGPU, "mrgpu"), (COMFY_LOCAL, "local")):
+    for url, label in ((COMFY_GPU, "gpu-host"), (COMFY_LOCAL, "local")):
         r = _http_json(f"{url}/system_stats", timeout=3.0)
         detail = ""
         if r.get("ok") and isinstance(r.get("data"), dict):
@@ -104,8 +104,8 @@ def smoke_t1() -> list[dict[str, Any]]:
             detail = f"comfy={sys_.get('comfyui_version')} ram_free={sys_.get('ram_free')}"
         else:
             detail = r.get("error") or "down"
-        # MRGPU is hard for video path; local soft
-        checks.append(_check(f"comfy_{label}", r.get("ok") is True, detail, hard=(label == "mrgpu")))
+        # GPU-host is hard for video path; local soft
+        checks.append(_check(f"comfy_{label}", r.get("ok") is True, detail, hard=(label == "gpu-host")))
 
     wan = AI_DATA / "pinokio/api/wan2gp.git"
     checks.append(_check("wan2gp_path", wan.is_dir(), str(wan)))
@@ -184,7 +184,7 @@ def smoke_t4() -> list[dict[str, Any]]:
         checks.append(_skip("sm_workflow_pins", f"workflows root missing or no globs: {wf_root}"))
 
     # Comfy nodes via object_info (subset)
-    r = _http_json(f"{COMFY_MRGPU}/object_info", timeout=8.0)
+    r = _http_json(f"{COMFY_GPU}/object_info", timeout=8.0)
     if not r.get("ok"):
         checks.append(_check("comfy_object_info", False, r.get("error") or "unreachable", hard=True))
         return checks
@@ -265,7 +265,7 @@ def run_smoke(tiers: list[str] | None = None) -> dict[str, Any]:
         "ok": len(hard_fail) == 0,
         "ts": _utc(),
         "api_base": API_BASE,
-        "comfy_mrgpu": COMFY_MRGPU,
+        "comfy_gpu": COMFY_GPU,
         "summary": {
             "pass": pass_n,
             "fail": fail_n,

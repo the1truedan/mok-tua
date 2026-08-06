@@ -9,8 +9,8 @@
 
 ```text
 Continue from mok-tua docs/operations/SESSION_HANDOFF_2026-08-05_FULL_GAMUT_STAGED_SMOKE.md
-Also: docs/operations/I2V_GROK_VS_MRGPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md
-      docs/roadmap/FULL_GAMUT_MRGPU_FRAMEWORK_2026-08-05.md
+Also: docs/operations/I2V_GROK_VS_LOCAL_GPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md
+      docs/roadmap/FULL_GAMUT_GPU_FRAMEWORK_2026-08-05.md
 Control: ~/grokcode/docs/operations/AGENT_CONTEXT_PIT_AND_MULTI_CLI_CONTINUITY_2026-08-05.md
 Hippo: HIPPO_CONTEXT_CITATIONS_ONLY=1 · tags agent-context, repeated-reminder, mok-tua
 ```
@@ -26,11 +26,11 @@ Hippo: HIPPO_CONTEXT_CITATIONS_ONLY=1 · tags agent-context, repeated-reminder, 
 | Protect-after-public runbook | ✅ | `docs/PUBLIC_RELEASE_PROTECT_BRANCH_2026-08-05.md` |
 | Privacy rescan (remotes, secrets, PHI) | ✅ | gamut report §1 |
 | Pinokio gamut HTTP + pterm | ✅ / honest skips | `docs/reports/PINOKIO_GAMUT_SMOKE_2026-08-05.md` |
-| Full-gamut framework (Adobe back-burner) | ✅ | `docs/roadmap/FULL_GAMUT_MRGPU_FRAMEWORK_2026-08-05.md` |
+| Full-gamut framework (Adobe back-burner) | ✅ | `docs/roadmap/FULL_GAMUT_GPU_FRAMEWORK_2026-08-05.md` |
 | FramePack shared models map + launcher | ✅ | `scripts/run_framepack_shared_models.sh` · ops FRAMEPACK doc |
 | Host uv venv + `--install-deps` batch | ✅ installed on gpu-host (torch cu128 path) | host: `~/pinokio-host-runtimes/framepack-linux-amd64` |
-| I2V Grok vs MRGPU incident | ✅ documented | ops incident 2026-08-05 |
-| **MRGPU local render** (stills + AnimateDiff) | ✅ GPU 100% ~48s | `docs/reports/MRGPU_LOCAL_RENDER_SMOKE_2026-08-05.md` |
+| I2V Grok vs local GPU incident | ✅ documented | ops incident 2026-08-05 |
+| **local GPU render** (stills + AnimateDiff) | ✅ GPU 100% ~48s | `docs/reports/GPU_LOCAL_RENDER_SMOKE_2026-08-05.md` |
 | Hybrid Grok I2V demo | ✅ labeled QQQ1 / not GPU | `docs/DEMO_VIDEO_PROOF_2026-08-05.md` |
 | Overnight E0–E16 comic path | ✅ complete w/ skips | overnight runbook + social handoff (control) |
 | C64 conductor TUI smoke | ✅ | `mok_tua_cli.py tui --repl --skin c64` → READY. + help |
@@ -61,8 +61,8 @@ python3 scripts/mok_tua_cli.py tui --repl --skin c64   # H help · Q quit
 | Layer | Tool | Smoke | Notes |
 |-------|------|-------|-------|
 | Orchestration | mok-tua API/CLI/TUI | ✅ unit + C64 | |
-| Stills | ComfyUI DreamShaper_8 | ✅ MRGPU | comic + local render |
-| Video gen local | AnimateDiff `mm_sd_v15_v2` | ✅ MRGPU | peak util 100% |
+| Stills | ComfyUI DreamShaper_8 | ✅ GPU-host | comic + local render |
+| Video gen local | AnimateDiff `mm_sd_v15_v2` | ✅ GPU-host | peak util 100% |
 | Video gen local | Wan Gradio :7861–7865 | ⏭ skip | ports down at probe |
 | Video gen local | FramePack Studio | 🔧 deps + map | launch next; shared `hf_hub` |
 | Face | FaceFusion :7870 | ✅ HTTP | CUDA/cublas residual |
@@ -77,14 +77,14 @@ python3 scripts/mok_tua_cli.py tui --repl --skin c64   # H help · Q quit
 ### 2.3 Staged pulls policy (remind)
 
 - Clean pulls only; no Maestro force on dirty wrappers  
-- Host-split UV cache: `/mnt/ai-data/uv-cache/mrgpu` · `UV_LINK_MODE=copy`  
+- Host-split UV cache: `/mnt/ai-data/uv-cache/gpu-host` · `UV_LINK_MODE=copy`  
 - Affinity catalog (control): `data/catalog/pinokio_api_host_affinity_2026-08-05.json`  
 - Hygiene script: `scripts/pinokio_pull_hygiene.sh`
 
 ### 2.4 FramePack next commands (gpu-host)
 
 ```bash
-# from desk-host — role alias Host mrgpu / gpu-host
+# from desk-host — role alias Host gpu-host / gpu-host
 scp ~/mok-tua/scripts/run_framepack_shared_models.sh gpu-host:/tmp/
 ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --install-deps'   # once / after reqs change
 ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7865'
@@ -123,10 +123,10 @@ See `TODO.md` in this repo. Priority operator picks:
 
 | Doc | Role |
 |-----|------|
-| `docs/roadmap/FULL_GAMUT_MRGPU_FRAMEWORK_2026-08-05.md` | Capability matrix + waves |
+| `docs/roadmap/FULL_GAMUT_GPU_FRAMEWORK_2026-08-05.md` | Capability matrix + waves |
 | `docs/operations/FRAMEPACK_SHARED_MODELS_2026-08-05.md` | Shared weights law |
-| `docs/operations/I2V_GROK_VS_MRGPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md` | Provenance incident |
-| `docs/reports/MRGPU_LOCAL_RENDER_SMOKE_2026-08-05.md` | Local GPU proof |
+| `docs/operations/I2V_GROK_VS_LOCAL_GPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md` | Provenance incident |
+| `docs/reports/GPU_LOCAL_RENDER_SMOKE_2026-08-05.md` | Local GPU proof |
 | `docs/reports/PINOKIO_GAMUT_SMOKE_2026-08-05.md` | Mesh probes |
 | `docs/DEMO_VIDEO_PROOF_2026-08-05.md` | Hybrid honesty |
 | `docs/PUBLIC_RELEASE_PROTECT_BRANCH_2026-08-05.md` | Flip sequence |

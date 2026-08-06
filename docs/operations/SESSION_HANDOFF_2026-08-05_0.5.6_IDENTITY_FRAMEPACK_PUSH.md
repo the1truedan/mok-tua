@@ -3,7 +3,7 @@
 **Date:** 2026-08-05 (lab close → 2026-08-06 UTC)  
 **Repo:** `~/mok-tua` · dual remote **github** + **forgejo** (no userinfo in URLs)  
 **Branch:** `agent/mok-tua-staged-pulls-runbooks` · private `main` @ **`da0696d`** (GitHub pushed)  
-**Version:** **0.5.6** (CEO MRGPU examples + accurate collage; TUI **0.5.5**; full-gamut **0.5.4**)  
+**Version:** **0.5.6** (CEO GPU-host examples + accurate collage; TUI **0.5.5**; full-gamut **0.5.4**)  
 **Visibility:** **PRIVATE** — public flip **human-gated only**  
 **Control mirror:** `~/grokcode/docs/operations/SESSION_HANDOFF_2026-08-05_MOK_TUA_0.5.6_PRIVATE_PUSH.md`
 
@@ -21,7 +21,7 @@ Hippo: HIPPO_CONTEXT_CITATIONS_ONLY=1 · tags agent-context, repeated-reminder, 
   control mem_efce82990a85
 
 DONE this arc (private GH):
-- 0.5.6 CEO MRGPU storyboard/face-polish/AD strip + accurate products-capabilities collage
+- 0.5.6 CEO GPU-host storyboard/face-polish/AD strip + accurate products-capabilities collage
 - C64 TUI 0.5.5 PETSCII + two-pane + receipts API
 - IPAdapter FaceID 7 weights on /mnt/ai-data/models/ipadapter · Comfy lists
 - Wan 14B I2V tensors inventory on diffusion_models · no re-pull
@@ -29,7 +29,7 @@ DONE this arc (private GH):
 - Director HTTP OK · backends registry still empty (UI register)
 - Storage law: hot scratch local SSD → promote finals to /ai-data; bees = settled only
 
-PHI: never. Public flip: human only. Grok I2V ≠ MRGPU local.
+PHI: never. Public flip: human only. Grok I2V ≠ local GPU.
 ```
 
 ---
@@ -41,7 +41,7 @@ PHI: never. Public flip: human only. Grok I2V ≠ MRGPU local.
 | [`HANDOFF.md`](../../HANDOFF.md) | Front door |
 | [`TODO.md`](../../TODO.md) | Open/closed board |
 | [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`](../reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md) | 0.5.6 smoke matrix |
-| [`docs/operations/I2V_GROK_VS_MRGPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md`](I2V_GROK_VS_MRGPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md) | Provenance law |
+| [`docs/operations/I2V_GROK_VS_LOCAL_GPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md`](I2V_GROK_VS_LOCAL_GPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md) | Provenance law |
 | [`docs/operations/IPADAPTER_FACEID_INSTALL_2026-08-05.md`](IPADAPTER_FACEID_INSTALL_2026-08-05.md) | FaceID pool |
 | [`docs/operations/FRAMEPACK_I2V_SMOKE_2026-08-05.md`](FRAMEPACK_I2V_SMOKE_2026-08-05.md) | FramePack I2V |
 | [`docs/operations/WAN_WEIGHTS_STAGING_2026-08-05.md`](WAN_WEIGHTS_STAGING_2026-08-05.md) | Wan inventory |
@@ -63,7 +63,7 @@ PHI: never. Public flip: human only. Grok I2V ≠ MRGPU local.
 | CEO example assets **0.5.6** | storyboard + face polish + AD frame strip + accurate `products-capabilities.png` (not Drive montage) |
 | Unit tests | `python3 -m unittest discover -s tests -q` → **20 OK** (smoke stamp) |
 
-### Identity / models (MRGPU shared pool)
+### Identity / models (GPU-host shared pool)
 
 | Item | State | Path / note |
 |------|-------|-------------|
@@ -83,11 +83,11 @@ PHI: never. Public flip: human only. Grok I2V ≠ MRGPU local.
 | Hub FramePackI2V_HY | ~24G complete under `models/hf_hub` |
 | HunyuanVideo hub | partial (VAE-centric) — may limit some paths |
 | GPU proof | SSE: VAE → CLIP Vision → sampling · util **~100%** · VRAM **~11–13 GiB** |
-| Receipt | `docs/assets/receipts/framepack_ceo_i2v.receipt.json` · `renderer: mrgpu_framepack_i2v` · **mp4 artifact finalize still open** (`artifact_ok: false` on status json path) |
+| Receipt | `docs/assets/receipts/framepack_ceo_i2v.receipt.json` · `renderer: gpu_framepack_i2v` · **mp4 artifact finalize still open** (`artifact_ok: false` on status json path) |
 
 ### Provenance law (do not re-break)
 
-- **Grok Imagine I2V ≠ MRGPU local.** Hybrid demos are QQQ1 cloud.  
+- **Grok Imagine I2V ≠ local GPU.** Hybrid demos are QQQ1 cloud.  
 - Every clip: `renderer` + `qqq` + `gpu_evidence`.  
 - Canonical local video proof remains AnimateDiff report + FramePack local path when mp4 lands.
 

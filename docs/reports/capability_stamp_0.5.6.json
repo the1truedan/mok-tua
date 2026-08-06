@@ -13,10 +13,10 @@
     "tui_petscii_boot",
     "tui_two_pane_stats",
     "receipt_stamp",
-    "mrgpu_comfy_stills",
+    "gpu_comfy_stills",
     "ceo_storyboard_hybrid",
     "ceo_face_polish_img2img",
-    "mrgpu_animatediff_short_loop",
+    "gpu_animatediff_short_loop",
     "products_capabilities_collage"
   ],
   "pending": [

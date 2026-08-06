@@ -3,7 +3,7 @@
 **Date:** 2026-08-05 (lab) · stamp refresh for transparency poster  
 **Branch:** `agent/mok-tua-staged-pulls-runbooks` → `main` (private)  
 **Comfy:** gpu-host `:8188` · ComfyUI **0.29.0** · RTX 4060 Ti  
-**Policy:** accuracy over montage · IRL UI screenshots · path+prompt under each capability card · never label cloud I2V as MRGPU local
+**Policy:** accuracy over montage · IRL UI screenshots · path+prompt under each capability card · never label cloud I2V as local GPU
 
 Catalog: [`capability_stamp_0.5.7.json`](capability_stamp_0.5.7.json)
 
@@ -42,7 +42,7 @@ Catalog: [`capability_stamp_0.5.7.json`](capability_stamp_0.5.7.json)
 
 | Asset | Renderer / source |
 |-------|-------------------|
-| `capabilities/panels/0N-*.jpg` | `mrgpu_comfy_ipadapter_plusface_img2img` |
+| `capabilities/panels/0N-*.jpg` | `gpu_comfy_ipadapter_plusface_img2img` |
 | `example-storyboard-sheet.jpg` | collage of panels |
 | `example-face-polish.jpg` | plus-face polish denoise 0.32 |
 | `capabilities/ui/*` | IRL screenshots + PETSCII render |

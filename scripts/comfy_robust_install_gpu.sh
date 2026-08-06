@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
-# F-order ROBUST custom_nodes install for mok-tua on MRGPU (shared NFS pool).
-# Run ON mrgpu (or: ssh mrgpu 'bash -s' < this_script).
+# F-order ROBUST custom_nodes install for mok-tua on GPU-host (shared NFS pool).
+# Run ON gpu-host (or: ssh gpu-host 'bash -s' < this_script).
 # Does NOT install avoid-list nodes. Pins numpy after deps.
 set -euo pipefail
 
 CN="${COMFY_CUSTOM_NODES:-/mnt/ai-data/comfyui/custom_nodes}"
-VENV="${COMFY_VENV:-/mnt/ai-data/comfyui/envs/mrgpu/.venv}"
+VENV="${COMFY_VENV:-/mnt/ai-data/comfyui/envs/gpu-host/.venv}"
 PY="${VENV}/bin/python"
-LOG_DIR="${COMFY_USER:-/mnt/ai-data/comfyui/user/mrgpu}"
+LOG_DIR="${COMFY_USER:-/mnt/ai-data/comfyui/user/gpu-host}"
 STAMP=$(date -u +%Y%m%dT%H%M%SZ)
 LOG="${LOG_DIR}/robust_install_${STAMP}.log"
 mkdir -p "$LOG_DIR"
 exec > >(tee -a "$LOG") 2>&1
 
-echo "=== comfy_robust_install_mrgpu $STAMP ==="
+echo "=== comfy_robust_install_gpu $STAMP ==="
 echo "CN=$CN VENV=$VENV"
 id
 [ -d "$CN" ] || { echo "missing CN"; exit 1; }
@@ -120,4 +120,4 @@ find /mnt/ai-data/models/Lora -maxdepth 1 -name '._*' -type f 2>/dev/null | head
 done
 
 echo "=== DONE log=$LOG ==="
-echo "Restart ComfyUI on mrgpu to load new nodes, then: scripts/smoke_comfy_robust.sh"
+echo "Restart ComfyUI on gpu-host to load new nodes, then: scripts/smoke_comfy_robust.sh"

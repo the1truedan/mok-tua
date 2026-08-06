@@ -279,7 +279,7 @@ def stamp_from_monitor(
     host_role: str = "gpu-host",
     wall_clock_s: float | None = None,
     tokens: dict[str, Any] | None = None,
-    node: str = "mrgpu",
+    node: str = "gpu-host",
     burn: bool = False,
 ) -> dict[str, Any]:
     """Build + write receipt; optionally sample host_monitor and burn caption."""

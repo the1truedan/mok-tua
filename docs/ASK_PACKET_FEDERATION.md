@@ -20,7 +20,7 @@ mok-tua is the **demand** broker (estimate, QQQ, resume). Johnny/CHIPPER supply 
 
 1. **Provenance ≠ verification.** A receipt proves the log wasn’t altered; it does not prove the node ran your Qwen pin. v1: trusted nodes + optional later spot-audit.
 2. **PHI is unbroadcastable.** `data_class: phi | phi-adjacent` cannot emit crowd-routable packets (`emit` raises).
-3. **Crowd / federation for `public` only.** Internal may use **trusted** lab nodes (m4rv/mrgpu/tower).
+3. **Crowd / federation for `public` only.** Internal may use **trusted** lab nodes (desk-host/gpu-host/tower).
 4. **Manifest public, payload sealed.** Prompts live in `payload_ref` (local_path or future x25519/age).
 5. **Mac NPU** is an LLM/embedding tier (MLX), not shareable video UNet supply.
 

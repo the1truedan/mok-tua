@@ -36,7 +36,7 @@ Redirecting that path to the shared hub is the only non-fork fix that stops pack
 
 ## NFS permissions (Mac uid 501 vs Linux uid 1000)
 
-Mac-created dirs under `/Volumes/ai-data/work/framepack` often show as **uid 501** on MRGPU with mode `2755` (group **no write**). Linux `dtm` is **uid 1000** / **gid 1000**, so you get:
+Mac-created dirs under `/Volumes/ai-data/work/framepack` often show as **uid 501** on GPU-host with mode `2755` (group **no write**). Linux `dtm` is **uid 1000** / **gid 1000**, so you get:
 
 ```text
 PermissionError: ... '/mnt/ai-data/work/framepack/receipts/...'
@@ -51,7 +51,7 @@ chmod -R g+rwX /Volumes/ai-data/work/framepack
 find /Volumes/ai-data/work/framepack -type d -exec chmod 2775 {} \;
 ```
 
-Prefer creating lab work trees **on MRGPU** (`mkdir -m 2775`) so owner is uid 1000.
+Prefer creating lab work trees **on GPU-host** (`mkdir -m 2775`) so owner is uid 1000.
 
 **Launcher:** `run_framepack_shared_models.sh` now tests write access and falls back to  
 `$HOME/work/framepack/{outputs,metadata,receipts}` if NFS is not writable.
@@ -82,12 +82,12 @@ ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.
 | **SM GUI host venv (3.10)** | `~/pinokio-host-runtimes/framepack-sm310-linux-amd64/env` |
 | Package `venv` | **symlink** → SM GUI host venv |
 | Optional CLI 3.12 | `~/pinokio-host-runtimes/framepack-linux-amd64/env` |
-| UV cache | `/mnt/ai-data/uv-cache/mrgpu` (`UV_LINK_MODE=copy`) |
+| UV cache | `/mnt/ai-data/uv-cache/gpu-host` (`UV_LINK_MODE=copy`) |
 | Package code | NFS SM package (source only) |
 | Weights | `/mnt/ai-data/models` + `hf_hub` |
 
 `--install-deps` = torch(cu128) + `requirements.txt` (**einops** included) + link `package/venv`.  
-Full SM GUI + M4RV orchestration: `docs/operations/FRAMEPACK_SM_GUI_AND_ORCHESTRATION_2026-08-05.md`
+Full SM GUI + desk-host orchestration: `docs/operations/FRAMEPACK_SM_GUI_AND_ORCHESTRATION_2026-08-05.md`
 
 ## Lifecycle (mok-tua · SM · LAN)
 
@@ -109,7 +109,7 @@ ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --install-deps'
 ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7864'
 ```
 
-1. Launch (SM GUI or wrapper) on MRGPU  
+1. Launch (SM GUI or wrapper) on GPU-host  
 2. Confirm no new multi-GB dirs under package tree  
 3. HTTP OK on `http://gpu-host:7864/` from desk  
 4. One short I2V job → receipt under `work/framepack/receipts/` (or `~/work/framepack/receipts` fallback)  

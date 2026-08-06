@@ -101,7 +101,7 @@ SM workflows already on disk (sample): Wan 2.2 animate, InfiniteTalk, Uni3C move
 4. Optional: **FaceFusion** / LivePortrait for identity  
 5. **VO**: TTS-Story or Qwen3-TTS from dialogue lines  
 6. **Music**: ACE-Step API  
-7. **Motion**: Wan2GP **or** Comfy Wan InfiniteTalk / animate pins on MRGPU  
+7. **Motion**: Wan2GP **or** Comfy Wan InfiniteTalk / animate pins on GPU-host  
 8. **Body**: FreeMoCap capture → OpenPose maps → re-render pass  
 9. **Stitch**: mok-tua run dir + ffmpeg  
 
@@ -128,7 +128,7 @@ SM workflows already on disk (sample): Wan 2.2 animate, InfiniteTalk, Uni3C move
 ```bash
 # planned shape (catalog-driven)
 mok-tua launch directors_console   # pinokio start recipe
-mok-tua launch wan2gp --host mrgpu
+mok-tua launch wan2gp --host gpu-host
 mok-tua launch sm_comfy --port 8188
 mok-tua providers list             # from director_stack_catalog.json
 ```

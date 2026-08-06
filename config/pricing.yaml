@@ -2,21 +2,21 @@
 # Numbers are planning defaults; refresh from provider pages as needed.
 
 providers:
-  local_m4rv:
+  local_desk:
     type: local
     cost_usd: 0.0
     est_still_sec: 25
     est_video_sec_per_s: 8
     sla: best-effort
-    notes: "Live SM ComfyUI on M4RV (MPS); image/storyboard preferred"
+    notes: "Live SM ComfyUI on desk-host (MPS); image/storyboard preferred"
 
-  local_mrgpu:
+  local_gpu:
     type: local
     cost_usd: 0.0
     est_still_sec: 12
     est_video_sec_per_s: 4
     sla: best-effort
-    notes: "CUDA Comfy on MRGPU; video / Wan / I2V preferred"
+    notes: "CUDA Comfy on GPU-host; video / Wan / I2V preferred"
 
   local_tower_cpu:
     type: local
@@ -118,12 +118,12 @@ providers:
     sla: best-effort-retry
     data_classes: [public]
     status: earmark
-    notes: "Trusted lab federation first (m4rv/mrgpu/tower). PHI structurally unroutable. See docs/ASK_PACKET_FEDERATION.md"
+    notes: "Trusted lab federation first (desk-host/gpu-host/tower). PHI structurally unroutable. See docs/ASK_PACKET_FEDERATION.md"
 
 defaults:
   prefer:
-    - local_m4rv
-    - local_mrgpu
+    - local_desk
+    - local_gpu
     - grok_imagine
     - nano_banana
     - hf_zerogpu_pro

@@ -5,7 +5,7 @@
 **Affinity catalog:** `~/grokcode/data/catalog/pinokio_api_host_affinity_2026-08-05.json`  
 **Sides:** `fixtures/la_dark_one_april_fools_sides.md`  
 **Bible:** `/Volumes/ai-data/work/story-anim/bibles/LA_DARK_ONE_STORY_BIBLE_PUBLIC_SAFE.md`  
-**Staging policy:** `config/pinokio_mrgpu_staging.json`
+**Staging policy:** `config/pinokio_gpu_staging.json`
 
 ---
 
@@ -14,9 +14,9 @@
 | # | Action | Command / check | Receipt |
 |---|--------|-----------------|--------|
 | **E0** | Preflight | `ls` bible + sides + `work/story-anim`; NFS up | paths |
-| **E1** | UV on MRGPU | Process env `UV_CACHE_DIR=/mnt/ai-data/uv-cache/mrgpu` | env log |
+| **E1** | UV on GPU-host | Process env `UV_CACHE_DIR=/mnt/ai-data/uv-cache/gpu-host` | env log |
 | **E2** | Remotes scrub | `cd ~/mok-tua && git remote -v` (no userinfo) | clean |
-| **E3** | Affinity gate | Only P0/P1 `mrgpu_cuda` / either; SKIP `mac_metal` | catalog |
+| **E3** | Affinity gate | Only P0/P1 `gpu_cuda` / either; SKIP `mac_metal` | catalog |
 | **E4** | Dirty audit | Read staging JSON dirty flags; **no** force pull on dirty | note |
 | **E5** | Pull clean only | FF-only clean trees; leave dirty Wan/TTS/etc. as-is | pull log |
 | **E6** | Director's Console | HTTP 200 on :5173 :9800 :9820 (Linux runtime) | probe |
@@ -39,7 +39,7 @@
 |-----|-----|-----|
 | P0 | UV + Pinokio daemon | verify |
 | P0 | Sovereign Comfy | up + still |
-| P0 | Wan2GP / wanMRGPU / wan | up + 1 I2V (**no** dirty force-pull) |
+| P0 | Wan2GP / wan-gpu / wan | up + 1 I2V (**no** dirty force-pull) |
 | P0 | Directors Console | up if Linux runtime healthy |
 | P1 | mok-tua | sides → stage → collect |
 | P2 | TTS / ACE | only if clean + Linux sox |
@@ -69,9 +69,9 @@ ffmpeg -y -f concat -safe 0 -i "$RUN/clips.txt" \
 
 ## Live overnight path (2026-08-05 executed)
 
-**SSH runbook:** `~/grokcode/docs/operations/SSH_MRGPU_OVERNIGHT_MOK_TUA_2026-08-05.md`
+**SSH runbook:** `~/grokcode/docs/operations/SSH_GPU-host_OVERNIGHT_MOK_TUA_2026-08-05.md`
 
-| Item | Path on MRGPU |
+| Item | Path on GPU-host |
 |------|----------------|
 | Work root (Linux-owned NFS) | `/mnt/ai-data/work/smoke/mok-tua-overnight-2026-08-05` |
 | Runner | `.../overnight_e0_e16_runner.sh` |
@@ -79,15 +79,15 @@ ffmpeg -y -f concat -safe 0 -i "$RUN/clips.txt" \
 | Mac mirror (read; Mac-created subtree may be 501-sticky) | `/Volumes/ai-data/work/smoke/mok-tua/overnight/2026-08-05` |
 
 ```bash
-# status from M4RV
-ssh -o BatchMode=yes mrgpu '
+# status from desk-host
+ssh -o BatchMode=yes gpu-host '
   R=/mnt/ai-data/work/smoke/mok-tua-overnight-2026-08-05
   ps -p $(cat $R/receipts/overnight.pid) -o pid,etime,cmd
   tail -40 $(ls -t $R/logs/overnight_*.log | head -1)
 '
 ```
 
-**UV:** always `UV_CACHE_DIR=/mnt/ai-data/uv-cache/mrgpu` on MRGPU.
+**UV:** always `UV_CACHE_DIR=/mnt/ai-data/uv-cache/gpu-host` on GPU-host.
 
 ---
 

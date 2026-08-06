@@ -32,7 +32,7 @@ def sample_gpu_host() -> dict[str, Any]:
             sys.path.insert(0, api)
         from host_monitor import sample_host
 
-        return sample_host("mrgpu")
+        return sample_host("gpu-host")
     except Exception as exc:
         return {"ok": False, "error": str(exc)}
 

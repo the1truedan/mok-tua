@@ -108,8 +108,8 @@ def main() -> int:
         "--monitor",
         default=None,
         nargs="?",
-        const="mrgpu",
-        help="Sample host during live pull (default node: mrgpu)",
+        const="gpu-host",
+        help="Sample host during live pull (default node: gpu_host)",
     )
     pull.add_argument("--priority-max", type=int, default=2)
 
@@ -154,12 +154,12 @@ def main() -> int:
     lw = lock_sub.add_parser("write", help="Write lock from catalog + git SHAs")
     lw.add_argument("--smoke-ref", default=None)
     ll = lock_sub.add_parser("load", help="Launch loading profile from lock")
-    ll.add_argument("profile", help="demo|full_local|video_mrgpu|face|audio|body")
+    ll.add_argument("profile", help="demo|full_local|video_gpu|face|audio|body")
     ll.add_argument("--live", action="store_true")
-    ll.add_argument("--monitor", default=None, nargs="?", const="mrgpu")
+    ll.add_argument("--monitor", default=None, nargs="?", const="gpu-host")
 
-    mon = sub.add_parser("monitor", help="One-shot mrgpu resource sample")
-    mon.add_argument("--node", default="mrgpu")
+    mon = sub.add_parser("monitor", help="One-shot gpu-host resource sample")
+    mon.add_argument("--node", default="gpu-host")
     mon.add_argument("--json", action="store_true")
 
     # --- federation: ask packets / nodes / chains ---
@@ -182,7 +182,7 @@ def main() -> int:
     nodes = sub.add_parser("nodes", help="Federation node index (trusted lab)")
     nodes_sub = nodes.add_subparsers(dest="nodes_cmd", required=True)
     nodes_sub.add_parser("list", help="List advertisements")
-    ns = nodes_sub.add_parser("seed", help="Seed m4rv/mrgpu/tower from tier_lock")
+    ns = nodes_sub.add_parser("seed", help="Seed desk-host/gpu-host/tower from tier_lock")
     ns.add_argument("--force", action="store_true")
     nh = nodes_sub.add_parser("heartbeat", help="Touch last_heartbeat")
     nh.add_argument("node_id")
@@ -205,7 +205,7 @@ def main() -> int:
         help="Write receipt next to artifact (samples host_monitor when local)",
     )
     rst.add_argument("path")
-    rst.add_argument("--renderer", required=True, help="e.g. mrgpu_comfy_animatediff")
+    rst.add_argument("--renderer", required=True, help="e.g. gpu_comfy_animatediff")
     rst.add_argument("--qqq", default="QQQ0")
     rst.add_argument("--prompt", default=None)
     rst.add_argument("--model", default=None)
@@ -222,7 +222,7 @@ def main() -> int:
         action="store_true",
         help="Optional ffmpeg caption bar → *_cited.* (never default)",
     )
-    rst.add_argument("--node", default="mrgpu")
+    rst.add_argument("--node", default="gpu-host")
 
     # --- conductor TUI ---
     tui_p = sub.add_parser(

@@ -1,7 +1,7 @@
-# FramePack Studio — SM GUI launch + mok-tua orchestration (MRGPU)
+# FramePack Studio — SM GUI launch + mok-tua orchestration (GPU-host)
 
 **Date:** 2026-08-05  
-**Host:** gpu-host (MRGPU) · orchestrate from desk-host (M4RV) via SSH/role  
+**Host:** gpu-host (GPU-host) · orchestrate from desk-host (desk-host) via SSH/role  
 **Stamp:** `2026.08-framepack-sm-gui-venv-link`
 
 ---
@@ -24,7 +24,7 @@
 4. Re-Launch from Stability Matrix Packages UI
 
 ```bash
-# From M4RV → gpu-host
+# From desk-host → gpu-host
 scp ~/mok-tua/scripts/run_framepack_shared_models.sh gpu-host:/tmp/
 ssh gpu-host 'bash /tmp/run_framepack_shared_models.sh --install-deps'
 # Then SM GUI Launch, or:
@@ -46,7 +46,7 @@ If SM “repairs” the package and recreates a real `venv/` directory, re-run `
 | SM package `venv` | symlink → host SM 3.10 env |
 | Host SM 3.10 env | `~/pinokio-host-runtimes/framepack-sm310-linux-amd64/env` |
 | Optional CLI 3.12 env | `~/pinokio-host-runtimes/framepack-linux-amd64/env` |
-| UV cache | `/mnt/ai-data/uv-cache/mrgpu` · `UV_LINK_MODE=copy` |
+| UV cache | `/mnt/ai-data/uv-cache/gpu-host` · `UV_LINK_MODE=copy` |
 | Shared models | `/mnt/ai-data/models` |
 
 ---
@@ -63,7 +63,7 @@ If SM “repairs” the package and recreates a real `venv/` directory, re-run `
 **Dual control truth:** SM GUI and mok-tua do **not** share process ownership automatically.  
 **Robust model:** one owner (prefer mok-tua) + shared registry + same wrapper for any start path + LAN Gradio for everyone.
 
-### From M4RV (desk-host) — orchestrate, don’t reinstall on Mac
+### From desk-host (desk-host) — orchestrate, don’t reinstall on Mac
 
 ```bash
 # 1) one-time / after requirements change (also fixes SM GUI einops)
@@ -132,5 +132,5 @@ test -d "$FP/diffusers_helper" && echo diffusers_helper_ok
 
 - `docs/operations/FRAMEPACK_SHARED_MODELS_2026-08-05.md`  
 - `scripts/run_framepack_shared_models.sh`  
-- `docs/roadmap/FULL_GAMUT_MRGPU_FRAMEWORK_2026-08-05.md`  
+- `docs/roadmap/FULL_GAMUT_GPU_FRAMEWORK_2026-08-05.md`  
 - UV NFS: control-repo `UV_CACHE_CROSS_HOST_NFS_INCIDENT_2026-08-04.md`  

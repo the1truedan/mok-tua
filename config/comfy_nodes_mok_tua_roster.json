@@ -1,8 +1,8 @@
 {
   "version": 1,
   "updated": "2026-08-02",
-  "scope": "ROBUST mok-tua Comfy worker (MRGPU primary, M4RV stills)",
-  "host_law": "Install/update nodes on mrgpu as uid 1000 when possible; fix .git a+rwx for Manager .cnr-id on NFS",
+  "scope": "ROBUST mok-tua Comfy worker (GPU-host primary, desk-host stills)",
+  "host_law": "Install/update nodes on gpu-host as uid 1000 when possible; fix .git a+rwx for Manager .cnr-id on NFS",
   "avoid": [
     {
       "id": "ComfyUI-RVC",

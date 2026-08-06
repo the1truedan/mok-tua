@@ -50,7 +50,7 @@ def work_root() -> Path:
     if env and Path(env).is_dir():
         return Path(env)
     orch = load_json("orchestration.json")
-    preferred = (orch.get("outputs") or {}).get("work_root_M4RV")
+    preferred = (orch.get("outputs") or {}).get("work_root_DESK")
     if preferred and Path(preferred).is_dir():
         return Path(preferred)
     fallback = os.environ.get("WORK_FALLBACK", str(ROOT / "work"))
@@ -62,8 +62,8 @@ def work_root() -> Path:
 def endpoint_url(key: str) -> str:
     orch = load_json("orchestration.json")
     env_map = {
-        "m4rv": os.environ.get("COMFY_M4RV_URL"),
-        "mrgpu": os.environ.get("COMFY_MRGPU_URL"),
+        "desk-host": os.environ.get("COMFY_DESK_URL"),
+        "gpu-host": os.environ.get("COMFY_GPU_URL"),
         "headroom": os.environ.get("HEADROOM_BASE"),
     }
     if env_map.get(key):
@@ -150,8 +150,8 @@ def estimate_story(story: dict[str, Any], *, qqq: str | None = None) -> dict[str
 def _run_dir(run_id: str) -> Path:
     d = work_root() / "runs" / run_id
     d.mkdir(parents=True, exist_ok=True)
-    (d / "m4rv").mkdir(exist_ok=True)
-    (d / "mrgpu").mkdir(exist_ok=True)
+    (d / "desk-host").mkdir(exist_ok=True)
+    (d / "gpu-host").mkdir(exist_ok=True)
     (d / "frames").mkdir(exist_ok=True)
     return d
 
@@ -250,7 +250,7 @@ def submit_still_via_provider(
         return result
 
     # local Comfy (default)
-    host = str(provider_cfg.get("host") or "m4rv")
+    host = str(provider_cfg.get("host") or "desk-host")
     base_url = endpoint_url(host)
     pin_name = provider_cfg.get("workflow_pin")
     pin = _workflow_pin(orch, str(pin_name) if pin_name else None)
@@ -307,7 +307,7 @@ def submit_video_via_provider(
             "workflow_ref": provider_cfg.get("workflow_ref"),
         }
 
-    host = str(provider_cfg.get("host") or "mrgpu")
+    host = str(provider_cfg.get("host") or "gpu-host")
     base_url = endpoint_url(host)
     pin = _workflow_pin(orch, str(provider_cfg.get("workflow_pin") or ""))
     return comfy.plan_video(
@@ -362,8 +362,8 @@ def create_run_from_markdown(
     stages.append({"stage": "estimate", "result": est})
     (rdir / "estimate.json").write_text(dumps(est), encoding="utf-8")
 
-    m4rv_url = endpoint_url("m4rv")
-    mrgpu_url = endpoint_url("mrgpu")
+    desk_host_url = endpoint_url("desk-host")
+    gpu_host_url = endpoint_url("gpu-host")
     style_lock = None
     meta = story.get("meta") or {}
     if isinstance(meta, dict):
@@ -472,7 +472,7 @@ def create_run_from_markdown(
         "run_dir": str(rdir),
         "stages": stages,
         "shots": shot_results,
-        "endpoints": {"m4rv": m4rv_url, "mrgpu": mrgpu_url, "headroom": endpoint_url("headroom")},
+        "endpoints": {"desk-host": desk_host_url, "gpu-host": gpu_host_url, "headroom": endpoint_url("headroom")},
         "providers": {
             "still": still_name,
             "video": video_name,
@@ -509,7 +509,7 @@ def resume_shot(run_id: str, shot_id: str, *, last_good_frame: int | None = None
             resume["last_good_frame"] = last_good_frame
             resume["last_good_path"] = str(rdir / "frames" / f"{last_good_frame:04d}.png")
         resume["status"] = "resume_planned"
-        resume["backend"] = "mrgpu"
+        resume["backend"] = "gpu-host"
         resume["note"] = "Re-queue I2V with start frame = last_good_frame (VideoHelperSuite skip_first_frames)"
         updated = True
         break
@@ -564,15 +564,15 @@ def list_runs(limit: int = 20) -> list[dict[str, Any]]:
 
 
 def health() -> dict[str, Any]:
-    m4rv = comfy.probe(endpoint_url("m4rv"))
-    mrgpu = comfy.probe(endpoint_url("mrgpu"))
+    desk_host = comfy.probe(endpoint_url("desk-host"))
+    gpu_host = comfy.probe(endpoint_url("gpu-host"))
     orch = load_json("orchestration.json")
     return {
         "ok": True,
         "service": "mock-tua-api",
         "work_root": str(work_root()),
-        "comfy_m4rv": m4rv,
-        "comfy_mrgpu": mrgpu,
+        "comfy_desk": desk_host,
+        "comfy_gpu": gpu_host,
         "headroom": endpoint_url("headroom"),
         "qqq": _qqq_mode(),
         "dry_run": os.environ.get("MOCK_TUA_DRY_RUN", "1") not in ("0", "false"),

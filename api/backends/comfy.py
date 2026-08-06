@@ -447,7 +447,7 @@ def plan_video(
     base_url: str,
     prompt: str,
     *,
-    host_key: str = "mrgpu",
+    host_key: str = "gpu-host",
     duration_s: float = 5.0,
     dry_run: bool = True,
     workflow_pin: dict[str, Any] | None = None,
@@ -474,7 +474,7 @@ def plan_video(
                 "ok": True,
                 "status": "dry_run" if dry_run else "pin_pending",
                 "note": pin_load.get("note")
-                or "Video graphs require MRGPU Comfy + Wan/AD workflow pin API export",
+                or "Video graphs require GPU-host Comfy + Wan/AD workflow pin API export",
             }
         )
         if not dry_run:

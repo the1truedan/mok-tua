@@ -10,16 +10,16 @@
 > CEO identity pack (`example-storyboard-sheet.jpg`, FaceID polish/strip, hero compose).
 >
 > - Ken Burns = ffmpeg zoompan of stills · **not** FaceID · **not** generative GPU film  
-> - Hybrid vibe = **Grok Imagine I2V** + kenburns · **not** MRGPU  
+> - Hybrid vibe = **Grok Imagine I2V** + kenburns · **not** GPU-host  
 
 > ## Correction (operator verification)
 >
-> The **hybrid** clip below was **Grok Imagine I2V + ffmpeg**, **not** MRGPU.  
+> The **hybrid** clip below was **Grok Imagine I2V + ffmpeg**, **not** GPU-host.  
 > That is why **no GPU usage** was observed.  
 >
 > **Canonical local generative path (still pre-FaceID selfie lock, but real GPU AD):**  
-> `docs/reports/MRGPU_LOCAL_RENDER_SMOKE_2026-08-05.md`  
-> Staging: `work/social-staging/2026-08/manager_mrgpu_local_render_20260805/`  
+> `docs/reports/GPU_LOCAL_RENDER_SMOKE_2026-08-05.md`  
+> Staging: `work/social-staging/2026-08/manager_gpu_local_render_20260805/`  
 > — ComfyUI DreamShaper stills + **AnimateDiff** on **RTX 4060 Ti**, ~48s e2e, GPU peak **100%**.
 >
 > **(post-FaceID)** CEO + brand exports: `docs/assets/exports/README.md` · FaceID stills under `docs/assets/example-*` · PETSCII Matrix `docs/assets/exports/mok-tua-petscii-matrix-export.mp4`.

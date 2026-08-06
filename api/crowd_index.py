@@ -31,7 +31,7 @@ def save_nodes(data: dict[str, Any]) -> None:
 
 
 def seed_lab_nodes(*, force: bool = False) -> dict[str, Any]:
-    """Seed m4rv / mrgpu / tower from tier_lock if missing."""
+    """Seed desk-host / gpu-host / tower from tier_lock if missing."""
     from ask_packet import lock_ref_for_tier
 
     data = load_nodes()
@@ -47,7 +47,7 @@ def seed_lab_nodes(*, force: bool = False) -> dict[str, Any]:
     seeds = [
         {
             "schema": "node_advertisement.v1",
-            "id": "m4rv",
+            "id": "desk-host",
             "pubkey": None,
             "endpoint": "http://127.0.0.1:8188",
             "lock_hashes_resident": [t0, t1],
@@ -62,13 +62,13 @@ def seed_lab_nodes(*, force: bool = False) -> dict[str, Any]:
             "roles": ["still", "expand", "llm"],
             "last_heartbeat": _utc(),
             "trusted": True,
-            "notes": "M4RV SM Comfy — stills preferred",
+            "notes": "desk-host SM Comfy — stills preferred",
         },
         {
             "schema": "node_advertisement.v1",
-            "id": "mrgpu",
+            "id": "gpu-host",
             "pubkey": None,
-            "endpoint": os.environ.get("COMFY_MRGPU_URL", "http://gpu-host:8188"),
+            "endpoint": os.environ.get("COMFY_GPU_URL", "http://gpu-host:8188"),
             "lock_hashes_resident": [t0, t1, t2, t3],
             "models_digest_set": ["wan22", "qwen_edit_2509_fp8", "animatediff"],
             "vram_gb": 16.0,
@@ -81,7 +81,7 @@ def seed_lab_nodes(*, force: bool = False) -> dict[str, Any]:
             "roles": ["still", "i2v", "video", "face", "tts"],
             "last_heartbeat": _utc(),
             "trusted": True,
-            "notes": "MRGPU Comfy — video / Wan preferred",
+            "notes": "GPU-host Comfy — video / Wan preferred",
         },
         {
             "schema": "node_advertisement.v1",

@@ -1,11 +1,11 @@
 {
   "schema": "crowd_nodes.v1",
-  "updated": "2026-08-05T22:21:08Z",
+  "updated": "2026-08-06T02:27:42Z",
   "notes": "Trusted lab federation only. Re-seed: mok-tua nodes seed --force",
   "nodes": [
     {
       "schema": "node_advertisement.v1",
-      "id": "m4rv",
+      "id": "desk-host",
       "pubkey": null,
       "endpoint": "http://127.0.0.1:8188",
       "lock_hashes_resident": [
@@ -31,13 +31,13 @@
         "expand",
         "llm"
       ],
-      "last_heartbeat": "2026-08-05T22:21:08Z",
+      "last_heartbeat": "2026-08-06T02:27:42Z",
       "trusted": true,
-      "notes": "M4RV SM Comfy \u2014 stills preferred"
+      "notes": "desk-host SM Comfy \u2014 stills preferred"
     },
     {
       "schema": "node_advertisement.v1",
-      "id": "mrgpu",
+      "id": "gpu-host",
       "pubkey": null,
       "endpoint": "http://gpu-host:8188",
       "lock_hashes_resident": [
@@ -68,9 +68,9 @@
         "face",
         "tts"
       ],
-      "last_heartbeat": "2026-08-05T22:21:08Z",
+      "last_heartbeat": "2026-08-06T02:27:42Z",
       "trusted": true,
-      "notes": "MRGPU Comfy \u2014 video / Wan preferred"
+      "notes": "GPU-host Comfy \u2014 video / Wan preferred"
     },
     {
       "schema": "node_advertisement.v1",
@@ -95,7 +95,7 @@
         "stitch",
         "expand"
       ],
-      "last_heartbeat": "2026-08-05T22:21:08Z",
+      "last_heartbeat": "2026-08-06T02:27:42Z",
       "trusted": true,
       "notes": "Tower control / CPU \u2014 no GPU video"
     }

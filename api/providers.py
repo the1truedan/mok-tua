@@ -51,7 +51,7 @@ LAUNCH_RECIPES: dict[str, dict[str, Any]] = {
         "kind": "stability_matrix",
         "probe": [
             {"type": "http", "url": "http://127.0.0.1:8188/system_stats"},
-            {"type": "http", "url": "http://gpu-host:8188/system_stats", "label": "mrgpu"},
+            {"type": "http", "url": "http://gpu-host:8188/system_stats", "label": "gpu-host"},
         ],
         "open": "http://127.0.0.1:8188",
         "cwd": str(AI_DATA / "stability-matrix/mac-Data/Packages/ComfyUI"),
@@ -65,7 +65,7 @@ LAUNCH_RECIPES: dict[str, dict[str, Any]] = {
         ],
         "env_extra": {"PYTORCH_MPS_HIGH_WATERMARK_RATIO": "0.0"},
         "prefer_script": str(Path.home() / "grokcode/scripts/comfy_launch_shared.sh"),
-        "note": "Uses SM ComfyUI package; MRGPU via comfy_mrgpu_host_runtime.sh",
+        "note": "Uses SM ComfyUI package; GPU-host via comfy_gpu_host_runtime.sh",
     },
     "directors_console": {
         "kind": "pinokio",
@@ -975,7 +975,7 @@ def pull_tier(
     force: bool = False,
     priority_max: int | None = 2,
 ) -> dict[str, Any]:
-    """Pull all apps in a tier (or all bleeding_edge) with progress + optional mrgpu monitor."""
+    """Pull all apps in a tier (or all bleeding_edge) with progress + optional gpu-host monitor."""
     from host_monitor import format_sample_line, progress_bar, HostMonitor
 
     cat = load_catalog()
@@ -1000,7 +1000,7 @@ def pull_tier(
         mon = HostMonitor(node=monitor)
 
         def _cb(sample: dict[str, Any]) -> None:
-            print(f"\r{format_sample_line(sample, pull_label='mrgpu'):<110}", end="", flush=True)
+            print(f"\r{format_sample_line(sample, pull_label='gpu-host'):<110}", end="", flush=True)
 
         mon.on_sample = _cb
         mon.start()

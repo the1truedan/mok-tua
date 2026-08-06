@@ -110,7 +110,7 @@ That identity is the only face in these mockups — COMDEX keynote, functions bo
 
 Folder: [`docs/assets/pres-smoke/`](docs/assets/pres-smoke/) · reuse `00-ceo-source-still.jpg` as LoadImage for live Comfy/Wan experiments.
 
-### Other illustrative outputs (MRGPU · CEO identity · **post-FaceID** · v0.5.7)
+### Other illustrative outputs (GPU-host · CEO identity · **post-FaceID** · v0.5.7)
 
 Regenerated on **gpu-host Comfy** from `pres-smoke/00-ceo-source-still.jpg` via **IPAdapter FaceID PLUS V2** (padded face ref for InsightFace).  
 **Cite as (post-FaceID).** Older Ken Burns / hybrid Grok clips are **(pre-FaceID)** — see [`docs/assets/exports/README.md`](docs/assets/exports/README.md).  
@@ -122,7 +122,7 @@ Individual panels: [`docs/assets/capabilities/panels/`](docs/assets/capabilities
 
 | Short-loop strip (glitch-filtered · not Grok) | Conductor TUI (fixed PETSCII boot) |
 |-----------------------------------------------|------------------------------------|
-| <img src="docs/assets/ceo-i2v-frame-strip.jpg" alt="MRGPU AnimateDiff FaceID strip without black-triangle glitch" width="420" /> | <img src="docs/assets/capabilities/ui/ui-tui-boot.png" alt="mok-tua fixed inverse PETSCII boot" width="420" /> |
+| <img src="docs/assets/ceo-i2v-frame-strip.jpg" alt="GPU-host AnimateDiff FaceID strip without black-triangle glitch" width="420" /> | <img src="docs/assets/capabilities/ui/ui-tui-boot.png" alt="mok-tua fixed inverse PETSCII boot" width="420" /> |
 
 <p align="center"><em>path · prompt · renderer · host_role · QQQ0 on each card — never claim cloud I2V as local GPU.</em></p>
 
@@ -304,7 +304,7 @@ Deep CLI, tier locks (T0–T4), pull hygiene, ask-packet federation, ROBUST Comf
 | **0.5.1** | Annotated capability collage + personal origin (Pinokio/SM gap, Gateway Tech C64 nostalgia, ai-gateway deck) |
 | **0.5** | Conductor TUI shipped (`tui/`): C64 + modern skins, CLI `tui` verb, vendor GUI mok-ups kept |
 | **0.4** | Clearer public story + product map + non-doxxing vendor/mok-up art |
-| **0.3** | Tier lock, MRGPU monitor, ask-packets, ROBUST Comfy roster |
+| **0.3** | Tier lock, GPU-host monitor, ask-packets, ROBUST Comfy roster |
 | **0.2** | Providers, sides ingest, multi-angle stills, CLI launch/pull |
 | **0.1** | First scaffold |
 

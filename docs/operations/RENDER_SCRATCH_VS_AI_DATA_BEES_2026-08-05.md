@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-05  
 **Applies to:** Comfy, FramePack, Wan, Director intermediates, overnight E0–E16  
-**Hosts:** gpu-host (MRGPU) · desk Mac NFS client · Unraid/bees volume behind `/mnt/ai-data`
+**Hosts:** gpu-host (GPU-host) · desk Mac NFS client · Unraid/bees volume behind `/mnt/ai-data`
 
 ---
 

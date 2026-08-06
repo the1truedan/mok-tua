@@ -3,11 +3,11 @@
   "locked_at": "2026-08-02T17:04:58Z",
   "mok_tua_version": "0.3.0",
   "host_profiles": {
-    "m4rv": {
+    "desk-host": {
       "role": "stills",
       "comfy": "http://127.0.0.1:8188"
     },
-    "mrgpu": {
+    "gpu-host": {
       "role": "video",
       "host": "gpu-host",
       "comfy_url": "http://gpu-host:8188",
@@ -358,7 +358,7 @@
       "tts_story",
       "facefusion"
     ],
-    "video_mrgpu": [
+    "video_gpu": [
       "sm_comfy",
       "wan2gp"
     ],

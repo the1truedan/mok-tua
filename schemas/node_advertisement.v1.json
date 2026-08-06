@@ -48,7 +48,7 @@
     "last_heartbeat": { "type": "string" },
     "trusted": {
       "type": "boolean",
-      "description": "Lab nodes you operate (mrgpu/m4rv/tower) vs open crowd"
+      "description": "Lab nodes you operate (gpu-host/desk-host/tower) vs open crowd"
     },
     "notes": { "type": "string" }
   }

@@ -139,7 +139,7 @@
 <div class="eyebrow">mok-tua v0.5.7 · private · tested capability map · sausage-made transparency</div>
 <h1>How one source still moves through real interfaces</h1>
 <p class="lede">
-  Individual cards with <strong>IRL screenshots</strong> and <strong>MRGPU-generated panels</strong> from the operator selfie
+  Individual cards with <strong>IRL screenshots</strong> and <strong>GPU-host-generated panels</strong> from the operator selfie
   (<code>00-ceo-source-still.jpg</code>). Each photo lists path + prompt/command + renderer.
   Not a faux multi-app promo montage.
 </p>
@@ -160,7 +160,7 @@
   (<code>ip-adapter-faceid-plusv2_sd15.bin</code> + LoRA + CLIP vision H + InsightFace buffalo_l) with
   <strong>padded</strong> face ref from <code>00-ceo-source-still.jpg</code> (extreme close-up fails det until padded).
   <strong>Residuals:</strong> InstantID weights empty · Director <code>/api/backends []</code> · FramePack mp4 finalize open · Wan ports.
-  Grok Imagine I2V ≠ MRGPU local. Public flip human-gated only.
+  Grok Imagine I2V ≠ local GPU. Public flip human-gated only.
 </div>
 
 <!-- 0 SOURCE -->
@@ -235,7 +235,7 @@
 <section class="card">
   <div class="card-head">
     <div class="cap-tag ui">4 · ComfyUI IRL (gpu-host)</div>
-    <h3>Live node graph surface on MRGPU</h3>
+    <h3>Live node graph surface on GPU-host</h3>
     <div class="tools">:8188 · DreamShaper_8 + IPAdapter FaceID PLUS V2 · role label gpu-host</div>
   </div>
   <div class="shot">
@@ -266,7 +266,7 @@
   <div class="sausage">
     <div><span class="k">path:</span> <span class="path">docs/assets/capabilities/panels/01-wide.jpg … 06-outdoor.jpg</span></div>
     <div class="prompt"><span class="k">prompt (wide):</span> cinematic storyboard panel, wide shot classroom-like tech meetup, same man as reference selfie… handwritten black marker 'ceo' on forehead when forehead visible…</div>
-    <div class="tool"><span class="k">tool:</span> mrgpu_comfy_faceid_storyboard · DreamShaper_8 + faceid-plusv2 · QQQ0 · scripts/regen_ceo_capability_assets.py</div>
+    <div class="tool"><span class="k">tool:</span> gpu_comfy_faceid_storyboard · DreamShaper_8 + faceid-plusv2 · QQQ0 · scripts/regen_ceo_capability_assets.py</div>
   </div>
 </section>
 
@@ -299,7 +299,7 @@
   <div class="sausage">
     <div><span class="k">path:</span> <span class="path">docs/assets/hero-prompt-to-product.jpg</span></div>
     <div class="prompt"><span class="k">compose:</span> 6 FaceID panels + AD strip frame in video chrome · brand mok-tua · storyboard · animate · teach</div>
-    <div class="tool"><span class="k">tool:</span> mrgpu_ceo_hero_compose · QQQ0 · receipt docs/assets/receipts/hero-prompt-to-product.receipt.json</div>
+    <div class="tool"><span class="k">tool:</span> gpu_ceo_hero_compose · QQQ0 · receipt docs/assets/receipts/hero-prompt-to-product.receipt.json</div>
   </div>
 </section>
 
@@ -315,7 +315,7 @@
   <div class="sausage">
     <div><span class="k">path:</span> <span class="path">docs/assets/example-face-polish.jpg</span></div>
     <div class="prompt"><span class="k">prompt:</span> portrait photo polish of same man as reference selfie… handwritten black marker ceo on forehead… navy backdrop · denoise=0.42</div>
-    <div class="tool"><span class="k">tool:</span> mrgpu_comfy_faceid_face_polish · QQQ0 · receipt docs/assets/receipts/example-face-polish.receipt.json</div>
+    <div class="tool"><span class="k">tool:</span> gpu_comfy_faceid_face_polish · QQQ0 · receipt docs/assets/receipts/example-face-polish.receipt.json</div>
   </div>
 </section>
 
@@ -323,7 +323,7 @@
 <section class="card">
   <div class="card-head">
     <div class="cap-tag video">7 · short loop (AnimateDiff + FaceID)</div>
-    <h3>Frame strip from MRGPU short loop · not cloud Grok</h3>
+    <h3>Frame strip from GPU-host short loop · not cloud Grok</h3>
   </div>
   <div class="shot">
     <img src="../ceo-i2v-frame-strip.jpg" alt="AnimateDiff frame strip" />
@@ -331,7 +331,7 @@
   <div class="sausage">
     <div><span class="k">path:</span> <span class="path">docs/assets/ceo-i2v-frame-strip.jpg</span></div>
     <div class="prompt"><span class="k">prompt:</span> short loop of CEO face · subtle head motion and blink · dual monitor glow · coherent face</div>
-    <div class="tool"><span class="k">tool:</span> mrgpu_comfy_faceid_animatediff · mm_sd_v15_v2 · FaceID PLUS V2 · QQQ0 · NOT Grok Imagine</div>
+    <div class="tool"><span class="k">tool:</span> gpu_comfy_faceid_animatediff · mm_sd_v15_v2 · FaceID PLUS V2 · QQQ0 · NOT Grok Imagine</div>
   </div>
 </section>
 
@@ -348,7 +348,7 @@
   <div class="sausage">
     <div><span class="k">path:</span> <span class="path">docs/assets/capabilities/ui/ui-framepack.png</span></div>
     <div class="prompt"><span class="k">UI fields:</span> drop 00-ceo-source-still · prompt e.g. “subtle head motion and blink, same person, handwritten ceo on forehead”</div>
-    <div class="tool"><span class="k">tool:</span> FramePack Studio Gradio · shared /mnt/ai-data/models · renderer mrgpu_framepack_i2v · receipt docs/assets/receipts/framepack_ceo_i2v.receipt.json (artifact_ok pending)</div>
+    <div class="tool"><span class="k">tool:</span> FramePack Studio Gradio · shared /mnt/ai-data/models · renderer gpu_framepack_i2v · receipt docs/assets/receipts/framepack_ceo_i2v.receipt.json (artifact_ok pending)</div>
   </div>
 </section>
 
@@ -372,7 +372,7 @@
 <div class="footer">
   mok-tua <strong>v0.5.7</strong> · smoke: docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md ·
   stamp: docs/reports/capability_stamp_0.5.7.json ·
-  law: Grok I2V ≠ MRGPU local · public flip human-only ·
+  law: Grok I2V ≠ local GPU · public flip human-only ·
   storage: hot scratch local SSD → promote finals to /ai-data · bees settled only
 </div>
 

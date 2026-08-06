@@ -1,29 +1,29 @@
 {
   "version": 2,
   "updated": "2026-08-02",
-  "description": "mok-tua hybrid: M4RV Headroom + SM Comfy stills; MRGPU video; cloud overflow via QQQ providers (Grok Imagine, Nano Banana, Seedance earmark).",
+  "description": "mok-tua hybrid: desk-host Headroom + SM Comfy stills; GPU-host video; cloud overflow via QQQ providers (Grok Imagine, Nano Banana, Seedance earmark).",
   "model_pool": {
-    "M4RV": "/Volumes/ai-data/models",
-    "MRGPU": "/mnt/ai-data/models",
+    "desk-host": "/Volumes/ai-data/models",
+    "GPU-host": "/mnt/ai-data/models",
     "TOWER": "/mnt/ai-data/models"
   },
   "endpoints": {
-    "m4rv": {
-      "host": "m4rv",
+    "desk-host": {
+      "host": "desk-host",
       "label": "Mac SM ComfyUI (live)",
       "base_url": "http://127.0.0.1:8188",
       "role": "image",
       "mode": "live"
     },
-    "mrgpu": {
-      "host": "mrgpu",
-      "label": "MRGPU ComfyUI (container or host runtime)",
+    "gpu-host": {
+      "host": "gpu-host",
+      "label": "GPU-host ComfyUI (container or host runtime)",
       "base_url": "http://gpu-host:8188",
       "role": "video",
       "mode": "remote"
     },
     "headroom": {
-      "host": "m4rv",
+      "host": "desk-host",
       "label": "Live Headroom / LiteLLM path",
       "base_url": "http://localhost:8787/v1",
       "role": "llm",
@@ -36,11 +36,11 @@
       "role": "cloud",
       "mode": "stub",
       "live_model": "manager-openrouter-free",
-      "note": "NEW LAW: MRGPU may use cloud compute for mok-tua overflow; never PHI auto-cloud"
+      "note": "NEW LAW: GPU-host may use cloud compute for mok-tua overflow; never PHI auto-cloud"
     },
-    "mrgpu_litellm": {
-      "host": "mrgpu",
-      "label": "MRGPU LiteLLM worker+cloud",
+    "gpu_litellm": {
+      "host": "gpu-host",
+      "label": "GPU-host LiteLLM worker+cloud",
       "base_url": "http://gpu-host:4000/v1",
       "role": "llm_worker_cloud",
       "mode": "live"
@@ -56,12 +56,12 @@
   },
   "routing": {
     "script_to_shots": "headroom",
-    "image-gen": "m4rv",
-    "character-sheet": "m4rv",
-    "storyboard-panel": "m4rv",
-    "video-gen": "mrgpu",
-    "i2v": "mrgpu",
-    "talking-avatar": "mrgpu",
+    "image-gen": "desk-host",
+    "character-sheet": "desk-host",
+    "storyboard-panel": "desk-host",
+    "video-gen": "gpu-host",
+    "i2v": "gpu-host",
+    "talking-avatar": "gpu-host",
     "cloud-overflow": "mock_cloud"
   },
   "defaults": {
@@ -76,13 +76,13 @@
   "still_providers": {
     "local_sd_minimal": {
       "type": "local_comfy",
-      "host": "m4rv",
+      "host": "desk-host",
       "workflow_pin": "minimal_still",
       "qqq": ["QQQ0", "QQQ1", "QQQ3"]
     },
     "local_qwen_edit": {
       "type": "local_comfy",
-      "host": "m4rv",
+      "host": "desk-host",
       "workflow_pin": "qwen_next_scene_angles",
       "requires_models": [
         "Qwen-Image-Edit-2509",
@@ -112,14 +112,14 @@
   "video_providers": {
     "local_wan": {
       "type": "local_comfy",
-      "host": "mrgpu",
+      "host": "gpu-host",
       "workflow_pin": "wan22_animate",
       "qqq": ["QQQ0", "QQQ1", "QQQ3"],
       "status": "pin_pending"
     },
     "local_animatediff": {
       "type": "local_comfy",
-      "host": "mrgpu",
+      "host": "gpu-host",
       "workflow_pin": "animatediff_basic",
       "qqq": ["QQQ0", "QQQ1"],
       "status": "smoke_ok_2026-08-05",
@@ -127,7 +127,7 @@
     },
     "local_framepack": {
       "type": "local_framepack",
-      "host": "mrgpu",
+      "host": "gpu-host",
       "provider_id": "framepack_studio",
       "port": 7864,
       "bind": "0.0.0.0",
@@ -152,8 +152,8 @@
     }
   },
   "outputs": {
-    "work_root_M4RV": "/Volumes/ai-data/work/story-anim",
-    "work_root_MRGPU": "/mnt/ai-data/work/story-anim",
+    "work_root_DESK": "/Volumes/ai-data/work/story-anim",
+    "work_root_GPU": "/mnt/ai-data/work/story-anim",
     "local_fallback": "./work"
   },
   "still_defaults": {
@@ -175,12 +175,12 @@
     "minimal_still": {
       "type": "inline",
       "builder": "build_minimal_still_graph",
-      "host": "m4rv",
+      "host": "desk-host",
       "tags": ["sd", "still", "storyboard"]
     },
     "qwen_next_scene_angles": {
       "path": "workflows/qwen_next_scene_angles.api.json",
-      "host": "m4rv",
+      "host": "desk-host",
       "builder": "qwen_edit_storyboard",
       "tags": ["qwen", "edit", "next-scene", "multi-angle", "storyboard"],
       "status": "locked",
@@ -194,47 +194,47 @@
     },
     "character_sheet": {
       "path": "/Volumes/ai-data/stability-matrix/mac-Data/Workflows/workflow-flux-consistent-character-sheet-oSEKBwDLvkt9rHMfdU1b-reverentelusarca-openart.ai.json",
-      "host": "m4rv",
+      "host": "desk-host",
       "tags": ["flux", "character", "image"],
       "status": "external"
     },
     "photo_to_video": {
       "path": "/Volumes/ai-data/stability-matrix/mac-Data/Workflows/workflow-photo-to-video-make-your-images-move-LIxcxnDqGGS3WQQ6XCT7-neuralunk-openart.ai.json",
-      "host": "mrgpu",
+      "host": "gpu-host",
       "tags": ["i2v", "video"],
       "status": "external"
     },
     "wan22_animate": {
       "path": "/Volumes/ai-data/stability-matrix/mac-Data/Workflows/workflow-wan22-animate-workfow-comfyui-IhXSpaW4tGqX2xWwFV60-bbs_revenger-openart.ai.json",
-      "host": "mrgpu",
+      "host": "gpu-host",
       "tags": ["wan", "animate", "video"],
       "status": "external"
     },
     "talking_avatar_wan22": {
       "path": "/Volumes/ai-data/stability-matrix/mac-Data/Workflows/workflow-create-talking-avatar-using-wan-22-sound-to-video-model-tKc1vwOSUx0tRGGwFw7U-cgpixel_ai_art-openart.ai.json",
-      "host": "mrgpu",
+      "host": "gpu-host",
       "tags": ["wan", "avatar", "video", "audio"],
       "status": "external"
     },
     "animatediff_basic": {
       "path": "workflows/animatediff_basic.api.json",
-      "host": "mrgpu",
+      "host": "gpu-host",
       "tags": ["animatediff", "video", "fallback"],
       "status": "placeholder",
       "note": "Export AD Evolved API graph; models under models/animatediff/"
     },
     "ltx_fflf": {
       "path": "/Volumes/ai-data/stability-matrix/mac-Data/Packages/ComfyUI/user/default/workflows/LTX-2.3-FFLF.json",
-      "host": "mrgpu",
+      "host": "gpu-host",
       "tags": ["ltx", "video"],
       "status": "external"
     }
   },
   "integration_earmarks": {
-    "pinokio_mrgpu_staging": {
+    "pinokio_gpu_staging": {
       "status": "audited",
-      "path": "config/pinokio_mrgpu_staging.json",
-      "host": "mrgpu",
+      "path": "config/pinokio_gpu_staging.json",
+      "host": "gpu-host",
       "use": "Ranked audit gates for video, lipsync, voice, music, mocap, and body-animation Pinokio providers"
     },
     "director_stack_catalog": {
@@ -247,7 +247,7 @@
       "status": "locked",
       "path": "config/tier_lock_T0-T4.json",
       "mok_tua_version": "0.3.0",
-      "use": "Version pins + loading profiles (demo/full_local/video_mrgpu); smoke_ref under work/smoke/"
+      "use": "Version pins + loading profiles (demo/full_local/video_gpu); smoke_ref under work/smoke/"
     },
     "ask_packet_federation": {
       "status": "lab",
@@ -259,16 +259,16 @@
       "docs": "docs/ASK_PACKET_FEDERATION.md",
       "chain_id": "mok-tua-render",
       "pricing": "crowd_federated",
-      "use": "Johnny BOM + tier_lock join + CHAINS receipts; trusted m4rv/mrgpu/tower only; PHI unbroadcastable"
+      "use": "Johnny BOM + tier_lock join + CHAINS receipts; trusted desk-host/gpu-host/tower only; PHI unbroadcastable"
     },
     "comfy_robust_roster": {
       "status": "locked",
       "path": "config/comfy_nodes_mok_tua_roster.json",
       "docs": "docs/COMFY_ROBUST_NODES.md",
-      "install": "scripts/comfy_robust_install_mrgpu.sh",
+      "install": "scripts/comfy_robust_install_gpu.sh",
       "smoke": "scripts/smoke_comfy_robust.sh",
       "updated": "2026-08-02",
-      "use": "A-E packs + F install order + G outside-Comfy; disable avoid-list on MRGPU"
+      "use": "A-E packs + F install order + G outside-Comfy; disable avoid-list on GPU-host"
     },
     "directors_console": {
       "status": "live_spawned",

@@ -7,7 +7,7 @@
 #   - Outputs → /mnt/ai-data/work/framepack/outputs
 #   - Prefer --offline when hub snapshots already exist
 #
-# Usage (on MRGPU):
+# Usage (on GPU-host):
 #   bash scripts/run_framepack_shared_models.sh --install-deps   # SM GUI + CLI envs
 #   bash scripts/run_framepack_shared_models.sh --offline --server 0.0.0.0 --port 7865
 #   Stability Matrix Packages → Launch (uses package/venv → host-local SM 3.10)
@@ -27,7 +27,7 @@ HOST_SM_VENV="${HOST_SM_ENV_ROOT}/env"
 HOST_ENV_ROOT="${FRAMEPACK_HOST_ENV:-$HOME/pinokio-host-runtimes/framepack-linux-amd64}"
 HOST_VENV="${HOST_ENV_ROOT}/env"
 UV_BIN="${UV_BIN:-$HOME/.local/bin/uv}"
-UV_CACHE_DIR="${UV_CACHE_DIR:-/mnt/ai-data/uv-cache/mrgpu}"
+UV_CACHE_DIR="${UV_CACHE_DIR:-/mnt/ai-data/uv-cache/gpu-host}"
 export UV_CACHE_DIR
 export UV_LINK_MODE="${UV_LINK_MODE:-copy}"
 # Preferred shared work tree (NFS). Mac (uid 501) often creates 755 dirs Linux
@@ -286,7 +286,7 @@ fi
 
 PY="$(resolve_python)"
 if [[ -z "$PY" ]]; then
-  echo "ERROR: no FramePack venv. Run once on MRGPU:" >&2
+  echo "ERROR: no FramePack venv. Run once on GPU-host:" >&2
   echo "  bash $0 --install-deps" >&2
   echo "SM host env: $HOST_SM_VENV" >&2
   exit 1

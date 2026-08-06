@@ -1,13 +1,13 @@
-# MRGPU local render smoke — M.A.N.A.G.E.R. (2026-08-05)
+# local GPU render smoke — M.A.N.A.G.E.R. (2026-08-05)
 
 ## Clarification (prior vs this run)
 
 | Artifact | Renderer | GPU? | Notes |
 |----------|----------|------|-------|
-| **Prior** `manager_vibe_demo_hybrid_12s.mp4` | **Grok Imagine I2V** + ffmpeg | **No** (cloud + CPU) | Why you saw no MRGPU usage |
+| **Prior** `manager_vibe_demo_hybrid_12s.mp4` | **Grok Imagine I2V** + ffmpeg | **No** (cloud + CPU) | Why you saw no GPU-host usage |
 | **Prior** `manager_vibe_demo_local_kenburns.mp4` | **ffmpeg zoompan only** | **No** generative GPU | Pans static PNGs |
 | **Prior comic** `manager_updates_20260805T152028Z` | **ComfyUI DreamShaper_8** (local) | **Yes** (stills) | IPAdapter failed; face = prompt + optional FaceFusion strip |
-| **This run** `manager_mrgpu_local_render_20260805` | **ComfyUI on MRGPU** stills + **AnimateDiff** video | **Yes** | Receipt below |
+| **This run** `manager_gpu_local_render_20260805` | **ComfyUI on GPU-host** stills + **AnimateDiff** video | **Yes** | Receipt below |
 
 **Not used this run:** Grok Imagine, xAI cloud, session `image_to_video`.
 
@@ -18,7 +18,7 @@
 | Layer | Value |
 |-------|--------|
 | Conductor client | `mok-tua` `api.backends.comfy.ComfyClient` |
-| Program | **ComfyUI 0.29.0** on **MRGPU** |
+| Program | **ComfyUI 0.29.0** on **GPU-host** |
 | Device | `cuda:0 NVIDIA GeForce RTX 4060 Ti` |
 | PyTorch | `2.6.0+cu124` |
 | Still checkpoint | `DreamShaper_8_pruned.safetensors` |
@@ -30,7 +30,7 @@
 
 ## Story / plot (coherent M.A.N.A.G.E.R. arc)
 
-**Logline:** Developer runs the M.A.N.A.G.E.R. stack — mok-tua plans shots, Comfy paints stills on MRGPU, AnimateDiff makes short motion, smoke/receipts for public flip.
+**Logline:** Developer runs the M.A.N.A.G.E.R. stack — mok-tua plans shots, Comfy paints stills on GPU-host, AnimateDiff makes short motion, smoke/receipts for public flip.
 
 | Shot | ID | Beat |
 |------|-----|------|
@@ -51,7 +51,7 @@
 | ffmpeg kenburns of stills (CPU stitch only) | ~1 | **Not** generative GPU video |
 | **End-to-end total** | **~47.8** | receipt `wall_clock.total_seconds` |
 
-Timestamps (UTC) in `receipts/mrgpu_local_render.json`.
+Timestamps (UTC) in `receipts/gpu_local_render.json`.
 
 ---
 
@@ -73,15 +73,15 @@ See JSON fields `stills[].prompt` / `negative` / `seed` / `prompt_id`.
 
 | File | Role |
 |------|------|
-| `…/panels/s1_conductor.png` | MRGPU Comfy still |
-| `…/panels/s2_comfy_queue.png` | MRGPU Comfy still |
-| `…/panels/s3_ship_thumbs.png` | MRGPU Comfy still |
-| `…/clips/animatediff_manager_mrgpu_ad_00001.mp4` | **MRGPU AnimateDiff** generative video |
-| `…/clips/manager_mrgpu_stills_kenburns_cpu_stitch.mp4` | CPU preview of stills (labeled non-GPU) |
-| `…/receipts/mrgpu_local_render.json` | Full machine receipt |
+| `…/panels/s1_conductor.png` | GPU-host Comfy still |
+| `…/panels/s2_comfy_queue.png` | GPU-host Comfy still |
+| `…/panels/s3_ship_thumbs.png` | GPU-host Comfy still |
+| `…/clips/animatediff_manager_gpu_ad_00001.mp4` | **GPU-host AnimateDiff** generative video |
+| `…/clips/manager_gpu_stills_kenburns_cpu_stitch.mp4` | CPU preview of stills (labeled non-GPU) |
+| `…/receipts/gpu_local_render.json` | Full machine receipt |
 
 Staging root:  
-`/Volumes/ai-data/work/social-staging/2026-08/manager_mrgpu_local_render_20260805/`
+`/Volumes/ai-data/work/social-staging/2026-08/manager_gpu_local_render_20260805/`
 
 ---
 
@@ -96,7 +96,7 @@ Staging root:
 
 **Prior comic** used `face_ref` from `~/Downloads/my-circle-face.png` in **prompt text only** (IPAdapter timed out). FaceFusion strip pass improved faces on that comic, not on the Grok video.
 
-**Next for true likeness (local):** FaceFusion post-swap on these stills/clip using `face_ref.png`, or install IPAdapter FaceID weights on MRGPU and re-queue.
+**Next for true likeness (local):** FaceFusion post-swap on these stills/clip using `face_ref.png`, or install IPAdapter FaceID weights on GPU-host and re-queue.
 
 ---
 
@@ -111,4 +111,4 @@ Staging root:
 | Grok used | ❌ |
 | Wan Gradio ports | still offline (AnimateDiff used instead) |
 
-*Use this packet as the MRGPU evidence path for the 16:20 public story — not the Grok hybrid.*
+*Use this packet as the GPU-host evidence path for the 16:20 public story — not the Grok hybrid.*

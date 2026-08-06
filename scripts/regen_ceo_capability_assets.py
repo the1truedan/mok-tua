@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate CEO capability art on MRGPU Comfy with IPAdapter FaceID PLUS V2.
+"""Regenerate CEO capability art on GPU-host Comfy with IPAdapter FaceID PLUS V2.
 
 Identity seed: docs/assets/pres-smoke/00-ceo-source-still.jpg
 
@@ -41,7 +41,7 @@ try:
 except Exception:  # pragma: no cover
     sample_host = None  # type: ignore
 
-COMFY_URL = os.environ.get("COMFY_URL", os.environ.get("COMFY_MRGPU_URL", "http://gpu-host:8188")).rstrip("/")
+COMFY_URL = os.environ.get("COMFY_URL", os.environ.get("COMFY_GPU_URL", "http://gpu-host:8188")).rstrip("/")
 CKPT = os.environ.get("MOK_TUA_CKPT", "DreamShaper_8_pruned.safetensors")
 # Explicit loaders (Unified FaceID needs ViT-H filename pattern our pool lacks)
 FACEID_BIN = os.environ.get("MOK_TUA_FACEID_BIN", "ip-adapter-faceid-plusv2_sd15.bin")
@@ -408,7 +408,7 @@ def build_faceid_animatediff_graph(
 def sample_gpu() -> dict[str, Any]:
     if sample_host is not None:
         try:
-            s = sample_host("mrgpu")
+            s = sample_host("gpu-host")
             if s.get("ok"):
                 return s
         except Exception:
@@ -472,7 +472,7 @@ def collage_storyboard(panel_paths: list[Path], out_path: Path, labels: list[str
         label = labels[i] if i < len(labels) else p.stem
         draw.text((x + 8, y + cell_h + 8), label, fill=(30, 30, 30), font=font)
     cite = (
-        "mok-tua · MRGPU Comfy · DreamShaper_8 · IPAdapter FaceID PLUS V2 · "
+        "mok-tua · GPU-host Comfy · DreamShaper_8 · IPAdapter FaceID PLUS V2 · "
         "source 00-ceo-source-still · QQQ0"
     )
     draw.text((pad, H - 28), cite, fill=(80, 80, 80), font=font_sm)
@@ -513,7 +513,7 @@ def face_polish_sheet(before: Path, after: Path, out_path: Path) -> None:
     draw.text((28, 22), "BEFORE", fill=(255, 255, 255), font=font)
     draw.text((bw + 28, 22), "AFTER", fill=(255, 255, 255), font=font)
     cite = (
-        "mok-tua · MRGPU Comfy FaceID PLUS V2 · DreamShaper_8 · "
+        "mok-tua · GPU-host Comfy FaceID PLUS V2 · DreamShaper_8 · "
         "source 00-ceo-source-still · QQQ0"
     )
     draw.rectangle([0, bh - 36, bw * 2, bh], fill=(0, 0, 0))
@@ -562,7 +562,7 @@ def extract_frame_strip(mp4: Path, out_path: Path, n: int = 4) -> bool:
         font = ImageFont.load_default()
     draw.text(
         (8, h + 16),
-        "MRGPU AnimateDiff + FaceID PLUS V2 · DreamShaper_8 + mm_sd_v15_v2 · "
+        "GPU-host AnimateDiff + FaceID PLUS V2 · DreamShaper_8 + mm_sd_v15_v2 · "
         "CEO source · QQQ0 · not Grok cloud",
         fill=(180, 200, 220),
         font=font,
@@ -667,7 +667,7 @@ def compose_hero(panel_paths: list[Path], strip_or_panel: Path, out_path: Path) 
 
     draw.text((860, 500), "CEO identity from", fill=(160, 175, 200), font=font_sm)
     draw.text((860, 522), "00-ceo-source-still", fill=(200, 210, 230), font=font_sm)
-    draw.text((860, 548), "MRGPU · FaceID PLUS V2 · QQQ0", fill=(120, 140, 170), font=font_xs)
+    draw.text((860, 548), "GPU-host · FaceID PLUS V2 · QQQ0", fill=(120, 140, 170), font=font_xs)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     canvas.save(out_path, quality=92)
@@ -770,7 +770,7 @@ def main() -> int:
     wall_sb = time.time() - t_all
     rec_sb = build_receipt(
         sheet,
-        renderer="mrgpu_comfy_faceid_storyboard",
+        renderer="gpu_comfy_faceid_storyboard",
         provider="comfy",
         cloud_or_local="local",
         model=f"{CKPT}+{FACEID_BIN}",
@@ -833,7 +833,7 @@ def main() -> int:
     )
     rec_fp = build_receipt(
         polish_out,
-        renderer="mrgpu_comfy_faceid_face_polish",
+        renderer="gpu_comfy_faceid_face_polish",
         provider="comfy",
         cloud_or_local="local",
         model=f"{CKPT}+{FACEID_BIN}",
@@ -900,7 +900,7 @@ def main() -> int:
                     )
                     rec_ad = build_receipt(
                         ad_mp4 if ad_mp4.is_file() else strip,
-                        renderer="mrgpu_comfy_faceid_animatediff",
+                        renderer="gpu_comfy_faceid_animatediff",
                         provider="comfy",
                         cloud_or_local="local",
                         model=f"{CKPT}+mm_sd_v15_v2.fp16+{FACEID_BIN}",
@@ -921,7 +921,7 @@ def main() -> int:
                         write_receipt(
                             build_receipt(
                                 strip,
-                                renderer="mrgpu_comfy_faceid_animatediff_frame_strip",
+                                renderer="gpu_comfy_faceid_animatediff_frame_strip",
                                 provider="comfy",
                                 cloud_or_local="local",
                                 model=f"{CKPT}+mm_sd_v15_v2.fp16+{FACEID_BIN}",
@@ -957,7 +957,7 @@ def main() -> int:
         write_receipt(
             build_receipt(
                 hero,
-                renderer="mrgpu_ceo_hero_compose",
+                renderer="gpu_ceo_hero_compose",
                 provider="compose+comfy_faceid",
                 cloud_or_local="local",
                 model=f"{CKPT}+{FACEID_BIN}",

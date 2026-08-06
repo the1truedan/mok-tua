@@ -2,7 +2,7 @@
   "schema": "mok_tua.pinokio_staging.v1",
   "generated_at": "2026-08-04T00:45:00Z",
   "host": {
-    "id": "mrgpu",
+    "id": "gpu-host",
     "address": "gpu-host",
     "gpu": "NVIDIA GeForce RTX 4060 Ti 16GB",
     "pinokio_version": "8.0.40",

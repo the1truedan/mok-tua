@@ -84,7 +84,7 @@ True **320×200 framebuffer** remains the screenshot canvas; the live TUI uses t
 ### Provenance (screenshots / clips)
 
 ```bash
-python3 scripts/mok_tua_cli.py receipt stamp PATH --renderer mrgpu_comfy_animatediff \
+python3 scripts/mok_tua_cli.py receipt stamp PATH --renderer gpu_comfy_animatediff \
   --qqq QQQ0 --prompt "…" --model DreamShaper_8 --wall-clock-s 48
 # optional burn-in caption bar:
 python3 scripts/mok_tua_cli.py receipt stamp PATH --renderer … --burn-caption

@@ -17,7 +17,7 @@ PHI and private paths stay local.
 | S0 | `doctor`, provider roster, Headroom/LiteLLM health | JSON status | all required local services explicit |
 | S1 | sample Markdown/PDF sides parse | shot ledger | deterministic scenes/shots |
 | S2 | one small local still | 512px PNG + receipt | submit/poll/collect and hash match |
-| S3 | one short I2V/video clip on MRGPU | low-frame MP4 + receipt | provider adapter proves status and output |
+| S3 | one short I2V/video clip on GPU-host | low-frame MP4 + receipt | provider adapter proves status and output |
 | S4 | one short TTS/audio bed | WAV/MP3 + receipt | normalized audio metadata and hash |
 | S5 | resume/retry with same run ID | ledger diff | idempotent and no duplicate publication |
 | S6 | public example packaging | redacted manifest | no PHI/secrets/private paths |
@@ -38,7 +38,7 @@ receipt beside the redacted asset.
 ## Creative lane sequence
 
 1. local still (small graph, QQQ0);
-2. still → short I2V on MRGPU;
+2. still → short I2V on GPU-host;
 3. same shot ledger → short voice/audio bed;
 4. package a storyboard sheet plus receipts;
 5. only then test optional cloud providers with explicit QQQ and public-safe

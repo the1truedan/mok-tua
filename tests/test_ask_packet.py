@@ -80,8 +80,8 @@ class AskPacketTests(unittest.TestCase):
         res = award.award_packet(pkt, dry_run=True)
         self.assertTrue(res["ok"], res)
         self.assertIsNotNone(res.get("winner"))
-        # still prefers m4rv or mrgpu
-        self.assertIn(res["winner"]["id"], {"m4rv", "mrgpu", "tower"})
+        # still prefers desk-host or gpu-host
+        self.assertIn(res["winner"]["id"], {"desk-host", "gpu-host", "tower"})
 
     def test_internal_not_untrusted(self) -> None:
         import ask_packet

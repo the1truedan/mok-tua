@@ -51,7 +51,7 @@ Probes use the operator lab; public docs only name **roles**.
 | freemocap / cogstudio / dreamtalk | present in catalog |
 
 Affinity catalog (51 apps): control-repo `data/catalog/pinokio_api_host_affinity_2026-08-05.json`  
-Counts: mac_metal 5 · mrgpu_cuda 12 · either 22 · deferred 12.
+Counts: mac_metal 5 · gpu_cuda 12 · either 22 · deferred 12.
 
 ---
 

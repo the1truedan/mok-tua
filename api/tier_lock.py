@@ -26,7 +26,7 @@ DEFAULT_LOADING = {
         "tts_story",
         "facefusion",
     ],
-    "video_mrgpu": ["sm_comfy", "wan2gp"],
+    "video_gpu": ["sm_comfy", "wan2gp"],
     "face": ["facefusion", "dreamtalk"],
     "audio": ["ace_step", "tts_story"],
     "body": ["freemocap"],
@@ -139,11 +139,11 @@ def write_lock(
         "locked_at": _utc(),
         "mok_tua_version": MOK_TUA_VERSION,
         "host_profiles": host_profiles or {
-            "m4rv": {"role": "stills", "comfy": COMFY_HINT_LOCAL()},
-            "mrgpu": {
+            "desk-host": {"role": "stills", "comfy": COMFY_HINT_LOCAL()},
+            "gpu-host": {
                 "role": "video",
-                "host": os.environ.get("MRGPU_HOST", "gpu-host"),
-                "comfy_url": os.environ.get("COMFY_MRGPU_URL", "http://gpu-host:8188"),
+                "host": os.environ.get("GPU_HOST", "gpu-host"),
+                "comfy_url": os.environ.get("COMFY_GPU_URL", "http://gpu-host:8188"),
                 "gpu": "RTX 4060 Ti 16G",
             },
         },

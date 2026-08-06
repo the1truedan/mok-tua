@@ -21,7 +21,7 @@ class ArtifactReceiptTests(unittest.TestCase):
             p.write_bytes(b"\x89PNG\r\n\x1a\n" + b"\x00" * 32)
             rec = artifact_receipt.build_receipt(
                 p,
-                renderer="mrgpu_comfy_animatediff",
+                renderer="gpu_comfy_animatediff",
                 model="DreamShaper_8",
                 host_role="gpu-host",
                 qqq="QQQ0",
@@ -34,12 +34,12 @@ class ArtifactReceiptTests(unittest.TestCase):
             self.assertEqual(rec["schema"], artifact_receipt.SCHEMA)
             self.assertEqual(rec["artifact"]["kind"], "image")
             self.assertTrue(rec["artifact"]["sha256"])
-            self.assertIn("mrgpu_comfy_animatediff", rec["caption_line"])
+            self.assertIn("gpu_comfy_animatediff", rec["caption_line"])
             self.assertIn("gpu-host", rec["caption_line"])
             side = artifact_receipt.write_receipt(rec, chain=False)
             self.assertTrue(side.is_file())
             loaded = artifact_receipt.load_receipt(p)
-            self.assertEqual(loaded["renderer"], "mrgpu_comfy_animatediff")
+            self.assertEqual(loaded["renderer"], "gpu_comfy_animatediff")
 
     def test_redact_unknown_host(self) -> None:
         with tempfile.TemporaryDirectory() as td:
@@ -49,7 +49,7 @@ class ArtifactReceiptTests(unittest.TestCase):
                 p,
                 renderer="grok_imagine_i2v",
                 cloud_or_local="cloud",
-                host_role="gpu-host",
+                host_role="unknown-lab-box",
                 qqq="QQQ1",
             )
             self.assertEqual(rec["host_role"], "host-redacted")

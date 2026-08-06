@@ -27,7 +27,7 @@ That is the opposite of “AI afficionado” posting: no unearned jargon parade,
 | Someone who can use GitHub and run a CLI | Someone who already knows Headroom, CHAINS, QQQ, pterm |
 | Short sentences, concrete verbs | Stack acronyms without a one-line gloss |
 | What it does → why it helps → how to try | Capability matrices as the first paragraph |
-| Honest skips (“this path is cloud”) | Vibes that hide provenance (see I2V Grok vs MRGPU incident) |
+| Honest skips (“this path is cloud”) | Vibes that hide provenance (see I2V Grok vs local GPU incident) |
 
 **Lab-private docs** (ops handoffs, receipts, gamut reports) keep full jargon.  
 **Public-facing** README intro, GH Release body, and social captions get a **wait-what pass** before publish.
@@ -88,6 +88,6 @@ Prefer **wait-what** for GitHub *human* front door. Do not paste agent handoff t
 ## Related
 
 - `docs/PUBLIC_RELEASE_PROTECT_BRANCH_2026-08-05.md`  
-- `docs/operations/I2V_GROK_VS_MRGPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md`  
+- `docs/operations/I2V_GROK_VS_LOCAL_GPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md`  
 - `HANDOFF.md` · `TODO.md` P2 item  
 - Upstream license: see repo LICENSE before redistributing skill text  

@@ -7,7 +7,7 @@
     "kind": "image",
     "exists": true
   },
-  "renderer": "mrgpu_ceo_hero_compose_v2",
+  "renderer": "gpu_ceo_hero_compose_v2",
   "provider": "compose+comfy_faceid",
   "cloud_or_local": "local",
   "model": "DreamShaper_8+faceid-plusv2",
@@ -28,7 +28,7 @@
   "gpu_evidence": null,
   "sampled_by": "manual",
   "ts_utc": "2026-08-06T02:01:17Z",
-  "caption_line": "mrgpu_ceo_hero_compose_v2 \u00b7 DreamShaper_8+faceid-plusv2 \u00b7 gpu-host \u00b7 ? \u00b7 n/a \u00b7 gpu ? \u00b7 QQQ0",
+  "caption_line": "gpu_ceo_hero_compose_v2 \u00b7 DreamShaper_8+faceid-plusv2 \u00b7 gpu-host \u00b7 ? \u00b7 n/a \u00b7 gpu ? \u00b7 QQQ0",
   "extra": {
     "player_source": "capabilities/panels/03-closeup.jpg",
     "fix": "removed glitched multi-frame strip crop that showed black blade on forehead",
