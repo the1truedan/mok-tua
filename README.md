@@ -3,7 +3,7 @@
 **Turn a script into storyboard pictures — and, when you want, short video — on machines you own.**
 
 Local-first creative control desk for M.A.N.A.G.E.R.  
-Hybrid **v0.5** · private GitHub · MIT
+Hybrid **v0.5.6** · private GitHub · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md)
 
 [![Linktree](https://img.shields.io/badge/Linktree-the1truedan-43E55E?style=flat&logo=linktree&logoColor=white)](https://linktr.ee/the1truedan)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support-FF5E5B?style=flat&logo=ko-fi&logoColor=white)](https://ko-fi.com/the1truedan)
@@ -96,11 +96,20 @@ That identity is the only face in these mockups — COMDEX keynote, functions bo
 
 Folder: [`docs/assets/pres-smoke/`](docs/assets/pres-smoke/) · reuse `00-ceo-source-still.jpg` as LoadImage for live Comfy/Wan experiments.
 
-### Other illustrative outputs
+### Other illustrative outputs (gpu-host · CEO identity · cited)
 
-| Stills (generic instructor sheet) | Face polish look |
-|-----------------------------------|------------------|
-| <img src="docs/assets/example-storyboard-sheet.jpg" alt="Six-panel instructor storyboard" width="420" /> | <img src="docs/assets/example-face-polish.jpg" alt="Portrait polish before/after style" width="420" /> |
+Regenerated on **gpu-host Comfy** from `pres-smoke/00-ceo-source-still.jpg` (2026-08-05).  
+Receipts: [`docs/assets/receipts/`](docs/assets/receipts/).
+
+| Storyboard (hybrid DreamShaper_8) | Face polish (img2img denoise≈0.28) |
+|-----------------------------------|--------------------------------------|
+| <img src="docs/assets/example-storyboard-sheet.jpg" alt="Six-panel CEO storyboard from gpu-host Comfy" width="420" /> | <img src="docs/assets/example-face-polish.jpg" alt="CEO face polish before source still after Comfy refine" width="420" /> |
+
+| AnimateDiff short-loop strip (not cloud Grok) | Conductor TUI (PETSCII boot → two-pane) |
+|-----------------------------------------------|----------------------------------------|
+| <img src="docs/assets/ceo-i2v-frame-strip.jpg" alt="gpu-host AnimateDiff frame strip" width="420" /> | <img src="docs/assets/mokup-c64-tui-live.png" alt="mok-tua C64 TUI two-pane deck" width="420" /> |
+
+<p align="center"><em>renderer · model · host_role · QQQ0 · gpu_evidence on each receipt — never claim cloud I2V as local GPU.</em></p>
 
 ---
 
@@ -118,26 +127,27 @@ Folder: [`docs/assets/pres-smoke/`](docs/assets/pres-smoke/) · reuse `00-ceo-so
 | **ACE-Step / TTS-Story** | Music beds & spoken lines | Audio tier tools |
 | **Grok Imagine / Nano Banana** | Optional paid/cloud stills | Only with keys + privacy gate |
 
-### Capability collage (annotated)
+### Capability collage (accurate workflow · v0.5.6)
 
-C64 conductor strip on top · **full uncropped** complex graphs · one Drive **source still** for storyboard angles + image→video · real Director’s Console chrome · tier stand-ins for voice/body.
+**One CEO source still** → conductor TUI → gpu-host storyboard / face polish / AnimateDiff loop · vendor graphs labeled as *family examples* when not this run.
 
 <p align="center">
-  <img src="docs/assets/products-capabilities.png" alt="Annotated collage: C64 TUI, Drive source still for I2V/storyboard, complex Comfy image graph, complex Wan I2V video graph, director, voice, movement" width="900" />
+  <img src="docs/assets/products-capabilities.png" alt="Accurate capability map: CEO source still, C64 TUI, gpu-host storyboard, face polish, AnimateDiff strip, vendor I2V graph family" width="900" />
 </p>
 
-| # | Capability | What you see | Tool surface mok-tua talks to |
-|---|------------|--------------|-------------------------------|
-| 0 | **Source still** | Drive identity still → storyboard crops → I2V | Same subject across shots (`vendor/drive-source-still-i2v.jpg`) |
-| — | **Conductor** (top) | C64-themed TUI + GUI options | `tui --skin c64` · CLI · API `:8799` |
-| 1 | **Image gen** | **Complex still graph** (2-pass hires / latent upscale) | ComfyUI image workflow — not the templates gallery |
-| 2 | **Video gen** | **Complex Wan I2V graph** + source still inset | Comfy Wan pin / GPU worker — different node family than stills |
-| 3 | **Director orchestration** | Director’s Console storyboard canvas | Peer GUI + mok-tua ledger / launches |
-| 4 | **Voice gen** | Audio tier (waveform stand-in) | ACE-Step · TTS-Story · Kokoro — Pinokio launch |
-| 5 | **Movement gen** | Same Drive still + mocap sketch | FaceFusion · LivePortrait · FreeMoCap |
+| # | Capability | What you see | Tool surface / citation |
+|---|------------|--------------|-------------------------|
+| 0 | **Source still** | Real `00-ceo-source-still.jpg` (not a crop montage) | LoadImage / prompt context |
+| — | **Conductor** | PETSCII boot → two-pane VIC-II stats | `tui --skin c64` · CLI · API `:8799` |
+| 1 | **Storyboard** | Regenerated CEO six-panel sheet | gpu-host Comfy DreamShaper_8 · receipt |
+| 2 | **Face polish** | BEFORE source · AFTER img2img refine | gpu-host Comfy · receipt |
+| 3 | **Short loop** | AnimateDiff frame strip (GPU 100%) | gpu-host ADE + VHS · not Grok cloud |
+| 4 | **I2V graph family** | Wan-style complex graph (vendor example) | Labeled *not this CEO run* |
+| 5 | **Still graph family** | Hiresfix complex graph (vendor) | Example only |
+| 6 | **Director desk** | Director’s Console chrome | Peer GUI + mok-tua ledger |
 
-Layouts use `object-fit: contain` so node graphs are **fully visible** (no crop).  
-Source HTML: [`docs/assets/mokups/capability-collage.html`](docs/assets/mokups/capability-collage.html).
+Source HTML: [`docs/assets/mokups/capability-collage.html`](docs/assets/mokups/capability-collage.html).  
+Smoke matrix: [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md).
 
 ---
 

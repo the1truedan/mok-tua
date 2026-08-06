@@ -51,10 +51,13 @@ Prefer these over generic generated faces when documenting “face locked throug
 | File | Use |
 |------|-----|
 | `hero-prompt-to-product.jpg` | README hero |
-| `products-capabilities.png` | **Annotated** capability collage (C64 strip + 5 lanes) — prefer this |
+| `products-capabilities.png` | **Accurate** workflow collage (CEO still → TUI → gpu-host stills/polish/loop) — prefer this |
 | `products-capabilities.jpg` | JPEG twin of the above |
-| `example-storyboard-sheet.jpg` | Example stills sheet |
-| `example-face-polish.jpg` | Face polish look |
+| `example-storyboard-sheet.jpg` | **gpu-host** CEO hybrid storyboard (replaces old instructor woman sheet) |
+| `example-face-polish.jpg` | **gpu-host** CEO img2img polish (BEFORE = source still) |
+| `ceo-i2v-frame-strip.jpg` | AnimateDiff frame strip from CEO short loop |
+| `mokup-c64-tui-live*.png` | Real TUI boot/deck documentation stills (0.5.5+) |
+| `receipts/*.receipt.json` | Provenance sidecars for regenerated assets |
 | `08-product-map.png` | Product map |
 | `concept-*.jpg` | Optional abstract metaphors (not substitutes for vendor UIs) |
 | `mokups/capability-collage.html` | Source for annotated collage (Chrome headless → PNG) |

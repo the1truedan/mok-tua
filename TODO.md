@@ -1,7 +1,7 @@
 # mok-tua TODO
 
 **Last updated:** 2026-08-05  
-**Version baseline:** **0.5.5** (TUI split + receipts; full-gamut packet was 0.5.4)  
+**Version baseline:** **0.5.6** (CEO gpu-host examples + collage; TUI 0.5.5; full-gamut 0.5.4)  
 **Visibility:** private until human go · see `docs/PUBLIC_RELEASE_PROTECT_BRANCH_2026-08-05.md`  
 **Handoff:** `docs/operations/SESSION_HANDOFF_2026-08-05_FULL_GAMUT_STAGED_SMOKE.md`
 
@@ -27,6 +27,7 @@
 | D14 | FramePack launch recipe + port map pushed private | `api/providers.py` · orchestration `local_framepack` |
 | D15 | Conductor TUI 0.5.5: PETSCII boot, two-pane, VIC-II stats, green/mono skins | `tui/` · INTERFACES |
 | D16 | Artifact receipt sidecar + optional burn-caption | `api/artifact_receipt.py` · CLI `receipt` |
+| D17 | CEO gpu-host storyboard + face polish + AD strip + accurate collage | 0.5.6 · smoke stamp |
 
 ---
 
