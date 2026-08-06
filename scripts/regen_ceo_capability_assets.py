@@ -625,26 +625,45 @@ def compose_hero(panel_paths: list[Path], strip_or_panel: Path, out_path: Path) 
         canvas.paste(im, (x, y))
         draw.text((x + 4, y + cell_h - 16), f"{i+1:02d}", fill=(80, 80, 80), font=font_xs)
 
-    # Player chrome
+    # Player chrome — ONE clean still only.
+    # Never paste a multi-frame AD strip (wide crop of glitched frames → black "blade" on forehead).
     px, py = 860, 200
     pw, ph = 360, 280
-    draw.rounded_rectangle([px - 6, py - 6, px + pw + 6, py + ph + 40], radius=14, fill=(18, 24, 36), outline=(240, 160, 60), width=2)
-    # content
+    draw.rounded_rectangle(
+        [px - 6, py - 6, px + pw + 6, py + ph + 40],
+        radius=14,
+        fill=(18, 24, 36),
+        outline=(240, 160, 60),
+        width=2,
+    )
     if strip_or_panel.is_file():
         im = Image.open(strip_or_panel).convert("RGB")
-        # if strip is wide, crop left frame-ish
-        if im.width > im.height * 1.5:
-            # use first portion
-            crop_w = int(im.height * pw / ph)
-            im = im.crop((0, 0, min(crop_w, im.width), im.height))
+        # Multi-frame strip → first frame cell only
+        if im.width > im.height * 1.8:
+            content_h = im.height - 48 if im.height > 100 else im.height
+            frame_w = max(1, (im.width - 8 * 5) // 4)
+            im = im.crop((8, 8, 8 + frame_w, 8 + max(1, content_h)))
+        # cover-crop to player aspect
+        target_ratio = pw / ph
+        ir = im.width / max(1, im.height)
+        if ir > target_ratio:
+            nh = im.height
+            nw = int(nh * target_ratio)
+            left = (im.width - nw) // 2
+            im = im.crop((left, 0, left + nw, nh))
+        else:
+            nw = im.width
+            nh = int(nw / target_ratio)
+            top = max(0, (im.height - nh) // 2 - nh // 10)
+            top = min(top, max(0, im.height - nh))
+            im = im.crop((0, top, nw, top + nh))
         im = im.resize((pw, ph), Image.Resampling.LANCZOS)
         canvas.paste(im, (px, py))
-    # play button
     cx, cy = px + pw // 2, py + ph // 2
-    draw.ellipse([cx - 32, cy - 32, cx + 32, cy + 32], fill=(240, 160, 60, 220))
+    draw.ellipse([cx - 32, cy - 32, cx + 32, cy + 32], fill=(240, 160, 60))
     draw.polygon([(cx - 10, cy - 16), (cx - 10, cy + 16), (cx + 18, cy)], fill=(20, 20, 24))
     draw.rectangle([px, py + ph, px + pw, py + ph + 28], fill=(12, 16, 24))
-    draw.text((px + 12, py + ph + 8), "00:04 / 00:02  ·  FaceID loop", fill=(180, 190, 210), font=font_xs)
+    draw.text((px + 12, py + ph + 8), "FaceID still · clean player", fill=(180, 190, 210), font=font_xs)
 
     draw.text((860, 500), "CEO identity from", fill=(160, 175, 200), font=font_sm)
     draw.text((860, 522), "00-ceo-source-still", fill=(200, 210, 230), font=font_sm)
@@ -932,7 +951,8 @@ def main() -> int:
         print("SKIP_HERO set")
     else:
         print("compose hero…")
-        hero_src = strip if strip.is_file() else (panel_paths[2] if panel_paths else SOURCE)
+        # Prefer FaceID closeup panel for player (never multi-frame AD strip → black-blade glitch)
+        hero_src = panel_paths[2] if len(panel_paths) > 2 else (panel_paths[0] if panel_paths else SOURCE)
         compose_hero(panel_paths, hero_src, hero)
         write_receipt(
             build_receipt(
