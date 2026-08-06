@@ -1,0 +1,37 @@
+{
+  "schema": "mok_tua_artifact_receipt.v1",
+  "artifact": {
+    "path": "/Users/dtm/mok-tua/docs/assets/capabilities/panels/01-wide.jpg",
+    "name": "01-wide.jpg",
+    "sha256": "ea5e7bdab0e42ebbee8923646fb29fd6aad5f657e11f7b19a0b477ed576a57f6",
+    "kind": "image",
+    "exists": true
+  },
+  "renderer": "mrgpu_comfy_ipadapter_plusface_img2img",
+  "provider": "comfy",
+  "cloud_or_local": "local",
+  "model": "DreamShaper_8_pruned.safetensors+ip-adapter-plus-face_sd15.safetensors",
+  "host_role": "gpu-host",
+  "qqq": "QQQ0",
+  "prompt": "cinematic storyboard panel, wide shot tech meetup classroom, same man as the reference selfie photo, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker letters spelling ceo on forehead (not hearts, not doodles), blue hoodie, standing by projector showing mok-tua, audience laptops, natural light, 35mm photo",
+  "negative_prompt": null,
+  "seed": null,
+  "wall_clock_s": 4.55,
+  "tokens": {
+    "input": null,
+    "output": null,
+    "total": null,
+    "note": "n/a"
+  },
+  "gpu": {},
+  "cpu": {},
+  "gpu_evidence": null,
+  "sampled_by": "manual",
+  "ts_utc": "2026-08-06T01:25:27Z",
+  "caption_line": "mrgpu_comfy_ipadapter_plusface_img2img \u00b7 DreamShaper_8_pruned.safetensors+ip-adapter-plus-face_sd15.safetensors \u00b7 gpu-h\u2026",
+  "extra": {
+    "seed": 43000,
+    "denoise": 0.52,
+    "faceid_insightface": "residual_incomplete"
+  }
+}

@@ -3,6 +3,31 @@
 All notable changes to **mok-tua** are documented here.  
 Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are local lab (America/New_York context).
 
+## [0.5.7] — 2026-08-05
+
+### Added
+
+- **Transparency capability poster** (`products-capabilities.png`): vertical stack of **individual**
+  real cards with path + prompt/command under each photo (not faux multi-app promo).
+- **IRL UI captures** under `docs/assets/capabilities/ui/`: PETSCII boot, two-pane deck, CLI REPL,
+  ComfyUI, FramePack Gradio, Director’s Console.
+- **Individual storyboard panels** `docs/assets/capabilities/panels/01–06-*.jpg` + per-panel receipts.
+- Regen script: `scripts/regen_ceo_ipadapter_panels_0_5_7.py` (IPAdapter plus-face img2img on MRGPU).
+- Smoke stamp: `docs/reports/capability_stamp_0.5.7.json`.
+
+### Changed
+
+- CEO storyboard + face polish re-rendered via **ip-adapter-plus-face_sd15** + img2img from
+  `00-ceo-source-still.jpg` (forehead “ceo” preserved on polish).
+- README capability section documents sausage-made captions and 0.5.7 tested set.
+- Package TUI version **0.5.7**.
+
+### Honest residuals
+
+- InsightFace **FaceID** (buffalo_l incomplete / antelope loader error) — not claimed; plus-face path used.
+- Storyboard panels remain face-weighted (wide scene variety limited without full FaceID).
+- FramePack mp4 `artifact_ok` finalize · Wan live ports · Director backends registry empty · InstantID.
+
 ## [0.5.6] — 2026-08-05
 
 ### Added
@@ -26,7 +51,7 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
 
 ### Honest limits
 
-- IPAdapter FaceID weights now staged on shared pool (see ops IPADAPTER doc); InstantID residual open.
+- IPAdapter FaceID weights staged; InsightFace FaceID residual (see 0.5.7).
 - Pres-smoke 01–04 still route-unknown mocks (unchanged).
 - FramePack UI I2V mp4 finalize and Wan live ports remain pending / honest skip.
 

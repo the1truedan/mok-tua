@@ -1,9 +1,9 @@
 # mok-tua TODO
 
 **Last updated:** 2026-08-05  
-**Version baseline:** **0.5.6** (CEO MRGPU examples + collage; TUI 0.5.5; full-gamut 0.5.4)  
+**Version baseline:** **0.5.7** (transparency poster · IPAdapter plus-face · fixed PETSCII · IRL UIs)  
 **Visibility:** private until human go · see `docs/PUBLIC_RELEASE_PROTECT_BRANCH_2026-08-05.md`  
-**Handoff:** `docs/operations/SESSION_HANDOFF_2026-08-05_0.5.6_IDENTITY_FRAMEPACK_PUSH.md` · `HANDOFF.md`
+**Handoff:** `HANDOFF.md` · smoke `docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`
 
 ---
 
@@ -34,6 +34,8 @@
 | D21 | Render scratch vs ai-data vs bees law | `RENDER_SCRATCH_VS_AI_DATA_BEES` |
 | D22 | Hippo history + breakthrough milestones packet | `HIPPO_HISTORY_AND_BREAKTHROUGH_MILESTONES` |
 | D23 | Session handoff 0.5.6 identity/FramePack private push | `SESSION_HANDOFF_…_0.5.6_IDENTITY_FRAMEPACK_PUSH` |
+| D24 | 0.5.7 transparency poster + IPAdapter plus-face panels + IRL UIs | `products-capabilities.png` · `capabilities/` · stamp 0.5.7 |
+| D25 | PETSCII boot glyph fix + inverse loader (CLI/Textual) | `tui/petscii.py` · themes · `ui-tui-boot.png` |
 
 ---
 
@@ -46,7 +48,7 @@
 | **1** | FramePack **finalize mp4** + receipt `artifact_ok: true` (`renderer: mrgpu_framepack_i2v`) | GPU sampling already observed · capture/promote from local SSD |
 | **2** | If hub incomplete: one intentional `FRAMEPACK_ALLOW_DOWNLOAD=1` seed into **shared** hub only | never package-local HF tree |
 | **3** | Wan 2.2 / Wan2GP **one-clip I2V** when ports/adapters live | honest skip until Wan ports up (not FramePack 7864) |
-| **4** | W0 residual: InstantID; FaceFusion CUDA polish | FaceID bins already live · Comfy lists |
+| **4** | W0 residual: complete InsightFace buffalo_l/antelope for true FaceID; InstantID; FaceFusion CUDA | plus-face path live · FaceID InsightFace residual |
 | **4b** | Director: register Comfy backend in UI | `/api/backends` currently `[]` |
 
 ### P1 — conductor + social

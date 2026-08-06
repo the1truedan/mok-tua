@@ -3,37 +3,35 @@
   "artifact": {
     "path": "/Users/dtm/mok-tua/docs/assets/example-face-polish.jpg",
     "name": "example-face-polish.jpg",
-    "sha256": "5785d4655d5d85b594bbb348c668fb05c4ee7c155109afb2dd260870d0f55775",
+    "sha256": "17dcec6625df3f742407e97b201b2bb7963491b3cea52bf6468b216bf5055b44",
     "kind": "image",
     "exists": true
   },
-  "renderer": "mrgpu_comfy_img2img_face_polish",
+  "renderer": "mrgpu_comfy_ipadapter_plusface_polish",
   "provider": "comfy",
   "cloud_or_local": "local",
-  "model": "DreamShaper_8_pruned.safetensors",
+  "model": "DreamShaper_8_pruned.safetensors+ip-adapter-plus-face_sd15.safetensors",
   "host_role": "gpu-host",
   "qqq": "QQQ0",
-  "prompt": "same person as reference selfie, same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, gentle studio portrait polish, natural freckles kept, reduce redness slightly, clean key light, navy soft backdrop, photoreal, NOT a different person",
+  "prompt": "portrait photo polish of same man as the reference selfie photo, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker letters spelling ceo on forehead (not hearts, not doodles), clean studio key light, subtle skin cleanup, natural pores retained, professional headshot, navy backdrop, same identity",
   "negative_prompt": null,
   "seed": null,
-  "wall_clock_s": 9.46,
+  "wall_clock_s": 5.92,
   "tokens": {
     "input": null,
     "output": null,
     "total": null,
-    "note": "n/a local comfy"
+    "note": "n/a"
   },
-  "gpu": {
-    "peak_util_pct": 3.0
-  },
+  "gpu": {},
   "cpu": {},
-  "gpu_evidence": "peak_util=3.0% host_role=gpu-host",
-  "sampled_by": "host_monitor",
-  "ts_utc": "2026-08-06T00:22:41Z",
-  "caption_line": "mrgpu_comfy_img2img_face_polish \u00b7 DreamShaper_8_pruned.safetensors \u00b7 gpu-host \u00b7 9.5s \u00b7 n/a local comfy \u00b7 GPU 3% \u00b7 QQQ0",
+  "gpu_evidence": null,
+  "sampled_by": "manual",
+  "ts_utc": "2026-08-06T01:25:51Z",
+  "caption_line": "mrgpu_comfy_ipadapter_plusface_polish \u00b7 DreamShaper_8_pruned.safetensors+ip-adapter-plus-face_sd15.safetensors \u00b7 gpu-ho\u2026",
   "extra": {
-    "denoise": 0.28,
     "before": "00-ceo-source-still.jpg",
-    "prompt_id": "282e86c3-b271-4455-9db0-92a68ed336ad"
+    "denoise": 0.32,
+    "version": "0.5.7"
   }
 }
