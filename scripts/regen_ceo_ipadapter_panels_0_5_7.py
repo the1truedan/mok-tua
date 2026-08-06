@@ -5,7 +5,7 @@ InsightFace FaceID residual: buffalo_l incomplete / antelope loader error on hos
 this path uses ip-adapter-plus-face_sd15 + clip_vision_h (no InsightFace).
 
 Usage:
-  COMFY_URL=http://REDACTED-LAN-IP:8188 python3 scripts/regen_ceo_ipadapter_panels_0_5_7.py
+  COMFY_URL=http://gpu-host:8188 python3 scripts/regen_ceo_ipadapter_panels_0_5_7.py
 """
 
 from __future__ import annotations
@@ -28,7 +28,7 @@ sys.path.insert(0, str(ROOT))
 from artifact_receipt import build_receipt, write_receipt  # noqa: E402
 from backends.comfy import ComfyClient  # noqa: E402
 
-COMFY_URL = os.environ.get("COMFY_URL", "http://REDACTED-LAN-IP:8188").rstrip("/")
+COMFY_URL = os.environ.get("COMFY_URL", "http://gpu-host:8188").rstrip("/")
 CKPT = os.environ.get("MOK_TUA_CKPT", "DreamShaper_8_pruned.safetensors")
 IP_FILE = "ip-adapter-plus-face_sd15.safetensors"
 CLIP_VISION = "clip_vision_h.safetensors"

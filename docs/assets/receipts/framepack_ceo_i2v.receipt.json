@@ -1,7 +1,7 @@
 {
   "schema": "mok_tua_artifact_receipt.v1",
   "artifact": {
-    "path": "/Users/redacted/mok-tua/work/ceo_capability_regen/framepack_i2v_status.json",
+    "path": "work/ceo_capability_regen/framepack_i2v_status.json",
     "name": "framepack_i2v_status.json",
     "sha256": "68d8b8cbe3f146b59fee735871d4bd3eca32ac3014a683de85690c711e21a154",
     "kind": "doc",

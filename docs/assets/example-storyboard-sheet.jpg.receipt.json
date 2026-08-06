@@ -1,7 +1,7 @@
 {
   "schema": "mok_tua_artifact_receipt.v1",
   "artifact": {
-    "path": "/Users/redacted/mok-tua/docs/assets/example-storyboard-sheet.jpg",
+    "path": "docs/assets/example-storyboard-sheet.jpg",
     "name": "example-storyboard-sheet.jpg",
     "sha256": "ccf02c7053f0645db623a0c81aca0d5d4acbd0b8848903dfcbce705689480a74",
     "kind": "image",

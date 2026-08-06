@@ -138,7 +138,7 @@ See full note: [`RENDER_SCRATCH_VS_AI_DATA_BEES_2026-08-05.md`](RENDER_SCRATCH_V
 
 ```text
 github   https://github.com/the1truedan/mok-tua.git     PRIVATE
-forgejo  http://REDACTED-LAN-IP:33333/the1truedan/mok-tua.git
+forgejo  <lab-forgejo>/the1truedan/mok-tua.git  # LAN URL local-only; not for public tree
 ```
 
 - Push **private** branch/main only with operator intent.  

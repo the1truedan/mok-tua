@@ -1,7 +1,7 @@
 {
   "schema": "mok_tua_artifact_receipt.v1",
   "artifact": {
-    "path": "/Users/redacted/mok-tua/docs/assets/example-face-polish.jpg",
+    "path": "docs/assets/example-face-polish.jpg",
     "name": "example-face-polish.jpg",
     "sha256": "100aac47eecd1e679e81ea41e4bcced7a234b24cf5d53cbf932d4605c5b66b83",
     "kind": "image",

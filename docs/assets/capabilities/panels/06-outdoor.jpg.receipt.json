@@ -1,7 +1,7 @@
 {
   "schema": "mok_tua_artifact_receipt.v1",
   "artifact": {
-    "path": "/Users/redacted/mok-tua/docs/assets/capabilities/panels/06-outdoor.jpg",
+    "path": "docs/assets/capabilities/panels/06-outdoor.jpg",
     "name": "06-outdoor.jpg",
     "sha256": "1268e373aa2b992a6350c7d747ff3b2c3b425989b019e8b0e752da4a050b5a9a",
     "kind": "image",

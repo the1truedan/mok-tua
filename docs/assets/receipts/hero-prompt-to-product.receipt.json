@@ -1,7 +1,7 @@
 {
   "schema": "mok_tua_artifact_receipt.v1",
   "artifact": {
-    "path": "/Users/redacted/mok-tua/docs/assets/hero-prompt-to-product.jpg",
+    "path": "docs/assets/hero-prompt-to-product.jpg",
     "name": "hero-prompt-to-product.jpg",
     "sha256": "1ed10b53e88e25ce8fa4102245f5ab16d48d5872285c53c5f753f61b702a48ba",
     "kind": "image",

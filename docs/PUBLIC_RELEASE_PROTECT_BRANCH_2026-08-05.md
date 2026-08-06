@@ -30,8 +30,8 @@ cd ~/mok-tua
 git remote -v
 # expect no userinfo; github + optional forgejo
 
-# final scrub gate
-rg -n '192\.168\.|/Users/redacted' $(git ls-files) && echo FAIL || echo scrub_ok
+# final scrub gate (hard FAIL if any absolute home path or RFC1918 IP)
+git grep -nE '192\.168\.|/Users/[A-Za-z0-9._-]+/' && echo FAIL || echo scrub_ok
 
 # FLIP — only after explicit operator “go”
 gh repo edit the1truedan/mok-tua --visibility public

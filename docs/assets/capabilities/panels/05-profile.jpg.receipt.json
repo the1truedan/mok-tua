@@ -1,7 +1,7 @@
 {
   "schema": "mok_tua_artifact_receipt.v1",
   "artifact": {
-    "path": "/Users/redacted/mok-tua/docs/assets/capabilities/panels/05-profile.jpg",
+    "path": "docs/assets/capabilities/panels/05-profile.jpg",
     "name": "05-profile.jpg",
     "sha256": "a9af07c804c0473f10d196bedc817ac95dcdbffb74b642a08e7477e35bda3f1c",
     "kind": "image",

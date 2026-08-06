@@ -1,7 +1,7 @@
 {
   "schema": "mok_tua_artifact_receipt.v1",
   "artifact": {
-    "path": "/Users/redacted/mok-tua/docs/assets/ceo-i2v-frame-strip.jpg",
+    "path": "docs/assets/ceo-i2v-frame-strip.jpg",
     "name": "ceo-i2v-frame-strip.jpg",
     "sha256": "f2b8c2b6d50812015873247e10ce9e5e76aaeb4fa5ce63dc89aba3d2fc3a537b",
     "kind": "image",
