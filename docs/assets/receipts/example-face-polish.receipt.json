@@ -3,38 +3,36 @@
   "artifact": {
     "path": "/Users/redacted/mok-tua/docs/assets/example-face-polish.jpg",
     "name": "example-face-polish.jpg",
-    "sha256": "452d2e9c4b81df476a9371f8a854f0e7e3d75d6967862f1861f82c3f3b715217",
+    "sha256": "100aac47eecd1e679e81ea41e4bcced7a234b24cf5d53cbf932d4605c5b66b83",
     "kind": "image",
     "exists": true
   },
-  "renderer": "gpu-host_comfy_faceid_face_polish",
+  "renderer": "gpu-host_comfy_faceid_face_polish_gentle",
   "provider": "comfy",
   "cloud_or_local": "local",
-  "model": "DreamShaper_8_pruned.safetensors+ip-adapter-faceid-plusv2_sd15.bin",
+  "model": "DreamShaper_8_pruned+faceid-plusv2",
   "host_role": "gpu-host",
   "qqq": "QQQ0",
-  "prompt": "portrait photo polish of same man as reference selfie, fair skin, freckles, light red facial patches, green-hazel eyes, short sandy brown hair, goofy intense expression, handwritten black marker 'ceo' on forehead when forehead visible, clean studio key light, subtle skin cleanup, natural pores retained, professional headshot, navy backdrop, same identity as reference, handwritten black marker ceo on forehead visible",
+  "prompt": "photorealistic portrait of the same man as the reference selfie, fair skin freckles light redness natural pores, green-hazel eyes, short sandy brown hair, goofy intense expression preserved exactly, handwritten black marker word ceo on forehead kept legible, same camera angle extreme close-up selfie, soft natural light, subtle cleanup only, realistic skin texture, no plastic, no morph",
   "negative_prompt": null,
   "seed": null,
-  "wall_clock_s": 7.97,
+  "wall_clock_s": 9.040809869766235,
   "tokens": {
     "input": null,
     "output": null,
     "total": null,
-    "note": "n/a local comfy"
+    "note": "n/a"
   },
-  "gpu": {
-    "peak_util_pct": 3.0
-  },
+  "gpu": {},
   "cpu": {},
-  "gpu_evidence": "peak_util=3.0% host_role=gpu-host",
-  "sampled_by": "host_monitor_or_ssh",
-  "ts_utc": "2026-08-06T01:35:39Z",
-  "caption_line": "gpu-host_comfy_faceid_face_polish \u00b7 DreamShaper_8_pruned.safetensors+ip-adapter-faceid-plusv2_sd15.bin \u00b7 gpu-host \u00b7 8.0s \u00b7\u2026",
+  "gpu_evidence": null,
+  "sampled_by": "manual",
+  "ts_utc": "2026-08-06T01:53:37Z",
+  "caption_line": "gpu-host_comfy_faceid_face_polish_gentle \u00b7 DreamShaper_8_pruned+faceid-plusv2 \u00b7 gpu-host \u00b7 9.0s \u00b7 n/a \u00b7 gpu ? \u00b7 QQQ0",
   "extra": {
-    "before": "00-ceo-source-still.jpg",
-    "after_denoise": 0.42,
-    "prompt_id": "d53c5257-1cb1-4b37-9e55-49fff3e6d203",
-    "identity": "FaceID PLUS V2 img2img from source still"
+    "seed": 61021,
+    "denoise": 0.25,
+    "faceid_weight": 0.5,
+    "note": "gentle polish"
   }
 }

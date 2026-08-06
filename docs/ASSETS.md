@@ -51,13 +51,14 @@ Prefer these over generic generated faces when documenting “face locked throug
 | File | Use |
 |------|-----|
 | `hero-prompt-to-product.jpg` | README hero — **CEO FaceID** storyboard wall + player (replaces stock woman concept) |
-| `products-capabilities.png` | **0.5.7 transparency poster** — individual IRL cards + path/prompt under each (prefer this) |
-| `products-capabilities.jpg` | JPEG twin of the above |
+| `product-capabilities/product-capabilities-NN-*.jpg` | **0.5.7 split cards** (one image per component · preferred) |
+| `product-capabilities-index.jpg` | Thumbnail index of all split cards |
+| `products-capabilities.png` / `.jpg` | **Legacy path** — small index only (no longer a multi‑MB tall poster) |
 | `capabilities/ui/*` | IRL screenshots: TUI boot/deck, CLI, Comfy, FramePack, Director |
 | `capabilities/panels/*` | Individual **FaceID PLUS V2** storyboard panels |
 | `example-storyboard-sheet.jpg` | **gpu-host FaceID PLUS V2** 6-panel CEO storyboard |
-| `example-face-polish.jpg` | **gpu-host FaceID** polish (BEFORE = source still) |
-| `ceo-i2v-frame-strip.jpg` | AnimateDiff + FaceID frame strip (not cloud Grok) |
+| `example-face-polish.jpg` | **gpu-host FaceID** gentle polish (BEFORE = source still) |
+| `ceo-i2v-frame-strip.jpg` | AnimateDiff + FaceID strip (black-triangle frames filtered) |
 | `mokup-c64-tui-live*.png` | Real TUI boot/deck documentation stills (0.5.5+) |
 | `receipts/*.receipt.json` | Provenance sidecars for regenerated assets |
 | `08-product-map.png` | Product map |

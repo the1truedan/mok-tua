@@ -101,13 +101,13 @@ Folder: [`docs/assets/pres-smoke/`](docs/assets/pres-smoke/) · reuse `00-ceo-so
 Regenerated on **gpu-host Comfy** from `pres-smoke/00-ceo-source-still.jpg` via **IPAdapter FaceID PLUS V2** (padded face ref for InsightFace).  
 Individual panels: [`docs/assets/capabilities/panels/`](docs/assets/capabilities/panels/) · Receipts: [`docs/assets/receipts/`](docs/assets/receipts/) · script: `scripts/regen_ceo_capability_assets.py`.
 
-| Storyboard sheet (FaceID PLUS V2) | Face polish BEFORE / AFTER |
-|-----------------------------------|----------------------------|
-| <img src="docs/assets/example-storyboard-sheet.jpg" alt="Six-panel CEO storyboard FaceID PLUS V2" width="420" /> | <img src="docs/assets/example-face-polish.jpg" alt="CEO face polish before source still after FaceID refine" width="420" /> |
+| Storyboard sheet (FaceID PLUS V2) | Face polish BEFORE / AFTER (gentle refine) |
+|-----------------------------------|--------------------------------------------|
+| <img src="docs/assets/example-storyboard-sheet.jpg" alt="Six-panel CEO storyboard FaceID PLUS V2" width="420" /> | <img src="docs/assets/example-face-polish.jpg" alt="CEO face polish before source still after gentle FaceID refine" width="420" /> |
 
-| AnimateDiff + FaceID strip (not cloud Grok) | Conductor TUI (fixed PETSCII boot → two-pane) |
-|---------------------------------------------|-----------------------------------------------|
-| <img src="docs/assets/ceo-i2v-frame-strip.jpg" alt="gpu-host AnimateDiff FaceID frame strip" width="420" /> | <img src="docs/assets/capabilities/ui/ui-tui-boot.png" alt="mok-tua fixed inverse PETSCII boot" width="420" /> |
+| Short-loop strip (glitch-filtered · not Grok) | Conductor TUI (fixed PETSCII boot) |
+|-----------------------------------------------|------------------------------------|
+| <img src="docs/assets/ceo-i2v-frame-strip.jpg" alt="gpu-host AnimateDiff FaceID strip without black-triangle glitch" width="420" /> | <img src="docs/assets/capabilities/ui/ui-tui-boot.png" alt="mok-tua fixed inverse PETSCII boot" width="420" /> |
 
 <p align="center"><em>path · prompt · renderer · host_role · QQQ0 on each card — never claim cloud I2V as local GPU.</em></p>
 
@@ -127,29 +127,32 @@ Individual panels: [`docs/assets/capabilities/panels/`](docs/assets/capabilities
 | **ACE-Step / TTS-Story** | Music beds & spoken lines | Audio tier tools |
 | **Grok Imagine / Nano Banana** | Optional paid/cloud stills | Only with keys + privacy gate |
 
-### Capability transparency poster (IRL cards · v0.5.7)
+### Capability cards (split · v0.5.7) — not one tall PNG
 
-**Vertical poster of individual cards** — real UI screenshots + gpu-host panels from the CEO source still.  
-Under every photo: **path · prompt/command · tool/renderer**. Not a faux multi-app promo.
+**One image per component** under [`docs/assets/product-capabilities/`](docs/assets/product-capabilities/) so GitHub doesn’t pull a multi‑MB vertical hog.  
+Each card embeds **path · prompt/command · tool** under the photo (sausage-made).
 
 <p align="center">
-  <img src="docs/assets/products-capabilities.png" alt="Capability transparency poster: source still, fixed PETSCII boot, CLI, Comfy, IPAdapter panels, polish, AnimateDiff, FramePack, Director" width="900" />
+  <img src="docs/assets/product-capabilities-index.jpg" alt="Index of split product-capabilities cards" width="720" />
 </p>
 
-| # | Capability | What you see | Path / command |
-|---|------------|--------------|----------------|
-| 0 | **Source still** | Real selfie + handwritten “ceo” | `pres-smoke/00-ceo-source-still.jpg` |
-| 1 | **TUI boot** | Fixed inverse PETSCII MOK-TUA | `capabilities/ui/ui-tui-boot.png` · `tui --skin c64` |
-| 2 | **TUI deck** | Two-pane READY. + VIC-II stats | `capabilities/ui/ui-tui-deck.png` |
-| 3 | **CLI REPL** | Line launcher (no Textual) | `capabilities/ui/ui-cli-repl.png` · `tui --repl` |
-| 4 | **Comfy IRL** | Live graph UI on gpu-host | `capabilities/ui/ui-comfy-ceo.png` |
-| 5 | **Storyboard panels** | Six individual IPAdapter panels | `capabilities/panels/01–06-*.jpg` |
-| 6 | **Face polish** | BEFORE / AFTER | `example-face-polish.jpg` |
-| 7 | **Short loop** | AnimateDiff frame strip | `ceo-i2v-frame-strip.jpg` · not Grok |
-| 8 | **FramePack IRL** | Gradio :7864 | `capabilities/ui/ui-framepack.png` |
-| 9 | **Director IRL** | Live CPE UI | `capabilities/ui/ui-director.png` |
+| # | Card file | Component |
+|---|-----------|-----------|
+| 00 | [`product-capabilities-00-source-still.jpg`](docs/assets/product-capabilities/product-capabilities-00-source-still.jpg) | Source selfie |
+| 01 | [`product-capabilities-01-tui-boot.jpg`](docs/assets/product-capabilities/product-capabilities-01-tui-boot.jpg) | PETSCII TUI boot |
+| 02 | [`product-capabilities-02-tui-deck.jpg`](docs/assets/product-capabilities/product-capabilities-02-tui-deck.jpg) | Two-pane deck |
+| 03 | [`product-capabilities-03-cli-repl.jpg`](docs/assets/product-capabilities/product-capabilities-03-cli-repl.jpg) | CLI REPL |
+| 04 | [`product-capabilities-04-comfy-ui.jpg`](docs/assets/product-capabilities/product-capabilities-04-comfy-ui.jpg) | ComfyUI IRL |
+| 05 | [`product-capabilities-05-storyboard-panels.jpg`](docs/assets/product-capabilities/product-capabilities-05-storyboard-panels.jpg) | Six FaceID panels |
+| 06 | [`product-capabilities-06-storyboard-sheet.jpg`](docs/assets/product-capabilities/product-capabilities-06-storyboard-sheet.jpg) | Storyboard sheet |
+| 07 | [`product-capabilities-07-hero.jpg`](docs/assets/product-capabilities/product-capabilities-07-hero.jpg) | README hero |
+| 08 | [`product-capabilities-08-face-polish.jpg`](docs/assets/product-capabilities/product-capabilities-08-face-polish.jpg) | Face polish B/A |
+| 09 | [`product-capabilities-09-short-loop-strip.jpg`](docs/assets/product-capabilities/product-capabilities-09-short-loop-strip.jpg) | AD strip (glitch-filtered) |
+| 10 | [`product-capabilities-10-framepack-ui.jpg`](docs/assets/product-capabilities/product-capabilities-10-framepack-ui.jpg) | FramePack Gradio |
+| 11 | [`product-capabilities-11-director-ui.jpg`](docs/assets/product-capabilities/product-capabilities-11-director-ui.jpg) | Director UI |
 
-Source HTML: [`docs/assets/mokups/capability-collage.html`](docs/assets/mokups/capability-collage.html).  
+Legacy raw URL [`products-capabilities.png`](docs/assets/products-capabilities.png) is now a **small index** (same path, bandwidth-friendly), not a 10k-tall poster.
+
 Smoke matrix: [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md) · stamp [`capability_stamp_0.5.7.json`](docs/reports/capability_stamp_0.5.7.json).
 
 ---
