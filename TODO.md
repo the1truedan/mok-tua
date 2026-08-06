@@ -3,7 +3,7 @@
 **Last updated:** 2026-08-05  
 **Version baseline:** **0.5.6** (CEO MRGPU examples + collage; TUI 0.5.5; full-gamut 0.5.4)  
 **Visibility:** private until human go · see `docs/PUBLIC_RELEASE_PROTECT_BRANCH_2026-08-05.md`  
-**Handoff:** `docs/operations/SESSION_HANDOFF_2026-08-05_FULL_GAMUT_STAGED_SMOKE.md`
+**Handoff:** `docs/operations/SESSION_HANDOFF_2026-08-05_0.5.6_IDENTITY_FRAMEPACK_PUSH.md` · `HANDOFF.md`
 
 ---
 
@@ -28,6 +28,12 @@
 | D15 | Conductor TUI 0.5.5: PETSCII boot, two-pane, VIC-II stats, green/mono skins | `tui/` · INTERFACES |
 | D16 | Artifact receipt sidecar + optional burn-caption | `api/artifact_receipt.py` · CLI `receipt` |
 | D17 | CEO MRGPU storyboard + face polish + AD strip + accurate collage | 0.5.6 · smoke stamp |
+| D18 | IPAdapter FaceID weights staged on shared pool (7 files) | `IPADAPTER_FACEID_INSTALL` · `stage_ipadapter_faceid.sh` |
+| D19 | Wan 14B I2V weight inventory (no re-pull) | `WAN_WEIGHTS_STAGING` |
+| D20 | Director HTTP path to models via Comfy documented | `DIRECTOR_MODELS_CONNECTIVITY` |
+| D21 | Render scratch vs ai-data vs bees law | `RENDER_SCRATCH_VS_AI_DATA_BEES` |
+| D22 | Hippo history + breakthrough milestones packet | `HIPPO_HISTORY_AND_BREAKTHROUGH_MILESTONES` |
+| D23 | Session handoff 0.5.6 identity/FramePack private push | `SESSION_HANDOFF_…_0.5.6_IDENTITY_FRAMEPACK_PUSH` |
 
 ---
 
@@ -37,10 +43,11 @@
 
 | # | Item | Gate |
 |---|------|------|
-| **1** | FramePack **UI I2V** + receipt (`renderer: mrgpu_framepack`, qqq, gpu_evidence) | SM venv + launch recipe wired · port **7864** |
-| **2** | If hub empty: one intentional `FRAMEPACK_ALLOW_DOWNLOAD=1` seed into **shared** hub only | never package-local HF tree |
+| **1** | FramePack **finalize mp4** + receipt `artifact_ok: true` (`renderer: mrgpu_framepack_i2v`) | GPU sampling already observed · capture/promote from local SSD |
+| **2** | If hub incomplete: one intentional `FRAMEPACK_ALLOW_DOWNLOAD=1` seed into **shared** hub only | never package-local HF tree |
 | **3** | Wan 2.2 / Wan2GP **one-clip I2V** when ports/adapters live | honest skip until Wan ports up (not FramePack 7864) |
-| **4** | W0 identity: stage **IPAdapter FaceID + InstantID** weights; FaceFusion CUDA residual | likeness ≠ prompt alone |
+| **4** | W0 residual: InstantID; FaceFusion CUDA polish | FaceID bins already live · Comfy lists |
+| **4b** | Director: register Comfy backend in UI | `/api/backends` currently `[]` |
 
 ### P1 — conductor + social
 

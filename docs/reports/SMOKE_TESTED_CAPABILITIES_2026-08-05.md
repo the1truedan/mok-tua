@@ -21,9 +21,12 @@
 | CEO face polish img2img | **PASS** | `docs/assets/example-face-polish.jpg` + receipt |
 | AnimateDiff short loop (QQQ0) | **PASS** | `work/ceo_capability_regen/ceo_animatediff.mp4` · frame strip in assets |
 | Capability collage (accurate workflow) | **PASS** | `docs/assets/products-capabilities.png` from rewritten HTML |
-| FramePack UI I2V end-to-end receipt | **PENDING** | launch recipe wired `:7864` · UI job next |
-| Wan live Gradio ports | **SKIP** (honest) | pinokio gamut report |
-| IPAdapter FaceID full lock | **PARTIAL** | nodes present; **weights incomplete** on host → prompt-lock + CU img2img |
+| FramePack UI I2V (API + GPU) | **IN PROGRESS / partial** | Gradio `:7864` · VAE→CLIP→sampling · util ~100% · see `FRAMEPACK_I2V_SMOKE` + receipt |
+| Wan **weights** on pool | **PASS** (inventory) | `wan2.2_i2v_*_14B_fp8` present · `WAN_WEIGHTS_STAGING` |
+| Wan live Gradio ports | **SKIP** (honest) | pinokio gamut until ports up |
+| IPAdapter FaceID weights | **PASS** | 7 files in `models/ipadapter/` · Comfy loader lists |
+| Director stack HTTP | **PASS** | UI 5173 · CPE 9800 · orch 9820 healthy |
+| Director Comfy backend registry | **FAIL** | `/api/backends` empty — register in UI |
 | Cloud Grok Imagine I2V | **NOT DEFAULT** | I2V incident law — QQQ1 only, never “local” |
 
 ---

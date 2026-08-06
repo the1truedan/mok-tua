@@ -1,0 +1,48 @@
+{
+  "schema": "mok_tua_artifact_receipt.v1",
+  "artifact": {
+    "path": "/Users/dtm/mok-tua/work/ceo_capability_regen/framepack_i2v_status.json",
+    "name": "framepack_i2v_status.json",
+    "sha256": "68d8b8cbe3f146b59fee735871d4bd3eca32ac3014a683de85690c711e21a154",
+    "kind": "doc",
+    "exists": true
+  },
+  "renderer": "mrgpu_framepack_i2v",
+  "provider": "framepack_studio",
+  "cloud_or_local": "local",
+  "model": "FramePackI2V_HY (hf_hub 24G) \u00b7 HunyuanVideo hub partial(VAE)",
+  "host_role": "gpu-host",
+  "qqq": "QQQ0",
+  "prompt": "subtle head motion and blink, same person, handwritten ceo on forehead, gentle push-in",
+  "negative_prompt": null,
+  "seed": null,
+  "wall_clock_s": 79.44,
+  "tokens": {
+    "input": null,
+    "output": null,
+    "total": null,
+    "note": "n/a FramePack"
+  },
+  "gpu": {
+    "gpu_util_pct": 6.0,
+    "gpu_mem_used_mib": 4012.0,
+    "gpu_mem_total_mib": 16380.0,
+    "note": "end-of-job sample"
+  },
+  "cpu": {},
+  "gpu_evidence": "peak observed ~100% util / ~11\u201313 GiB VRAM during job; end sample {'gpu_util_pct': 6.0, 'gpu_mem_used_mib': 4012.0, 'gpu_mem_total_mib': 16380.0, 'note': 'end-of-job sample'}",
+  "sampled_by": "host_monitor",
+  "ts_utc": "2026-08-06T00:50:46Z",
+  "caption_line": "mrgpu_framepack_i2v \u00b7 FramePackI2V_HY (hf_hub 24G) \u00b7 HunyuanVideo hub partial(VAE) \u00b7 gpu-host \u00b7 79.4s \u00b7 n/a FramePack \u00b7\u2026",
+  "extra": {
+    "gradio_event_id": "8104f8cb1a90406995e118a7e763eb70",
+    "port": 7864,
+    "open": "http://gpu-host:7864/",
+    "seconds_requested": 1.5,
+    "steps": 10,
+    "source_still": "docs/assets/pres-smoke/00-ceo-source-still.jpg",
+    "artifact_ok": false,
+    "shared_models": "/mnt/ai-data/models",
+    "hf_home": "/mnt/ai-data/models/hf_hub"
+  }
+}
