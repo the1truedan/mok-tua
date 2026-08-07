@@ -1,6 +1,6 @@
 # HANDOFF — mok-tua (latest)
 
-**Date:** 2026-08-06  
+**Date:** 2026-08-07 (orchestration + CMIP FaceID public refresh)  
 **Version:** **0.5.10** (PETSCII Matrix v4 brand short · TUI launch workflow · show/play media)  
 **Branch:** `main` @ **`a054a60`** (+ follow-up handoff commit if present)  
 **Visibility:** **PUBLIC** — https://github.com/the1truedan/mok-tua · `main` protected  
@@ -12,9 +12,9 @@
 2. **Brand short:** [`docs/assets/exports/mok-tua-petscii-matrix-export.mp4`](docs/assets/exports/mok-tua-petscii-matrix-export.mp4) · cite [`docs/assets/exports/README.md`](docs/assets/exports/README.md)  
 3. **Launch TUI:** `python3 scripts/mok_tua_cli.py tui` → PETSCII intro → CLI help → status → deck  
 4. **Interfaces:** [`docs/INTERFACES.md`](docs/INTERFACES.md) (launch workflow · media · software disks)  
-5. **Smoke stamp 0.5.7:** [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md)  
+5. **Smoke stamp:** [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-07.md`](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-07.md) · [`docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md`](docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md)  
 6. **TODO:** [`TODO.md`](TODO.md)  
-7. **Context pit (control):** `~/grokcode/docs/operations/AGENT_CONTEXT_PIT_AND_MULTI_CLI_CONTINUITY_2026-08-05.md`
+7. **Context pit (control):** `(private control plane — not required for public mok-tua use)`
 
 ## Paste for new chat
 

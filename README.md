@@ -18,7 +18,7 @@
 **Turn a script into storyboard pictures — and, when you want, short video — on machines you own.**
 
 Local-first creative control desk for M.A.N.A.G.E.R.  
-Hybrid **v0.5.10** · public · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md)
+Hybrid **v0.5.10** · public · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-07.md) · [orchestration smoke (cited)](docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md)
 
 [![Version](https://img.shields.io/badge/version-0.5.10-blue.svg)](CHANGELOG.md)
 [![Release](https://img.shields.io/github/v/release/the1truedan/mok-tua?display_name=tag&include_prereleases&sort=semver&label=release)](https://github.com/the1truedan/mok-tua/releases)
@@ -147,7 +147,22 @@ That identity is the only face in these mockups — COMDEX keynote, functions bo
 
 Folder: [`docs/assets/pres-smoke/`](docs/assets/pres-smoke/) · reuse `00-ceo-source-still.jpg` as LoadImage for live Comfy/Wan experiments.
 
-### Other illustrative outputs (GPU-host · CEO identity · **post-FaceID** · v0.5.7)
+### CMIP origin storyboard (FaceID · local Comfy · **not Imagine**)
+
+Eight-panel comic of how [cmip-terpene-db](https://github.com/the1truedan/cmip-terpene-db) came to be — vibecode → look up terpenes → collect → stoners gather → verify → toss unverified data → stoners stay → coder still codes. Identity from `pres-smoke/00-ceo-source-still.jpg` via **FaceID PLUS V2**.
+
+<p align="center">
+  <img src="docs/assets/cmip-terpene-origin/cmip-origin-storyboard-sheet.jpg" alt="Eight-panel CMIP origin FaceID storyboard sheet" width="900" />
+</p>
+
+<p align="center">
+  <a href="docs/assets/cmip-terpene-origin/">panels</a>
+  · <a href="docs/assets/receipts/cmip-terpene-origin-storyboard.receipt.json">receipt</a>
+  · <a href="scripts/regen_cmip_terpene_storyboard.py"><code>regen_cmip_terpene_storyboard.py</code></a>
+  · <a href="docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md">orchestration smoke</a>
+</p>
+
+### Other illustrative outputs (GPU-host · CEO identity · **post-FaceID** · v0.5.7+)
 
 Regenerated on **gpu-host Comfy** from `pres-smoke/00-ceo-source-still.jpg` via **IPAdapter FaceID PLUS V2** (padded face ref for InsightFace).  
 **Cite as (post-FaceID).** Older Ken Burns / hybrid Grok clips are **(pre-FaceID)** — see [`docs/assets/exports/README.md`](docs/assets/exports/README.md).  

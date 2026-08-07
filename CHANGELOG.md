@@ -5,6 +5,17 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
 
 ## [0.5.10] — 2026-08-06
 
+### Added (2026-08-07 public refresh)
+
+- **CMIP terpene origin FaceID storyboard** (8 panels + sheet): local Comfy FaceID PLUS V2
+  from `pres-smoke/00-ceo-source-still.jpg` — **not Imagine**.
+  - `docs/assets/cmip-terpene-origin/` · receipt `docs/assets/receipts/cmip-terpene-origin-storyboard.receipt.json`
+  - Regen: `scripts/regen_cmip_terpene_storyboard.py` (`COMFY_URL=http://gpu-host:8188`)
+- **Cited orchestration smoke** loop (exclusive GPU free → gate → pin → receipt):
+  `docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md`
+- Smoke matrix refresh: `docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-07.md`
+- Sister schema repo link: https://github.com/the1truedan/cmip-terpene-db
+
 ### Added
 
 - **PETSCII Matrix brand short v4** (~28s): C64 loader → µ rain → bright MOK-TUA → CRT TV-off

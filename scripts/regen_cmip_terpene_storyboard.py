@@ -7,7 +7,7 @@ Identity seed (public mok-tua): docs/assets/pres-smoke/00-ceo-source-still.jpg
 NOT Imagine/cloud: local GPU-host Comfy + IPAdapter FaceID.
 
 Usage:
-  COMFY_URL=http://REDACTED-LAN-IP:8188 python3 scripts/regen_cmip_terpene_storyboard.py
+  COMFY_URL=http://gpu-host:8188 python3 scripts/regen_cmip_terpene_storyboard.py
 """
 
 from __future__ import annotations
@@ -42,7 +42,7 @@ from regen_ceo_capability_assets import (  # noqa: E402
     queue_and_wait,
 )
 
-COMFY_URL = os.environ.get("COMFY_URL", "http://REDACTED-LAN-IP:8188").rstrip("/")
+COMFY_URL = os.environ.get("COMFY_URL", "http://gpu-host:8188").rstrip("/")
 SOURCE = ROOT / "docs/assets/pres-smoke/00-ceo-source-still.jpg"
 OUT = Path(os.environ.get("MOK_TUA_CMIP_OUT", str(ROOT / "work" / "cmip_terpene_storyboard")))
 ASSETS = ROOT / "docs" / "assets" / "cmip-terpene-origin"
