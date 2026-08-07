@@ -157,15 +157,79 @@ def loading_screen_text(version: str = "0.5.4", *, step: int = 0) -> str:
     return "\n".join(lines)
 
 
+def demoscene_filter(line: str, width: int = 40) -> str:
+    """Strip secrets/paths/ANSI; fit ~40 cols for C64 spirit log tail."""
+    import re
+
+    s = line.replace("\r", " ").replace("\t", " ")
+    s = re.sub(r"\x1b\[[0-9;]*m", "", s)
+    s = re.sub(r"https?://192\.168\.\d+\.\d+", "http://gpu-host", s)
+    s = re.sub(r"/Users/[^/\s]+", "~", s)
+    s = re.sub(r"/mnt/ai-data", "nas:", s)
+    s = re.sub(r"/Volumes/ai-data", "nas:", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    if len(s) > width:
+        return s[: width - 1] + "…"
+    return s
+
+
+def disk_insert_banner(label: str, title: str = "", *, state: str = "READY") -> str:
+    """INSERT DISK metaphor for a software catalog entry."""
+    lab = (label or "UNKNOWN").upper()[:12]
+    tit = (title or "SOFTWARE").upper()[:16]
+    st = (state or "READY").upper()[:14]
+    lines = [
+        "╔══════════════════════════════════════╗",
+        f"║  INSERT DISK: {lab:<22} ║",
+        f"║  TITLE: {tit:<28} ║",
+        f"║  STATUS: {st:<27} ║",
+        "║  LOADING PROGRAM  *******************║",
+        "╚══════════════════════════════════════╝",
+        "  PRESS PLAY ON TAPE · OR TYPE launch",
+    ]
+    return "\n".join(lines)
+
+
+def loading_screen_for(tool_id: str, version: str = "0.5.8", *, step: int = 0) -> str:
+    """Per-tool demoscene load screen (extends boot splash)."""
+    tid = (tool_id or "mok_tua").lower()
+    table = {
+        "sm_comfy": ("COMFYUI", "NODE GRAPH ENGINE"),
+        "comfy": ("COMFYUI", "NODE GRAPH ENGINE"),
+        "directors_console": ("DIRECTORS", "CONSOLE ORCHESTRA"),
+        "directors": ("DIRECTORS", "CONSOLE ORCHESTRA"),
+        "framepack_studio": ("FRAMEPACK", "LONG VIDEO STUDIO"),
+        "framepack": ("FRAMEPACK", "LONG VIDEO STUDIO"),
+        "wan2gp": ("WAN2GP", "VIDEO GENERATION"),
+        "wan": ("WAN", "VIDEO GENERATION"),
+        "ace_step": ("ACE-STEP", "MUSIC GENERATION"),
+        "facefusion": ("FACEFUSION", "FACE PIPELINE"),
+        "qwen_edit": ("QWEN-EDIT", "STORYBOARD PAUSED"),
+        "mok_tua": ("MOK-TUA", "CONDUCTOR CORE"),
+    }
+    label, subtitle = table.get(tid, (tid.upper()[:12], "SOFTWARE DISK"))
+    boot = loading_screen_text(version, step=step)
+    extra = (
+        f"\n  DISK  {label}\n"
+        f"  {subtitle}\n"
+        f"  GPU-PREP RECOMMENDED BEFORE RENDER\n"
+    )
+    return boot + extra
+
+
 def intro_recommendations() -> str:
     return (
         "LAUNCH INTRO — prompt recommendations\n"
         "─────────────────────────────────────\n"
-        "  · Still: local Comfy DreamShaper / Qwen edit (QQQ0)\n"
-        "  · Short loop: local_animatediff on gpu-host\n"
+        "  · Still: local Comfy DreamShaper (QQQ0)\n"
+        "  · Storyboard LoRAs: multi-angle / next-scene (Qwen weights staged;\n"
+        "    sampling PAUSED on 16GB — use when VRAM allows)\n"
+        "  · Short loop: AnimateDiff on gpu-host\n"
+        "  · Motion sizzle: WAN 2.2 I2V or AnimateDiff (not slideshow)\n"
         "  · Longer I2V: FramePack :7864  (receipt required)\n"
         "  · Cloud I2V: grok_imagine only with QQQ1 + label\n"
         "  · Every clip: renderer · qqq · gpu_evidence\n"
+        "  · Disk catalog: software · disk COMFYUI · gpu-prep\n"
         "\n"
         "Shortcuts: [D]octor [P]roviders [R]un [S]moke\n"
         "           [L]ock [T]status [M]onitor [H]elp [Q]uit\n"

@@ -128,38 +128,89 @@ class ComfyClient:
         except json.JSONDecodeError:
             return {"ok": False, "status": status, "error": "invalid_json"}
 
+    def free_memory(
+        self,
+        *,
+        unload_models: bool = True,
+        free_memory: bool = True,
+    ) -> dict[str, Any]:
+        """POST /free — unload models / free VRAM (allowlisted GPU prep)."""
+        payload = json.dumps(
+            {"unload_models": unload_models, "free_memory": free_memory}
+        ).encode()
+        try:
+            status, body = self._request(
+                "POST",
+                "/free",
+                data=payload,
+                headers={"Content-Type": "application/json"},
+            )
+            return {
+                "ok": status in (200, 204),
+                "status": status,
+                "body": body[:200].decode("utf-8", errors="replace"),
+            }
+        except ConnectionError as exc:
+            return {"ok": False, "error": str(exc)}
+
     def wait_for_prompt(
         self,
         prompt_id: str,
         *,
         timeout_s: float = 600.0,
         poll_s: float = 2.0,
+        on_tick: Any = None,
     ) -> dict[str, Any]:
-        """Poll /history/{prompt_id} until outputs appear or timeout."""
+        """Poll /history/{prompt_id} until outputs appear or timeout.
+
+        on_tick: optional callable(elapsed_s, status_str) for progress bars.
+        """
         deadline = time.time() + max(timeout_s, 1.0)
+        t0 = time.time()
         last: dict[str, Any] = {}
         while time.time() < deadline:
             last = self.history(prompt_id)
+            elapsed = time.time() - t0
+            status_str = "running"
             if last.get("ok"):
                 hist = last.get("history") or {}
                 entry = hist.get(prompt_id) if isinstance(hist, dict) else None
                 if isinstance(entry, dict):
                     status_obj = entry.get("status") or {}
+                    status_str = str(status_obj.get("status_str") or "running")
                     if status_obj.get("completed") or entry.get("outputs"):
+                        if on_tick:
+                            try:
+                                on_tick(elapsed, "completed")
+                            except Exception:
+                                pass
                         return {
                             "ok": True,
                             "status": "completed",
                             "prompt_id": prompt_id,
                             "outputs": entry.get("outputs"),
                             "status_detail": status_obj,
+                            "elapsed_s": elapsed,
                         }
                     if status_obj.get("status_str") == "error":
+                        if on_tick:
+                            try:
+                                on_tick(elapsed, "error")
+                            except Exception:
+                                pass
                         return {
                             "ok": False,
                             "status": "error",
                             "prompt_id": prompt_id,
                             "status_detail": status_obj,
+                            "elapsed_s": elapsed,
                         }
+            if on_tick:
+                try:
+                    # indeterminate: use elapsed / timeout as soft frac
+                    on_tick(elapsed, status_str)
+                except Exception:
+                    pass
             time.sleep(poll_s)
         return {
             "ok": False,

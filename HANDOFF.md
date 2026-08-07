@@ -1,7 +1,7 @@
 # HANDOFF — mok-tua (latest)
 
 **Date:** 2026-08-06  
-**Version:** **0.5.8** (manager-pivot anime multi-angle/next-scene · Qwen Edit staged · 14.20s export)  
+**Version:** **0.5.9** (C64 software catalog · gpu-prep · Qwen sampling paused · motion sizzle path)  
 **Branch:** `agent/mok-tua-staged-pulls-runbooks` → **main** (public)  
 **Visibility:** **PUBLIC** — https://github.com/the1truedan/mok-tua · `main` protected
 
@@ -20,10 +20,11 @@
 
 | Item | Notes |
 |------|--------|
-| Qwen Image Edit 2509 fp8 | **PRESENT** ~20 GB · `local_qwen_edit` **6/6** · KSampler **OOM** on 4060 Ti 16 GB |
-| Manager pivot anime short | **14.20 s** · multi-angle + Next Scene · photoceopic ref · Imagine stills + ffmpeg · public assets |
-| MiniMax H3 | Manifest rows `local_minimax_h3` — pull after Comfy ≥0.30 |
-| Blade Runner titles | Template HTML scaffold |
+| Qwen Image Edit 2509 fp8 | **PRESENT** · sampling **PAUSED** on 16 GB (OOM) — do not hammer |
+| Manager pivot slideshow | **14.20 s** panel-hold · public · not generative motion |
+| Motion sizzle | AnimateDiff I2V script `render_motion_sizzle_from_still.py` + `gpu-prep` |
+| C64 software catalog | `software` · `disk` · demoscene load screens · `gpu-prep` |
+| MiniMax H3 | Manifest only — after Comfy ≥0.30 |
 | Public | https://github.com/the1truedan/mok-tua |
 
 ## What 0.5.7 shipped

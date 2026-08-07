@@ -13,6 +13,7 @@ Ledger also mirrored in `~/grokcode/data/progress/milestones.jsonl` (repo=`mok-t
 | **0.5.3** | 2026-08-02 | `2026.08-mok-tua-v0.5-conductor` | Presentation-smoke mockups (silly CEO still → COMDEX / board / cartoon booth / six-panel storyboard). |
 | **0.5.4** | 2026-08-05 | `2026.08-mok-tua-full-gamut-staged-smoke` | Full-gamut framework; FramePack shared-models launcher; Pinokio gamut + GPU-host AnimateDiff smoke; Grok-vs-GPU-host I2V provenance incident; C64 TUI re-smoke; staged-pulls branch docs; public flip still human-gated. |
 | **0.5.8** | 2026-08-06 | `2026.08-mok-tua-manager-pivot-qwen-storyboard` | Qwen Edit 2509 pool stage (6/6); multi-angle+next-scene anime pivot storyboard (procurement→MANAGER); **14.20 s** export + PROVENANCE; local KSampler OOM honesty on 16 GB; public. |
+| **0.5.9** | 2026-08-06 | `2026.08-mok-tua-c64-catalog-gpu-prep-sizzle` | C64 software catalog + disk insert + gpu-prep + progress bars; Qwen sampling paused; AnimateDiff motion sizzle (~5s, 2 segments). |
 | **ops** | 2026-08-01→02 | `2026.08-mok-tua-comfy-ai-data-wire` | Comfy + ai-data connectivity probe; GPU-host Comfy live; tier smoke **26 pass / 0 hard fail** (`mok_tua_tier_smoke_2026-08-02.json`). |
 | **ops** | 2026-08-05 | `2026.08-i2v-grok-vs-gpu-host-context-ambiguity` | Process incident: cloud Grok I2V misread as local GPU; dual-path labeling rules. |
 

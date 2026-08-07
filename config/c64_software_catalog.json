@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "updated": "2026-08-06",
+  "description": "C64 demoscene software catalog — each tool is a 'game disk'. Insert disk = path/port probe before launch.",
+  "disks": [
+    {
+      "id": "mok_tua",
+      "label": "MOK-TUA",
+      "title": "CONDUCTOR",
+      "kind": "lab",
+      "tier": "T0",
+      "ports": [8799],
+      "path_hints": ["~/mok-tua"],
+      "recipe": "mok_tua",
+      "splash": "conductor",
+      "log_source": null
+    },
+    {
+      "id": "sm_comfy",
+      "label": "COMFYUI",
+      "title": "NODE GRAPH",
+      "kind": "stability_matrix",
+      "tier": "T1",
+      "ports": [8188],
+      "path_hints": [
+        "comfyui/src/ComfyUI",
+        "stability-matrix/mac-Data/Packages/ComfyUI"
+      ],
+      "recipe": "sm_comfy",
+      "splash": "comfy",
+      "log_source": "comfy_api"
+    },
+    {
+      "id": "directors_console",
+      "label": "DIRECTORS",
+      "title": "CONSOLE",
+      "kind": "pinokio",
+      "tier": "T0",
+      "ports": [5173, 9800, 9820],
+      "path_hints": ["pinokio/api/directorsconsole.pinokio.git"],
+      "recipe": "directors_console",
+      "splash": "directors",
+      "log_source": "work/launches"
+    },
+    {
+      "id": "framepack_studio",
+      "label": "FRAMEPACK",
+      "title": "STUDIO",
+      "kind": "stability_matrix",
+      "tier": "T1",
+      "ports": [7864],
+      "path_hints": ["stability-matrix/Data/Packages"],
+      "recipe": "local_framepack",
+      "splash": "framepack",
+      "log_source": "framepack"
+    },
+    {
+      "id": "wan2gp",
+      "label": "WAN2GP",
+      "title": "VIDEO",
+      "kind": "pinokio",
+      "tier": "T1",
+      "ports": [],
+      "path_hints": ["pinokio/api/wan2gp.git", "pinokio/api/wangpu-host.git"],
+      "recipe": null,
+      "splash": "wan",
+      "log_source": null
+    },
+    {
+      "id": "wan_pinokio",
+      "label": "WAN",
+      "title": "PINOKIO",
+      "kind": "pinokio",
+      "tier": "T1",
+      "ports": [],
+      "path_hints": ["pinokio/api/wan.git"],
+      "recipe": null,
+      "splash": "wan",
+      "log_source": null
+    },
+    {
+      "id": "ace_step",
+      "label": "ACE-STEP",
+      "title": "MUSIC",
+      "kind": "pinokio",
+      "tier": "T2",
+      "ports": [],
+      "path_hints": ["pinokio/api/ace-step.pinokio.git"],
+      "recipe": null,
+      "splash": "audio",
+      "log_source": null
+    },
+    {
+      "id": "facefusion",
+      "label": "FACEFUSION",
+      "title": "FACE",
+      "kind": "pinokio",
+      "tier": "T3",
+      "ports": [7870],
+      "path_hints": ["pinokio/api/facefusion*"],
+      "recipe": null,
+      "splash": "face",
+      "log_source": null
+    },
+    {
+      "id": "tts_story",
+      "label": "TTS-STORY",
+      "title": "VOICE",
+      "kind": "pinokio",
+      "tier": "T2",
+      "ports": [],
+      "path_hints": ["pinokio/api/TTS-Story.git"],
+      "recipe": null,
+      "splash": "audio",
+      "log_source": null
+    },
+    {
+      "id": "qwen_edit",
+      "label": "QWEN-EDIT",
+      "title": "STORYBOARD",
+      "kind": "comfy_model",
+      "tier": "T4",
+      "ports": [8188],
+      "path_hints": ["models/diffusion_models/qwen_image_edit_2509_fp8_e4m3fn.safetensors"],
+      "recipe": null,
+      "splash": "comfy",
+      "log_source": "comfy_api",
+      "status_note": "weights staged; sampling PAUSED on 16GB (OOM)"
+    }
+  ]
+}
