@@ -1,7 +1,7 @@
 {
   "version": 1,
   "locked_at": "2026-08-02T17:04:58Z",
-  "mok_tua_version": "0.3.0",
+  "mok_tua_version": "0.5.10",
   "host_profiles": {
     "desk-host": {
       "role": "stills",

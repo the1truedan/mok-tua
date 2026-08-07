@@ -17,10 +17,11 @@ from story_parse import parse_story_markdown
 
 app = FastAPI(
     title="mok-tua",
-    version="0.5.0",
+    version="0.5.10",
     description=(
         "Shot-driven storyboard orchestrator. Stage models to ai-data, ingest "
-        "PDF/FDX/MD sides, run local Qwen multi-angle+next-scene or cloud stills."
+        "PDF/FDX/MD sides, run local multi-angle+next-scene or cloud stills. "
+        "Conductor TUI: PETSCII intro → CLI help → status → show/play media."
     ),
 )
 
@@ -113,7 +114,7 @@ def info() -> dict[str, Any]:
     orch = stages.load_json("orchestration.json")
     return {
         "service": "mok-tua-api",
-        "version": "0.5.0",
+        "version": "0.5.10",
         "mvp_chain": orch.get("mvp_chain"),
         "work_root": str(stages.work_root()),
         "docs": str(ROOT / "README.md"),

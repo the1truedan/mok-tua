@@ -1,9 +1,10 @@
 # mok-tua TODO
 
-**Last updated:** 2026-08-05  
-**Version baseline:** **0.5.7** (transparency poster · IPAdapter plus-face · fixed PETSCII · IRL UIs)  
+**Last updated:** 2026-08-06  
+**Version baseline:** **0.5.10** (PETSCII Matrix v4 · TUI launch workflow · show/play media; prior 0.5.7 transparency poster still cite)  
 **Visibility:** private until human go · see `docs/PUBLIC_RELEASE_PROTECT_BRANCH_2026-08-05.md`  
-**Handoff:** `HANDOFF.md` · smoke `docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`
+**Handoff:** `HANDOFF.md` · smoke `docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`  
+**Recheck:** `docs/operations/MODEL_PULL_RECHECK_VIDEO_ROBUST_2026-08-06.md`
 
 ---
 
@@ -45,6 +46,10 @@
 
 | # | Item | Gate |
 |---|------|------|
+| **0a** | **Qwen Image Edit 2509 fp8** into pool (unlock multi-angle + next-scene LoRAs already present) | stage_manifest `qwen_edit_2509_fp8` · in flight 2026-08-06 |
+| **0b** | Smoke `qwen_next_scene_angles` after Edit base lands | receipt + 2–3 angle stills |
+| **0c** | Comfy ≥0.30 + **MiniMax H3** pruned pack (~42.5 G) | manifest `local_minimax_h3` · native nodes required |
+| **0d** | Blade Runner title-card blink short (template scaffold done) | `docs/assets/styles/blade-runner-title/` |
 | **1** | FramePack **finalize mp4** + receipt `artifact_ok: true` (`renderer: gpu_framepack_i2v`) | GPU sampling already observed · capture/promote from local SSD |
 | **2** | If hub incomplete: one intentional `FRAMEPACK_ALLOW_DOWNLOAD=1` seed into **shared** hub only | never package-local HF tree |
 | **3** | Wan 2.2 / Wan2GP **one-clip I2V** when ports/adapters live | honest skip until Wan ports up (not FramePack 7864) |
