@@ -1,0 +1,37 @@
+{
+  "schema": "mok_tua_artifact_receipt.v1",
+  "artifact": {
+    "path": "docs/assets/exports/manager-pivot-motion-sizzle-animatediff.mp4",
+    "name": "manager-pivot-motion-sizzle-animatediff.mp4",
+    "sha256": "8a8c509b1dcc65ff730500a856d27b863129777dbd621a8efe50138db24d22fd",
+    "kind": "video",
+    "exists": true
+  },
+  "renderer": "gpu_comfy_animatediff_i2v",
+  "provider": "gpu",
+  "cloud_or_local": "local",
+  "model": "DreamShaper_8_pruned.safetensors + mm_sd_v15_v2.fp16.safetensors",
+  "host_role": "gpu-host",
+  "qqq": "QQQ0",
+  "prompt": "anime style cinematic motion, subtle camera push-in, M.A.N.A.G.E.R. framework board glow, same character as reference, gentle head motion and blink, coherent face, soft light, high quality",
+  "negative_prompt": null,
+  "seed": null,
+  "wall_clock_s": 254.2362780570984,
+  "tokens": {
+    "input": null,
+    "output": null,
+    "total": null,
+    "note": "n/a"
+  },
+  "gpu": {},
+  "cpu": {},
+  "gpu_evidence": "animatediff_queue_ok",
+  "sampled_by": "manual",
+  "ts_utc": "2026-08-07T02:13:25Z",
+  "caption_line": "gpu_comfy_animatediff_i2v \u00b7 DreamShaper_8_pruned.safetensors + mm_sd_v15_v2.fp16.safetensors \u00b7 gpu-host \u00b7 254.2s \u00b7 n/a \u2026",
+  "extra": {
+    "duration_s": 5.0,
+    "segments": 2,
+    "summary": "work/motion_sizzle/summary.json"
+  }
+}

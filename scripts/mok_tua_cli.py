@@ -10,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "api"))
+sys.path.insert(0, str(ROOT))
 
 
 def _j(obj: object) -> None:
@@ -115,6 +116,38 @@ def main() -> int:
 
     status = sub.add_parser("status", help="Alias for providers table + doctor grade")
     status.add_argument("--json", action="store_true")
+
+    soft = sub.add_parser(
+        "software",
+        help="C64 demoscene software catalog (game disks) — probe paths/ports",
+    )
+    soft.add_argument("--json", action="store_true")
+
+    disk = sub.add_parser(
+        "disk",
+        help="Insert-disk probe for one tool (no spawn): disk COMFYUI | disk comfy",
+    )
+    disk.add_argument("tool_id", help="catalog id or label e.g. sm_comfy · COMFYUI · framepack")
+    disk.add_argument("--json", action="store_true")
+    disk.add_argument(
+        "--splash",
+        action="store_true",
+        help="Print PETSCII load screen for the disk",
+    )
+
+    gp = sub.add_parser(
+        "gpu-prep",
+        help="GPU exclusive prep: Comfy /free + peer port notes (dry-run default)",
+    )
+    gp.add_argument("--profile", default="video", help="video|still (default video)")
+    gp.add_argument("--live", action="store_true", help="Actually free Comfy models")
+    gp.add_argument(
+        "--stop-competitors",
+        action="store_true",
+        help="Note allowlisted peer ports (does not kill PIDs)",
+    )
+    gp.add_argument("--min-free-mib", type=float, default=8000.0)
+    gp.add_argument("--json", action="store_true")
 
     # --- process: discover / audit / smoke / lock ---
     disc = sub.add_parser("discover", help="Find Pinokio/GitHub options not in catalog")
@@ -420,6 +453,92 @@ def main() -> int:
         else:
             print(providers.format_table(prov["providers"]))
             print(f"\ngrade {doc.get('grade')}  live {prov['live']}/{prov['count']}")
+        return 0
+
+    if args.cmd == "software":
+        import software_catalog
+        from tui.petscii import disk_insert_banner
+
+        out = software_catalog.list_software()
+        if args.json:
+            _j(out)
+            return 0
+        print("**** MOK-TUA SOFTWARE CATALOG — INSERT DISK ****")
+        print(f"{'LABEL':<14} {'STATE':<14} {'TITLE':<16} ID")
+        print("-" * 60)
+        for d in out.get("disks") or []:
+            print(
+                f"{str(d.get('label') or ''):<14} "
+                f"{str(d.get('state') or ''):<14} "
+                f"{str(d.get('title') or ''):<16} "
+                f"{d.get('id')}"
+            )
+            if d.get("status_note"):
+                print(f"  note: {d['status_note']}")
+        print("\nREADY.  try:  disk COMFYUI  ·  disk framepack  ·  gpu-prep --live")
+        return 0
+
+    if args.cmd == "disk":
+        import software_catalog
+        from tui.petscii import disk_insert_banner, loading_screen_for
+
+        out = software_catalog.insert_disk(args.tool_id)
+        if args.splash or not args.json:
+            probe = (out.get("probe") or {}) if out.get("ok") else {}
+            print(
+                disk_insert_banner(
+                    str(probe.get("label") or args.tool_id),
+                    str(probe.get("title") or ""),
+                    state=str(probe.get("state") or "UNKNOWN"),
+                )
+            )
+            if args.splash and probe.get("id"):
+                print(loading_screen_for(str(probe.get("id"))))
+        if args.json:
+            _j(out)
+        else:
+            if out.get("ok"):
+                p = out["probe"]
+                print(f"id={p.get('id')}  state={p.get('state')}")
+                print(f"paths={p.get('paths_found')}")
+                print(f"ports={p.get('ports')}")
+                if p.get("status_note"):
+                    print(f"note={p['status_note']}")
+                print(out.get("message"))
+            else:
+                print(out)
+        return 0 if out.get("ok") else 1
+
+    if args.cmd == "gpu-prep":
+        import gpu_exclusive
+        from tui.petscii import loading_screen_for
+        from progress import ProgressBus
+
+        if not args.json:
+            print(loading_screen_for("sm_comfy", step=8))
+        bus = ProgressBus(enabled=not args.json)
+        bus.task("gpu", "gpu-prep", detail=args.profile)
+        out = gpu_exclusive.gpu_prep(
+            args.profile,
+            live=args.live,
+            stop_competitors=args.stop_competitors,
+            min_free_mib=args.min_free_mib,
+        )
+        bus.done("gpu", detail="ready" if out.get("ready") else ("dry" if not args.live else "check"))
+        bus.close()
+        if args.json:
+            _j(out)
+        else:
+            b, a = out.get("before") or {}, out.get("after") or {}
+            print(
+                f"live={out.get('live')} ready={out.get('ready')} "
+                f"free_mib before={b.get('gpu_mem_free_mib')} after={a.get('gpu_mem_free_mib')}"
+            )
+            for act in out.get("actions") or []:
+                print(f"  action: {act.get('action')} {act.get('dry_run') and '(dry)' or ''}")
+            peers = [p for p in (out.get("peers") or []) if p.get("listening")]
+            if peers:
+                print("peers listening:", ", ".join(f"{p['id']}:{p['port']}" for p in peers))
         return 0
 
     if args.cmd == "launch":

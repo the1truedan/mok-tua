@@ -22,6 +22,7 @@ GitHub cannot inline-play a repo `.mp4` inside Markdown. **Click poster or ▶ l
 |--------|----------------|--------------|------|
 | **PETSCII Matrix** brand short (~15s) | [poster.png](mok-tua-petscii-matrix-poster.png) | [▶ play export.mp4](mok-tua-petscii-matrix-export.mp4) | **(post-FaceID)** era · brand · **not** a face demo |
 | **Procurement → M.A.N.A.G.E.R.** anime multi-angle / next-scene (**14.20 s**) | [poster.jpg](manager-pivot-procurement-to-manager-anime-poster.jpg) | [▶ play mp4](manager-pivot-procurement-to-manager-anime.mp4) | photoceopic ref · multi-angle + `Next Scene:` grammar · **Imagine stills** (local Qwen Edit staged, **OOM** on 16 GB) · ffmpeg hold · see [PROVENANCE](../capabilities/manager-pivot/PROVENANCE.json) |
+| **Motion sizzle** AnimateDiff I2V (**~5 s**, generative) | [poster.jpg](manager-pivot-motion-sizzle-animatediff-poster.jpg) | [▶ play mp4](manager-pivot-motion-sizzle-animatediff.mp4) | **QQQ0** · DreamShaper_8 + mm_sd_v15_v2 · 2 segments · `gpu-prep` · **not** slideshow · Qwen sampling paused |
 
 <p align="center">
   <a href="mok-tua-petscii-matrix-export.mp4" title="Open playable PETSCII Matrix export">

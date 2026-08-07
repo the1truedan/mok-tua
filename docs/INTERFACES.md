@@ -79,6 +79,28 @@ Docs art: **official upstream screenshots** (or generic live UI with **no lab pa
 Mock (docs art): `docs/assets/mokup-c64-tui.png` · source `docs/assets/mokups/c64-tui.html`.  
 True **320×200 framebuffer** remains the screenshot canvas; the live TUI uses terminal cells with the same palette and prompt discipline.
 
+### Software catalog (demoscene “game disks”) · v0.5.9
+
+Each tool is a **disk**. Insert = path + port probe (no spawn). Launch = load screen + recipe.
+
+| CLI | Effect |
+|-----|--------|
+| `software` | List catalog with RUNNING / DISK_READY / DISK_NOT_FOUND |
+| `disk COMFYUI` | Insert-disk probe + banner for one title |
+| `disk framepack --splash` | PETSCII load screen for that tool |
+| `gpu-prep` | Dry-run free-VRAM plan |
+| `gpu-prep --live` | Comfy `POST /free` unload models (allowlisted) |
+
+Catalog source: `config/c64_software_catalog.json` (synced from director stack + launch recipes).  
+Progress: uv-like bars via `api/progress.py` (Rich when installed).  
+GPU law: one active renderer; free Comfy between segments; never kill unknown PIDs.
+
+```bash
+python3 scripts/mok_tua_cli.py software
+python3 scripts/mok_tua_cli.py disk sm_comfy --splash
+python3 scripts/mok_tua_cli.py gpu-prep --profile video --live
+```
+
 **Not in scope for C64 skin:** reimplementing Comfy’s node graph in PETSCII. That stays GUI.
 
 ### Provenance (screenshots / clips)
