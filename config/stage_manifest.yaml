@@ -88,6 +88,64 @@ items:
     required_for: [local_qwen_edit]
     skip_if_exists: true
 
+  # --- MiniMax H3 (Comfy-Org pruned INT8 stack) — requires ComfyUI >= 0.30 ---
+  # Pull only after native MiniMaxH3* nodes appear in /object_info.
+  # required_for: local_minimax_h3 · ~42.5 GB total (T2V/I2V); R2V optional +~21 GB
+  - id: minimax_h3_fl2va_pruned_int8
+    role: video_omni_diffusion
+    source:
+      type: hf
+      repo: Comfy-Org/MiniMax-H3
+      file: diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors
+    dest_subdir: diffusion_models
+    dest_name: minimax_h3_fl2va_pruned_int8_convrot.safetensors
+    required_for: [local_minimax_h3]
+    skip_if_exists: true
+
+  - id: minimax_h3_te_nvfp4
+    role: video_omni_text_encoder
+    source:
+      type: hf
+      repo: Comfy-Org/MiniMax-H3
+      file: text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors
+    dest_subdir: text_encoders
+    dest_name: qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors
+    required_for: [local_minimax_h3]
+    skip_if_exists: true
+
+  - id: minimax_h3_video_vae
+    role: video_omni_vae
+    source:
+      type: hf
+      repo: Comfy-Org/MiniMax-H3
+      file: vae/minimax_h3_video_vae_fp16.safetensors
+    dest_subdir: vae
+    dest_name: minimax_h3_video_vae_fp16.safetensors
+    required_for: [local_minimax_h3]
+    skip_if_exists: true
+
+  - id: minimax_h3_audio_vae
+    role: video_omni_audio_vae
+    source:
+      type: hf
+      repo: Comfy-Org/MiniMax-H3
+      file: vae/minimax_h3_audio_vae_fp32.safetensors
+    dest_subdir: vae
+    dest_name: minimax_h3_audio_vae_fp32.safetensors
+    required_for: [local_minimax_h3]
+    skip_if_exists: true
+
+  - id: minimax_h3_ref2va_pruned_int8
+    role: video_omni_ref2v
+    source:
+      type: hf
+      repo: Comfy-Org/MiniMax-H3
+      file: diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors
+    dest_subdir: diffusion_models
+    dest_name: minimax_h3_ref2va_pruned_int8_convrot.safetensors
+    required_for: [local_minimax_h3_r2v]
+    skip_if_exists: true
+
 workflows:
   - id: qwen_next_scene_angles
     pin: qwen_next_scene_angles
@@ -97,3 +155,8 @@ workflows:
     pin: animatediff_basic
     path: workflows/animatediff_basic.api.json
     status: placeholder
+  - id: minimax_h3_t2v_low_mp
+    pin: minimax_h3_t2v_low_mp
+    path: workflows/minimax_h3_t2v_low_mp.api.json
+    status: earmarked
+    note: Export from Comfy template library after upgrade to >=0.30

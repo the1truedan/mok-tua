@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blade Runner title card — mok-tua</title>
+  <style>
+    :root {
+      --bg: #050505;
+      --fg: #e8e0d0;
+      --dim: #8a8170;
+      --track: 0.28em;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Goudy Old Style", "Goudy Oldstyle", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    }
+    .stage {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8vh 6vw;
+      background:
+        radial-gradient(ellipse at center, #12100c 0%, #050505 70%);
+    }
+    .card {
+      text-align: center;
+      max-width: 28ch;
+    }
+    .line1 {
+      font-size: clamp(1.6rem, 4.2vw, 3.2rem);
+      font-weight: 600;
+      letter-spacing: var(--track);
+      text-transform: uppercase;
+      line-height: 1.25;
+      margin-bottom: 1.4em;
+    }
+    .line2 {
+      font-size: clamp(0.95rem, 2.1vw, 1.45rem);
+      font-weight: 400;
+      letter-spacing: calc(var(--track) * 1.4);
+      text-transform: uppercase;
+      color: var(--dim);
+      line-height: 1.5;
+    }
+    .rule {
+      width: 3.5rem;
+      height: 1px;
+      background: var(--dim);
+      margin: 0 auto 1.6em;
+      opacity: 0.55;
+    }
+    .meta {
+      position: fixed;
+      bottom: 1.2rem;
+      right: 1.4rem;
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: #3a3630;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="card">
+      <div class="line1" id="line1">M.A.N.A.G.E.R.</div>
+      <div class="rule" aria-hidden="true"></div>
+      <div class="line2" id="line2">ORCHESTRATION · NOT MAGIC</div>
+    </div>
+  </div>
+  <div class="meta">mok-tua · blade-runner-title · aesthetic lane</div>
+  <script>
+    (function () {
+      const q = new URLSearchParams(location.search);
+      const l1 = q.get("line1") || document.body.dataset.line1;
+      const l2 = q.get("line2") || document.body.dataset.line2;
+      if (l1) document.getElementById("line1").textContent = l1;
+      if (l2) document.getElementById("line2").textContent = l2;
+    })();
+  </script>
+</body>
+</html>

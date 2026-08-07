@@ -1,5 +1,7 @@
 # Demo / export citations — **pre-FaceID** vs **post-FaceID**
 
+**Sibling aesthetic lane (title cards):** [`../styles/blade-runner-title/`](../styles/blade-runner-title/) — Rands / Blade Runner mood; does not replace PETSCII Matrix.
+
 Use these labels in README, Release notes, and receipts so agents and humans do not greenwash.
 
 | Era | Meaning |
@@ -19,6 +21,7 @@ GitHub cannot inline-play a repo `.mp4` inside Markdown. **Click poster or ▶ l
 | Export | Poster (still) | ▶ Play (mp4) | Cite |
 |--------|----------------|--------------|------|
 | **PETSCII Matrix** brand short (~15s) | [poster.png](mok-tua-petscii-matrix-poster.png) | [▶ play export.mp4](mok-tua-petscii-matrix-export.mp4) | **(post-FaceID)** era · brand · **not** a face demo |
+| **Procurement → M.A.N.A.G.E.R.** anime multi-angle / next-scene (**14.20 s**) | [poster.jpg](manager-pivot-procurement-to-manager-anime-poster.jpg) | [▶ play mp4](manager-pivot-procurement-to-manager-anime.mp4) | photoceopic ref · multi-angle + `Next Scene:` grammar · **Imagine stills** (local Qwen Edit staged, **OOM** on 16 GB) · ffmpeg hold · see [PROVENANCE](../capabilities/manager-pivot/PROVENANCE.json) |
 
 <p align="center">
   <a href="mok-tua-petscii-matrix-export.mp4" title="Open playable PETSCII Matrix export">
@@ -32,6 +35,27 @@ GitHub cannot inline-play a repo `.mp4` inside Markdown. **Click poster or ▶ l
 
 Blob URL (same player):  
 https://github.com/the1truedan/mok-tua/blob/main/docs/assets/exports/mok-tua-petscii-matrix-export.mp4
+
+### Procurement → M.A.N.A.G.E.R. (anime multi-angle · next-scene)
+
+<p align="center">
+  <a href="manager-pivot-procurement-to-manager-anime.mp4" title="Open playable pivot short">
+    <img src="manager-pivot-procurement-to-manager-anime-poster.jpg" alt="Anime pivot storyboard poster — click to play" width="720" />
+  </a>
+</p>
+
+| Field | Value |
+|-------|--------|
+| **Duration** | **14.20 s** (30 fps · 426 frames · 6 panels × 71 frames) |
+| **Narrative** | procurement vibecoding → M.A.N.A.G.E.R. framework |
+| **Style** | anime · multi-angle camera phrases + `Next Scene:` continuity |
+| **Identity ref** | [`../pres-smoke/00-ceo-source-still.jpg`](../pres-smoke/00-ceo-source-still.jpg) (photoceopic) |
+| **Stills renderer** | xAI Imagine `image_edit` (QQQ1 opt-in demo · not medical) |
+| **Local Qwen Image Edit** | weights **present** (`qwen_image_edit_2509_fp8` + multi-angle + next-scene LoRAs); **KSampler OOM** on RTX 4060 Ti 16 GB even with Comfy `--lowvram` |
+| **Motion** | ffmpeg panel-hold (not generative video) |
+| **Sheet** | [`../capabilities/manager-pivot/storyboard-sheet.jpg`](../capabilities/manager-pivot/storyboard-sheet.jpg) |
+| **Full prompts / stats** | [`../capabilities/manager-pivot/PROVENANCE.json`](../capabilities/manager-pivot/PROVENANCE.json) |
+| **Script** | `scripts/render_manager_pivot_qwen_storyboard.py` (local path when VRAM allows) |
 
 **(pre-FaceID)** motion demos (Ken Burns / hybrid Grok) live under lab staging, not this folder — see table below and [`../../DEMO_VIDEO_PROOF_2026-08-05.md`](../../DEMO_VIDEO_PROOF_2026-08-05.md).
 

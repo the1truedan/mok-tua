@@ -1,18 +1,30 @@
 # HANDOFF — mok-tua (latest)
 
-**Date:** 2026-08-05  
-**Version:** **0.5.7** (transparency poster · IPAdapter plus-face panels · fixed PETSCII · IRL UIs)  
-**Branch:** `agent/mok-tua-staged-pulls-runbooks` → **main** (private)  
-**Visibility:** **PRIVATE** (human flip only)
+**Date:** 2026-08-06  
+**Version:** **0.5.8** (manager-pivot anime multi-angle/next-scene · Qwen Edit staged · 14.20s export)  
+**Branch:** `agent/mok-tua-staged-pulls-runbooks` → **main** (public)  
+**Visibility:** **PUBLIC** — https://github.com/the1truedan/mok-tua · `main` protected
 
 ## Start here
 
 1. **Smoke stamp 0.5.7:** [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md) · [`capability_stamp_0.5.7.json`](docs/reports/capability_stamp_0.5.7.json)  
-2. **Capability poster:** [`docs/assets/products-capabilities.png`](docs/assets/products-capabilities.png) (vertical transparency cards)  
-3. **Collage source:** [`docs/assets/mokups/capability-collage.html`](docs/assets/mokups/capability-collage.html)  
-4. **TODO:** [`TODO.md`](TODO.md)  
-5. **I2V provenance:** [`docs/operations/I2V_GROK_VS_LOCAL_GPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md`](docs/operations/I2V_GROK_VS_LOCAL_GPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md)  
-6. **Context pit (control):** `~/grokcode/docs/operations/AGENT_CONTEXT_PIT_AND_MULTI_CLI_CONTINUITY_2026-08-05.md`
+2. **Model pull recheck (video robust):** [`docs/operations/MODEL_PULL_RECHECK_VIDEO_ROBUST_2026-08-06.md`](docs/operations/MODEL_PULL_RECHECK_VIDEO_ROBUST_2026-08-06.md)  
+3. **Public flip disclosure recheck:** [`docs/operations/PUBLIC_FLIP_DISCLOSURE_RECHECK_2026-08-06.md`](docs/operations/PUBLIC_FLIP_DISCLOSURE_RECHECK_2026-08-06.md)  
+4. **Blade Runner title cards (Rands lane):** [`docs/assets/styles/blade-runner-title/`](docs/assets/styles/blade-runner-title/)  
+5. **Capability poster:** [`docs/assets/products-capabilities.png`](docs/assets/products-capabilities.png) (vertical transparency cards)  
+6. **TODO:** [`TODO.md`](TODO.md)  
+7. **I2V provenance:** [`docs/operations/I2V_GROK_VS_LOCAL_GPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md`](docs/operations/I2V_GROK_VS_LOCAL_GPU_CONTEXT_AMBIGUITY_INCIDENT_2026-08-05.md)  
+8. **Context pit (control):** `~/grokcode/docs/operations/AGENT_CONTEXT_PIT_AND_MULTI_CLI_CONTINUITY_2026-08-05.md`
+
+## 2026-08-06 wave
+
+| Item | Notes |
+|------|--------|
+| Qwen Image Edit 2509 fp8 | **PRESENT** ~20 GB · `local_qwen_edit` **6/6** · KSampler **OOM** on 4060 Ti 16 GB |
+| Manager pivot anime short | **14.20 s** · multi-angle + Next Scene · photoceopic ref · Imagine stills + ffmpeg · public assets |
+| MiniMax H3 | Manifest rows `local_minimax_h3` — pull after Comfy ≥0.30 |
+| Blade Runner titles | Template HTML scaffold |
+| Public | https://github.com/the1truedan/mok-tua |
 
 ## What 0.5.7 shipped
 

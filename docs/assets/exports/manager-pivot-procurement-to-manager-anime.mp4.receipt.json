@@ -1,0 +1,45 @@
+{
+  "schema": "mok_tua_artifact_receipt.v1",
+  "artifact": {
+    "path": "/Users/redacted/mok-tua/docs/assets/exports/manager-pivot-procurement-to-manager-anime.mp4",
+    "name": "manager-pivot-procurement-to-manager-anime.mp4",
+    "sha256": "a02eac30a540e5524761e04ee097e0c82718423903f12f407ad7008642a89154",
+    "kind": "video",
+    "exists": true
+  },
+  "renderer": "ffmpeg_hold_from_anime_storyboard_panels",
+  "provider": "ffmpeg",
+  "cloud_or_local": "local",
+  "model": "imagine_image_edit panels \u2192 ffmpeg",
+  "host_role": "desk-host",
+  "qqq": "QQQ1",
+  "prompt": "Turn the camera to a wide-angle lens, front eye-level establishing shot. Anime procurement chaos + photoceopic identity. | Next Scene: Medium shot. Vibecoding procurement automations, stress lines. | Next Scene: Close-up. Realization, MANAGER holographic hope. | Next Scene: Front-right quarter. M.A.N.A.G.E.R. architecture board. | Next Scene: Orbit right 30\u00b0. Floating UI panels, privacy locks, custody tickets. | Next Scene: Wide establishing. Modern lab presenting M.A.N.A.G.E.R. framework.",
+  "negative_prompt": null,
+  "seed": null,
+  "wall_clock_s": null,
+  "tokens": {
+    "input": null,
+    "output": null,
+    "total": null,
+    "note": "n/a"
+  },
+  "gpu": {},
+  "cpu": {},
+  "gpu_evidence": "assemble local; stills from imagine",
+  "sampled_by": "manual",
+  "ts_utc": "2026-08-07T01:45:16Z",
+  "caption_line": "ffmpeg_hold_from_anime_storyboard_panels \u00b7 imagine_image_edit panels \u2192 ffmpeg \u00b7 desk-host \u00b7 ? \u00b7 n/a \u00b7 assemble local; s\u2026",
+  "extra": {
+    "duration_s": 14.2,
+    "target_duration_s": 14.2,
+    "frames_per_panel": [
+      71,
+      71,
+      71,
+      71,
+      71,
+      71
+    ],
+    "panel_count": 6
+  }
+}
