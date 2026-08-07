@@ -17,7 +17,7 @@
 **Turn a script into storyboard pictures — and, when you want, short video — on machines you own.**
 
 Local-first creative control desk for M.A.N.A.G.E.R.  
-Hybrid **v0.5.7** · public · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md)
+Hybrid **v0.5.8** · public · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md)
 
 [![Linktree](https://img.shields.io/badge/Linktree-the1truedan-43E55E?style=flat&logo=linktree&logoColor=white)](https://linktr.ee/the1truedan)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support-FF5E5B?style=flat&logo=ko-fi&logoColor=white)](https://ko-fi.com/the1truedan)
@@ -54,6 +54,37 @@ Story in one place, stills from another, video on a GPU box, face polish in a th
 **mok-tua** is the conductor I needed for that gap — not another generative model, not a reskin of Comfy. It keeps the run ordered: shots, stages, QQQ gates, launch recipes, receipts. The tools keep their own GUIs.
 
 The **Commodore 64** conductor skin is deliberate nostalgia. Time at the **Gateway Tech hardware museum** (and parallel **C64-themed deck work** on the broader **ai-gateway** maintenance surface) pulled me back to a fixed palette, a monospaced prompt, and a `READY.` line. So the TUI borrows that spirit while vendor apps stay modern. You can drive the same verbs from CLI, API, C64 TUI, or modern TUI — and still open Comfy or Director’s Console when you want the full internal GUI.
+
+---
+
+## Example · procurement vibecoding → M.A.N.A.G.E.R. (anime multi-angle)
+
+Six-panel **multi-angle + next-scene** storyboard (anime style) from the photoceopic identity still, then a **14.20 s** panel-hold short.
+
+<p align="center">
+  <a href="docs/assets/exports/manager-pivot-procurement-to-manager-anime.mp4" title="Play 14.20s pivot short">
+    <img src="docs/assets/exports/manager-pivot-procurement-to-manager-anime-poster.jpg" alt="Anime pivot poster — click to play MP4" width="900" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="docs/assets/exports/manager-pivot-procurement-to-manager-anime.mp4"><strong>▶ Play 14.20 s short</strong></a>
+  · <a href="docs/assets/capabilities/manager-pivot/storyboard-sheet.jpg">6-panel sheet</a>
+  · <a href="docs/assets/capabilities/manager-pivot/PROVENANCE.json">prompts · models · duration stats</a>
+</p>
+
+| | |
+|--|--|
+| **Story** | Chaotic procurement / vibecoding office → pivot → M.A.N.A.G.E.R. framework board → calm orchestrated lab |
+| **Camera grammar** | Natural multi-angle phrases + `Next Scene:` continuity (same design as Qwen Edit LoRAs) |
+| **Ref** | `docs/assets/pres-smoke/00-ceo-source-still.jpg` (photoceopic) |
+| **Duration** | **14.20 s** · 30 fps · 6×71 frames |
+| **Stills** | Imagine `image_edit` · QQQ1 demo (not medical) |
+| **Local Qwen Edit 2509** | Pool staged (`local_qwen_edit` 6/6) · **OOM on 16 GB** KSampler — see provenance |
+
+<p align="center">
+  <img src="docs/assets/capabilities/manager-pivot/storyboard-sheet.jpg" alt="Six-panel anime storyboard sheet" width="900" />
+</p>
 
 ---
 

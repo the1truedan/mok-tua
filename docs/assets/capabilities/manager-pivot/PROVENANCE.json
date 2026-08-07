@@ -1,0 +1,82 @@
+{
+  "schema": "mok_tua_manager_pivot_storyboard.v1",
+  "generated_at": "2026-08-07T01:45:16.399156+00:00",
+  "narrative": "procurement vibecoding \u2192 M.A.N.A.G.E.R. framework",
+  "style": "anime",
+  "ref_image": "docs/assets/pres-smoke/00-ceo-source-still.jpg",
+  "ref_note": "photoceopic identity inspiration",
+  "local_qwen_edit": {
+    "weights_present": true,
+    "inventory_local_qwen_edit": "6/6 pool files present",
+    "comfy": "0.29.0 gpu-host --lowvram",
+    "result": "OOM on KSampler \u2014 qwen_image_edit_2509_fp8 + VL TE exceeds 16GB peak",
+    "script": "scripts/render_manager_pivot_qwen_storyboard.py",
+    "models": [
+      "qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+      "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+      "qwen_image_vae.safetensors",
+      "Qwen-Edit-2509-Multiple-angles.safetensors",
+      "next-scene_lora-v2-3000.safetensors"
+    ]
+  },
+  "this_render": {
+    "renderer": "imagine_image_edit_photoceopic_ref",
+    "camera_grammar": "multi-angle natural language + Next Scene: prefixes (same as Qwen LoRA design)",
+    "qqq": "QQQ1_opt_in_imagine_demo_not_medical",
+    "panels": [
+      {
+        "key": "01_wide_procurement",
+        "prompt": "Turn the camera to a wide-angle lens, front eye-level establishing shot. Anime procurement chaos + photoceopic identity.",
+        "path": "work/manager_pivot_qwen/01_wide_procurement.png",
+        "public": "docs/assets/capabilities/manager-pivot/01_wide_procurement.jpg"
+      },
+      {
+        "key": "02_medium_vibecode",
+        "prompt": "Next Scene: Medium shot. Vibecoding procurement automations, stress lines.",
+        "path": "work/manager_pivot_qwen/02_medium_vibecode.png",
+        "public": "docs/assets/capabilities/manager-pivot/02_medium_vibecode.jpg"
+      },
+      {
+        "key": "03_close_pivot",
+        "prompt": "Next Scene: Close-up. Realization, MANAGER holographic hope.",
+        "path": "work/manager_pivot_qwen/03_close_pivot.png",
+        "public": "docs/assets/capabilities/manager-pivot/03_close_pivot.jpg"
+      },
+      {
+        "key": "04_board_manager",
+        "prompt": "Next Scene: Front-right quarter. M.A.N.A.G.E.R. architecture board.",
+        "path": "work/manager_pivot_qwen/04_board_manager.png",
+        "public": "docs/assets/capabilities/manager-pivot/04_board_manager.jpg"
+      },
+      {
+        "key": "05_orbit_framework",
+        "prompt": "Next Scene: Orbit right 30\u00b0. Floating UI panels, privacy locks, custody tickets.",
+        "path": "work/manager_pivot_qwen/05_orbit_framework.png",
+        "public": "docs/assets/capabilities/manager-pivot/05_orbit_framework.jpg"
+      },
+      {
+        "key": "06_wide_new_world",
+        "prompt": "Next Scene: Wide establishing. Modern lab presenting M.A.N.A.G.E.R. framework.",
+        "path": "work/manager_pivot_qwen/06_wide_new_world.png",
+        "public": "docs/assets/capabilities/manager-pivot/06_wide_new_world.jpg"
+      }
+    ]
+  },
+  "video": {
+    "path": "docs/assets/exports/manager-pivot-procurement-to-manager-anime.mp4",
+    "poster": "docs/assets/exports/manager-pivot-procurement-to-manager-anime-poster.jpg",
+    "sheet": "docs/assets/capabilities/manager-pivot/storyboard-sheet.jpg",
+    "target_duration_s": 14.2,
+    "measured_duration_s": 14.2,
+    "fps": 30,
+    "frames_total": 426,
+    "frames_per_panel": [
+      71,
+      71,
+      71,
+      71,
+      71,
+      71
+    ]
+  }
+}
