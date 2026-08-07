@@ -53,26 +53,30 @@ Docs art: **official upstream screenshots** (or generic live UI with **no lab pa
 
 1. Verbs stay in `scripts/mok_tua_cli.py` (`doctor`, `providers`, `run`, `smoke`, `lock`, `receipt`, …).  
 2. `tui/` is a thin front-end: `tui/bridge.py` spawns the CLI; no second business-logic path.  
-3. **Launch:** PETSCII demoscene **MOK-TUA** block-font splash → two-pane deck.  
-4. **Left pane:** launch intro (prompt recommendations **or** `--prompt` CLI seed) + RichLog.  
-5. **Right pane:** system stats (gpu-host + desk) with **VIC-II style bars** (`████░`).  
+3. **Launch workflow (v0.5.10):** CLI PETSCII loader → CLI args / disk menu print → `status`+`software` probes → Textual PETSCII splash → two-pane deck with help+status+media paths.  
+4. **Left pane:** CLI argument menu · C64 disk directory · stack status · recent media paths · prompt recommendations (or `--prompt` seed) + RichLog.  
+5. **Right pane:** system stats (gpu-host + desk) with **VIC-II style bars** (`████░`); refreshes after status/doctor/show/play.  
 6. Skins (`.tcss`): **`c64`** default (aliases `1980crt`, `tui-c64-mode-default-1980crt-tui`) · **`green`** / `matrix` · **`mono`** / `paper` · **`modern`**.  
-7. Media: `show PATH` (in-pane still / video thumb) · `play PATH` (external mpv/timg/open).  
+7. Media: `show PATH` (in-pane still / video thumb for **jpg/png/mp4**) · `play` / `open PATH` (external mpv/timg/open) · `media` lists recent exports.  
 8. Full-screen via **Textual** when installed (`pip install -r tui/requirements.txt`); otherwise **stdlib REPL** (`--repl`).  
-9. Entry points: `python -m tui`, `mok_tua_cli.py tui`, `./scripts/run_tui.sh`.
+9. Entry points: `python -m tui`, `mok_tua_cli.py tui`, `./scripts/run_tui.sh`.  
+10. Brand short: `docs/assets/exports/mok-tua-petscii-matrix-export.mp4` (loader→µ→CRT→tmux→disk menu).
 
 | Command | Effect |
 |---------|--------|
-| `python3 scripts/mok_tua_cli.py tui` | C64 skin (default) + PETSCII boot |
+| `python3 scripts/mok_tua_cli.py tui` | PETSCII intro + CLI help + status → C64 deck |
+| `… tui --no-intro` | Skip CLI preflight print (TUI still boots) |
+| `… tui --no-status` | Skip status/software probes (offline-friendly) |
 | `… tui --skin green` | Green phosphor on black |
 | `… tui --skin mono` | White text on black |
 | `… tui --skin modern` | Modern navy TUI |
 | `… tui --prompt "…"` | Seed left intro with prompt text |
 | `… tui --repl` | Line-oriented (no Textual) |
-| In-TUI: `D` / `doctor` | CLI doctor |
+| In-TUI: `D` / `doctor` | CLI doctor (+ refresh stats) |
 | In-TUI: `R` / `run [path]` | Dry-run story (default fixture) |
-| In-TUI: `P` `S` `L` `T` `M` `H` `Q` | providers · smoke · lock · status · monitor · help · quit |
-| In-TUI: `show` / `play` / `receipt stamp` | media + provenance |
+| In-TUI: `P` `S` `L` `T` `W` `M` `H` `Q` | providers · smoke · lock · status · software · media · help · quit |
+| In-TUI: `menu` | C64 disk directory (args · prompts · caps) |
+| In-TUI: `show` / `play` / `open` / `receipt stamp` | jpg/png/mp4 + provenance |
 
 **C64 font note:** true PETSCII ROM font is a **terminal font** choice (Kitty/WezTerm/iTerm). The TUI ships block-element demoscene logos + VIC-II palette; it cannot force C64 ROM glyphs in every emulator.
 

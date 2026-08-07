@@ -154,3 +154,37 @@ def media_status() -> str:
     except ImportError:
         tools.append("textual-image:n")
     return "media " + " ".join(tools)
+
+
+def list_recent_media(root: Path | None = None, *, limit: int = 12) -> list[Path]:
+    """Find recent jpg/png/mp4 under docs/assets/exports and work/ (newest first)."""
+    root = root or Path(__file__).resolve().parents[1]
+    roots = [
+        root / "docs" / "assets" / "exports",
+        root / "work",
+        root / "docs" / "assets" / "capabilities",
+    ]
+    found: list[Path] = []
+    exts = IMAGE_EXT | VIDEO_EXT
+    for base in roots:
+        if not base.is_dir():
+            continue
+        try:
+            for p in base.rglob("*"):
+                if p.is_file() and p.suffix.lower() in exts:
+                    # skip huge intermediate frame dumps
+                    if "frames" in p.parts or "frames_v2" in p.parts or "frames_v3" in p.parts:
+                        continue
+                    if p.name.startswith("f") and p.suffix.lower() == ".png" and len(p.stem) == 5:
+                        continue
+                    found.append(p)
+        except OSError:
+            continue
+    found.sort(key=lambda p: p.stat().st_mtime if p.exists() else 0, reverse=True)
+    return found[:limit]
+
+
+def open_media(path: Path) -> dict[str, Any]:
+    """Alias for play_external — images and video."""
+    return play_external(path)
+

@@ -264,3 +264,51 @@ def vic_bar(pct: float | None, width: int = 10) -> str:
     p = max(0.0, min(100.0, float(pct)))
     filled = int(round((p / 100.0) * width))
     return "█" * filled + "░" * (width - filled) + f" {p:5.1f}%"
+
+
+def cli_args_menu() -> str:
+    """Compact argument / verb list for boot → CLI help handoff."""
+    return (
+        "  models:  inventory · stage\n"
+        "  story:   sides PATH · run PATH · batch PATHS…\n"
+        "  stack:   providers · doctor · launch ID · stop ID · pull\n"
+        "  disks:   software · disk COMFYUI|FRAMEPACK|DIRECTORS · gpu-prep\n"
+        "  process: discover · audit · smoke · lock show|write|load\n"
+        "  fed:     packet emit · nodes list · chains tip\n"
+        "  media:   show PATH.jpg|.png · play PATH.mp4 · open PATH\n"
+        "  proof:   receipt show|stamp PATH --renderer … --qqq QQQ0\n"
+        "  ui:      tui [--skin c64|green|mono|modern] [--prompt TEXT]\n"
+        "\n"
+        "  prompt types: still · multi-angle · Next Scene: · i2v sizzle\n"
+        "  caps: storyboard · video segments · music/voice · federation\n"
+    )
+
+
+def disk_directory_menu() -> str:
+    """Old-school C64 LOAD\"$\",8 style software catalog (text)."""
+    return (
+        '**** MOK-TUA DISK DIRECTORY ****\n'
+        ' 0 "MOK-TUA CONDUCTOR "  00 2A\n'
+        " DRIVE 8  ·  UNIT 0  ·  QQQ0 LOCAL\n"
+        "\n"
+        ' 1  "SOFTWARE"              PRG  LIST GAME DISKS\n'
+        ' 2  "DISK COMFYUI --SPLASH"  PRG  INSERT + LOAD SCRN\n'
+        ' 3  "DISK FRAMEPACK"        PRG  LONG I2V STUDIO\n'
+        ' 4  "DISK DIRECTORS"        PRG  CONSOLE ORCHESTRA\n'
+        ' 5  "GPU-PREP --LIVE"       PRG  FREE VRAM /FREE\n'
+        ' 6  "RUN STORY.MD"          PRG  STORY→SHOTS→STILLS\n'
+        ' 7  "SIDES SCRIPT.PDF"      PRG  INGEST PDF/FDX\n'
+        ' 8  "DOCTOR"                PRG  STACK HEALTH\n'
+        ' 9  "TUI --SKIN C64"        PRG  CONDUCTOR DECK\n'
+        '10  "SHOW OUT.PNG"          PRG  PREVIEW STILL\n'
+        '11  "PLAY OUT.MP4"          PRG  EXTERNAL PLAYER\n'
+        '12  "RECEIPT STAMP"         PRG  PROVENANCE SIDECAR\n'
+        '13  "PROMPTS: STILL"        SEQ  DREAMSHAPER / FLUX\n'
+        '14  "PROMPTS: MULTI-ANGLE"  SEQ  CAMERA GRAMMAR\n'
+        '15  "PROMPTS: NEXT SCENE:"  SEQ  CONTINUITY LOCK\n'
+        '16  "PROMPTS: I2V SIZZLE"   SEQ  ANIMATEDIFF / WAN\n'
+        "\n"
+        ' EXAMPLE:  show docs/assets/exports/mok-tua-petscii-matrix-poster.png\n'
+        ' EXAMPLE:  play docs/assets/exports/mok-tua-petscii-matrix-export.mp4\n'
+        " BLOCKS FREE: 664  ·  TYPE software | disk ID | show PATH\n"
+    )

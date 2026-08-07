@@ -27,15 +27,25 @@ Commands (type name or shortcut):
   R  run         Dry-run sample story (or: run PATH)
   B  batch       Dry-run batch on fixtures
   I  inventory   Model stage inventory
+  W  software    C64 software catalog (game disks)
+  K  disk ID     Insert-disk probe (e.g. disk COMFYUI)
+  G  gpu-prep    Free-VRAM plan (--live to POST /free)
   N  nodes       Federation node list
   C  chains      CHAINS tip / verify (chains tip)
   M  monitor     One-shot gpu-host sample
-  show PATH      Preview still / video thumb in left pane
-  play PATH      External mpv/timg/open for media
+  show PATH      Preview still / video thumb (jpg png webp)
+  play PATH      External player for mp4 / image
+  open PATH      Alias of play (jpg png mp4)
   thumb PATH     Mini preview (alias of show)
+  media          List recent exports + player tools
+  menu           C64 disk directory (args · prompts · caps)
   receipt …      show PATH | stamp PATH --renderer … [--burn-caption]
   H  help        This screen
   Q  quit        Exit TUI
+
+Launch workflow: PETSCII boot → CLI args menu → status → READY.
+  After READY: type a prompt/command; statuses refresh on doctor/status.
+  After generate: show work/out.png · play work/out.mp4
 
 Skins: c64 (default) | 1980crt | green | mono | modern
 Same verbs as: python3 scripts/mok_tua_cli.py <cmd>
@@ -71,6 +81,9 @@ def resolve_command(line: str) -> tuple[str, list[str] | None, str | None]:
         "r": "run",
         "b": "batch",
         "i": "inventory",
+        "w": "software",
+        "k": "disk",
+        "g": "gpu-prep",
         "n": "nodes",
         "c": "chains",
         "m": "monitor",
@@ -136,11 +149,30 @@ def resolve_command(line: str) -> tuple[str, list[str] | None, str | None]:
     if head == "monitor":
         return ("monitor", ["monitor", *rest], None)
 
-    if head in ("show", "thumb", "play"):
+    if head in ("show", "thumb", "play", "open"):
+        if head == "open":
+            head = "play"
         if not rest:
-            return (head, None, f"usage: {head} PATH")
+            return (head, None, f"usage: {head} PATH  (jpg/png/mp4)")
         # local TUI handlers use argv form [verb, path]
         return (head, [head, *rest], None)
+
+    if head == "media":
+        return ("media", ["media"], None)
+
+    if head == "menu":
+        return ("menu", ["menu"], None)
+
+    if head == "software":
+        return ("software", ["software", *rest], None)
+
+    if head == "disk":
+        if not rest:
+            return ("disk", None, "usage: disk COMFYUI|FRAMEPACK|DIRECTORS [--splash]")
+        return ("disk", ["disk", *rest], None)
+
+    if head in ("gpu-prep", "gpuprep", "gpu_prep"):
+        return ("gpu-prep", ["gpu-prep", *rest], None)
 
     if head == "receipt":
         if not rest:
@@ -165,6 +197,9 @@ def resolve_command(line: str) -> tuple[str, list[str] | None, str | None]:
         "stop",
         "pull",
         "status",
+        "software",
+        "disk",
+        "gpu-prep",
         "discover",
         "audit",
         "stage-app",
@@ -243,14 +278,14 @@ def boot_banner(skin: str = "c64", version: str = "0.5") -> str:
             "\n"
             "READY.\n"
             "\n"
-            " [D]OCTOR [P]ROVIDERS [R]UN [S]MOKE\n"
+            " [D]OCTOR [P]ROVIDERS [R]UN [S]MOKE [W]SOFTWARE\n"
             " [L]OCK   [T]STATUS  [M]ONITOR [H]ELP [Q]UIT\n"
-            " show/play PATH · receipt stamp PATH\n"
+            " show/play/open PATH · menu · media · receipt stamp\n"
             "\n"
             "READY."
         )
     return (
         f"mok-tua conductor TUI v{version}  skin={skin}\n"
-        "Type help · shortcuts D/P/R/S/L/T/M/H/Q · same verbs as CLI\n"
-        "READY."
+        "Type help · shortcuts D/P/R/S/L/T/M/W/H/Q · same verbs as CLI\n"
+        "show/play jpg png mp4 · READY."
     )

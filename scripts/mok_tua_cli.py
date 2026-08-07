@@ -36,6 +36,7 @@ def main() -> int:
             "  process: discover|audit|stage-app|smoke|lock\n"
             "  federation: packet|nodes|chains (ask_packet.v1 trusted lab)\n"
             "  ui: tui (--skin c64|green|mono|modern · --prompt TEXT)\n"
+            "      PETSCII intro → CLI help → status → deck; show/play jpg|png|mp4\n"
             "  provenance: receipt show|stamp"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -260,7 +261,10 @@ def main() -> int:
     # --- conductor TUI ---
     tui_p = sub.add_parser(
         "tui",
-        help="Full-screen / line TUI over CLI verbs (C64 default · green/mono · modern)",
+        help=(
+            "Conductor TUI: PETSCII intro → CLI help → status → deck "
+            "(C64 default · green/mono · modern); show/play media"
+        ),
     )
     tui_p.add_argument(
         "--skin",
@@ -280,6 +284,16 @@ def main() -> int:
         action="store_true",
         help="Force stdlib line REPL (no Textual)",
     )
+    tui_p.add_argument(
+        "--no-intro",
+        action="store_true",
+        help="Skip PETSCII + CLI-help preflight print before Textual",
+    )
+    tui_p.add_argument(
+        "--no-status",
+        action="store_true",
+        help="Skip status/software probes at launch",
+    )
 
     args = p.parse_args()
 
@@ -294,6 +308,10 @@ def main() -> int:
             argv.extend(["--prompt", args.prompt])
         if args.repl:
             argv.append("--repl")
+        if args.no_intro:
+            argv.append("--no-intro")
+        if args.no_status:
+            argv.append("--no-status")
         return tui_main(argv)
 
     if args.cmd == "inventory":

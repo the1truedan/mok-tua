@@ -3,6 +3,24 @@
 All notable changes to **mok-tua** are documented here.  
 Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are local lab (America/New_York context).
 
+## [0.5.10] — 2026-08-06
+
+### Added
+
+- **PETSCII Matrix brand short v4** (~28s): C64 loader → µ rain → bright MOK-TUA → CRT TV-off
+  blip → tmux CLI → INSERT DISK → C64 disk directory (args · prompt types · capabilities).
+  - `docs/assets/exports/mok-tua-petscii-matrix-export.mp4` + poster
+  - Re-render: `scripts/render_petscii_matrix_export.py`
+- **Launch workflow** (`tui/workflow.py`): PETSCII intro → CLI help/args menu → `status`+`software`
+  probes → conductor deck with media-ready paths.
+- TUI verbs: `menu` · `media` · `open PATH` (alias of play) · shortcuts `W` software · `K` disk · `G` gpu-prep.
+- `show` / `play` / `open` for **jpg · png · mp4** (repo-relative paths + recent export list).
+
+### Changed
+
+- `tui` CLI: default preflight intro; `--no-intro` / `--no-status` escapes.
+- Package TUI version **0.5.10**.
+
 ## [0.5.7] — 2026-08-05
 
 ### Added
