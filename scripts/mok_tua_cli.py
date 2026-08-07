@@ -29,7 +29,7 @@ def main() -> int:
     p = argparse.ArgumentParser(
         prog="mok-tua",
         description=(
-            "mok-tua v0.5 — director stack process\n"
+            "mok-tua v0.5.10 — director stack process\n"
             "  models: inventory|stage\n"
             "  story:  sides|run|batch\n"
             "  stack:  providers|doctor|launch|stop|pull|status\n"

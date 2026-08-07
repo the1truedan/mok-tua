@@ -199,7 +199,7 @@ def boot_frame(step: int, bar_cells: int = BAR_CELLS) -> Image.Image:
     body_f = _font(20)
     d.text(
         (W // 2, 28),
-        "**** MOK-TUA V0.5.9  CONDUCTOR · SKIN=C64 ****",
+        "**** MOK-TUA V0.5.10  CONDUCTOR · SKIN=C64 ****",
         fill=C64_TITLE,
         font=title_f,
         anchor="mt",
@@ -212,7 +212,7 @@ def boot_frame(step: int, bar_cells: int = BAR_CELLS) -> Image.Image:
 
     d.text(
         (W // 2, ly + logo.height + 28),
-        "**** MOK-TUA V0.5.9  CONDUCTOR ****",
+        "**** MOK-TUA V0.5.10  CONDUCTOR ****",
         fill=C64_INK,
         font=body_f,
         anchor="mt",
@@ -413,7 +413,7 @@ def tmux_cli_frame(t: float, *, blink: bool = True) -> Image.Image:
         ("dim", "last login: local · conductor session"),
         ("dim", "cd ~/mok-tua && source .venv/bin/activate"),
         ("fg", "$ python3 scripts/mok_tua_cli.py --help"),
-        ("accent", "mok-tua v0.5.9 — director stack process"),
+        ("accent", "mok-tua v0.5.10 — director stack process"),
         ("dim", "  models: inventory | stage"),
         ("dim", "  story:  sides | run | batch"),
         ("dim", "  stack:  providers | doctor | launch | stop | pull"),

@@ -29,6 +29,8 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
 - `docs/INTERFACES.md` launch workflow table (media · menu · intro flags).
 - `docs/assets/exports/README.md` beat sheet v4.
 - `docs/MILESTONES.md` row `2026.08-mok-tua-petscii-matrix-v4-launch-workflow`.
+- Root `VERSION` file · README shields · GitHub release **v0.5.10** tag notation.
+- API / tier-lock package version strings aligned to **0.5.10**.
 
 ## [0.5.7] — 2026-08-05
 

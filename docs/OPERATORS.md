@@ -3,7 +3,7 @@
 > **Looking for the plain-English overview?** Start at the root [README.md](../README.md).  
 > This page keeps the **technical** detail (ports, CLI, tiers, federation, API tables).
 
-**Version:** hybrid v0.5 · Control API **`:8799`**
+**Version:** hybrid **v0.5.10** · Control API **`:8799`**
 
 ---
 
