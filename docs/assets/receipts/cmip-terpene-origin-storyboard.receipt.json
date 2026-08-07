@@ -1,7 +1,7 @@
 {
   "schema": "mok_tua_artifact_receipt.v1",
   "artifact": {
-    "path": "/Users/dtm/mok-tua/docs/assets/cmip-terpene-origin/cmip-origin-storyboard-sheet.jpg",
+    "path": "docs/assets/cmip-terpene-origin/cmip-origin-storyboard-sheet.jpg",
     "name": "cmip-origin-storyboard-sheet.jpg",
     "sha256": "99e7ab6f1cdfab5060003dea687b65ee404b3d78f95177efc9e665d029c2b0d3",
     "kind": "image",
