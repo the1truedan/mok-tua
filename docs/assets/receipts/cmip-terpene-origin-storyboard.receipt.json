@@ -1,0 +1,39 @@
+{
+  "schema": "mok_tua_artifact_receipt.v1",
+  "artifact": {
+    "path": "/Users/redacted/mok-tua/docs/assets/cmip-terpene-origin/cmip-origin-storyboard-sheet.jpg",
+    "name": "cmip-origin-storyboard-sheet.jpg",
+    "sha256": "99e7ab6f1cdfab5060003dea687b65ee404b3d78f95177efc9e665d029c2b0d3",
+    "kind": "image",
+    "exists": true
+  },
+  "renderer": "gpu_comfy_faceid_plus_v2",
+  "provider": "comfy",
+  "cloud_or_local": "local",
+  "model": "DreamShaper_8_pruned + ip-adapter-faceid-plusv2_sd15 + clip_vision_h + buffalo_l",
+  "host_role": "gpu-host",
+  "qqq": "QQQ0",
+  "prompt": "CMIP terpene origin 8-panel FaceID storyboard",
+  "negative_prompt": null,
+  "seed": null,
+  "wall_clock_s": null,
+  "tokens": {
+    "input": null,
+    "output": null,
+    "total": null,
+    "note": "n/a"
+  },
+  "gpu": {},
+  "cpu": {},
+  "gpu_evidence": null,
+  "sampled_by": "manual",
+  "ts_utc": "2026-08-07T21:11:22Z",
+  "caption_line": "gpu_comfy_faceid_plus_v2 \u00b7 DreamShaper_8_pruned + ip-adapter-faceid-plusv2_sd15 + clip_vision_h + buffalo_l \u00b7 gpu-host \u2026",
+  "extra": {
+    "face_ref": "docs/assets/pres-smoke/00-ceo-source-still.jpg",
+    "face_ref_url": "https://github.com/the1truedan/mok-tua/blob/main/docs/assets/pres-smoke/00-ceo-source-still.jpg",
+    "script": "scripts/regen_cmip_terpene_storyboard.py",
+    "not_imagine": true,
+    "panel_count": 8
+  }
+}
