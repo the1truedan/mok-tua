@@ -15,11 +15,20 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
   probes → conductor deck with media-ready paths.
 - TUI verbs: `menu` · `media` · `open PATH` (alias of play) · shortcuts `W` software · `K` disk · `G` gpu-prep.
 - `show` / `play` / `open` for **jpg · png · mp4** (repo-relative paths + recent export list).
+- Session handoff: `docs/operations/SESSION_HANDOFF_2026-08-06_0.5.10_PETSCII_LAUNCH_WORKFLOW.md`
+  · root `HANDOFF.md` paste packet for 0.5.10.
 
 ### Changed
 
 - `tui` CLI: default preflight intro; `--no-intro` / `--no-status` escapes.
 - Package TUI version **0.5.10**.
+- README brand blurb documents ~28s loader→µ→CRT→tmux→disk menu narrative.
+
+### Docs
+
+- `docs/INTERFACES.md` launch workflow table (media · menu · intro flags).
+- `docs/assets/exports/README.md` beat sheet v4.
+- `docs/MILESTONES.md` row `2026.08-mok-tua-petscii-matrix-v4-launch-workflow`.
 
 ## [0.5.7] — 2026-08-05
 
