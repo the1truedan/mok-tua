@@ -1,8 +1,10 @@
 """Textual full-screen conductor TUI (optional dependency).
 
-Launch: PETSCII demoscene MOK-TUA splash → two-pane deck
-  left  = intro (prompt arg or recommendations) + log
+Launch workflow:
+  PETSCII demoscene splash → CLI args / disk menu → status probes → two-pane deck
+  left  = intro + log (help · status · media paths)
   right = system stats with VIC-II bars
+  READY. accepts commands; show/play/open jpg|png|mp4
 """
 
 from __future__ import annotations
@@ -11,10 +13,11 @@ from pathlib import Path
 from typing import ClassVar
 
 from tui import DEFAULT_SKIN, SKINS, resolve_skin, __version__
-from tui.bridge import HELP_TEXT, boot_banner, resolve_command, run_cli
+from tui.bridge import HELP_TEXT, resolve_command, run_cli
 from tui.media import classify, media_status, play_external, render_image_preview
-from tui.petscii import intro_recommendations, intro_with_prompt, loading_screen_text
+from tui.petscii import disk_directory_menu, loading_screen_text
 from tui.stats_panel import format_stats_panel, sample_gpu_host, sample_local_cpu
+from tui.workflow import deck_intro_lines, media_ready_block
 
 THEMES_DIR = Path(__file__).resolve().parent / "themes"
 
@@ -32,6 +35,9 @@ def build_app(
     skin: str = DEFAULT_SKIN,
     *,
     seed_prompt: str | None = None,
+    preloaded_status: str | None = None,
+    preloaded_software: str | None = None,
+    auto_status: bool = True,
 ):
     """Return a MokTuaApp class instance. Raises ImportError if Textual missing."""
     from textual import work
@@ -68,10 +74,17 @@ def build_app(
             self,
             skin_name: str = DEFAULT_SKIN,
             seed_prompt: str | None = None,
+            *,
+            preloaded_status: str | None = None,
+            preloaded_software: str | None = None,
+            auto_status: bool = True,
         ) -> None:
             super().__init__()
             self.skin_name = resolve_skin(skin_name)
             self.seed_prompt = (seed_prompt or "").strip() or None
+            self._preloaded_status = preloaded_status
+            self._preloaded_software = preloaded_software
+            self._auto_status = auto_status
             self._busy = False
             self._booting = True
             self._boot_step = 0
@@ -86,8 +99,8 @@ def build_app(
                 else f"mok-tua conductor  v{ver}  ·  skin={self.skin_name}"
             )
             menu = (
-                "[D]octor  [P]roviders  [R]un  [S]moke  [L]ock  [T]status  "
-                "[M]onitor  [H]elp  [Q]uit  ·  show/play/receipt"
+                "[D]octor  [P]roviders  [R]un  [S]moke  [T]status  [W]software  "
+                "[M]edia  [H]elp  [Q]uit  ·  show/play/open jpg·png·mp4"
             )
             yield Static(title, id="chrome")
             yield Static(menu, id="menu")
@@ -149,17 +162,29 @@ def build_app(
             except Exception:
                 pass
             log = self.query_one("#log", RichLog)
-            for line in boot_banner(self.skin_name, __version__).splitlines():
-                log.write(line)
+            # Prefer CLI preflight probes; else fetch status when auto_status on.
+            status_text = self._preloaded_status
+            software_text = self._preloaded_software
+            if self._auto_status and status_text is None:
+                log.write("[dim]probing stack status…[/]")
+                self._busy = True
+                self._set_ready("BUSY…")
+                self.run_boot_status_worker()
+                return
+            self._write_deck_intro(status_text or "", software_text or "")
+
+        def _write_deck_intro(self, status_text: str, software_text: str) -> None:
+            log = self.query_one("#log", RichLog)
+            for line in deck_intro_lines(
+                self.skin_name,
+                __version__,
+                seed_prompt=self.seed_prompt,
+                status_text=status_text or None,
+                software_text=software_text or None,
+            ):
+                safe = line.replace("[", "\\[")
+                log.write(safe)
             log.write("")
-            if self.seed_prompt:
-                for line in intro_with_prompt(self.seed_prompt).splitlines():
-                    log.write(line)
-            else:
-                for line in intro_recommendations().splitlines():
-                    log.write(line)
-            log.write("")
-            log.write(media_status())
             log.write("[bold]READY.[/]")
             self._refresh_stats()
             self._stats_timer = self.set_interval(3.0, self._refresh_stats, name="stats")
@@ -167,6 +192,18 @@ def build_app(
                 self.query_one("#cmd", Input).focus()
             except Exception:
                 pass
+
+        @work(thread=True, exclusive=True)
+        def run_boot_status_worker(self) -> None:
+            from tui.workflow import run_status_snapshot
+
+            st, sw = run_status_snapshot()
+            self.call_from_thread(self._finish_boot_status, st, sw)
+
+        def _finish_boot_status(self, status_text: str, software_text: str) -> None:
+            self._busy = False
+            self._set_ready("READY.")
+            self._write_deck_intro(status_text, software_text)
 
         def _refresh_stats(self) -> None:
             try:
@@ -224,6 +261,23 @@ def build_app(
                 return
             if name == "help":
                 self._write_help()
+                # after help, refresh right-pane statuses
+                self._refresh_stats()
+                return
+            if name == "menu":
+                log = self.query_one("#log", RichLog)
+                for line in disk_directory_menu().splitlines():
+                    log.write(line.replace("[", "\\["))
+                log.write("[bold]READY.[/]")
+                self._refresh_stats()
+                return
+            if name == "media":
+                log = self.query_one("#log", RichLog)
+                for line in media_ready_block().splitlines():
+                    log.write(line.replace("[", "\\["))
+                log.write(media_status())
+                log.write("[bold]READY.[/]")
+                self._refresh_stats()
                 return
             if name == "show":
                 self._handle_show(argv or [])
@@ -235,16 +289,32 @@ def build_app(
                 self._handle_show(argv or [], thumb=True)
                 return
             assert argv is not None
+            # status / doctor / software: refresh VIC-II pane after
             self._start_cli(name, argv)
+
+        def _resolve_media_path(self, raw: str) -> Path:
+            path = Path(raw).expanduser()
+            if path.is_file():
+                return path
+            # try relative to repo root
+            from tui.workflow import ROOT
+
+            alt = ROOT / raw
+            if alt.is_file():
+                return alt
+            return path
 
         def _handle_show(self, argv: list[str], *, thumb: bool = False) -> None:
             log = self.query_one("#log", RichLog)
             if len(argv) < 2:
-                log.write("[red]usage: show PATH | thumb PATH[/]")
+                log.write("[red]usage: show PATH.jpg|.png|.mp4 | thumb PATH[/]")
+                for line in media_ready_block().splitlines()[:12]:
+                    log.write(line.replace("[", "\\["))
                 return
-            path = Path(argv[1]).expanduser()
+            path = self._resolve_media_path(argv[1])
             if not path.is_file():
                 log.write(f"[red]missing: {path}[/]")
+                log.write("[dim]tip: media  ·  show docs/assets/exports/….png[/]")
                 return
             kind = classify(path)
             if kind == "video":
@@ -257,25 +327,32 @@ def build_app(
                 else:
                     log.write("[yellow]no ffmpeg thumb — try: play PATH[/]")
                     return
+            elif kind == "other":
+                log.write(f"[red]not an image/video:[/] {path.suffix}")
+                return
             preview = render_image_preview(path, max_width=52 if not thumb else 28)
             log.write(f"[bold]SHOW[/] {path}")
             # RichLog markup: escape brackets from chafa/rich
             for line in preview.splitlines():
                 safe = line.replace("[", "\\[")
                 log.write(safe)
+            self._refresh_stats()
             log.write("[bold]READY.[/]")
 
         def _handle_play(self, argv: list[str]) -> None:
             log = self.query_one("#log", RichLog)
             if len(argv) < 2:
-                log.write("[red]usage: play PATH[/]")
+                log.write("[red]usage: play|open PATH.mp4|.png|.jpg[/]")
+                for line in media_ready_block().splitlines()[:12]:
+                    log.write(line.replace("[", "\\["))
                 return
-            path = Path(argv[1]).expanduser()
+            path = self._resolve_media_path(argv[1])
             result = play_external(path)
             if result.get("ok"):
-                log.write(f"[green]PLAY[/] {path} via {result.get('cmd')}")
+                log.write(f"[green]PLAY[/] {path} via {result.get('cmd')} ({result.get('kind')})")
             else:
                 log.write(f"[red]play failed:[/] {result.get('error')}")
+            self._refresh_stats()
             log.write("[bold]READY.[/]")
 
         def _start_cli(self, name: str, argv: list[str]) -> None:
@@ -319,14 +396,29 @@ def build_app(
             except Exception:
                 pass
 
-    return MokTuaApp(skin_name=skin, seed_prompt=seed_prompt)
+    return MokTuaApp(
+        skin_name=skin,
+        seed_prompt=seed_prompt,
+        preloaded_status=preloaded_status,
+        preloaded_software=preloaded_software,
+        auto_status=auto_status,
+    )
 
 
 def run_textual(
     skin: str = DEFAULT_SKIN,
     *,
     seed_prompt: str | None = None,
+    preloaded_status: str | None = None,
+    preloaded_software: str | None = None,
+    auto_status: bool = True,
 ) -> int:
-    app = build_app(skin, seed_prompt=seed_prompt)
+    app = build_app(
+        skin,
+        seed_prompt=seed_prompt,
+        preloaded_status=preloaded_status,
+        preloaded_software=preloaded_software,
+        auto_status=auto_status,
+    )
     result = app.run()
     return int(result) if result is not None else 0

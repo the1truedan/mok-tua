@@ -20,7 +20,7 @@ GitHub cannot inline-play a repo `.mp4` inside Markdown. **Click poster or ▶ l
 
 | Export | Poster (still) | ▶ Play (mp4) | Cite |
 |--------|----------------|--------------|------|
-| **PETSCII Matrix** brand short (~15s) | [poster.png](mok-tua-petscii-matrix-poster.png) | [▶ play export.mp4](mok-tua-petscii-matrix-export.mp4) | **(post-FaceID)** era · brand · **not** a face demo |
+| **PETSCII Matrix** brand short (~28s) | [poster.png](mok-tua-petscii-matrix-poster.png) | [▶ play export.mp4](mok-tua-petscii-matrix-export.mp4) | **(post-FaceID)** era · brand · C64 loader→µ→CRT→tmux→disk menu · **not** a face demo |
 | **Procurement → M.A.N.A.G.E.R.** anime multi-angle / next-scene (**14.20 s**) | [poster.jpg](manager-pivot-procurement-to-manager-anime-poster.jpg) | [▶ play mp4](manager-pivot-procurement-to-manager-anime.mp4) | photoceopic ref · multi-angle + `Next Scene:` grammar · **Imagine stills** (local Qwen Edit staged, **OOM** on 16 GB) · ffmpeg hold · see [PROVENANCE](../capabilities/manager-pivot/PROVENANCE.json) |
 | **Motion sizzle** AnimateDiff I2V (**~5 s**, generative) | [poster.jpg](manager-pivot-motion-sizzle-animatediff-poster.jpg) | [▶ play mp4](manager-pivot-motion-sizzle-animatediff.mp4) | **QQQ0** · DreamShaper_8 + mm_sd_v15_v2 · 2 segments · `gpu-prep` · **not** slideshow · Qwen sampling paused |
 
@@ -98,16 +98,24 @@ FaceID install / path: [`../../operations/IPADAPTER_FACEID_INSTALL_2026-08-05.md
 
 ## PETSCII Matrix export (detail)
 
-**What it is:** Conductor **identity** short — not a tool walkthrough, not CEO face.
+**What it is:** Conductor **identity + onboarding** short — brand logo, then real CLI verbs as a C64 disk directory. Not CEO face.
 
-**Beat sheet:**
-1. C64 PETSCII TUI boot (`mokup-c64-tui-live-boot.png`)
-2. Matrix-style falling **µ** glyphs  
-3. µs resolve into **clear PETSCII block lettering: MOK-TUA**  
-4. Hold solid logo  
-5. Dissolve back into dropping µ rain  
+**Beat sheet (v4 — ~28s @ 24fps):**
+1. **C64 loader** — PETSCII boot with **LOADING** bar filling in **16×16 character blocks** (0→100%)
+2. **µ rain** — matrix-style falling µ / block glyphs
+3. **Resolve** — rain forms **MOK-TUA** PETSCII block lettering
+4. **Rain stops** — logo holds; then **brightens** (CRT-hot white)
+5. **TV turn-off** — vertical squash → center horizontal line → center blip → black
+6. **tmux CLI** — pane `0:mok-tua*` types `mok_tua_cli.py --help`, `doctor`, `software`, then `READY. disk COMFYUI --splash`
+7. **INSERT DISK** splash (drive 8 spinning + asterisk load bar)
+8. **C64 disk directory** (`LOAD"$",8` aesthetic) — arguments, prompt types, capabilities:
+   - **PRG args:** `software`, `disk COMFYUI --splash`, `disk FRAMEPACK`, `disk DIRECTORS`, `gpu-prep --live`, `run story.md`, `sides script.pdf`, `batch`, `launch`, `pull --tier T0`, `doctor`, `tui --skin c64`, `receipt stamp`
+   - **SEQ prompts:** still · multi-angle · `Next Scene:` · I2V sizzle (AnimateDiff/WAN)
+   - **USR caps:** storyboard · video segments · music/voice · federation (`ask_packet.v1`)
+   - Footer examples: `LOAD"7",8,1` → run story · `LOAD"3",8,1` → disk comfy · `LOAD"18",8,1` → i2v sizzle
 
 **How made:** Procedural PIL + ffmpeg (local CPU). Glyphs from `tui/petscii.py`.  
+**Re-render:** `python3 scripts/render_petscii_matrix_export.py --procedural-boot`  
 **QQQ:** QQQ0 · no cloud · no PHI.  
 **Cite:** **(post-FaceID)** packaging era · **not** a FaceID face proof (no selfie in this clip).
 

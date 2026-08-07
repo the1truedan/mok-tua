@@ -1,4 +1,4 @@
-"""python -m tui [--skin c64|green|mono|modern|…] [--prompt TEXT] [--repl]"""
+"""python -m tui [--skin c64|green|mono|modern|…] [--prompt TEXT] [--repl] [--no-intro]"""
 
 from __future__ import annotations
 
@@ -17,7 +17,10 @@ from tui import DEFAULT_SKIN, SKINS, __version__, resolve_skin
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(
         prog="python -m tui",
-        description="mok-tua conductor TUI (C64 default · green/mono · modern)",
+        description=(
+            "mok-tua conductor TUI — PETSCII intro → CLI help → status → deck "
+            "(C64 default · green/mono · modern)"
+        ),
     )
     p.add_argument(
         "--skin",
@@ -38,6 +41,16 @@ def main(argv: list[str] | None = None) -> int:
         help="Force stdlib line REPL (no Textual full-screen)",
     )
     p.add_argument(
+        "--no-intro",
+        action="store_true",
+        help="Skip CLI PETSCII + help + status preflight (TUI still boots)",
+    )
+    p.add_argument(
+        "--no-status",
+        action="store_true",
+        help="Skip status/software probes at launch (faster offline)",
+    )
+    p.add_argument(
         "--version",
         action="version",
         version=f"mok-tua-tui {__version__}",
@@ -45,22 +58,49 @@ def main(argv: list[str] | None = None) -> int:
     args = p.parse_args(argv)
     skin = resolve_skin(args.skin)
     if args.skin and args.skin.lower() not in {s.lower() for s in SKINS} and skin == DEFAULT_SKIN:
-        # unknown skin string that resolve_skin fell back on — warn
         if args.skin.lower() not in ("c64",):
             print(f"[tui] unknown skin {args.skin!r}; using {skin}", file=sys.stderr)
+
+    preloaded_status: str | None = None
+    preloaded_software: str | None = None
+    if not args.no_intro:
+        from tui.workflow import preflight_cli_intro
+
+        snap = preflight_cli_intro(
+            version=__version__,
+            skip_status=args.no_status,
+            quiet=False,
+        )
+        preloaded_status = snap.get("status") or None
+        preloaded_software = snap.get("software") or None
+        if args.no_status:
+            preloaded_status = ""
+            preloaded_software = ""
 
     if not args.repl:
         try:
             from tui.app import run_textual, textual_available
 
             if textual_available():
-                return run_textual(skin, seed_prompt=args.prompt)
+                return run_textual(
+                    skin,
+                    seed_prompt=args.prompt,
+                    preloaded_status=preloaded_status,
+                    preloaded_software=preloaded_software,
+                    auto_status=not args.no_status and preloaded_status is None,
+                )
         except Exception as exc:  # pragma: no cover - UI path
             print(f"[tui] Textual path failed ({exc}); falling back to REPL", file=sys.stderr)
 
     from tui.repl import run_repl
 
-    return run_repl(skin, seed_prompt=args.prompt)
+    return run_repl(
+        skin,
+        seed_prompt=args.prompt,
+        preloaded_status=preloaded_status,
+        preloaded_software=preloaded_software,
+        auto_status=not args.no_status,
+    )
 
 
 if __name__ == "__main__":

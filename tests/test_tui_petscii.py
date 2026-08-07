@@ -11,7 +11,15 @@ sys.path.insert(0, str(ROOT))
 
 from tui import DEFAULT_SKIN, resolve_skin  # noqa: E402
 from tui.bridge import resolve_command  # noqa: E402
-from tui.petscii import intro_recommendations, loading_screen_text, mok_tua_logo_lines, vic_bar  # noqa: E402
+from tui.petscii import (  # noqa: E402
+    cli_args_menu,
+    disk_directory_menu,
+    intro_recommendations,
+    loading_screen_text,
+    mok_tua_logo_lines,
+    vic_bar,
+)
+from tui.workflow import deck_intro_lines, media_ready_block  # noqa: E402
 
 
 class PetsciiTests(unittest.TestCase):
@@ -70,6 +78,9 @@ class PetsciiTests(unittest.TestCase):
         self.assertIsNone(err)
         name, argv, err = resolve_command("play clip.mp4")
         self.assertEqual(name, "play")
+        name, argv, err = resolve_command("open clip.mp4")
+        self.assertEqual(name, "play")
+        self.assertEqual(argv, ["play", "clip.mp4"])
         name, argv, err = resolve_command("receipt stamp a.png --renderer r")
         self.assertEqual(name, "receipt")
         assert argv is not None
@@ -77,6 +88,33 @@ class PetsciiTests(unittest.TestCase):
         self.assertEqual(argv[1], "stamp")
         name, argv, err = resolve_command("m")
         self.assertEqual(name, "monitor")
+        name, argv, err = resolve_command("software")
+        self.assertEqual(name, "software")
+        name, argv, err = resolve_command("disk COMFYUI --splash")
+        self.assertEqual(name, "disk")
+        assert argv is not None
+        self.assertIn("COMFYUI", argv)
+        name, argv, err = resolve_command("menu")
+        self.assertEqual(name, "menu")
+        name, argv, err = resolve_command("media")
+        self.assertEqual(name, "media")
+        name, argv, err = resolve_command("w")
+        self.assertEqual(name, "software")
+
+    def test_disk_menu_and_workflow(self) -> None:
+        menu = disk_directory_menu()
+        self.assertIn("DISK DIRECTORY", menu)
+        self.assertIn("SHOW OUT.PNG", menu)
+        self.assertIn("PLAY OUT.MP4", menu)
+        args = cli_args_menu()
+        self.assertIn("show PATH", args)
+        self.assertIn("play PATH", args)
+        lines = deck_intro_lines("c64", "0.5.10", status_text="grade B+", software_text="COMFYUI")
+        joined = "\n".join(lines)
+        self.assertIn("READY.", joined)
+        self.assertIn("CLI ARGUMENTS", joined)
+        self.assertIn("grade B+", joined)
+        self.assertIn("MEDIA", media_ready_block())
 
 
 if __name__ == "__main__":
