@@ -1,6 +1,6 @@
 {
   "schema": "crowd_nodes.v1",
-  "updated": "2026-08-06T02:27:42Z",
+  "updated": "2026-08-07T21:58:15Z",
   "notes": "Trusted lab federation only. Re-seed: mok-tua nodes seed --force",
   "nodes": [
     {
@@ -9,8 +9,8 @@
       "pubkey": null,
       "endpoint": "http://127.0.0.1:8188",
       "lock_hashes_resident": [
-        "T0_orchestrators@60c4f00b9e1325de",
-        "T1_vid_gen@4e103167334b165a"
+        "T0_orchestrators@6292b6e5a2a22ce1",
+        "T1_vid_gen@f1ccf60de4ef7c8c"
       ],
       "models_digest_set": [
         "qwen_edit_2509_fp8",
@@ -31,7 +31,7 @@
         "expand",
         "llm"
       ],
-      "last_heartbeat": "2026-08-06T02:27:42Z",
+      "last_heartbeat": "2026-08-07T21:58:15Z",
       "trusted": true,
       "notes": "desk-host SM Comfy \u2014 stills preferred"
     },
@@ -41,10 +41,10 @@
       "pubkey": null,
       "endpoint": "http://gpu-host:8188",
       "lock_hashes_resident": [
-        "T0_orchestrators@60c4f00b9e1325de",
-        "T1_vid_gen@4e103167334b165a",
-        "T2_audio_music@41d86ae44ece200c",
-        "T3_face_body@e97fbfbc7680d441"
+        "T0_orchestrators@6292b6e5a2a22ce1",
+        "T1_vid_gen@f1ccf60de4ef7c8c",
+        "T2_audio_music@8c8fb9c41baeaa81",
+        "T3_face_body@35c3445a7c4b3006"
       ],
       "models_digest_set": [
         "wan22",
@@ -68,7 +68,7 @@
         "face",
         "tts"
       ],
-      "last_heartbeat": "2026-08-06T02:27:42Z",
+      "last_heartbeat": "2026-08-07T21:58:15Z",
       "trusted": true,
       "notes": "GPU-host Comfy \u2014 video / Wan preferred"
     },
@@ -78,7 +78,7 @@
       "pubkey": null,
       "endpoint": "http://control-host:8799",
       "lock_hashes_resident": [
-        "T0_orchestrators@60c4f00b9e1325de"
+        "T0_orchestrators@6292b6e5a2a22ce1"
       ],
       "models_digest_set": [],
       "vram_gb": 0.0,
@@ -95,7 +95,7 @@
         "stitch",
         "expand"
       ],
-      "last_heartbeat": "2026-08-06T02:27:42Z",
+      "last_heartbeat": "2026-08-07T21:58:15Z",
       "trusted": true,
       "notes": "Tower control / CPU \u2014 no GPU video"
     }

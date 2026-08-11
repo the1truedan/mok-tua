@@ -17,3 +17,5 @@ docs/assets/0[1-7]-*.png
 docs/assets/card-*.html
 docs/assets/*live*
 docs/assets/*snapshot*
+.mcp.json
+.pmb/
