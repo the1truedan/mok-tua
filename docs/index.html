@@ -216,6 +216,62 @@
   a.stack-card .link-hint { color: var(--accent-mu); }
   a.stack-card:hover .link-hint { color: var(--accent-soft); }
 
+  /* ---------- proof clips ---------- */
+
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .proof-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .proof-card video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+
+  .proof-meta { padding: 1.2rem 1.4rem 1.4rem; }
+
+  .proof-meta h3 {
+    margin: 0 0 0.8rem;
+    font-size: 0.98rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--fg-dim);
+  }
+
+  .proof-meta dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.35rem 0.8rem;
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 0.78rem;
+  }
+
+  .proof-meta dt {
+    color: var(--fg-dimmer);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .proof-meta dd { margin: 0; color: var(--fg-dim); }
+
+  .proof-note {
+    margin: 1.6rem 0 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--fg-dimmer);
+  }
+
   /* ---------- capability tiles ---------- */
 
   .cap-grid {
@@ -285,6 +341,7 @@
   @media (max-width: 720px) {
     .stack-grid { grid-template-columns: 1fr; }
     .cap-grid { grid-template-columns: 1fr; }
+    .proof-grid { grid-template-columns: 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -353,6 +410,45 @@
       <span class="link-hint">github.com/BerriAI/litellm →</span>
     </a>
   </div>
+</section>
+
+<section class="band">
+  <div class="section-head">
+    <p class="section-eyebrow">proof, not promises</p>
+    <h2 class="section-title">Lip sync, from a real render</h2>
+    <p class="section-sub">Two shots from one pipeline — a full song's shot list, planned beat by beat and rendered end to end. Click to play, audio included.</p>
+  </div>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <video controls preload="none" poster="assets/proof/lipsync-woman-navy-poster.jpg">
+        <source src="assets/proof/lipsync-woman-navy.mp4" type="video/mp4" />
+        Your browser doesn't support inline video — <a href="assets/proof/lipsync-woman-navy.mp4">download the clip</a> instead.
+      </video>
+      <div class="proof-meta">
+        <h3>&ldquo;&hellip;passionately explains a trend&hellip;&rdquo;</h3>
+        <dl>
+          <dt>seed</dt><dd>582379360</dd>
+          <dt>identity</dt><dd>Flux 2 Klein 9B reference still</dd>
+          <dt>shot planning</dt><dd>local LLM, beat-synced (verse section)</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="proof-card">
+      <video controls preload="none" poster="assets/proof/lipsync-woman-red-poster.jpg">
+        <source src="assets/proof/lipsync-woman-red.mp4" type="video/mp4" />
+        Your browser doesn't support inline video — <a href="assets/proof/lipsync-woman-red.mp4">download the clip</a> instead.
+      </video>
+      <div class="proof-meta">
+        <h3>&ldquo;&hellip;speaks with immense passion&hellip;&rdquo;</h3>
+        <dl>
+          <dt>seed</dt><dd>516341739</dd>
+          <dt>identity</dt><dd>Flux 2 Klein 9B reference still</dd>
+          <dt>shot planning</dt><dd>local LLM, beat-synced, handheld energy</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <p class="proof-note">Both shots are from the same 8-shot pipeline — a full song's beat-synced shot list, planned and rendered end to end in ~2h41m wall-clock on one 16GB GPU. No cloud render, no hand-timed edit.</p>
 </section>
 
 <section class="band">
