@@ -18,7 +18,7 @@
 **Turn a script into storyboard pictures — and, when you want, short video — on machines you own.**
 
 Local-first creative control desk for M.A.N.A.G.E.R.  
-Hybrid **v0.6.0** · public · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-07.md) · [orchestration smoke (cited)](docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md)
+Hybrid **v0.6.0** · public · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-15.md) · [orchestration smoke (cited)](docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md)
 
 [![Version](https://img.shields.io/badge/version-0.6.0-blue.svg)](CHANGELOG.md)
 [![Release](https://img.shields.io/github/v/release/the1truedan/mok-tua?display_name=tag&include_prereleases&sort=semver&label=release)](https://github.com/the1truedan/mok-tua/releases)
@@ -202,7 +202,7 @@ Individual panels: [`docs/assets/capabilities/panels/`](docs/assets/capabilities
 
 Additional screenshots of each piece — the TUI, the CLI, ComfyUI, the storyboard panels, and the rest — live in [`docs/assets/product-capabilities/`](docs/assets/product-capabilities/) rather than inline here, so this page stays a quick read instead of a scroll-through.
 
-Smoke matrix: [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md) · stamp [`capability_stamp_0.5.7.json`](docs/reports/capability_stamp_0.5.7.json).
+Smoke matrix: [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-15.md`](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-15.md) (0.6.0, text-only — what's actually confirmed vs. still pending).
 
 ---
 
