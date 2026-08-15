@@ -198,31 +198,9 @@ Individual panels: [`docs/assets/capabilities/panels/`](docs/assets/capabilities
 | **ACE-Step / TTS-Story** | Music beds & spoken lines | Audio tier tools |
 | **Grok Imagine / Nano Banana** | Optional paid/cloud stills | Only with keys + privacy gate |
 
-### Capability cards (split · v0.5.7) — not one tall PNG
+### More capability shots
 
-**One image per component** under [`docs/assets/product-capabilities/`](docs/assets/product-capabilities/) so GitHub doesn’t pull a multi‑MB vertical hog.  
-Each card embeds **path · prompt/command · tool** under the photo (sausage-made).
-
-<p align="center">
-  <img src="docs/assets/product-capabilities-index.jpg" alt="Index of split product-capabilities cards" width="720" />
-</p>
-
-| # | Card file | Component |
-|---|-----------|-----------|
-| 00 | [`product-capabilities-00-source-still.jpg`](docs/assets/product-capabilities/product-capabilities-00-source-still.jpg) | Source selfie |
-| 01 | [`product-capabilities-01-tui-boot.jpg`](docs/assets/product-capabilities/product-capabilities-01-tui-boot.jpg) | PETSCII TUI boot |
-| 02 | [`product-capabilities-02-tui-deck.jpg`](docs/assets/product-capabilities/product-capabilities-02-tui-deck.jpg) | Two-pane deck |
-| 03 | [`product-capabilities-03-cli-repl.jpg`](docs/assets/product-capabilities/product-capabilities-03-cli-repl.jpg) | CLI REPL |
-| 04 | [`product-capabilities-04-comfy-ui.jpg`](docs/assets/product-capabilities/product-capabilities-04-comfy-ui.jpg) | ComfyUI IRL |
-| 05 | [`product-capabilities-05-storyboard-panels.jpg`](docs/assets/product-capabilities/product-capabilities-05-storyboard-panels.jpg) | Six FaceID panels |
-| 06 | [`product-capabilities-06-storyboard-sheet.jpg`](docs/assets/product-capabilities/product-capabilities-06-storyboard-sheet.jpg) | Storyboard sheet |
-| 07 | [`product-capabilities-07-hero.jpg`](docs/assets/product-capabilities/product-capabilities-07-hero.jpg) | README hero |
-| 08 | [`product-capabilities-08-face-polish.jpg`](docs/assets/product-capabilities/product-capabilities-08-face-polish.jpg) | Face polish B/A |
-| 09 | [`product-capabilities-09-short-loop-strip.jpg`](docs/assets/product-capabilities/product-capabilities-09-short-loop-strip.jpg) | AD strip (glitch-filtered) |
-| 10 | [`product-capabilities-10-framepack-ui.jpg`](docs/assets/product-capabilities/product-capabilities-10-framepack-ui.jpg) | FramePack Gradio |
-| 11 | [`product-capabilities-11-director-ui.jpg`](docs/assets/product-capabilities/product-capabilities-11-director-ui.jpg) | Director UI |
-
-Legacy raw URL [`products-capabilities.png`](docs/assets/products-capabilities.png) is now a **small index** (same path, bandwidth-friendly), not a 10k-tall poster.
+Additional screenshots of each piece — the TUI, the CLI, ComfyUI, the storyboard panels, and the rest — live in [`docs/assets/product-capabilities/`](docs/assets/product-capabilities/) rather than inline here, so this page stays a quick read instead of a scroll-through.
 
 Smoke matrix: [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md) · stamp [`capability_stamp_0.5.7.json`](docs/reports/capability_stamp_0.5.7.json).
 
