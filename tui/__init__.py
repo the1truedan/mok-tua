@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__version__ = "0.5.10"
+__version__ = "0.6.0"
 
 # Canonical skin ids (map to themes/*.tcss)
 SKINS = (
