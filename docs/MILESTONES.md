@@ -15,6 +15,7 @@ Ledger also mirrored in `~/grokcode/data/progress/milestones.jsonl` (repo=`mok-t
 | **0.5.8** | 2026-08-06 | `2026.08-mok-tua-manager-pivot-qwen-storyboard` | Qwen Edit 2509 pool stage (6/6); multi-angle+next-scene anime pivot storyboard (procurement→MANAGER); **14.20 s** export + PROVENANCE; local KSampler OOM honesty on 16 GB; public. |
 | **0.5.9** | 2026-08-06 | `2026.08-mok-tua-c64-catalog-gpu-prep-sizzle` | C64 software catalog + disk insert + gpu-prep + progress bars; Qwen sampling paused; AnimateDiff motion sizzle (~5s, 2 segments). |
 | **0.5.10** | 2026-08-06 | `2026.08-mok-tua-petscii-matrix-v4-launch-workflow` | PETSCII Matrix brand short v4 (~28s); TUI launch workflow (intro→help→status→deck); show/play/open jpg·png·mp4. |
+| **0.6.0** | 2026-08-15 | `2026.08-mok-tua-music-video-lipsync-pipeline` | MiniMax H3 and LTX-2.3 video confirmed working end to end on a 16 GB GPU; Director's Console job submission verified end to end (real file on disk, not just a success response); `curate` tool for picking best takes across runs and assembling them; lipsync tool integration points wired into the model registry. No demo video yet — proof clips to follow. |
 | **ops** | 2026-08-01→02 | `2026.08-mok-tua-comfy-ai-data-wire` | Comfy + ai-data connectivity probe; GPU-host Comfy live; tier smoke **26 pass / 0 hard fail** (`mok_tua_tier_smoke_2026-08-02.json`). |
 | **ops** | 2026-08-05 | `2026.08-i2v-grok-vs-gpu-host-context-ambiguity` | Process incident: cloud Grok I2V misread as local GPU; dual-path labeling rules. |
 

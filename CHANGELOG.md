@@ -3,6 +3,30 @@
 All notable changes to **mok-tua** are documented here.  
 Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are local lab (America/New_York context).
 
+## [0.6.0] — 2026-08-15
+
+### Added
+
+- **More open video models confirmed working end to end**, each on a real render with output
+  checked (not just "downloaded"):
+  - MiniMax H3 image-to-video — needed a second, isolated install alongside the main one to pick
+    up a newer core version without breaking anything else already running on it.
+  - LTX-2.3 text-to-video with synced audio.
+  - Both run on a single consumer 16 GB GPU card.
+- **Director's Console job submission now verified end to end.** A shot goes in, a real rendered
+  file comes out — checked by actually watching for the file on disk, not just a success response.
+- **Shot curation tool** (`mok-tua curate`): when you generate the same shot more than once across
+  separate runs, this lets you mark which take was the best one, put the picks in story order, and
+  stitch them into a single video — without hand-editing file paths.
+- **Lipsync integration points identified and wired into the model registry** (face-swap, talking-head,
+  and portrait-animation tools) — the pieces line up with the rest of the pipeline; a full proof run is
+  still to come.
+
+### Skipped (on purpose, not forgotten)
+
+- No demo video attached to this release yet — the pipeline pieces above are proven individually;
+  a finished song-to-video-to-lipsync example is still in progress.
+
 ## [0.5.10] — 2026-08-06
 
 ### Added (2026-08-07 public refresh)
