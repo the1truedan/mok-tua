@@ -416,7 +416,7 @@
   <div class="section-head">
     <p class="section-eyebrow">proof, not promises</p>
     <h2 class="section-title">Lip sync, from a real render</h2>
-    <p class="section-sub">Two shots from one pipeline — a full song's shot list, planned beat by beat and rendered end to end. Click to play, audio included.</p>
+    <p class="section-sub">Two shots from one pipeline — the video model generated against the song's actual audio track, not text-prompted blind. Click to play, audio included.</p>
   </div>
   <div class="proof-grid">
     <div class="proof-card">
@@ -428,6 +428,7 @@
         <h3>&ldquo;&hellip;passionately explains a trend&hellip;&rdquo;</h3>
         <dl>
           <dt>seed</dt><dd>582379360</dd>
+          <dt>model</dt><dd>LTX-2 22B (distilled 1.1), audio-conditioned</dd>
           <dt>identity</dt><dd>Flux 2 Klein 9B reference still</dd>
           <dt>shot planning</dt><dd>local LLM, beat-synced (verse section)</dd>
         </dl>
@@ -442,13 +443,14 @@
         <h3>&ldquo;&hellip;speaks with immense passion&hellip;&rdquo;</h3>
         <dl>
           <dt>seed</dt><dd>516341739</dd>
+          <dt>model</dt><dd>LTX-2 22B (distilled 1.1), audio-conditioned</dd>
           <dt>identity</dt><dd>Flux 2 Klein 9B reference still</dd>
           <dt>shot planning</dt><dd>local LLM, beat-synced, handheld energy</dd>
         </dl>
       </div>
     </div>
   </div>
-  <p class="proof-note">Both shots are from the same 8-shot pipeline — a full song's beat-synced shot list, planned and rendered end to end in ~2h41m wall-clock on one 16GB GPU. No cloud render, no hand-timed edit.</p>
+  <p class="proof-note">Both shots are from the same 8-clip render — one LTX-2 job given the song's real audio track (not a separate lipsync pass), 887s active GPU time / ~2h9m job elapsed, on one 16GB GPU. No cloud render, no hand-timed edit.</p>
 </section>
 
 <section class="band">

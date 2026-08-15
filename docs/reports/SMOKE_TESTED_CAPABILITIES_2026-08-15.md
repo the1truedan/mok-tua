@@ -14,7 +14,8 @@
 | LTX-2.3 text-to-video + audio | **PASS** | Same isolated `:8189` env, int8-quantized distilled transformer. |
 | Director's Console job submission | **PASS** | `POST /api/job` on the Orchestrator (`:9820`) with a real ComfyUI workflow, `backend_affinity: mrgpu-8188`. Response: `status: completed`. Confirmed a real output file landed on disk at both the backend's own output directory and the orchestrator's per-job output path — not just a success response. |
 | `mok-tua curate` (scan/list/pick/order/assemble) | **PASS** | Synthetic two-run fixture: two takes of the same shot across separate directories, grouped correctly by shot id; picked the non-default take; assembled output verified frame-by-frame (correct color at t=0 matching the picked take, correct color at t=1.5s matching the second shot, correct total duration). |
-| Lipsync tool integration points | **PARTIAL** | Face-swap/talking-head/portrait-animation tools identified and wired into the model registry. No end-to-end lipsync render has been proven yet — do not claim more than "wired in." |
+| LTX-2 audio-conditioned video generation | **PASS** | Real 8-clip music-video render (`director_pipeline_id 8d4238dd`, job `dba1d6f6`) confirmed via Maestro's own job metadata: `model_type: ltx2_22B_distilled_1_1`, `audio_prompt_type: "A"`, `audio_guide` pointing at a real WAV file — the model was given the actual song audio during generation, not text-prompted blind. 887s active GPU generation time, 7743s total job elapsed, 1280×720, 8 steps. Two shots from this render are the site's proof clips. |
+| Dedicated lipsync tools (DreamTalk / LivePortrait / FaceFusion) | **PARTIAL — different mechanism, don't conflate with the row above** | These are wired into the model registry but were **not** invoked in the render above — that used LTX-2's own audio-conditioned generation, not a discrete lipsync pass on top of silent video. No render has actually exercised these specific tools yet. |
 
 ## Pending / earmarked (not PASS)
 
@@ -26,7 +27,7 @@
 | WAN2.1 Vace 14B | Weights staged, download in progress — targeted at the reference-conditioning approach for cross-shot consistency, not yet tested |
 | Krea 2 (RAW/Turbo/Identity Edit) | Weights staged — the model browser previously showed this as fully installed when it was not; re-verify actual weight presence before trusting that UI count again |
 | Director's Console cinematography (camera moves, shot grammar) | Job-submission *plumbing* is proven (see above), but only with a trivial still image. No render has actually exercised the camera-move/shot-grammar catalog (the 144-angle grid, named moves like push-in or crane, the 67 film-style presets) — the feature surface is real and live via the API, it just hasn't been used in an actual test render yet |
-| Full song → video → lipsync proof run | The piece still missing before claiming the whole pipeline end to end |
+| Dedicated lipsync-tool render (DreamTalk / LivePortrait / FaceFusion specifically) | Still missing — the row above proves audio-conditioned generation, not this separate mechanism |
 
 ---
 

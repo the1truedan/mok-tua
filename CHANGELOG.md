@@ -19,13 +19,19 @@ Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are lo
   separate runs, this lets you mark which take was the best one, put the picks in story order, and
   stitch them into a single video — without hand-editing file paths.
 - **Lipsync integration points identified and wired into the model registry** (face-swap, talking-head,
-  and portrait-animation tools) — the pieces line up with the rest of the pipeline; a full proof run is
-  still to come.
+  and portrait-animation tools) — the pieces line up with the rest of the pipeline. These are still
+  unproven on their own; the proof that landed this release used a different mechanism (see below).
+- **Lip sync proof clips, from a real render.** Two shots on the [live site](https://the1truedan.github.io/mok-tua/)
+  — LTX-2 22B (distilled 1.1), given the song's actual audio track during generation
+  (`audio_prompt_type: "A"` against a real WAV, not text-prompted blind). One combined 8-clip job,
+  887s active GPU time / ~2h9m elapsed, on a single 16 GB card. This is LTX-2's own audio-conditioned
+  generation, not the dedicated lipsync tools mentioned above — those are a separate mechanism and
+  still unproven; don't conflate the two.
 
 ### Skipped (on purpose, not forgotten)
 
-- No demo video attached to this release yet — the pipeline pieces above are proven individually;
-  a finished song-to-video-to-lipsync example is still in progress.
+- The dedicated lipsync tools (DreamTalk / LivePortrait / FaceFusion) still have no proof run of
+  their own — the proof clips above use LTX-2's native audio-conditioned generation instead.
 
 ## [0.5.10] — 2026-08-06
 
