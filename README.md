@@ -41,8 +41,12 @@ It does **not** replace every app. It is the **conductor**:
 |------|----------------------|
 | **Conductor** | mok-tua API + CLI — plans the run, tracks shots, safety gates |
 | **Writer helper** | Local LLM gateway (Headroom) — expands rough notes into shot lists |
-| **Camera / paint** | ComfyUI — makes the actual images (and optional video) |
-| **Director UI** | Director’s Console — human-friendly control surface |
+| **Camera / paint** | [ComfyUI](https://github.com/comfyanonymous/ComfyUI) — makes the actual images (and optional video) |
+| **Director UI** | [Director's Console](https://github.com/cocktailpeanut/directorsconsole.pinokio.git) — camera/lens/shot-grammar layer |
+| **Video studio** | [Maestro](https://github.com/Blizaine/Maestro) — model-agnostic video front end (WAN, LTX, and friends) |
+| **App installer** | [Pinokio](https://pinokio.computer) — one-click install/run for the surrounding AI app zoo |
+| **Model pool** | [Stability Matrix](https://github.com/LykosAI/StabilityMatrix) — shared weights so apps don't duplicate downloads |
+| **Model routing** | [LiteLLM](https://github.com/BerriAI/litellm) — one API over local + cloud LLMs, gated by privacy tier |
 | **Face / body** | FaceFusion, FreeMoCap, LivePortrait, … |
 | **Sound** | ACE-Step, TTS-Story, voice tools |
 | **Optional cloud** | Grok Imagine / Nano Banana stills — only when you say so |
