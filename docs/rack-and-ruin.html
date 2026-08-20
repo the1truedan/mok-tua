@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>rack-and-ruin</title>
+<meta name="description" content="Private joke-CVE ledger for a home lab. Root causes are accurate. The tone is not. Filings stay in the private repo; this page is the public explanation." />
+<style>
+  :root {
+    --bg: #0a0b16;
+    --bg-panel: #13152b;
+    --bg-panel-2: #171a35;
+    --line: #262a52;
+    --fg: #e4e2fb;
+    --fg-dim: #8b88b5;
+    --fg-dimmer: #5b5885;
+    --accent: #7c6fff;
+    --accent-soft: #a79bff;
+    --accent-mu: #39d98a;
+    --accent-bad: #ff8a96;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+  }
+
+  body {
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mono {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, "Courier New", monospace;
+  }
+
+  a { color: inherit; }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  .hero {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+
+  #mu-rain {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 5.5rem 1.5rem 4rem;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+    margin: 0 0 1.4rem;
+  }
+
+  .wordmark {
+    margin: 0;
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-weight: 700;
+    font-size: clamp(2.4rem, 7vw, 4.4rem);
+    letter-spacing: 0.02em;
+    color: var(--fg);
+    text-shadow:
+      0 0 6px rgba(124, 111, 255, 0.55),
+      0 0 26px rgba(124, 111, 255, 0.28),
+      0 0 60px rgba(124, 111, 255, 0.14);
+    text-wrap: balance;
+  }
+
+  .wordmark span { color: var(--accent-soft); }
+
+  .tagline {
+    max-width: 48ch;
+    margin: 1.4rem auto 0;
+    font-size: 1.1rem;
+    color: var(--fg-dim);
+    text-wrap: balance;
+  }
+
+  .hero-cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    margin-top: 2.4rem;
+  }
+
+  .btn {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    text-decoration: none;
+    padding: 0.65rem 1.1rem;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--bg-panel);
+    color: var(--fg);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .btn:hover, .btn:focus-visible { border-color: var(--accent); color: var(--accent-soft); }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+  }
+  .btn.primary:hover, .btn.primary:focus-visible { color: var(--bg); border-color: var(--accent-soft); background: var(--accent-soft); }
+
+  .version-chip {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 0.78rem;
+    color: var(--fg-dimmer);
+  }
+  .version-chip b { color: var(--accent-mu); font-weight: 600; }
+
+  section.band { max-width: 980px; margin: 0 auto; padding: 4.2rem 1.5rem; }
+
+  .section-head { text-align: center; margin-bottom: 2.6rem; }
+
+  .section-eyebrow {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fg-dimmer);
+    margin: 0 0 0.7rem;
+  }
+
+  .section-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  .section-sub {
+    max-width: 52ch;
+    margin: 0.7rem auto 0;
+    color: var(--fg-dim);
+    font-size: 0.98rem;
+  }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .stack-card {
+    background: var(--bg-panel);
+    padding: 1.5rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    min-height: 148px;
+  }
+
+  .stack-card .role {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+  }
+
+  .stack-card h3 { margin: 0; font-size: 1.05rem; font-weight: 600; }
+  .stack-card p { margin: 0; font-size: 0.88rem; color: var(--fg-dim); flex-grow: 1; }
+
+  .stack-card .link-hint {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 0.74rem;
+    color: var(--fg-dimmer);
+  }
+
+  .cap-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.1rem;
+  }
+
+  .cap-tile {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .cap-glyph {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 1.5rem;
+    color: var(--accent);
+    line-height: 1;
+    padding-top: 0.15rem;
+  }
+
+  .cap-tile h3 { margin: 0 0 0.35rem; font-size: 1rem; font-weight: 600; }
+  .cap-tile p { margin: 0; font-size: 0.88rem; color: var(--fg-dim); }
+
+  .ledger {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .ledger th, .ledger td {
+    text-align: left;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+
+  .ledger th {
+    color: var(--fg-dimmer);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.68rem;
+  }
+
+  .ledger tr:last-child td { border-bottom: none; }
+  .ledger .id { color: var(--accent-soft); white-space: nowrap; }
+  .ledger .kind { color: var(--accent-mu); }
+
+  .note {
+    margin: 1.6rem 0 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--fg-dimmer);
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 2.4rem 1.5rem 3rem;
+  }
+
+  .footer-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.4rem;
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    color: var(--fg-dim);
+  }
+
+  .footer-links a { text-decoration: none; }
+  .footer-links a:hover, .footer-links a:focus-visible { color: var(--accent-soft); }
+
+  .mu-mark {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    color: var(--fg-dimmer);
+    cursor: default;
+  }
+
+  .mu-mark span { color: var(--accent-mu); opacity: 0.75; }
+
+  @media (max-width: 720px) {
+    .stack-grid { grid-template-columns: 1fr; }
+    .cap-grid { grid-template-columns: 1fr; }
+    .ledger { display: block; overflow-x: auto; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #mu-rain { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <canvas id="mu-rain" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <p class="eyebrow">private joke-CVE ledger</p>
+    <h1 class="wordmark">rack<span>-</span>ruin</h1>
+    <p class="tagline">Homelab incidents written up with more comedic drama than the hardware technically deserves. Root causes, timelines, and lessons are accurate. The tone is not.</p>
+    <div class="hero-cta">
+      <a class="btn primary" href="https://github.com/the1truedan/rack-and-ruin">Private repo</a>
+      <a class="btn" href="https://the1truedan.github.io/mok-tua/">mok-tua pages</a>
+      <a class="btn" href="https://ko-fi.com/the1truedan">Ko-fi</a>
+      <span class="version-chip">ledger <b>private</b> · this page is the public explanation</span>
+    </div>
+  </div>
+</div>
+
+<section class="band">
+  <div class="section-head">
+    <p class="section-eyebrow">why it exists</p>
+    <h2 class="section-title">A caregiver’s incident book, not a CVE database</h2>
+    <p class="section-sub">The filings live in a private GitHub repo on purpose. This one-pager is the public face: what the ledger is, how to read the numbers, and why the jokes have receipts.</p>
+  </div>
+  <div class="cap-grid">
+    <div class="cap-tile">
+      <span class="cap-glyph">08</span>
+      <div>
+        <h3>CVE-FAUX integers</h3>
+        <p>Homelab incidents numbered like CVEs. Next integer follows <span class="mono">ls</span> of the repo, not a vendor CNA. Do not mint a sequel on a table that already closed.</p>
+      </div>
+    </div>
+    <div class="cap-tile">
+      <span class="cap-glyph">L8</span>
+      <div>
+        <h3>LAYER8 class</h3>
+        <p>Repeated AI-tool goofs that are not a new integer. The Green Pixel, the sidebar that forgets, the nudge tax. Operator tone is the casualty, not the cause.</p>
+      </div>
+    </div>
+    <div class="cap-tile">
+      <span class="cap-glyph">µ</span>
+      <div>
+        <h3>Same family as mok-tua</h3>
+        <p>Public instruments (mok-tua, ai-gateway, fast-models) ship Pages. This ledger stays private. One µensemble, two visibilities.</p>
+      </div>
+    </div>
+    <div class="cap-tile">
+      <span class="cap-glyph">K</span>
+      <div>
+        <h3>K.A.R.E.N. is the bouncer</h3>
+        <p>She slaps Grok, Claude, and Codex on NFS walks, kernel theatre, and token-waste panic. Grafana is not the bouncer. Splash is not the bouncer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="section-head">
+    <p class="section-eyebrow">how to read a filing</p>
+    <h2 class="section-title">Causation glyphs, not blame fanfic</h2>
+    <p class="section-sub">The 0825 grand debrief tagged every row. The puzzle is supposed to be assemblable. Faces are facetious; the receipts are not.</p>
+  </div>
+  <div class="stack-grid">
+    <div class="stack-card">
+      <span class="role">glyph</span>
+      <h3>reasoning</h3>
+      <p>The model invented a story that fit. Phantom reboot, “you're right,” gravity toward the wrong host.</p>
+      <span class="link-hint">theatre, not evidence</span>
+    </div>
+    <div class="stack-card">
+      <span class="role">glyph</span>
+      <h3>config</h3>
+      <p>The tool was wired wrong or not wired. Matcher missed Bash. Fail-open streamliner. Missing PreToolUse.</p>
+      <span class="link-hint">blind failsafe</span>
+    </div>
+    <div class="stack-card">
+      <span class="role">glyph</span>
+      <h3>context</h3>
+      <p>Docs, Hippo, and PMB said the right thing. The session did not uptake. Ritual without the tool call.</p>
+      <span class="link-hint">green pixel</span>
+    </div>
+    <div class="stack-card">
+      <span class="role">glyph</span>
+      <h3>prompt</h3>
+      <p>The ask was fine. The agent walked the pool anyway. Mac NFS <span class="mono">du</span> / <span class="mono">lsof +D</span> is the same walk.</p>
+      <span class="link-hint">live I/O is ssh tower</span>
+    </div>
+    <div class="stack-card">
+      <span class="role">glyph</span>
+      <h3>hardware</h3>
+      <p>Disks, nfsd, FAT32 <span class="mono">/boot</span>, Pinokio cache on NFS. Real iron, named paths.</p>
+      <span class="link-hint">not a kernel ghost</span>
+    </div>
+    <div class="stack-card">
+      <span class="role">glyph</span>
+      <h3>failsafe</h3>
+      <p>The hook, timeout, or skip that should have fired. When it didn't, the caregiver paid in hours and tokens.</p>
+      <span class="link-hint">LAYER8-0005</span>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="section-head">
+    <p class="section-eyebrow">tally, titles only</p>
+    <h2 class="section-title">What is on the ledger</h2>
+    <p class="section-sub">Bodies stay in the private repo. No session dumps, no dollar stamps, no PHI. Next integer after a new walk is 0827 — not this page.</p>
+  </div>
+  <table class="ledger">
+    <thead>
+      <tr><th>id</th><th>kind</th><th>title</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="id">LAYER8-0001</td><td class="kind">class</td><td>Grok userscript false-hostile</td></tr>
+      <tr><td class="id">LAYER8-0002</td><td class="kind">class</td><td>ChatGPT faith-in-code friction (STAAI)</td></tr>
+      <tr><td class="id">LAYER8-0003</td><td class="kind">class</td><td>Claude tinygrad schooling (STAAI)</td></tr>
+      <tr><td class="id">LAYER8-0004</td><td class="kind">class</td><td>The Green Pixel and the Sidebar That Forgets</td></tr>
+      <tr><td class="id">LAYER8-0005</td><td class="kind">class</td><td>Token fumes and the nudge tax</td></tr>
+      <tr><td class="id">CVE-FAUX-2026-0815</td><td class="kind">integer</td><td>Phantom reboot + NFS theatre</td></tr>
+      <tr><td class="id">CVE-FAUX-2026-0816</td><td class="kind">integer</td><td>Tower disk10 parity ghost</td></tr>
+      <tr><td class="id">CVE-FAUX-2026-0818</td><td class="kind">integer</td><td>Memory theatre</td></tr>
+      <tr><td class="id">CVE-FAUX-2026-0819</td><td class="kind">integer</td><td>Dollar-gate</td></tr>
+      <tr><td class="id">CVE-FAUX-2026-0820</td><td class="kind">integer</td><td>Context clues vs Grok gravity</td></tr>
+      <tr><td class="id">CVE-FAUX-2026-0821</td><td class="kind">integer</td><td>The Axe — <span class="mono">lsof +D</span> on Mac NFS</td></tr>
+      <tr><td class="id">CVE-FAUX-2026-0822/23</td><td class="kind">integer</td><td>Embed rediscovery + Headroom Anthropic mask</td></tr>
+      <tr><td class="id">CVE-FAUX-2026-0824</td><td class="kind">integer</td><td>“You're right” is not a tool call</td></tr>
+      <tr><td class="id">CVE-FAUX-2026-0825</td><td class="kind">integer</td><td>Grand debrief — causation table</td></tr>
+      <tr><td class="id">CVE-FAUX-2026-0826</td><td class="kind">integer</td><td>The Fourteen-Hour <span class="mono">du</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note">0825 “do not mint 0826” meant no debrief sequel. 0826 is a new walk. This page does not mint 0827.</p>
+</section>
+
+<section class="band">
+  <div class="section-head">
+    <p class="section-eyebrow">the µensemble</p>
+    <h2 class="section-title">Public pages, private ledger</h2>
+  </div>
+  <div class="stack-grid">
+    <a class="stack-card" href="https://the1truedan.github.io/mok-tua/" style="text-decoration:none">
+      <span class="role">public</span>
+      <h3>mok-tua</h3>
+      <p>Local-first conductor. This page copies that theme on purpose.</p>
+      <span class="link-hint" style="color:var(--accent-mu)">the1truedan.github.io/mok-tua →</span>
+    </a>
+    <a class="stack-card" href="https://the1truedan.github.io/ai-gateway/" style="text-decoration:none">
+      <span class="role">public</span>
+      <h3>ai-gateway</h3>
+      <p>Headroom in front, LiteLLM as the bus. Glue, not a model runtime.</p>
+      <span class="link-hint" style="color:var(--accent-mu)">the1truedan.github.io/ai-gateway →</span>
+    </a>
+    <a class="stack-card" href="https://the1truedan.github.io/fast-models/" style="text-decoration:none">
+      <span class="role">public</span>
+      <h3>fast-models</h3>
+      <p>NVMe → Btrfs → bees → NFS. The pool the integer CVEs keep walking.</p>
+      <span class="link-hint" style="color:var(--accent-mu)">the1truedan.github.io/fast-models →</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span class="mu-mark">rack-and-ruin is the private ledger in a larger <span>µ</span>ensemble</span>
+    <nav class="footer-links">
+      <a href="https://github.com/the1truedan/rack-and-ruin">GitHub (private)</a>
+      <a href="https://the1truedan.github.io/mok-tua/">mok-tua</a>
+      <a href="https://ko-fi.com/the1truedan">Ko-fi</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var canvas = document.getElementById('mu-rain');
+  if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ctx = canvas.getContext('2d');
+  var hero = canvas.parentElement;
+  var cols, drops, fontSize = 15;
+  var glyphs = 'µ08LAYER';
+
+  function size() {
+    var rect = hero.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+    cols = Math.floor(canvas.width / fontSize);
+    drops = new Array(cols).fill(0).map(function () { return Math.random() * -40; });
+  }
+  size();
+  window.addEventListener('resize', size);
+
+  function frame() {
+    ctx.fillStyle = 'rgba(10, 11, 22, 0.14)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.font = fontSize + 'px ui-monospace, Menlo, Consolas, monospace';
+    for (var i = 0; i < cols; i++) {
+      var g = glyphs[Math.floor(Math.random() * glyphs.length)];
+      var isMu = g === 'µ';
+      ctx.fillStyle = isMu ? 'rgba(57, 217, 138, 0.55)' : 'rgba(124, 111, 255, 0.28)';
+      ctx.fillText(g, i * fontSize, drops[i] * fontSize);
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+
+</body>
+</html>
