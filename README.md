@@ -18,15 +18,15 @@
 **Turn a script into storyboard pictures — and, when you want, short video — on machines you own.**
 
 Local-first creative control desk for M.A.N.A.G.E.R.  
-Hybrid **v0.6.0** · public · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-15.md) · [orchestration smoke (cited)](docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md)
+Hybrid **v0.7.0** · public · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-15.md) · [orchestration smoke (cited)](docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md)
 
-[![Version](https://img.shields.io/badge/version-0.6.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.7.0-blue.svg)](CHANGELOG.md)
 [![Release](https://img.shields.io/github/v/release/the1truedan/mok-tua?display_name=tag&include_prereleases&sort=semver&label=release)](https://github.com/the1truedan/mok-tua/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Linktree](https://img.shields.io/badge/Linktree-the1truedan-43E55E?style=flat&logo=linktree&logoColor=white)](https://linktr.ee/the1truedan)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support-FF5E5B?style=flat&logo=ko-fi&logoColor=white)](https://ko-fi.com/the1truedan)
 
-**Current release:** [`v0.6.0`](https://github.com/the1truedan/mok-tua/releases/tag/v0.6.0) — more open video models confirmed working end to end · Director's Console job submission verified · shot curation tool · lipsync integration points wired in · see [CHANGELOG](CHANGELOG.md) · [HANDOFF](HANDOFF.md)
+**Current release:** [`v0.7.0`](https://github.com/the1truedan/mok-tua/releases/tag/v0.7.0) — PocketTTS + DramaBox local TTS backends, both proven on a real generation · new HF Spaces category-page puller · 11 Spaces earmarked as optional cloud-call tools (not dependencies) · see [CHANGELOG](CHANGELOG.md) · [HANDOFF](HANDOFF.md)
 
 ---
 
@@ -333,6 +333,7 @@ Deep CLI, tier locks (T0–T4), pull hygiene, ask-packet federation, ROBUST Comf
 
 | Ver | What changed (human) |
 |-----|----------------------|
+| **0.7.0** | PocketTTS + DramaBox local TTS backends, both proven on a real generated wav (DramaBox confirmed GPU-near-exclusive by an actual OOM, fixed by excluding it from the concurrent launch chain); HF Spaces category-page puller; 11 Spaces earmarked as optional cloud-call tools — 2 of the 4 checked were down or incompatible, documented rather than assumed working |
 | **0.6.0** | More open video models confirmed working end to end on a 16 GB GPU (MiniMax H3, LTX-2.3); Director's Console job submission verified end to end; `curate` tool for picking best takes across runs; lipsync tool integration points wired in — no demo video yet |
 | **0.5.10** | PETSCII Matrix brand short v4 (~28s: loader→µ→CRT→tmux→disk menu); TUI launch workflow (intro→help→status→deck); `show`/`play`/`open` jpg·png·mp4; `menu`/`media` verbs |
 | **0.5.9** | C64 software catalog · disk insert · gpu-prep · AnimateDiff motion sizzle; Qwen sampling paused on 16 GB |
@@ -347,7 +348,7 @@ Deep CLI, tier locks (T0–T4), pull hygiene, ask-packet federation, ROBUST Comf
 | **0.2** | Providers, sides ingest, multi-angle stills, CLI launch/pull |
 | **0.1** | First scaffold |
 
-See **[CHANGELOG.md](CHANGELOG.md)** for dated detail · GitHub release **[v0.6.0](https://github.com/the1truedan/mok-tua/releases/tag/v0.6.0)**.
+See **[CHANGELOG.md](CHANGELOG.md)** for dated detail · GitHub release **[v0.7.0](https://github.com/the1truedan/mok-tua/releases/tag/v0.7.0)**.
 
 ---
 

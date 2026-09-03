@@ -1,15 +1,15 @@
 # HANDOFF — mok-tua (latest)
 
-**Date:** 2026-08-15 (video model coverage + Director's Console + curate)  
-**Version:** **0.6.0** (MiniMax H3 + LTX-2.3 confirmed · DC job submission verified · `curate` tool · lipsync integration points)  
-**Branch:** `main` · GitHub `6fa99de`..`56e6743`  
+**Date:** 2026-09-02 (PocketTTS + DramaBox local TTS backends · HF Spaces cloud-call earmarks)  
+**Version:** **0.7.0** (PocketTTS + DramaBox generation-verified · HF Spaces category puller · 11 cloud-call earmarks)  
+**Branch:** `main` · GitHub `56e6743`..`67f5e2f`  
 **Visibility:** **PUBLIC** — https://github.com/the1truedan/mok-tua · `main` protected  
 **Remotes:** `github` (canonical public) · `forgejo` (lab mirror, diverged history — do not rebase across)
 
 ## Start here
 
 1. **This file** — current state  
-2. **Latest release:** [`v0.6.0`](https://github.com/the1truedan/mok-tua/releases/tag/v0.6.0) · full notes in [`CHANGELOG.md`](CHANGELOG.md) · [`docs/MILESTONES.md`](docs/MILESTONES.md)  
+2. **Latest release:** [`v0.7.0`](https://github.com/the1truedan/mok-tua/releases/tag/v0.7.0) · full notes in [`CHANGELOG.md`](CHANGELOG.md) · [`docs/MILESTONES.md`](docs/MILESTONES.md)  
 3. **Launch TUI:** `python3 scripts/mok_tua_cli.py tui` → PETSCII intro → CLI help → status → deck  
 4. **Curate a cut:** `python3 scripts/mok_tua_cli.py curate scan|list|pick|order|assemble` — pick best takes across runs, ffmpeg-concat them in order  
 5. **Interfaces:** [`docs/INTERFACES.md`](docs/INTERFACES.md) (launch workflow · media · software disks)  
@@ -20,21 +20,23 @@
 ## Paste for new chat
 
 ```text
-Continue from ~/mok-tua/HANDOFF.md · version 0.6.0 · main public
+Continue from ~/mok-tua/HANDOFF.md · version 0.7.0 · main public
 
 DONE this arc:
-- MiniMax H3 image-to-video confirmed working end to end (isolated ComfyUI env,
-  needed for a newer core version without breaking the main install)
-- LTX-2.3 text-to-video with synced audio confirmed working end to end
-- Director's Console job submission verified end to end — real rendered file on
-  disk checked, not just a 200 response (closes the prior "backends registry
-  residual empty" gap below)
-- New `curate` CLI subcommand (api/curate.py): scan/list/pick/order/assemble —
-  pick the best take of a shot across separate runs, ffmpeg-concat the picks
-- Lipsync tool integration points (face-swap/talking-head/portrait-animation)
-  identified and wired into the model registry — full proof run still pending
-- No demo video shipped with this release yet — pipeline pieces proven
-  individually, a finished example is still in progress
+- PocketTTS (Kyutai) local backend added — generation-verified, real /generate
+  call produced a real wav, no known caveats
+- DramaBox (Resemble AI, LTX-2.3-derived, low-VRAM/MMGP path) local backend
+  added — generation-verified too, but the FIRST attempt OOM'd with another
+  idle GPU app still resident; confirmed it needs the GPU near-exclusive and
+  excluded it from the concurrent multi-app launch chain accordingly
+- New scripts/sync_hf_spaces_by_category.py — pulls HF's real curated
+  ?category= browse pages (not the generic /api/spaces listing, which
+  silently ignores that filter), 300+ Spaces across video-generation/
+  voice-cloning/music-generation
+- 11 Spaces earmarked as optional cloud-call tools (kind: "hf_space" in the
+  provider registry) — none wired in as a dependency. Live-tested 4 of them:
+  2 were down (RUNTIME_ERROR), 1 speaks a legacy protocol the current
+  gradio_client can't use, 1 needs a real reference clip to retry properly
 
 PRIOR still true:
 - Qwen Edit 2509 fp8 PRESENT · sampling PAUSED on 16GB OOM — do not hammer
@@ -43,13 +45,31 @@ PRIOR still true:
 - C64 software catalog software/disk/gpu-prep
 - PETSCII Matrix v4 brand short + TUI launch workflow (see CHANGELOG 0.5.10)
 - Grok I2V ≠ local GPU · FaceID InsightFace residual · PHI never
+- Full song → video → lipsync proof run still pending (see 0.6.0 wave)
 
 NEXT (optional polish, not blocking):
-- Full song → video → lipsync proof run (the piece still missing above)
+- Verify the other 7 earmarked cloud Spaces the same way PocketTTS/DramaBox
+  were verified (view_api(), one real call, only then write a backends/*.py)
+- Retry hf_musicgen with a real reference clip instead of melodies=None
+- hf_openvoice needs an older gradio_client pin or a direct HTTP call —
+  current client can't speak its legacy websocket-queue protocol
+- Build an actual VRAM-budget gate before DramaBox is called unattended
+  (mirror scripts/mrgpu_steam_prep.sh's exclusive-GPU pattern)
+- Full song → video → lipsync proof run (the piece still missing from 0.6.0)
 - Live Comfy/FramePack/Directors log stream into TUI RichLog demoscene filter
 - True WAN 2.2 dual-noise low-MP API pin (Lightning LoRAs on pool)
 - FramePack mp4 artifact_ok finalize residual
 ```
+
+## 2026-09-02 wave (0.7.0)
+
+| Item | Notes |
+|------|--------|
+| **PocketTTS backend** | `api/backends/pocket_tts.py` — generation-verified, real wav produced, no caveats |
+| **DramaBox backend** | `api/backends/dramabox.py` — generation-verified, but GPU-near-exclusive confirmed by a real OOM; excluded from the concurrent "audio" launch chain |
+| **HF Spaces category puller** | `scripts/sync_hf_spaces_by_category.py` — reads HF's real `?category=` pages, 300+ Spaces |
+| **11 cloud-call earmarks** | `kind: "hf_space"` provider entries, none default-wired; 2/4 live-tested were down or incompatible |
+| Public | https://github.com/the1truedan/mok-tua |
 
 ## 2026-08-15 wave (0.6.0)
 

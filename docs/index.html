@@ -359,9 +359,9 @@
     <p class="tagline">Turn a script into storyboard pictures — and, when you want, video — on machines you own.</p>
     <div class="hero-cta">
       <a class="btn primary" href="https://github.com/the1truedan/mok-tua">View on GitHub</a>
-      <a class="btn" href="https://github.com/the1truedan/mok-tua/releases/tag/v0.6.0">Latest release</a>
+      <a class="btn" href="https://github.com/the1truedan/mok-tua/releases/tag/v0.7.0">Latest release</a>
       <a class="btn" href="https://ko-fi.com/the1truedan">Ko-fi</a>
-      <span class="version-chip">v<b>0.6.0</b> · MIT · public</span>
+      <span class="version-chip">v<b>0.7.0</b> · MIT · public</span>
     </div>
   </div>
 </div>
@@ -408,6 +408,18 @@
       <h3>LiteLLM</h3>
       <p>One API surface over local and cloud language models, gated by privacy tier.</p>
       <span class="link-hint">github.com/BerriAI/litellm →</span>
+    </a>
+    <a class="stack-card" href="https://github.com/PierrunoYT/pocket-tts-pinokio" target="_blank" rel="noopener">
+      <span class="role">voice · local · v0.7.0</span>
+      <h3>PocketTTS</h3>
+      <p>Lightweight, CPU-capable voice-clone TTS. Generation-verified — a real call produced a real wav.</p>
+      <span class="link-hint">github.com/PierrunoYT/pocket-tts-pinokio →</span>
+    </a>
+    <a class="stack-card" href="https://github.com/PierrunoYT/DramaBox-TTS-Pinokio" target="_blank" rel="noopener">
+      <span class="role">voice · local · v0.7.0</span>
+      <h3>DramaBox</h3>
+      <p>Expressive, prompt-directed voice-clone TTS. Generation-verified — but confirmed GPU-near-exclusive by a real OOM, so it never runs alongside another GPU app in the same launch chain.</p>
+      <span class="link-hint">github.com/PierrunoYT/DramaBox-TTS-Pinokio →</span>
     </a>
   </div>
 </section>
@@ -486,6 +498,41 @@
         <h3>Runs on what you own</h3>
         <p>No render farm required — one GPU box is enough; a LAN full of them scales further.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="section-head">
+    <p class="section-eyebrow">planned, not shipped</p>
+    <h2 class="section-title">Cloud calls via Hugging Face Spaces</h2>
+    <p class="section-sub">Earmarked overflow tools for when the local roster is saturated or missing a capability — registered, not wired in as a dependency. Every one of these is labeled with what was actually confirmed, not what was hoped for: 2 of the 4 checked so far were down or speaking an incompatible API when tested.</p>
+  </div>
+  <div class="stack-grid">
+    <div class="stack-card">
+      <span class="role">down when checked</span>
+      <h3>LuxTTS</h3>
+      <p>Would-be workaround for a local LuxTTS install permanently blocked by an upstream Rust/tokenizers dependency deadlock. The one public Space hosting it returned a runtime error.</p>
+    </div>
+    <div class="stack-card">
+      <span class="role">down when checked</span>
+      <h3>Coqui XTTS</h3>
+      <p>Well-known open voice-clone TTS, a real gap vs. the local roster — but its official Space was returning a runtime error, plausibly because Coqui AI (the company) has since shut down.</p>
+    </div>
+    <div class="stack-card">
+      <span class="role">up, client-incompatible</span>
+      <h3>OpenVoice V2</h3>
+      <p>Distinct voice-clone architecture. Space is live, but its legacy websocket-queue API isn't speakable by the current gradio_client version — needs a different client, not a simple call.</p>
+    </div>
+    <div class="stack-card">
+      <span class="role">up, retry needed</span>
+      <h3>MusicGen</h3>
+      <p>Meta's official space, distinct from the local ACE-Step. Confirmed up with a modern API, but a first test call needs a real reference clip, not an empty one, to succeed.</p>
+    </div>
+    <div class="stack-card">
+      <span class="role">registered, untested</span>
+      <h3>+ 7 more</h3>
+      <p>RVC voice conversion, Stable Audio 3, LivePortrait, SadTalker, MagicAnimate, LatentSync, and an official MiniMax H3 comparison point — registered as candidates, not yet call-verified.</p>
     </div>
   </div>
 </section>

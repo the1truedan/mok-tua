@@ -3,6 +3,35 @@
 All notable changes to **mok-tua** are documented here.  
 Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are local lab (America/New_York context).
 
+## [0.7.0] — 2026-09-02
+
+### Added
+
+- **Two new local voice-clone TTS backends, both proven on a real generation** — not just
+  installed:
+  - **PocketTTS** (Kyutai) — lightweight, CPU-capable. A real `/generate` call produced a real
+    wav; no caveats.
+  - **DramaBox** (Resemble AI, LTX-2.3-derived, low-VRAM/MMGP offload path) — a real
+    `/on_generate` call produced a real wav, but only once we confirmed it needs the GPU close
+    to exclusive: the first attempt OOM'd with another, otherwise-idle GPU app still holding a
+    couple GB it wasn't using. Fixed by excluding it from the concurrent multi-app launch chain,
+    not by pretending the constraint doesn't exist.
+- **A curated Hugging Face Spaces catalog puller** (`scripts/sync_hf_spaces_by_category.py`) that
+  reads HF's real `?category=` browse pages (video-generation / voice-cloning / music-generation —
+  300+ Spaces), not the generic API listing, which silently ignores that filter.
+- **Cloud-call Space earmarks** — 11 public Spaces registered as optional, non-default overflow
+  tools (`kind: "hf_space"` in the provider registry), each with an honest status rather than an
+  assumed one: live-testing 4 of them found 2 outright down and a 3rd speaking an API dialect the
+  current client can't use. Nothing here is a dependency of anything else.
+
+### Skipped (on purpose, not forgotten)
+
+- No cloud Space backend module shipped this release — every one tested this pass was either down,
+  incompatible, or needs a follow-up call with real input before it's trustworthy enough to wire in.
+- LuxTTS still isn't running locally — its dependency chain needs a 2020-era Rust toolchain that
+  can't simultaneously satisfy a modern safety lint and its own unpinned newer transitive deps.
+  The one public Space hosting it was down when checked, so that door is shut for now too.
+
 ## [0.6.0] — 2026-08-15
 
 ### Added

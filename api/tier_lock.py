@@ -35,7 +35,7 @@ DEFAULT_LOADING = {
     "body": ["freemocap"],
 }
 
-MOK_TUA_VERSION = "0.6.0"
+MOK_TUA_VERSION = "0.7.0"
 
 
 def _utc() -> str:
