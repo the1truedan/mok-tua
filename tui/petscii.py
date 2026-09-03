@@ -203,6 +203,8 @@ def loading_screen_for(tool_id: str, version: str = "0.5.8", *, step: int = 0) -
         "wan2gp": ("WAN2GP", "VIDEO GENERATION"),
         "wan": ("WAN", "VIDEO GENERATION"),
         "ace_step": ("ACE-STEP", "MUSIC GENERATION"),
+        "pocket_tts": ("POCKET-TTS", "VOICE CLONE TTS"),
+        "dramabox": ("DRAMABOX", "EXPRESSIVE TTS"),
         "facefusion": ("FACEFUSION", "FACE PIPELINE"),
         "qwen_edit": ("QWEN-EDIT", "STORYBOARD PAUSED"),
         "mok_tua": ("MOK-TUA", "CONDUCTOR CORE"),

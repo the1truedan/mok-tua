@@ -28,7 +28,10 @@ DEFAULT_LOADING = {
     ],
     "video_gpu": ["sm_comfy", "wan2gp"],
     "face": ["facefusion", "dreamtalk"],
-    "audio": ["ace_step", "tts_story"],
+    # dramabox deliberately excluded -- confirmed 2026-09-02 it needs the GPU
+    # close to exclusive (OOMs alongside even idle ace-step-ui, ~2.66GB);
+    # launch it individually, never as part of this concurrent chain.
+    "audio": ["ace_step", "tts_story", "pocket_tts"],
     "body": ["freemocap"],
 }
 

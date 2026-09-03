@@ -134,6 +134,8 @@ def smoke_t2() -> list[dict[str, Any]]:
         ("pinokio/api/ace-step.pinokio.git", "ace_step"),
         ("pinokio/api/TTS-Story.git", "tts_story"),
         ("pinokio/api/Qwen3-TTS-Pinokio.git", "qwen3_tts"),
+        ("pinokio/api/pocket-tts-pinokio.git", "pocket_tts"),
+        ("pinokio/api/DramaBox-TTS-Pinokio.git", "dramabox"),
     ):
         p = AI_DATA / rel
         checks.append(_check(f"{name}_path", p.is_dir(), str(p)))

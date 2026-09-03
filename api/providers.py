@@ -183,6 +183,136 @@ LAUNCH_RECIPES: dict[str, dict[str, Any]] = {
         "cmd": ["bash", "-lc", "python app.py"],
         "note": "Multi-voice story TTS",
     },
+    "pocket_tts": {
+        "kind": "pinokio",
+        "probe": [{"type": "http", "url": "http://127.0.0.1:42050/", "label": "pocket_tts_local"}],
+        "app_root": "pinokio/api/pocket-tts-pinokio.git",
+        "cwd_rel": "app",
+        "cmd": ["bash", "-lc", "PORT=${PORT:-42050} env/bin/python app.py"],
+        "default_port": 42050,
+        "note": "Lightweight CPU-capable voice-clone TTS (Kyutai PocketTTS); added 2026-09-02, real /generate call verified against a live instance",
+    },
+    "dramabox": {
+        "kind": "pinokio",
+        "probe": [{"type": "http", "url": "http://127.0.0.1:42051/", "label": "dramabox_local"}],
+        "app_root": "pinokio/api/DramaBox-TTS-Pinokio.git",
+        "cwd_rel": "app",
+        "cmd": [
+            "bash",
+            "-lc",
+            "GRADIO_SERVER_PORT=${PORT:-42051} MMGP_PROFILE=auto "
+            "PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True env/bin/python ../launch_low_vram.py",
+        ],
+        "default_port": 42051,
+        "note": "Expressive prompt-directed TTS w/ voice clone (Resemble AI, LTX-2.3-based); low-VRAM/MMGP path. Generation-verified 2026-09-02 (real wav produced), but ONLY with the GPU near-exclusive — OOMs alongside even idle ace-step-ui (~2.66GB). Do not launch concurrently with other GPU apps; see api/backends/dramabox.py docstring.",
+    },
+
+    # ---- kind: "hf_space" — public Hugging Face Spaces, earmarked 2026-09-02 -----
+    # Cloud call targets, not local launches: launch_provider() short-circuits to
+    # status="cloud_hosted" for this kind (nothing to spawn). Call via gradio_client
+    # against "open" (owner/space form resolves fine) from a backends/*.py module,
+    # same pattern as ace_step.py/pocket_tts.py/dramabox.py. Sourced from
+    # config/hf_spaces_by_category.generated.json (scripts/sync_hf_spaces_by_category.py).
+    # Real caveats, not local-GPU ones: most run on shared ZeroGPU (queue + cold-start
+    # unpredictability, no SLA), a public Space can go offline/rate-limit/change its API
+    # signature without notice, and nothing here should be a default/blocking dependency
+    # for an unattended orchestration run — treat as overflow/comparison/gap-fill only.
+    # Only hf_luxtts has a written+verified backends/*.py so far; the rest are
+    # registered-but-uncalled candidates, verify before relying on them.
+    "hf_luxtts": {
+        "kind": "hf_space",
+        "probe": [{"type": "http", "url": "https://huggingface.co/spaces/YatharthS/LuxTTS"}],
+        "open": "YatharthS/LuxTTS",
+        "note": "Hosted LuxTTS — 150x realtime voice-clone TTS. Would-be direct workaround "
+        "for the local LuxTTS-Pinokio install, which is permanently blocked by an upstream "
+        "tokenizers==0.10.3 Rust-toolchain deadlock (LinaCodec pins ancient transformers). "
+        "Checked 2026-09-02: this specific Space is currently DOWN "
+        "(gradio_client: 'RUNTIME_ERROR' — owner-side crash, not a caller-side problem). "
+        "No verified backend module written — nothing to verify against. Re-check "
+        "before relying on this; if it stays down, search for another LuxTTS-hosting Space.",
+    },
+    "hf_xtts": {
+        "kind": "hf_space",
+        "probe": [{"type": "http", "url": "https://huggingface.co/spaces/coqui/xtts"}],
+        "open": "coqui/xtts",
+        "note": "Coqui XTTS-v2 — real gap vs. local roster (no XTTS locally). 2766 likes, "
+        "widely used. Not yet call-verified.",
+    },
+    "hf_openvoice": {
+        "kind": "hf_space",
+        "probe": [{"type": "http", "url": "https://huggingface.co/spaces/myshell-ai/OpenVoiceV2"}],
+        "open": "myshell-ai/OpenVoiceV2",
+        "note": "MyShell OpenVoice V2 — distinct voice-clone architecture, real gap vs. "
+        "local roster. Checked 2026-09-02: Space is UP, but its legacy `fn_index`/"
+        "websocket-queue API is incompatible with current gradio_client (2.6.0 raised "
+        "'Unknown protocol: ws') — needs an older gradio_client pin or a direct HTTP "
+        "call to work, not a simple Client().predict(). Not generation-verified.",
+    },
+    "hf_rvc": {
+        "kind": "hf_space",
+        "probe": [{"type": "http", "url": "https://huggingface.co/spaces/r3gm/rvc_zero"}],
+        "open": "r3gm/rvc_zero",
+        "note": "RVC (VITS-based) voice CONVERSION — a capability the local roster has "
+        "none of at all (convert existing audio to a different voice, not text-to-speech). "
+        "Not yet call-verified.",
+    },
+    "hf_musicgen": {
+        "kind": "hf_space",
+        "probe": [{"type": "http", "url": "https://huggingface.co/spaces/facebook/MusicGen"}],
+        "open": "facebook/MusicGen",
+        "note": "Meta MusicGen, official space, 5088 likes — distinct architecture from "
+        "local ACE-Step. Checked 2026-09-02: Space is UP, modern named api_name "
+        "('/predict_batched') API confirmed via view_api() — but a test call with "
+        "melodies=None raised AppError('Internal Gradio error'); the 'required' Audio "
+        "param likely can't actually be omitted despite what the signature implies. "
+        "Retry with a real reference clip before relying on this.",
+    },
+    "hf_stable_audio": {
+        "kind": "hf_space",
+        "probe": [{"type": "http", "url": "https://huggingface.co/spaces/stabilityai/stable-audio-3"}],
+        "open": "stabilityai/stable-audio-3",
+        "note": "Stability AI's official Stable Audio 3 (music + SFX from text). "
+        "Not yet call-verified.",
+    },
+    "hf_liveportrait": {
+        "kind": "hf_space",
+        "probe": [{"type": "http", "url": "https://huggingface.co/spaces/KlingTeam/LivePortrait"}],
+        "open": "KlingTeam/LivePortrait",
+        "note": "LivePortrait — applies a driving video's motion to a portrait. 3785 "
+        "likes, distinct from local DreamTalk. Not yet call-verified.",
+    },
+    "hf_sadtalker": {
+        "kind": "hf_space",
+        "probe": [{"type": "http", "url": "https://huggingface.co/spaces/vinthony/SadTalker"}],
+        "open": "vinthony/SadTalker",
+        "note": "SadTalker — talking-face video from a single image + audio, distinct "
+        "architecture from local DreamTalk. Not yet call-verified.",
+    },
+    "hf_magicanimate": {
+        "kind": "hf_space",
+        "probe": [{"type": "http", "url": "https://huggingface.co/spaces/zcxu-eric/magicanimate"}],
+        "open": "zcxu-eric/magicanimate",
+        "note": "MagicAnimate — animated video from images + a motion sequence. "
+        "Not yet call-verified.",
+    },
+    "hf_latentsync": {
+        "kind": "hf_space",
+        "probe": [{"type": "http", "url": "https://huggingface.co/spaces/fffiloni/LatentSync"}],
+        "open": "fffiloni/LatentSync",
+        "note": "LatentSync — audio-conditioned lipsync via latent diffusion; "
+        "complements local FaceFusion's lipsync mode rather than duplicating it. "
+        "Not yet call-verified.",
+    },
+    "hf_minimax_h3": {
+        "kind": "hf_space",
+        "probe": [{"type": "http", "url": "https://huggingface.co/spaces/MiniMaxAI/MiniMax-H3-Turbo-Lora"}],
+        "open": "MiniMaxAI/MiniMax-H3-Turbo-Lora",
+        "note": "Official MiniMax H3 space (video + synchronized soundtrack) — same "
+        "family of tech as Maestro's local H3 Sol Engine; useful as an official-source "
+        "comparison point. Not yet call-verified.",
+    },
+    # ---- end kind: "hf_space" -------------------------------------------------
+
     "framepack_studio": {
         "kind": "stability_matrix",
         "probe": [
@@ -573,6 +703,15 @@ def launch_provider(
             "status": "gui_only",
             "id": app_id,
             "note": recipe.get("note"),
+            "open": recipe.get("open"),
+        }
+
+    if recipe.get("kind") == "hf_space":
+        return {
+            "ok": True,
+            "status": "cloud_hosted",
+            "id": app_id,
+            "note": recipe.get("note") or "Public HF Space — nothing to launch locally; call via its backends/* module.",
             "open": recipe.get("open"),
         }
 
@@ -1048,7 +1187,10 @@ def launch_chain(
         "demo": ["mok_tua", "sm_comfy", "directors_console"],
         "video": ["sm_comfy", "wan2gp"],
         "face": ["facefusion", "dreamtalk"],
-        "audio": ["ace_step", "tts_story"],
+        # dramabox deliberately excluded -- confirmed 2026-09-02 it needs the
+        # GPU close to exclusive (OOMs alongside even idle ace-step-ui,
+        # ~2.66GB); launch it individually, never as part of this chain.
+        "audio": ["ace_step", "tts_story", "pocket_tts"],
         "body": ["freemocap"],
         "full": [
             "mok_tua",

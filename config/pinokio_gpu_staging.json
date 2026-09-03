@@ -310,6 +310,46 @@
       },
       "pull_gate": "launcher_remediation_required",
       "next_gate": "replace plain git pull with ff-only; review unsafe-best-match and direct third-party CUDA wheels; keep nested seedvc pinned before dependency install"
+    },
+    {
+      "rank": 12,
+      "id": "pocket_tts",
+      "app_dir": "pocket-tts-pinokio.git",
+      "ref": "pinokio://gpu-host:42000/api/pocket-tts-pinokio.git",
+      "capabilities": [
+        "tts",
+        "voice_clone",
+        "cpu_capable"
+      ],
+      "mok_tua_stage": "S4_voice",
+      "source_present": true,
+      "runtime_state": "online",
+      "audit": {
+        "verified_at": "2026-09-02T19:20:00Z",
+        "note": "installed + launched :42050, real /generate call produced 2.48s wav \u2014 Tier 3 (real generation) verified"
+      },
+      "pull_gate": "current",
+      "next_gate": "none \u2014 generation-verified, backend module at api/backends/pocket_tts.py"
+    },
+    {
+      "rank": 13,
+      "id": "dramabox",
+      "app_dir": "DramaBox-TTS-Pinokio.git",
+      "ref": "pinokio://gpu-host:42000/api/DramaBox-TTS-Pinokio.git",
+      "capabilities": [
+        "tts",
+        "voice_clone",
+        "expressive_prompted"
+      ],
+      "mok_tua_stage": "S4_voice",
+      "source_present": true,
+      "runtime_state": "online",
+      "audit": {
+        "verified_at": "2026-09-02T20:00:00Z",
+        "note": "Live on :42051, real /on_generate call verified \u2014 produced dramabox_v78_etou.wav. GPU-EXCLUSIVE REQUIREMENT confirmed by live testing: OOM'd when ace-step-ui's idle API server (2.66GB) was also resident; succeeded cleanly once stopped. Not in the default 'audio' launch_chain for this reason."
+      },
+      "pull_gate": "current",
+      "next_gate": "orchestration-level VRAM budget check before launch (mirror scripts/mrgpu_steam_prep.sh gating) so this never runs concurrently with another GPU app unattended"
     }
   ],
   "deferred": [
