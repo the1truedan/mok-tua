@@ -18,7 +18,7 @@
 **Turn a script into storyboard pictures — and, when you want, short video — on machines you own.**
 
 Local-first creative control desk for M.A.N.A.G.E.R.  
-Hybrid **v0.7.0** · public · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-15.md) · [orchestration smoke (cited)](docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md)
+Hybrid **v0.7.0** · public · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md) (H3 VocalLock lipsync **PASS**) · [2026-08-15 stamp](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-15.md) · [orchestration smoke (cited)](docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md)
 
 [![Version](https://img.shields.io/badge/version-0.7.0-blue.svg)](CHANGELOG.md)
 [![Release](https://img.shields.io/github/v/release/the1truedan/mok-tua?display_name=tag&include_prereleases&sort=semver&label=release)](https://github.com/the1truedan/mok-tua/releases)
@@ -318,6 +318,22 @@ Medical / caregiver private data is never auto-sent to cloud.
 
 ---
 
+## Proven video + lipsync (smoke, not marketing)
+
+Two **different** mechanisms have real renders on a single 16 GB GPU. Do not mix them up with the dedicated talking-head tools (DreamTalk / LivePortrait / FaceFusion), which are wired in but still unproven.
+
+| Mechanism | Result | Evidence |
+|-----------|--------|----------|
+| **MiniMax H3 VocalLock_V3** (native audio-visual, isolated ComfyUI) | **PASS** — verse batch **5/5 scenes**, 32s window, identity still + vocal stem | [2026-09-12 smoke](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md) |
+| **LTX-2 audio-conditioned** (Maestro REST, real WAV `audio_guide`) | **PASS** since 2026-08-15 | [live site clips](https://the1truedan.github.io/mok-tua/) · [08-15 stamp](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-15.md) |
+
+Public robustness citations (weights, turbo, Vocal Lock, orchestration):
+
+- [MiniMax H3](https://huggingface.co/MiniMaxAI/MiniMax-H3) · [Comfy-Org/MiniMax-H3](https://huggingface.co/Comfy-Org/MiniMax-H3) · [ComfyUI #15224](https://github.com/Comfy-Org/ComfyUI/pull/15224)
+- [LightX2V](https://github.com/ModelTC/LightX2V) · [H3 Turbo-SLA](https://huggingface.co/lightx2v/Minimax-h3-Turbo-SLA) · [larryvrh turbo LoRA](https://huggingface.co/larryvrh/MiniMax-H3-Turbo-Lora)
+- [T8mars Vocal Lock](https://github.com/T8mars/comfyui-minimax-h3-audio-T8) · [awesome-minimax-H3](https://github.com/wildminder/awesome-minimax-H3)
+- [Maestro](https://github.com/Blizaine/Maestro) · [comfy-cli](https://github.com/Comfy-Org/comfy-cli) · [comfy-mcp](https://github.com/Comfy-Org/comfy-mcp)
+
 ## For operators & power users
 
 Deep CLI, tier locks (T0–T4), pull hygiene, ask-packet federation, ROBUST Comfy install, Docker, and API tables live here:
@@ -326,6 +342,7 @@ Deep CLI, tier locks (T0–T4), pull hygiene, ask-packet federation, ROBUST Comf
 - [docs/ASK_PACKET_FEDERATION.md](docs/ASK_PACKET_FEDERATION.md) — sealed lab jobs + receipts  
 - [docs/COMFY_ROBUST_NODES.md](docs/COMFY_ROBUST_NODES.md) — GPU worker node roster  
 - [config/director_stack_catalog.md](config/director_stack_catalog.md) — map of installed creative tools  
+- [docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md) — H3 VocalLock lipsync PASS + cited links  
 
 ---
 
@@ -333,8 +350,9 @@ Deep CLI, tier locks (T0–T4), pull hygiene, ask-packet federation, ROBUST Comf
 
 | Ver | What changed (human) |
 |-----|----------------------|
+| **2026-09-12** | **H3 VocalLock_V3 lipsync smoke PASS** (5/5 verse scenes on isolated ComfyUI, 16 GB GPU). Distinct from the 0.6.0 LTX-2 audio-conditioned proof clips. Dedicated DreamTalk/LivePortrait/FaceFusion still unproven. Cited robustness links: [smoke report](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md) |
 | **0.7.0** | PocketTTS + DramaBox local TTS backends, both proven on a real generated wav (DramaBox confirmed GPU-near-exclusive by an actual OOM, fixed by excluding it from the concurrent launch chain); HF Spaces category-page puller; 11 Spaces earmarked as optional cloud-call tools — 2 of the 4 checked were down or incompatible, documented rather than assumed working |
-| **0.6.0** | More open video models confirmed working end to end on a 16 GB GPU (MiniMax H3, LTX-2.3); Director's Console job submission verified end to end; `curate` tool for picking best takes across runs; lipsync tool integration points wired in — no demo video yet |
+| **0.6.0** | More open video models confirmed working end to end on a 16 GB GPU (MiniMax H3, LTX-2.3); Director's Console job submission verified end to end; `curate` tool for picking best takes across runs; LTX-2 audio-conditioned proof clips on the [live site](https://the1truedan.github.io/mok-tua/); dedicated lipsync *tools* still unproven |
 | **0.5.10** | PETSCII Matrix brand short v4 (~28s: loader→µ→CRT→tmux→disk menu); TUI launch workflow (intro→help→status→deck); `show`/`play`/`open` jpg·png·mp4; `menu`/`media` verbs |
 | **0.5.9** | C64 software catalog · disk insert · gpu-prep · AnimateDiff motion sizzle; Qwen sampling paused on 16 GB |
 | **0.5.8** | Manager pivot anime multi-angle storyboard · 14.20 s panel-hold export · Qwen Edit weights staged |

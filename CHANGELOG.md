@@ -3,6 +3,19 @@
 All notable changes to **mok-tua** are documented here.  
 Format inspired by [Keep a Changelog](https://keepachangelog.com/). Dates are local lab (America/New_York context).
 
+## [Unreleased] — 2026-09-12 (smoke notations, not a product bump)
+
+### Proven
+
+- **MiniMax H3 VocalLock_V3 lipsync — PASS.** Isolated ComfyUI `:8189` on a 16 GB GPU. Music-video verse batch, **5/5 scenes**, 32s window, identity still + manual vocal stem. This is native H3 audio-visual generation (audio in the latent), not DreamTalk / LivePortrait / FaceFusion and not the 2026-08-15 LTX-2 audio-conditioned proof. Report: [docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md).
+- **Cited robustness links** on the public repo for the stack that made that PASS possible: MiniMax H3 + Comfy-Org weights, LightX2V turbo LoRAs, T8mars Vocal Lock, Maestro REST (LTX path), comfy-cli / comfy-mcp (adopt later). Same report, plus [docs/COMFY_ROBUST_NODES.md](docs/COMFY_ROBUST_NODES.md).
+
+### Still not claimed
+
+- Dedicated lipsync-tool render (DreamTalk / LivePortrait / FaceFusion) — still no proof run of *those* tools.
+- Verse 2 and a later Director / LTX-2.5 shot batch were in flight at notation time — not PASS here.
+- Maestro’s own H3 Sol Engine picker remains the 2026-09-02 allowlist-blocked path; do not conflate it with the isolated ComfyUI graph.
+
 ## [0.7.0] — 2026-09-02
 
 ### Added

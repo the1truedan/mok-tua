@@ -338,10 +338,52 @@
 
   .mu-mark span { color: var(--accent-mu); opacity: 0.75; }
 
+  .cite-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .cite-card {
+    background: var(--bg-panel);
+    padding: 1.2rem 1.3rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-height: 108px;
+    transition: background 0.15s ease;
+  }
+
+  a.cite-card:hover, a.cite-card:focus-visible { background: var(--bg-panel-2); }
+  a.cite-card:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  .cite-card .role {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+  }
+
+  .cite-card h3 { margin: 0; font-size: 0.98rem; font-weight: 600; }
+  .cite-card p { margin: 0; font-size: 0.84rem; color: var(--fg-dim); flex-grow: 1; }
+  .cite-card .link-hint {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    color: var(--accent-mu);
+  }
+
   @media (max-width: 720px) {
     .stack-grid { grid-template-columns: 1fr; }
     .cap-grid { grid-template-columns: 1fr; }
     .proof-grid { grid-template-columns: 1fr; }
+    .cite-grid { grid-template-columns: 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -428,7 +470,7 @@
   <div class="section-head">
     <p class="section-eyebrow">proof, not promises</p>
     <h2 class="section-title">Lip sync, from a real render</h2>
-    <p class="section-sub">Two shots from one pipeline — the video model generated against the song's actual audio track, not text-prompted blind. Click to play, audio included.</p>
+    <p class="section-sub">Two proven mechanisms. These clips are LTX-2 audio-conditioned (2026-08-15). MiniMax H3 VocalLock_V3 later passed a 5/5 verse batch on the same 16&nbsp;GB GPU — native AV, different graph. Dedicated DreamTalk / LivePortrait / FaceFusion tools are still unproven.</p>
   </div>
   <div class="proof-grid">
     <div class="proof-card">
@@ -462,7 +504,65 @@
       </div>
     </div>
   </div>
-  <p class="proof-note">Both shots are from the same 8-clip render — one LTX-2 job given the song's real audio track (not a separate lipsync pass), 887s active GPU time / ~2h9m job elapsed, on one 16GB GPU. No cloud render, no hand-timed edit.</p>
+  <p class="proof-note">Both shots are from the same 8-clip render — one LTX-2 job given the song's real audio track (not a separate lipsync pass), 887s active GPU time / ~2h9m job elapsed, on one 16GB GPU. No cloud render, no hand-timed edit. H3 VocalLock stamp: <a href="https://github.com/the1truedan/mok-tua/blob/main/docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md">2026-09-12 smoke report</a>.</p>
+</section>
+
+<section class="band">
+  <div class="section-head">
+    <p class="section-eyebrow">cited, not assumed</p>
+    <h2 class="section-title">Robustness links for H3 + lipsync</h2>
+    <p class="section-sub">Public sources behind the 16&nbsp;GB PASS — weights, turbo LoRAs, Vocal Lock, and the conductor stack. Check Hugging Face sibling files before picking a precision.</p>
+  </div>
+  <div class="cite-grid">
+    <a class="cite-card" href="https://huggingface.co/MiniMaxAI/MiniMax-H3" target="_blank" rel="noopener">
+      <span class="role">weights · official</span>
+      <h3>MiniMax H3</h3>
+      <p>Omni-modal video + native stereo audio. Official model card.</p>
+      <span class="link-hint">huggingface.co/MiniMaxAI/MiniMax-H3 →</span>
+    </a>
+    <a class="cite-card" href="https://huggingface.co/Comfy-Org/MiniMax-H3" target="_blank" rel="noopener">
+      <span class="role">weights · ComfyUI</span>
+      <h3>Comfy-Org/MiniMax-H3</h3>
+      <p>INT8 pruned, nvfp4 text encoder, video + audio VAEs — the pack that ran locally.</p>
+      <span class="link-hint">huggingface.co/Comfy-Org/MiniMax-H3 →</span>
+    </a>
+    <a class="cite-card" href="https://github.com/ModelTC/LightX2V" target="_blank" rel="noopener">
+      <span class="role">turbo · 4 / 8 step</span>
+      <h3>LightX2V</h3>
+      <p>H3 T2AV / I2AV / Ref2AV configs and 768p turbo LoRAs. Do not stack two on one sampler until an A/B.</p>
+      <span class="link-hint">github.com/ModelTC/LightX2V →</span>
+    </a>
+    <a class="cite-card" href="https://github.com/T8mars/comfyui-minimax-h3-audio-T8" target="_blank" rel="noopener">
+      <span class="role">Vocal Lock · PASS</span>
+      <h3>T8mars H3 audio</h3>
+      <p>Vocal Lock binds a vocal stem to a named subject. This is the H3 lipsync mechanism that passed 5/5.</p>
+      <span class="link-hint">github.com/T8mars/comfyui-minimax-h3-audio-T8 →</span>
+    </a>
+    <a class="cite-card" href="https://github.com/Blizaine/Maestro" target="_blank" rel="noopener">
+      <span class="role">LTX path · REST</span>
+      <h3>Maestro</h3>
+      <p>Audio-conditioned LTX-2 jobs via <span class="mono">/api/v1/generate</span>. Gradio port drifts; :7860 is DreamTalk, not Maestro.</p>
+      <span class="link-hint">github.com/Blizaine/Maestro →</span>
+    </a>
+    <a class="cite-card" href="https://github.com/Comfy-Org/comfy-mcp" target="_blank" rel="noopener">
+      <span class="role">orchestration · later</span>
+      <h3>comfy-mcp + comfy-cli</h3>
+      <p>Structured run/monitor/introspect against a remote ComfyUI. Adopt when the GPU is idle — not mid-render.</p>
+      <span class="link-hint">github.com/Comfy-Org/comfy-mcp →</span>
+    </a>
+    <a class="cite-card" href="https://github.com/wildminder/awesome-minimax-H3" target="_blank" rel="noopener">
+      <span class="role">index</span>
+      <h3>Awesome MiniMax-H3</h3>
+      <p>Checkpoints, turbo table, community workflows. Index only — not a second source of truth.</p>
+      <span class="link-hint">github.com/wildminder/awesome-minimax-H3 →</span>
+    </a>
+    <a class="cite-card" href="https://github.com/the1truedan/mok-tua/blob/main/docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md" target="_blank" rel="noopener">
+      <span class="role">this lab · 2026-09-12</span>
+      <h3>Smoke report</h3>
+      <p>What passed, what is still unproven, and the full cite table.</p>
+      <span class="link-hint">docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md →</span>
+    </a>
+  </div>
 </section>
 
 <section class="band">
@@ -543,6 +643,7 @@
     <nav class="footer-links">
       <a href="https://github.com/the1truedan/mok-tua/blob/main/README.md">README</a>
       <a href="https://github.com/the1truedan/mok-tua/blob/main/CHANGELOG.md">Changelog</a>
+      <a href="https://github.com/the1truedan/mok-tua/blob/main/docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md">H3 smoke</a>
       <a href="rack-and-ruin.html">rack-and-ruin</a>
       <a href="https://github.com/the1truedan/mok-tua/blob/main/LICENSE">MIT License</a>
     </nav>

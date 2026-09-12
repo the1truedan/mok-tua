@@ -1,8 +1,8 @@
 # HANDOFF — mok-tua (latest)
 
-**Date:** 2026-09-02 (PocketTTS + DramaBox local TTS backends · HF Spaces cloud-call earmarks)  
-**Version:** **0.7.0** (PocketTTS + DramaBox generation-verified · HF Spaces category puller · 11 cloud-call earmarks)  
-**Branch:** `main` · GitHub `56e6743`..`67f5e2f`  
+**Date:** 2026-09-12 (H3 VocalLock lipsync smoke notations on public GitHub)  
+**Version:** **0.7.0** product · **Unreleased** docs stamp 2026-09-12  
+**Branch:** `main` · GitHub canonical  
 **Visibility:** **PUBLIC** — https://github.com/the1truedan/mok-tua · `main` protected  
 **Remotes:** `github` (canonical public) · `forgejo` (lab mirror, diverged history — do not rebase across)
 
@@ -10,56 +10,56 @@
 
 1. **This file** — current state  
 2. **Latest release:** [`v0.7.0`](https://github.com/the1truedan/mok-tua/releases/tag/v0.7.0) · full notes in [`CHANGELOG.md`](CHANGELOG.md) · [`docs/MILESTONES.md`](docs/MILESTONES.md)  
-3. **Launch TUI:** `python3 scripts/mok_tua_cli.py tui` → PETSCII intro → CLI help → status → deck  
-4. **Curate a cut:** `python3 scripts/mok_tua_cli.py curate scan|list|pick|order|assemble` — pick best takes across runs, ffmpeg-concat them in order  
-5. **Interfaces:** [`docs/INTERFACES.md`](docs/INTERFACES.md) (launch workflow · media · software disks)  
-6. **Smoke stamp:** [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-07.md`](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-07.md) · [`docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md`](docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md)  
-7. **TODO:** [`TODO.md`](TODO.md)  
-8. **Context pit (control):** `(private control plane — not required for public mok-tua use)`
+3. **H3 VocalLock lipsync PASS:** [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md`](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md) — verse batch 5/5, cited robustness links  
+4. **Launch TUI:** `python3 scripts/mok_tua_cli.py tui` → PETSCII intro → CLI help → status → deck  
+5. **Curate a cut:** `python3 scripts/mok_tua_cli.py curate scan|list|pick|order|assemble` — pick best takes across runs, ffmpeg-concat them in order  
+6. **Interfaces:** [`docs/INTERFACES.md`](docs/INTERFACES.md) (launch workflow · media · software disks)  
+7. **Prior smoke:** [`docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-15.md`](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-15.md) · [`docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md`](docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md)  
+8. **TODO:** [`TODO.md`](TODO.md)  
+9. **Context pit (control):** `(private control plane — not required for public mok-tua use)`
 
 ## Paste for new chat
 
 ```text
 Continue from ~/mok-tua/HANDOFF.md · version 0.7.0 · main public
 
-DONE this arc:
-- PocketTTS (Kyutai) local backend added — generation-verified, real /generate
-  call produced a real wav, no known caveats
-- DramaBox (Resemble AI, LTX-2.3-derived, low-VRAM/MMGP path) local backend
-  added — generation-verified too, but the FIRST attempt OOM'd with another
-  idle GPU app still resident; confirmed it needs the GPU near-exclusive and
-  excluded it from the concurrent multi-app launch chain accordingly
-- New scripts/sync_hf_spaces_by_category.py — pulls HF's real curated
-  ?category= browse pages (not the generic /api/spaces listing, which
-  silently ignores that filter), 300+ Spaces across video-generation/
-  voice-cloning/music-generation
-- 11 Spaces earmarked as optional cloud-call tools (kind: "hf_space" in the
-  provider registry) — none wired in as a dependency. Live-tested 4 of them:
-  2 were down (RUNTIME_ERROR), 1 speaks a legacy protocol the current
-  gradio_client can't use, 1 needs a real reference clip to retry properly
+DONE this arc (2026-09-12):
+- MiniMax H3 VocalLock_V3 lipsync smoke notations landed on the public
+  GitHub repo. Isolated ComfyUI :8189, verse batch 5/5 scenes, 32s window.
+  Stamp: docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md
+- Cited public robustness links (MiniMax H3, Comfy-Org weights, LightX2V,
+  T8mars Vocal Lock, Maestro, comfy-cli/comfy-mcp) on README + Pages +
+  COMFY_ROBUST_NODES. Do not conflate with DreamTalk/LivePortrait/FaceFusion.
 
 PRIOR still true:
+- PocketTTS + DramaBox generation-verified (0.7.0). DramaBox is GPU-near-exclusive.
+- LTX-2 audio-conditioned proof clips still on the live site (different mechanism).
 - Qwen Edit 2509 fp8 PRESENT · sampling PAUSED on 16GB OOM — do not hammer
 - Manager pivot 14.20s panel-hold slideshow (not generative motion)
-- Motion sizzle AnimateDiff path + gpu-prep; prefer WAN/AD over Qwen OOM path
-- C64 software catalog software/disk/gpu-prep
-- PETSCII Matrix v4 brand short + TUI launch workflow (see CHANGELOG 0.5.10)
 - Grok I2V ≠ local GPU · FaceID InsightFace residual · PHI never
-- Full song → video → lipsync proof run still pending (see 0.6.0 wave)
+- Dedicated DreamTalk / LivePortrait / FaceFusion render still pending
+- Maestro H3 Sol Engine picker still allowlist-blocked on a name-mismatched
+  Ref2VA file (2026-09-02 audit) — that is not the VocalLock PASS path
 
 NEXT (optional polish, not blocking):
+- Dedicated lipsync-tool smoke (DreamTalk first) — the 08-17 earmark
 - Verify the other 7 earmarked cloud Spaces the same way PocketTTS/DramaBox
   were verified (view_api(), one real call, only then write a backends/*.py)
 - Retry hf_musicgen with a real reference clip instead of melodies=None
-- hf_openvoice needs an older gradio_client pin or a direct HTTP call —
-  current client can't speak its legacy websocket-queue protocol
-- Build an actual VRAM-budget gate before DramaBox is called unattended
-  (mirror scripts/mrgpu_steam_prep.sh's exclusive-GPU pattern)
-- Full song → video → lipsync proof run (the piece still missing from 0.6.0)
+- hf_openvoice needs an older gradio_client pin or a direct HTTP call
 - Live Comfy/FramePack/Directors log stream into TUI RichLog demoscene filter
 - True WAN 2.2 dual-noise low-MP API pin (Lightning LoRAs on pool)
 - FramePack mp4 artifact_ok finalize residual
 ```
+
+## 2026-09-12 wave (docs / smoke notations)
+
+| Item | Notes |
+|------|--------|
+| **H3 VocalLock_V3 PASS** | Isolated ComfyUI `:8189`, verse batch 5/5 scenes, 32s, 16 GB. Native AV lipsync — not LTX-2, not DreamTalk. |
+| **Cited robustness links** | MiniMax H3 · Comfy-Org weights · LightX2V · T8mars Vocal Lock · Maestro · comfy-cli / comfy-mcp on README, Pages, and the 09-12 smoke report |
+| **Not claimed** | Verse 2 / Director LTX-2.5 batch · dedicated lipsync tools · Maestro H3 picker |
+| Public | https://github.com/the1truedan/mok-tua |
 
 ## 2026-09-02 wave (0.7.0)
 
@@ -79,7 +79,7 @@ NEXT (optional polish, not blocking):
 | **LTX-2.3 confirmed** | Text-to-video with synced audio, same isolated install |
 | **Director's Console verified** | Job submission end to end — real file on disk, not just a success response |
 | **`curate` tool** | `scripts/mok_tua_cli.py curate scan\|list\|pick\|order\|assemble` — best-take picking across runs |
-| **Lipsync integration points** | Face-swap/talking-head/portrait-animation wired into the model registry; proof run pending |
+| **Lipsync integration points** | Face-swap/talking-head/portrait-animation wired into the model registry; **those tools** still unproven. Native H3 VocalLock and LTX-2 audio-conditioned are the two PASSes. |
 | Public | https://github.com/the1truedan/mok-tua |
 
 ## 2026-08-06 wave (0.5.8 → 0.5.10)

@@ -5,6 +5,11 @@
 
 Machine roster: `config/comfy_nodes_mok_tua_roster.json`.
 
+**2026-09-12:** native MiniMax H3 VocalLock lipsync is PASS on the isolated H3 env
+(not this shared `:8188` roster). Cited public links and the three-mechanism split live in
+[docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md](reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md).
+DreamTalk / LivePortrait / wav2lip in pack D below remain **installed, not smoke-rendered**.
+
 ## F install order (done via script)
 
 1. Audit import failures / object_info  
@@ -46,3 +51,19 @@ ACE-Step, TTS-Story, FaceFusion, FreeMoCap, mok-tua ledger/QQQ, OminiControl (FL
 ## Avoid (disabled)
 
 Moore-AnimateAnyone, AniPortrait, BlenderAI (server), Assistant, RVC, Inference-Core-Nodes (broken import).
+
+## Cited public sources (H3 / lipsync robustness)
+
+Not a second node roster. These are the upstreams behind the 2026-09-12 VocalLock PASS and the 2026-08-15 LTX-2 clips. Full table: [docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md](reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md).
+
+| Source | URL |
+|--------|-----|
+| MiniMax H3 | https://huggingface.co/MiniMaxAI/MiniMax-H3 |
+| Comfy-Org H3 weights | https://huggingface.co/Comfy-Org/MiniMax-H3 |
+| Native H3 nodes | https://github.com/Comfy-Org/ComfyUI/pull/15224 |
+| LightX2V | https://github.com/ModelTC/LightX2V |
+| T8mars Vocal Lock | https://github.com/T8mars/comfyui-minimax-h3-audio-T8 |
+| Maestro | https://github.com/Blizaine/Maestro |
+| comfy-cli | https://github.com/Comfy-Org/comfy-cli |
+| comfy-mcp | https://github.com/Comfy-Org/comfy-mcp |
+| Awesome MiniMax-H3 | https://github.com/wildminder/awesome-minimax-H3 |
