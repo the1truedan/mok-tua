@@ -4,7 +4,6 @@
 **PASS** — verse batch 5/5 scenes. Stamp:
 [docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md](../reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md).
 The Maestro `compatible_model_paths` block on a differently-named Ref2VA file
-([VIDEO_GEN_MODEL_INVENTORY_AUDIT_2026-09-02.md](../reports/VIDEO_GEN_MODEL_INVENTORY_AUDIT_2026-09-02.md))
 still stands for the **Maestro Sol Engine** path. Do not treat that block as “H3 cannot
 lip-sync.”
 

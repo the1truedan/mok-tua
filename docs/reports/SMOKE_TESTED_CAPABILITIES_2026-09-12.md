@@ -38,7 +38,7 @@ Verse 2 and a later Director / LTX-2.5 shot batch were **in flight at notation t
 ### What this is *not*
 
 - Not a DreamTalk / LivePortrait / FaceFusion / InfiniteTalk proof.
-- Not Maestro’s H3 Sol Engine picker. A 2026-09-02 Maestro `compatible_model_paths` check **blocked** a differently-named H3 Ref2VA file ([VIDEO_GEN_MODEL_INVENTORY_AUDIT_2026-09-02.md](VIDEO_GEN_MODEL_INVENTORY_AUDIT_2026-09-02.md)). The PASS above is the **isolated ComfyUI** graph, which does not use that allowlist.
+- Not Maestro’s H3 Sol Engine picker. A 2026-09-02 Maestro `compatible_model_paths` check **blocked** a differently-named H3 Ref2VA file (see [H3_OPTIMIZED_SMOKE_CAMPAIGN_EARMARK_2026-09-02.md](../operations/H3_OPTIMIZED_SMOKE_CAMPAIGN_EARMARK_2026-09-02.md)). The PASS above is the **isolated ComfyUI** graph, which does not use that allowlist.
 - Not H3 Full, not LTX Dev 22B, not a second turbo LoRA stacked on the same sampler.
 - Not a claim that SDXL / PhotoMaker / PuLID / IP-Adapter FaceID plug into this graph. They do not.
 
@@ -125,7 +125,6 @@ Dedicated DreamTalk / LivePortrait / FaceFusion smoke remains the next lipsync r
 
 - [SMOKE_TESTED_CAPABILITIES_2026-08-15.md](SMOKE_TESTED_CAPABILITIES_2026-08-15.md) — H3 I2V + LTX-2.3 + LTX-2 audio-conditioned PASS; dedicated tools still pending
 - [LIPSYNC_SMOKETEST_EARMARK_2026-08-17.md](../operations/LIPSYNC_SMOKETEST_EARMARK_2026-08-17.md) — dedicated-tool earmark (still open)
-- [H3_OPTIMIZED_SMOKE_CAMPAIGN_EARMARK_2026-09-02.md](../operations/H3_OPTIMIZED_SMOKE_CAMPAIGN_EARMARK_2026-09-02.md) — Maestro allowlist / remaining candidates
-- [VIDEO_GEN_MODEL_INVENTORY_AUDIT_2026-09-02.md](VIDEO_GEN_MODEL_INVENTORY_AUDIT_2026-09-02.md) — why Maestro H3 ref2va was blocked
+- [H3_OPTIMIZED_SMOKE_CAMPAIGN_EARMARK_2026-09-02.md](../operations/H3_OPTIMIZED_SMOKE_CAMPAIGN_EARMARK_2026-09-02.md) — Maestro allowlist / remaining candidates (includes the Ref2VA name-mismatch block)
 - [COMFY_ROBUST_NODES.md](../COMFY_ROBUST_NODES.md) — GPU worker roster
 - [HF_CLOUD_SPACES_EARMARK_2026-09-02.md](../HF_CLOUD_SPACES_EARMARK_2026-09-02.md) — optional cloud comparison Space, not this PASS
