@@ -1,10 +1,23 @@
 # mok-tua TODO
 
-**Last updated:** 2026-08-06  
-**Version baseline:** **0.5.10** (PETSCII Matrix v4 · TUI launch workflow · show/play media; prior 0.5.7 transparency poster still cite)  
-**Visibility:** private until human go · see `docs/PUBLIC_RELEASE_PROTECT_BRANCH_2026-08-05.md`  
-**Handoff:** `HANDOFF.md` · smoke `docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-05.md`  
+**Last updated:** 2026-09-23  
+**Version baseline:** **0.7.0** (the 2026-09-12 H3 note is a smoke stamp, not a product bump)  
+**Visibility:** public GitHub `the1truedan/mok-tua` and GitHub Pages. Forgejo is a separate history — do not rebase.  
+**Handoff:** `HANDOFF.md` · smoke `docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md` (prior `SMOKE_TESTED_CAPABILITIES_2026-08-05.md`)  
 **Recheck:** `docs/operations/MODEL_PULL_RECHECK_VIDEO_ROBUST_2026-08-06.md`
+
+---
+
+## Done (0.6.0 through the 2026-09-12 smoke) ✅
+
+| # | Item | Evidence |
+|---|------|----------|
+| D26 | LTX-2 audio-conditioned generation on one 16 GB GPU | 2026-08-15 clips on the live page |
+| D27 | PocketTTS and DramaBox local voice, real wavs | CHANGELOG 0.7.0. DramaBox needs the card nearly exclusive |
+| D28 | MiniMax H3 VocalLock_V3, 5/5 scenes, 32s, isolated ComfyUI | `docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md` |
+| D29 | Director Comfy backend registered | `/api/backends` online, re-probed 2026-08-15 |
+
+Dedicated lipsync tools (DreamTalk / LivePortrait / FaceFusion) are still unproven. VERSION stays 0.7.0.
 
 ---
 
@@ -48,13 +61,13 @@
 |---|------|------|
 | **0a** | **Qwen Image Edit 2509 fp8** into pool (unlock multi-angle + next-scene LoRAs already present) | stage_manifest `qwen_edit_2509_fp8` · in flight 2026-08-06 |
 | **0b** | Smoke `qwen_next_scene_angles` after Edit base lands | receipt + 2–3 angle stills |
-| **0c** | Comfy ≥0.30 + **MiniMax H3** pruned pack (~42.5 G) | manifest `local_minimax_h3` · native nodes required |
+| ~~**0c**~~ | ~~Comfy + MiniMax H3 pruned pack~~ **closed** for the isolated ComfyUI graph | 2026-09-12 VocalLock 5/5. DreamTalk / LivePortrait / FaceFusion still open |
 | **0d** | Blade Runner title-card blink short (template scaffold done) | `docs/assets/styles/blade-runner-title/` |
 | **1** | FramePack **finalize mp4** + receipt `artifact_ok: true` (`renderer: gpu_framepack_i2v`) | GPU sampling already observed · capture/promote from local SSD |
 | **2** | If hub incomplete: one intentional `FRAMEPACK_ALLOW_DOWNLOAD=1` seed into **shared** hub only | never package-local HF tree |
 | **3** | Wan 2.2 / Wan2GP **one-clip I2V** when ports/adapters live | honest skip until Wan ports up (not FramePack 7864) |
 | **4** | W0 residual: complete InsightFace buffalo_l/antelope for true FaceID; InstantID; FaceFusion CUDA | plus-face path live · FaceID InsightFace residual |
-| **4b** | Director: register Comfy backend in UI | `/api/backends` currently `[]` |
+| ~~**4b**~~ | ~~Director: register Comfy backend in UI~~ **closed** — `/api/backends` online:1 (re-probed 2026-08-15) | was empty on 2026-08-05 |
 
 ### P1 — conductor + social
 
