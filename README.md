@@ -376,8 +376,13 @@ MIT — see [LICENSE](LICENSE).
 
 Built for **M.A.N.A.G.E.R. LLC** — local-first, auditable, sovereign creative tooling.
 
-<!-- manager-footer:start -->
 ---
 
-<p align="center">© 2026 M.A.N.A.G.E.R. LLC — prepare for the care when we cannot be there · <a href="https://linktr.ee/the1truedan">Linktree</a> · <a href="https://ko-fi.com/the1truedan">Ko-fi</a></p>
-<!-- manager-footer:end -->
+<p align="left">
+  <a href="https://the1truedan.github.io/mok-tua/"><img src="https://img.shields.io/badge/pages-mok--tua-e8b84a?style=for-the-badge" alt="GitHub Pages"></a>
+  <a href="https://github.com/the1truedan/mok-tua/releases"><img src="https://img.shields.io/badge/version-v0.7.1-3dcaa0?style=for-the-badge" alt="v0.7.1"></a>
+  <a href="https://linktr.ee/the1truedan"><img src="https://img.shields.io/badge/Linktree-39E09B?style=for-the-badge&logo=linktree&logoColor=white" alt="Linktree"></a>
+  <a href="https://ko-fi.com/the1truedan"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
+</p>
+
+**© 2026 M.A.N.A.G.E.R. LLC** — *prepare for the care when we cannot be there*
