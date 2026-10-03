@@ -15,18 +15,20 @@
 
 # mok-tua
 
-**Turn a script into storyboard pictures — and, when you want, short video — on machines you own.**
+**Makes storyboard pictures, and optional short videos, from a script on computers that you own.**
 
-Local-first creative control desk for M.A.N.A.G.E.R.  
-Hybrid **v0.7.0** · public · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md) (H3 VocalLock lipsync **PASS**) · [2026-08-15 stamp](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-15.md) · [orchestration smoke (cited)](docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md)
+mok-tua is the local control desk for M.A.N.A.G.E.R. It sends work to ComfyUI and Director tools on your own machines.
+Cloud tools are optional. A privacy rule set controls when the system can use them. You operate mok-tua from a PETSCII terminal interface.
 
-[![Version](https://img.shields.io/badge/version-0.7.0-blue.svg)](CHANGELOG.md)
+Hybrid **v0.7.1** · public · MIT · [smoke-tested capabilities](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md) (H3 VocalLock lipsync **PASS**) · [2026-08-15 stamp](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-08-15.md) · [orchestration smoke (cited)](docs/operations/ORCHESTRATION_SMOKE_CITED_2026-08-07.md)
+
+[![Version](https://img.shields.io/badge/version-0.7.1-blue.svg)](CHANGELOG.md)
 [![Release](https://img.shields.io/github/v/release/the1truedan/mok-tua?display_name=tag&include_prereleases&sort=semver&label=release)](https://github.com/the1truedan/mok-tua/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Linktree](https://img.shields.io/badge/Linktree-the1truedan-43E55E?style=flat&logo=linktree&logoColor=white)](https://linktr.ee/the1truedan)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support-FF5E5B?style=flat&logo=ko-fi&logoColor=white)](https://ko-fi.com/the1truedan)
 
-**Current release:** [`v0.7.0`](https://github.com/the1truedan/mok-tua/releases/tag/v0.7.0) — PocketTTS + DramaBox local TTS backends, both proven on a real generation · new HF Spaces category-page puller · 11 Spaces earmarked as optional cloud-call tools (not dependencies) · see [CHANGELOG](CHANGELOG.md) · [HANDOFF](HANDOFF.md)
+**Current release:** [`v0.7.1`](https://github.com/the1truedan/mok-tua/releases/tag/v0.7.1): releases the H3 VocalLock lipsync PASS (5/5 scenes) and the receipted "Big Data Stealing You" render smoke (4 of 8 shots), with clearer wording. **Previous:** [`v0.7.0`](https://github.com/the1truedan/mok-tua/releases/tag/v0.7.0) — PocketTTS + DramaBox local TTS backends, both proven on a real generation · new HF Spaces category-page puller · 11 Spaces earmarked as optional cloud-call tools (not dependencies) · see [CHANGELOG](CHANGELOG.md) · [HANDOFF](HANDOFF.md)
 
 ---
 
@@ -351,6 +353,7 @@ Deep CLI, tier locks (T0–T4), pull hygiene, ask-packet federation, ROBUST Comf
 | Ver | What changed (human) |
 |-----|----------------------|
 | **2026-09-12** | **H3 VocalLock_V3 lipsync smoke PASS** (5/5 verse scenes on isolated ComfyUI, 16 GB GPU). Distinct from the 0.6.0 LTX-2 audio-conditioned proof clips. Dedicated DreamTalk/LivePortrait/FaceFusion still unproven. Cited robustness links: [smoke report](docs/reports/SMOKE_TESTED_CAPABILITIES_2026-09-12.md) |
+| **0.7.1** | H3 VocalLock_V3 lipsync PASS released (5/5 verse scenes); "Big Data Stealing You" render smoke published (4 of 8 shots, receipted, limits stated); ASD-STE100 wording. |
 | **0.7.0** | PocketTTS + DramaBox local TTS backends, both proven on a real generated wav (DramaBox confirmed GPU-near-exclusive by an actual OOM, fixed by excluding it from the concurrent launch chain); HF Spaces category-page puller; 11 Spaces earmarked as optional cloud-call tools — 2 of the 4 checked were down or incompatible, documented rather than assumed working |
 | **0.6.0** | More open video models confirmed working end to end on a 16 GB GPU (MiniMax H3, LTX-2.3); Director's Console job submission verified end to end; `curate` tool for picking best takes across runs; LTX-2 audio-conditioned proof clips on the [live site](https://the1truedan.github.io/mok-tua/); dedicated lipsync *tools* still unproven |
 | **0.5.10** | PETSCII Matrix brand short v4 (~28s: loader→µ→CRT→tmux→disk menu); TUI launch workflow (intro→help→status→deck); `show`/`play`/`open` jpg·png·mp4; `menu`/`media` verbs |
